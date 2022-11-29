@@ -1,8 +1,2 @@
-
-import '../css/index.css'
-import '../css/index.scss'
-
-const add = (x, y) => x + y;
-
-console.log(add(1, 1));
-console.log('2')
+import { o } from '@daysnap/utils'
+console.log(o())

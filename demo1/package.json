@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -48,5 +49,9 @@
       "not dead",
       "not op_mini all"
     ]
+  },
+  "dependencies": {
+    "@daysnap/utils": "0.0.25",
+    "core-js": "^3.26.1"
   }
 }

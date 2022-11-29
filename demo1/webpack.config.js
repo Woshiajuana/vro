@@ -6,8 +6,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 
 // 设置 nodejs 环境变量
-process.env.NODE_ENV = 'development';
-
 module.exports = {
 
     // 入口
@@ -125,31 +123,34 @@ module.exports = {
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
-                exclude: /node_modules/,
-                options: {
-                    // 只是 babel 做怎样的处理
-                    presets: [
-                        [
-                            '@babel/preset-env',
-                            {
-                                // 按需加载
-                                useBuiltIns: 'usage',
-                                // 指定 core-js 版本
-                                corejs: {
-                                    version: 3,
-                                },
-                                // 指定兼容性做到哪个版本的浏览器
-                                targets: {
-                                    chrome: '60',
-                                    firefox: '60',
-                                    ie: '9',
-                                    safari: '10',
-                                    edge: '17',
-                                }
-                            }
-                        ]
-                    ]
-                }
+                // options: {
+                //     // 只是 babel 做怎样的处理
+                //     presets: [
+                //         [
+                //             '@babel/preset-env',
+                //             {
+                //                 // 按需加载
+                //                 useBuiltIns: 'usage',
+                //                 // 指定 core-js 版本
+                //                 corejs: {
+                //                     version: 3,
+                //                 },
+                //                 // 指定兼容性做到哪个版本的浏览器
+                //                 targets: {
+                //                     chrome: '60',
+                //                     firefox: '60',
+                //                     ie: '9',
+                //                     safari: '10',
+                //                     edge: '17',
+                //                 }
+                //             }
+                //         ]
+                //     ]
+                // },
+                include: [
+                    path.resolve(__dirname, 'node_modules/@daysnap/utils'),
+                    path.resolve(__dirname, 'src')
+                ]
             }
         ]
     },
@@ -173,8 +174,8 @@ module.exports = {
     ],
 
     // 模式
-    mode: 'development',
-    // mode: 'production',
+    // mode: 'development',
+    mode: 'production',
 
     // devServer
     // 自动编译，自动打开浏览器，字段刷新浏览器
