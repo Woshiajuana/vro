@@ -1,5 +1,6 @@
-const { a } = require('./a')
+const { a, omit } = require('./a')
 
 module.exports = {
   a,
+  omit,
 }
