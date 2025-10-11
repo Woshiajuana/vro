@@ -12,8 +12,8 @@
     "nest-start": "cross-env NODE_ENV=prod node dist/main",
     "release": "./bin/release.sh",
     "clean": "rimraf ./dist",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"libs/**/*.ts\"",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
+    "format": "prettier --write \"src/**/*.ts\" \"libs/**/*.ts\"",
+    "lint": "eslint \"{src,apps,libs}/**/*.ts\" --fix"
   },
   "dependencies": {
     "@daysnap/utils": "^0.1.17",
