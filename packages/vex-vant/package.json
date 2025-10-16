@@ -1,7 +1,7 @@
 {
-  "name": "@ajuanjs/vex",
+  "name": "@vrojs/vant",
   "version": "0.0.1",
-  "description": "vex ui",
+  "description": "vrojs ui",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "scripts": {
@@ -13,8 +13,10 @@
     "!**/demo/**/*"
   ],
   "keywords": [
-    "vex",
+    "vro",
+    "vrojs",
     "ui",
+    "vant",
     "vue"
   ],
   "author": "woshiajuana",

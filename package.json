@@ -1,5 +1,5 @@
 {
-  "name": "vex",
+  "name": "@vrojs/monorepo",
   "private": true,
   "version": "1.0.0",
   "description": "基于 vue 的 ui 组件库",
@@ -8,16 +8,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Woshiajuana/vex.git"
+    "url": "git+https://github.com/Woshiajuana/vrojs.git"
   },
-  "keywords": ["vue", "ui", "vex"],
+  "keywords": ["vue", "ui", "vrojs"],
   "author": "woshiajuana",
   "license": "ISC",
   "engines": {
     "pnpm": ">= 7.0.0"
   },
   "bugs": {
-    "url": "https://github.com/Woshiajuana/vex/issues"
+    "url": "https://github.com/Woshiajuana/vrojs/issues"
   },
-  "homepage": "https://github.com/Woshiajuana/vex#readme"
+  "homepage": "https://github.com/Woshiajuana/vrojs#readme"
 }
