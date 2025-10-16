@@ -1,0 +1,23 @@
+{
+  "name": "vex",
+  "private": true,
+  "version": "1.0.0",
+  "description": "基于 vue 的 ui 组件库",
+  "scripts": {
+    "dev": "pnpm -C ./playground dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Woshiajuana/vex.git"
+  },
+  "keywords": ["vue", "ui", "vex"],
+  "author": "woshiajuana",
+  "license": "ISC",
+  "engines": {
+    "pnpm": ">= 7.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/Woshiajuana/vex/issues"
+  },
+  "homepage": "https://github.com/Woshiajuana/vex#readme"
+}
