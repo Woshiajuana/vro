@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "description": "基于 vue 的 ui 组件库",
   "scripts": {
-    "dev": "pnpm -C ./playground dev"
+    "dev": "pnpm -C ./playground dev",
+    "preinstall": "npx only-allow pnpm"
   },
   "repository": {
     "type": "git",
@@ -14,6 +15,7 @@
   "author": "woshiajuana",
   "license": "ISC",
   "engines": {
+    "node": ">= 20",
     "pnpm": ">= 7.0.0"
   },
   "bugs": {
