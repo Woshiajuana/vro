@@ -5,13 +5,18 @@
   "description": "基于 vue 的 ui 组件库",
   "scripts": {
     "dev": "pnpm -C ./playground dev",
+    "plop:gen": "plop --plopfile=./scripts/test.ts",
     "preinstall": "npx only-allow pnpm"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Woshiajuana/vrojs.git"
   },
-  "keywords": ["vue", "ui", "vrojs"],
+  "keywords": [
+    "vue",
+    "ui",
+    "vrojs"
+  ],
   "author": "woshiajuana",
   "license": "ISC",
   "engines": {
@@ -21,5 +26,17 @@
   "bugs": {
     "url": "https://github.com/Woshiajuana/vrojs/issues"
   },
-  "homepage": "https://github.com/Woshiajuana/vrojs#readme"
+  "homepage": "https://github.com/Woshiajuana/vrojs#readme",
+  "devDependencies": {
+    "@vue/eslint-config-prettier": "^10.2.0",
+    "@vue/eslint-config-typescript": "^14.6.0",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.38.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-vue": "^10.5.1",
+    "plop": "^4.0.4",
+    "prettier": "^3.6.2",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.9.3"
+  }
 }
