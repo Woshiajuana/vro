@@ -1,8 +1,12 @@
 import prettierConfig from '@vue/eslint-config-prettier'
 import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
 import { globalIgnores } from 'eslint/config'
+
+
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
 import pluginVue from 'eslint-plugin-vue'
+
+
 
 // To allow more languages other than `ts` in `.vue` files, uncomment the following lines:
 // import { configureVueProject } from '@vue/eslint-config-typescript'
