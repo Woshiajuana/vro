@@ -1,9 +1,4 @@
-import { type NodePlopAPI } from "plop";
-
-
-
-
-
+import { type NodePlopAPI } from 'plop'
 
 export default function (plop: NodePlopAPI) {
   // plop generator code

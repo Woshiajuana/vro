@@ -5,6 +5,7 @@
   "description": "基于 vue 的 ui 组件库",
   "scripts": {
     "dev": "pnpm -C ./playground dev",
+    "lint": "eslint . --fix",
     "plop:gen": "plop --plopfile=./scripts/test.ts",
     "preinstall": "npx only-allow pnpm"
   },
@@ -34,6 +35,7 @@
     "eslint": "^9.38.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-vue": "^10.5.1",
+    "jiti": "^2.6.1",
     "plop": "^4.0.4",
     "prettier": "^3.6.2",
     "rimraf": "^6.0.1",
