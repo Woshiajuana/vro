@@ -19,6 +19,7 @@ export default function (plop: NodePlopAPI) {
   // 生成入库文件
   plop.setGenerator('entry', {
     description: `生成入口文件`,
+    actions: [],
   })
 
   // 新增一个组件
@@ -96,10 +97,10 @@ export default function (plop: NodePlopAPI) {
       { type: 'confirm', name: 'ok', message: '确认删除？' },
     ],
     actions: (res) => {
-      const { name, ok } = res ?? {}
+      const { packageName, name, ok } = res ?? {}
       if (ok) {
         const dirname = plop.getHelper('dashCase')(name)
-        rimraf.sync(rc(dirname))
+        rimraf.sync(rc(`${packageName}/src/${dirname}`))
         console.log('✔ 删除成功')
       }
       return []
