@@ -1,12 +1,13 @@
 import { exec as rawExec } from 'child_process'
+import fg from 'fast-glob'
 import path from 'path'
-import { type NodePlopAPI } from 'plop'
+import { type AddActionConfig, type NodePlopAPI } from 'plop'
 import { rimraf } from 'rimraf'
 
 const exec = (cmd: string) =>
   new Promise((resolve, reject) => {
-    rawExec(cmd, (err, stdout, stderr) => {
-      if (err || stderr) reject(err || stderr)
+    rawExec(cmd, (err, stdout) => {
+      if (err) reject(err)
       else resolve(stdout)
     })
   })
@@ -16,10 +17,51 @@ const rt = (...args: string[]) => r('scripts/plop-templates', ...args)
 const rc = (...args: string[]) => r('packages', ...args)
 
 export default function (plop: NodePlopAPI) {
+  plop.setActionType('OK', async (answers) => {
+    const { packageName } = answers
+    await exec(`npm run plop entry ${packageName}`)
+    return `SUCCESS`
+  })
+
   // 生成入库文件
   plop.setGenerator('entry', {
     description: `生成入口文件`,
-    actions: [],
+    prompts: [
+      {
+        type: 'checkbox',
+        name: 'packageNames',
+        message: '请选择包名？',
+        choices: ['core', 'element-plus', 'vant'],
+      },
+    ],
+    actions: (answers) => {
+      const packageNames: string[] = answers?.packageNames ?? []
+      const actions = packageNames
+        .map((name) => {
+          const entries = fg.sync([
+            `packages/${name}/src/**/index.ts`,
+            `!packages/${name}/src/index.ts`,
+            `!packages/${name}/src/**/style/index.ts`,
+          ])
+
+          const components = entries
+            .map((item) => {
+              const res = item.replace(/\\/g, '/').match(/src\/(.+)\/index\.ts$/)
+              return res?.[1]
+            })
+            .filter(Boolean)
+
+          return {
+            type: 'add',
+            path: rc(`${name}/src/index.ts`),
+            templateFile: rt('entry.hbs'),
+            force: true,
+            data: { components },
+          } as AddActionConfig
+        })
+        .flat()
+      return actions
+    },
   })
 
   // 新增一个组件
@@ -75,6 +117,9 @@ export default function (plop: NodePlopAPI) {
         path: rc('{{packageName}}/src/{{ dashCase name }}/style/index.scss'),
         templateFile: rt('component/style/scss.hbs'),
       },
+      {
+        type: 'OK',
+      },
     ],
   })
 
@@ -94,16 +139,18 @@ export default function (plop: NodePlopAPI) {
         message: '请输入名称？',
         filter: (v) => (v.toLocaleLowerCase().startsWith('vro') ? v : `vro-${v}`),
       },
-      { type: 'confirm', name: 'ok', message: '确认删除？' },
     ],
-    actions: (res) => {
-      const { packageName, name, ok } = res ?? {}
-      if (ok) {
+    actions: [
+      (answers) => {
+        const { packageName, name } = answers ?? {}
         const dirname = plop.getHelper('dashCase')(name)
-        rimraf.sync(rc(`${packageName}/src/${dirname}`))
-        console.log('✔ 删除成功')
-      }
-      return []
-    },
+        const pathname = rc(`${packageName}/src/${dirname}`)
+        rimraf.sync(pathname)
+        return `delete ${pathname}`
+      },
+      {
+        type: 'OK',
+      },
+    ],
   })
 }

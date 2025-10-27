@@ -8,7 +8,7 @@
     "dev": "pnpm -C ./playground dev",
     "lint": "eslint . --fix",
     "tput": "tput cvvis",
-    "plop": "plop --plopfile=./scripts/plopfile.ts --force generatorName",
+    "plop": "plop --plopfile=./scripts/plopfile.ts",
     "preinstall": "npx only-allow pnpm"
   },
   "repository": {
