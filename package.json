@@ -1,12 +1,13 @@
 {
   "name": "@vrojs/monorepo",
+  "type": "module",
   "private": true,
   "version": "1.0.0",
   "description": "基于 vue 的 ui 组件库",
   "scripts": {
     "dev": "pnpm -C ./playground dev",
     "lint": "eslint . --fix",
-    "plop:gen": "plop --plopfile=./scripts/test.ts",
+    "plop": "plop create --plopfile=./scripts/plopfile.ts --force",
     "preinstall": "npx only-allow pnpm"
   },
   "repository": {

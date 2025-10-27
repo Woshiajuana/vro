@@ -1,0 +1,15 @@
+import { withInstall } from '../utils'
+import Component from './{{dashCase name}}.vue'
+
+export * from './types'
+
+export const {{ pascalCase name }} = withInstall<typeof Component>(Component)
+export default {{ pascalCase name }}
+
+export type {{ pascalCase name }}Instance = InstanceType<typeof {{ pascalCase name }}>
+
+declare module 'vue' {
+  export interface GlobalComponents {
+    {{ pascalCase name }}: typeof {{ pascalCase name }}
+  }
+}
