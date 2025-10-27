@@ -5,5 +5,5 @@
 </template>
 
 <script setup lang="ts">
-  import { VroInput } from '@daysnap/horn-ui'
+  import { VroInput } from '@vrojs/core'
 </script>
