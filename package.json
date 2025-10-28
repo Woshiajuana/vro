@@ -8,7 +8,7 @@
     "dev": "pnpm -C ./playground dev",
     "lint": "eslint . --fix",
     "tput": "tput cvvis",
-    "build:auto-import-resolver": "pnpm -C ./packages/auto-import-resolver build",
+    "build:resolver": "pnpm -C ./packages/resolver build",
     "plop": "plop --plopfile=./scripts/plopfile.ts",
     "preinstall": "npx only-allow pnpm"
   },

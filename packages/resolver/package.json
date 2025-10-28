@@ -1,5 +1,5 @@
 {
-  "name": "@vrojs/auto-import-resolver",
+  "name": "@vrojs/resolver",
   "type": "module",
   "version": "0.0.1",
   "description": "vro auto import resolver based on unplugin-vue-components",
