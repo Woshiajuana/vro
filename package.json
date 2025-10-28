@@ -8,6 +8,7 @@
     "dev": "pnpm -C ./playground dev",
     "lint": "eslint . --fix",
     "tput": "tput cvvis",
+    "build:auto-import-resolver": "pnpm -C ./packages/auto-import-resolver build",
     "plop": "plop --plopfile=./scripts/plopfile.ts",
     "preinstall": "npx only-allow pnpm"
   },
@@ -31,6 +32,7 @@
   },
   "homepage": "https://github.com/Woshiajuana/vrojs#readme",
   "devDependencies": {
+    "@vrojs/core": "workspace:*",
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.6.0",
     "cross-env": "^10.1.0",
