@@ -1,0 +1,30 @@
+{
+  "name": "@vrojs/auto-import-resolver",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "vro auto import resolver based on unplugin-vue-components",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "src",
+    "typings",
+    "!**/demo/**/*"
+  ],
+  "keywords": [
+    "vro",
+    "vrojs",
+    "unplugin-vue-components",
+    "vue"
+  ],
+  "author": "woshiajuana",
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
