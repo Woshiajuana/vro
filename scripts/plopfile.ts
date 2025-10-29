@@ -16,6 +16,39 @@ const r = (...args: string[]) => path.resolve(import.meta.dirname, '..', ...args
 const rt = (...args: string[]) => r('scripts/plop-templates', ...args)
 const rc = (...args: string[]) => r('packages', ...args)
 
+const createPackageNamePrompt = (options: { type?: 'list' | 'checkbox' } = {}) => {
+  return {
+    type: 'list',
+    name: 'packageName',
+    message: '请选择包名？',
+    choices: ['core', 'element-plus', 'vant'],
+    ...options,
+  }
+}
+
+const createComponentNamePrompt = () => {
+  return {
+    type: 'input',
+    name: 'name',
+    message: '请输入名称？',
+    filter: (v: string, answers: any) => {
+      const { packageName } = answers || {}
+      const maps: Record<string, string> = { core: '', 'element-plus': 'el', vant: 'van' }
+      return v.toLocaleLowerCase().startsWith('vro')
+        ? v
+        : ['vro', maps[packageName], v].filter(Boolean).join('-')
+    },
+  }
+}
+
+const createAddAction = (pathSuffix: string, templateFileSuffix: string) => {
+  return {
+    type: 'add',
+    path: rc('{{ packageName }}/src/{{ dashCase name }}', pathSuffix),
+    templateFile: rt('component', templateFileSuffix),
+  }
+}
+
 export default function (plop: NodePlopAPI) {
   plop.setActionType('OK', async (answers) => {
     const { packageName } = answers
@@ -26,17 +59,10 @@ export default function (plop: NodePlopAPI) {
   // 生成入库文件
   plop.setGenerator('entry', {
     description: `生成入口文件`,
-    prompts: [
-      {
-        type: 'checkbox',
-        name: 'packageNames',
-        message: '请选择包名？',
-        choices: ['core', 'element-plus', 'vant'],
-      },
-    ],
+    prompts: [createPackageNamePrompt({ type: 'checkbox' })],
     actions: (answers) => {
-      const packageNames: string[] = answers?.packageNames ?? []
-      const actions = packageNames
+      const packageName: string[] = answers?.packageName ?? []
+      const actions = packageName
         .map((name) => {
           const entries = fg.sync([
             `packages/${name}/src/**/index.ts`,
@@ -67,56 +93,15 @@ export default function (plop: NodePlopAPI) {
   // 新增一个组件
   plop.setGenerator(`create`, {
     description: `创建一个新组件`,
-    prompts: [
-      {
-        type: 'list',
-        name: 'packageName',
-        message: '请选择包名？',
-        choices: ['core', 'element-plus', 'vant'],
-      },
-      {
-        type: 'input',
-        name: 'name',
-        message: '请输入名称？',
-        filter: (v) => (v.toLocaleLowerCase().startsWith('vro') ? v : `vro-${v}`),
-      },
-    ],
+    prompts: [createPackageNamePrompt(), createComponentNamePrompt()],
     actions: [
-      {
-        type: 'add',
-        path: rc('{{packageName}}/src/{{ dashCase name }}/index.ts'),
-        templateFile: rt('component/index.hbs'),
-      },
-      {
-        type: 'add',
-        path: rc('{{packageName}}/src/{{ dashCase name }}/{{ dashCase name }}.vue'),
-        templateFile: rt('component/vue.hbs'),
-      },
-      {
-        type: 'add',
-        path: rc('{{packageName}}/src/{{ dashCase name }}/types.ts'),
-        templateFile: rt('component/types.hbs'),
-      },
-      {
-        type: 'add',
-        path: rc('{{packageName}}/src/{{ dashCase name }}/README.md'),
-        templateFile: rt('component/md.hbs'),
-      },
-      {
-        type: 'add',
-        path: rc('{{packageName}}/src/{{ dashCase name }}/demo/index.vue'),
-        templateFile: rt('component/demo/vue.hbs'),
-      },
-      {
-        type: 'add',
-        path: rc('{{packageName}}/src/{{ dashCase name }}/style/index.ts'),
-        templateFile: rt('component/style/index.hbs'),
-      },
-      {
-        type: 'add',
-        path: rc('{{packageName}}/src/{{ dashCase name }}/style/index.scss'),
-        templateFile: rt('component/style/scss.hbs'),
-      },
+      createAddAction(`index.ts`, `index.hbs`),
+      createAddAction(`{{ dashCase name }}.vue`, `vue.hbs`),
+      createAddAction(`types.ts`, `types.hbs`),
+      createAddAction(`README.md`, `md.hbs`),
+      createAddAction(`demo/index.vue`, `demo/vue.hbs`),
+      createAddAction(`style/index.ts`, `style/index.hbs`),
+      createAddAction(`style/index.scss`, `style/scss.hbs`),
       {
         type: 'OK',
       },
@@ -126,20 +111,7 @@ export default function (plop: NodePlopAPI) {
   // 删除一个组件
   plop.setGenerator(`delete`, {
     description: `删除一个组件`,
-    prompts: [
-      {
-        type: 'list',
-        name: 'packageName',
-        message: '请选择包名？',
-        choices: ['core', 'element-plus', 'vant'],
-      },
-      {
-        type: 'input',
-        name: 'name',
-        message: '请输入名称？',
-        filter: (v) => (v.toLocaleLowerCase().startsWith('vro') ? v : `vro-${v}`),
-      },
-    ],
+    prompts: [createPackageNamePrompt(), createComponentNamePrompt()],
     actions: [
       (answers) => {
         const { packageName, name } = answers ?? {}
