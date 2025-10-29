@@ -1,0 +1,38 @@
+{
+  "name": "@vrojs/playground",
+  "private": true,
+  "version": "0.0.1",
+  "description": "vrojs 演练场",
+  "type": "module",
+  "scripts": {
+    "start": "vite --force --config ./build/vite.config.ts",
+    "build": "vite build --config ./build/vite.config.ts"
+  },
+  "author": "woshiajuana",
+  "license": "MIT",
+  "dependencies": {
+    "@daysnap/utils": "^0.1.20",
+    "@vant/touch-emulator": "^1.4.0",
+    "vant": "^4.9.21",
+    "vue": "^3.5.22",
+    "vue-router": "^4.6.3"
+  },
+  "devDependencies": {
+    "@types/humps": "^2.0.6",
+    "@types/markdown-it": "^12.2.3",
+    "@types/node": "^18.14.6",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "fast-glob": "^3.3.3",
+    "highlight.js": "^11.11.1",
+    "humps": "^2.0.1",
+    "markdown-it": "^13.0.1",
+    "markdown-it-anchor": "^8.6.7",
+    "sass": "1.58.3",
+    "transliteration": "^2.3.5",
+    "typescript": "^5.9.3",
+    "unplugin-vue-components": "^0.24.1",
+    "unplugin-vue-define-options": "^1.1.4",
+    "vite": "^4.1.4",
+    "vite-plugin-md": "^0.11.9"
+  }
+}

@@ -25,9 +25,11 @@
     "registry": "https://registry.npmjs.org/"
   },
   "peerDependencies": {
+    "@vrojs/core": "workspace:*",
     "vue": ">=3.0.0"
   },
   "devDependencies": {
+    "@vrojs/core": "workspace:*",
     "rimraf": "^6.0.1",
     "typescript": "^5.9.3"
   }
