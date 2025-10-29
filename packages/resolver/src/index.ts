@@ -21,14 +21,14 @@ function getSideEffects(options: {
   if (!importStyle) {
     return
   }
-  return `@vrojs/${packageName}/src/${kebabCase(componentName)}/style/index`
+  return `${packageName}/src/${kebabCase(componentName)}/style/index`
 }
 
 export function VroResolver(options: VroResolverOptions = {}) {
   const { importStyle } = options
 
   return {
-    type: 'component' as const,
+    type: 'component',
     resolve: (name: string) => {
       if (name.startsWith('VroEl')) {
         const packageName = '@vrojs/element-plus'
@@ -41,14 +41,14 @@ export function VroResolver(options: VroResolverOptions = {}) {
         const packageName = '@vrojs/vant'
         return {
           name,
-          from: '@vrojs/vant',
+          from: packageName,
           sideEffects: getSideEffects({ importStyle, packageName, componentName: name }),
         }
       } else if (name.startsWith('Vro')) {
         const packageName = '@vrojs/core'
         return {
           name,
-          from: '@vrojs/core',
+          from: packageName,
           sideEffects: getSideEffects({ importStyle, packageName, componentName: name }),
         }
       }

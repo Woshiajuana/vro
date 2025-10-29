@@ -3,17 +3,17 @@
   "type": "module",
   "version": "0.0.1",
   "description": "vro auto import resolver based on unplugin-vue-components",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run clean && tsc -p ./tsconfig.json",
+    "clean": "rimraf ./es",
+    "release": "npm run build && dsc publish --pnpm",
+    "sync": "dsc sync"
   },
   "sideEffects": false,
   "files": [
-    "src",
-    "typings",
-    "!**/demo/**/*"
+    "dist"
   ],
   "keywords": [
     "vro",
@@ -27,6 +27,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
+    "rimraf": "^6.0.1",
     "typescript": "^5.9.3"
   }
 }
