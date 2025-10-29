@@ -1,11 +1,9 @@
 <template>
-  <div class="vro-input">
-    <span>vro-input</span>
-  </div>
+  <input v-bind="props" />
 </template>
 
 <script setup lang="ts">
   import { vroInputProps } from './types'
 
-  defineProps(vroInputProps)
+  const props = defineProps(vroInputProps)
 </script>
