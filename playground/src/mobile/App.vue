@@ -11,11 +11,12 @@
 </template>
 
 <script>
-  import { watch } from 'vue'
   import { Button as VanButton } from 'vant'
-  import DemoNav from './components/DemoNav.vue'
-  import { useCurrentTheme } from '../utils/iframe-sync'
+  import { watch } from 'vue'
+
   import config from '../config.js'
+  import { useCurrentTheme } from '../utils/iframe-sync'
+  import DemoNav from './components/DemoNav.vue'
 
   export default {
     components: { DemoNav, VanButton },

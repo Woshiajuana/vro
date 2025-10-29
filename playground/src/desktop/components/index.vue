@@ -19,10 +19,10 @@
 </template>
 
 <script>
-  import DocNav from './Nav.vue'
-  import DocHeader from './Header.vue'
-  import DocContent from './Content.vue'
   import DocContainer from './Container.vue'
+  import DocContent from './Content.vue'
+  import DocHeader from './Header.vue'
+  import DocNav from './Nav.vue'
   import DocSimulator from './Simulator.vue'
 
   export default {

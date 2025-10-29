@@ -16,8 +16,8 @@
 </template>
 
 <script>
-  import DocContainer from './components/index.vue'
   import config from '../config'
+  import DocContainer from './components/index.vue'
 
   export default {
     components: {

@@ -1,9 +1,10 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
 import humps from 'humps'
 import { demos } from 'virtual:shared-mobile'
 import { nextTick, watch } from 'vue'
-import DemoHome from './components/DemoHome.vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
+
 import { listenToSyncPath, syncPathToParent } from '../utils/iframe-sync.js'
+import DemoHome from './components/DemoHome.vue'
 
 function getRoutes() {
   const routes = []

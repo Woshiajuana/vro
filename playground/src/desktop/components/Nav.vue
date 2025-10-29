@@ -14,8 +14,8 @@
 </template>
 
 <script>
-  import NavLink from './NavLink.vue'
   import config from '../../config.js'
+  import NavLink from './NavLink.vue'
 
   export default {
     name: 'VanDocNav',

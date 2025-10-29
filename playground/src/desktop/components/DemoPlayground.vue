@@ -107,7 +107,9 @@
           cursor: pointer;
           opacity: 0.6;
           outline: none;
-          transition: opacity 0.2s, background 0.2s;
+          transition:
+            opacity 0.2s,
+            background 0.2s;
 
           // expand click area
           &::after {

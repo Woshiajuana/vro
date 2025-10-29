@@ -1,11 +1,13 @@
-import { createApp } from 'vue'
-import DemoBlock from './components/DemoBlock.vue'
-import DemoSection from './components/DemoSection.vue'
-import { router } from './router'
-import App from './App.vue'
 import '@vant/touch-emulator'
 import 'vant/es/toast/style'
 import 'vant/es/dialog/style'
+
+import { createApp } from 'vue'
+
+import App from './App.vue'
+import DemoBlock from './components/DemoBlock.vue'
+import DemoSection from './components/DemoSection.vue'
+import { router } from './router'
 
 window.app = createApp(App)
   .use(router)

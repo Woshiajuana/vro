@@ -1,10 +1,11 @@
-import { defineConfig } from 'vite'
-import path from 'path'
 import Vue from '@vitejs/plugin-vue'
-import { GenShared, Markdown } from './plugins'
+import path from 'path'
+import { VantResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import DefineOptions from 'unplugin-vue-define-options/vite'
-import { VantResolver } from 'unplugin-vue-components/resolvers'
+import { defineConfig } from 'vite'
+
+import { GenShared, Markdown } from './plugins'
 
 // https://vitejs.dev/config/
 export default defineConfig({

@@ -1,7 +1,8 @@
-import hljs from 'highlight.js'
-import VitePluginMd from 'vite-plugin-md'
 import { createRequire } from 'node:module'
+
+import hljs from 'highlight.js'
 import type MarkdownIt from 'markdown-it'
+import VitePluginMd from 'vite-plugin-md'
 
 function markdownCardWrapper(htmlCode: string) {
   const group = htmlCode.replace(/<h3/g, ':::<h3').replace(/<h2/g, ':::<h2').split(':::')

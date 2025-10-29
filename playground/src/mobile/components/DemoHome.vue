@@ -12,8 +12,8 @@
 </template>
 
 <script>
-  import DemoHomeNav from './DemoHomeNav.vue'
   import config from '../../config'
+  import DemoHomeNav from './DemoHomeNav.vue'
 
   export default {
     components: {

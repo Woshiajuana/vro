@@ -1,2 +1,2 @@
-export * from './markdown'
 export * from './genShared'
+export * from './markdown'

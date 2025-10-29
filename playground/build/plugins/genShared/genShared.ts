@@ -1,4 +1,5 @@
 import type { PluginOption } from 'vite'
+
 import { genSharedDesktop } from './genSharedDesktop'
 import { genShareMobile } from './genShareMobile'
 

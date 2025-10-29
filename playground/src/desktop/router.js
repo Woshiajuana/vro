@@ -5,6 +5,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 import { listenToSyncPath, syncPathToChild } from '../utils/iframe-sync.js'
 
+console.log('documents => ', documents)
+
 function getRoutes() {
   const routes = []
 

@@ -1,8 +1,10 @@
-import { readdirSync, existsSync } from 'node:fs'
-import humps from 'humps'
-import glob from 'fast-glob'
-import { UI_SRC_DIR, removeExt, normalizePath, USE_SRC_DIR, JSSDK_SRC_DIR } from '../../utils'
+import { existsSync, readdirSync } from 'node:fs'
 import path from 'node:path'
+
+import glob from 'fast-glob'
+import humps from 'humps'
+
+import { JSSDK_SRC_DIR, normalizePath, removeExt, UI_SRC_DIR, USE_SRC_DIR } from '../../utils'
 
 interface DemoItem {
   name: string

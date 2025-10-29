@@ -1,16 +1,12 @@
 # VroInput
 
-
 ### 介绍
 
 ...
 
-
 ## 代码演示
 
-
 ### 基础用法
-
 
 ## API
 
@@ -53,7 +49,6 @@
   </tr>
 </table>
 
-
 ### 实例方法
 
 <table>
@@ -67,11 +62,9 @@
   </tr>
 </table>
 
-
-
 <script setup lang="ts">
   import { reserve } from '@daysnap/utils'
-  import { HorCell } from '../hor-cell'
+  // import { HorCell } from '../hor-cell'
   import { VroInput, vroInputProps } from '.'
   import { parseType } from '../utils'
 </script>

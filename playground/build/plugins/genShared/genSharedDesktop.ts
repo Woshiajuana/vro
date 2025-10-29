@@ -1,9 +1,11 @@
-import path from 'node:path'
 import fs from 'node:fs'
-import humps from 'humps'
-import glob from 'fast-glob'
 import { readdirSync } from 'node:fs'
-import { UI_SRC_DIR, normalizePath, UI_DOCS_DIR, USE_SRC_DIR, JSSDK_SRC_DIR } from '../../utils'
+import path from 'node:path'
+
+import glob from 'fast-glob'
+import humps from 'humps'
+
+import { JSSDK_SRC_DIR, normalizePath, UI_DOCS_DIR, UI_SRC_DIR, USE_SRC_DIR } from '../../utils'
 
 interface DocumentItem {
   name: string

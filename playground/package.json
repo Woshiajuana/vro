@@ -5,7 +5,7 @@
   "description": "vrojs 演练场",
   "type": "module",
   "scripts": {
-    "start": "vite --force --config ./build/vite.config.ts",
+    "dev": "vite --force --config ./build/vite.config.ts",
     "build": "vite build --config ./build/vite.config.ts"
   },
   "author": "woshiajuana",
