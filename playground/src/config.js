@@ -1,7 +1,7 @@
 import { parsePath } from '@daysnap/utils'
 
 export default {
-  name: 'horn',
+  name: 'Vro',
   build: {
     srcDir: 'src',
     tagPrefix: 'van-',
@@ -31,9 +31,9 @@ export default {
       seed: 'af5d41bc4e446e76665dbe3ec18d55c3',
     },
 
-    title: 'Horn',
-    subtitle: '（基于 Vant 定制的移动端组件库）',
-    description: '基于 Vant 定制的移动端组件库',
+    title: 'Vro',
+    subtitle: '（基于 vue3 组件库）',
+    description: '基于 vue3 组件库',
     logo: '/img/logo.png',
     langLabel: '中',
     links: [

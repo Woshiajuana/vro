@@ -13,7 +13,7 @@ export function GenShared(): PluginOption {
   const resolvedVirtualSharedMobileModuleId = `resolved:${virtualSharedMobileModuleId}`
 
   return {
-    name: 'daysnap-horn:shared',
+    name: 'vro:shared',
 
     resolveId(id) {
       if (id === virtualSharedDesktopModuleId) {
