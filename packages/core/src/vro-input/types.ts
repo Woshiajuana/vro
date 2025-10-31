@@ -1,10 +1,10 @@
-import type { ExtractPropTypes, HTMLAttributes } from 'vue'
+import type { ExtractPropTypes, HTMLAttributes, InputTypeHTMLAttribute } from 'vue'
 
 import { definePropType } from '../utils'
 
 export const vroInputProps = {
   type: {
-    type: String,
+    type: definePropType<InputTypeHTMLAttribute | 'digit'>(String),
     default: 'text',
   },
   modelValue: {
