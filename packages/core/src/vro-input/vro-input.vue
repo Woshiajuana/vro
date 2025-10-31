@@ -10,6 +10,7 @@
 </template>
 
 <script setup lang="ts">
+  import { isFunction, isNumber, isRegExp, omit } from '@daysnap/utils'
   import { computed } from 'vue'
 
   import { useComposition } from '../hooks/use-composition'
@@ -20,9 +21,9 @@
 
   const dynamicProps = computed(() => {
     // eslint-disable-next-line prefer-const
-    let { type, inputmode, pattern, ...rest } = props
+    let { type, inputmode, ...rest } = props
 
-    if (type === 'digit') {
+    if (type === 'decimal') {
       type = 'text'
       inputmode = 'decimal'
     } else if (type === 'number') {
@@ -30,7 +31,7 @@
       inputmode = 'numeric'
     }
 
-    return { ...rest, type, inputmode }
+    return { ...omit(rest, ['pattern']), type, inputmode }
   })
 
   const { handleCompositionstart, handleCompositionend } = useComposition()
@@ -40,13 +41,34 @@
     if ((target as any)?.composing) {
       return
     }
-    const value = target.value
-    const { type, fractionDigits, pattern, modelValue } = props
+    let value = target.value
+    const { type, precision, pattern, modelValue } = props
 
-    if (value === 'number') {
-      //
+    if (type === 'number') {
+      value = value.replace(/[^\d]/g, '')
+    } else if (type === 'digit') {
+      console.log('handleInput => 1 ', value)
+      // 小数 默认小数点 2 位
+      const reg = new RegExp(`^([1-9]\\d*|0)(\\.?\\d{0,${precision}})`, 'g')
+      const v = value.match(reg)
+      value = v ? v[0] : ''
+
+      if (value.startsWith('0') && !value.startsWith('0.') && value.length > 1) {
+        value = `${+value}`
+      }
     }
-    console.log('handleInput => ', value)
+
+    if (pattern) {
+      if (isFunction(pattern)) {
+        value = pattern(value, isNumber(modelValue) ? modelValue.toString() : (modelValue ?? ''))
+      } else if (isRegExp(pattern)) {
+        value = value.replace(pattern, '')
+      }
+    }
+
+    if (target.value !== value) {
+      target.value = value
+    }
     emit('update:model-value', value)
     emit('change', value)
   }
