@@ -25,12 +25,13 @@ export const vroInputProps = {
    */
   precision: {
     type: [String, Number],
-    default: 0,
+    default: 2,
   },
   /**
    * 扩展
    */
   pattern: definePropType<(value: string, preValue: string) => string>(Function),
+  id: String,
   name: String,
   readonly: Boolean,
   inputmode: definePropType<HTMLAttributes['inputmode']>(String),

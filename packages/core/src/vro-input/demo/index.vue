@@ -5,7 +5,19 @@
     </select>
     <br />
     <br />
-    <vro-input v-model="value" :type="type" precision=""/>
+    <vro-input v-model="value" :type="type" />
+    <br />
+    <input
+      data-v-5d93a0b6=""
+      data-v-07191213=""
+      type="tel"
+      inputmode="numeric"
+      maxlength="7"
+      placeholder="请填写表显里程"
+      class="as-field-input"
+    />
+    <br />
+    <input class="el-input__inner" name="x" type="text" id="x1" />
     <br />
     <br />
     <p>值：{{ value }}</p>
@@ -16,7 +28,7 @@
   import { VroInput } from '@vrojs/core'
   import { ref } from 'vue'
 
-  const options = ['text', 'password', 'tel', 'number', 'digit']
-  const type = ref('digit')
-  const value = ref()
+  const options = ['text', 'password', 'tel', 'number', 'decimal']
+  const type = ref('text')
+  const value = ref('1')
 </script>

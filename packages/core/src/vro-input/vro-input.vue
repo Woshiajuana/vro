@@ -1,6 +1,7 @@
 <template>
   <input
     v-bind="dynamicProps"
+    :value="modelValue"
     @compositionstart="handleCompositionstart"
     @compositionend="handleCompositionend"
     @input="handleInput"
@@ -13,11 +14,12 @@
   import { isFunction, isNumber, isRegExp, omit } from '@daysnap/utils'
   import { computed } from 'vue'
 
-  import { useComposition } from '../hooks/use-composition'
+  import { useComposition, useId } from '../hooks'
   import { vroInputProps } from './types'
 
-  const emit = defineEmits(['update:model-value', 'change', 'focus', 'blur'])
+  defineOptions({ name: 'VroInput' })
   const props = defineProps(vroInputProps)
+  const emit = defineEmits(['update:model-value', 'change', 'focus', 'blur'])
 
   const dynamicProps = computed(() => {
     // eslint-disable-next-line prefer-const
@@ -31,7 +33,9 @@
       inputmode = 'numeric'
     }
 
-    return { ...omit(rest, ['pattern']), type, inputmode }
+    const id = props.id ?? useId()
+
+    return { ...omit(rest, ['pattern', 'modelValue', 'precision']), id, type, inputmode }
   })
 
   const { handleCompositionstart, handleCompositionend } = useComposition()
@@ -46,11 +50,12 @@
 
     if (type === 'number') {
       value = value.replace(/[^\d]/g, '')
-    } else if (type === 'digit') {
-      console.log('handleInput => 1 ', value)
+    } else if (type === 'decimal') {
       // 小数 默认小数点 2 位
-      const reg = new RegExp(`^([1-9]\\d*|0)(\\.?\\d{0,${precision}})`, 'g')
+      // const reg = new RegExp(`^([1-9]\\d*|0)(\\.?\\d{0,${precision}})`, 'g')
+      const reg = new RegExp(`^-?(0|[1-9]\\d*)?(\\.\\d{0,2})?`, 'g')
       const v = value.match(reg)
+      console.log('handleInput => v ', v, precision, props)
       value = v ? v[0] : ''
 
       if (value.startsWith('0') && !value.startsWith('0.') && value.length > 1) {
