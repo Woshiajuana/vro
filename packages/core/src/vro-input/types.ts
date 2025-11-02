@@ -15,8 +15,14 @@ export const vroInputProps = {
     type: definePropType<string | number | null | undefined>([String, Number, Object]),
     default: '',
   },
-  max: [String, Number],
-  min: [String, Number],
+  max: {
+    type: [String, Number],
+    default: Number.MAX_SAFE_INTEGER,
+  },
+  min: {
+    type: [String, Number],
+    default: Number.MIN_SAFE_INTEGER,
+  },
   maxlength: [String, Number],
   placeholder: String,
   disabled: Boolean,

@@ -1,34 +1,61 @@
 <template>
   <demo-block title="基础用法">
-    <select v-model="type">
-      <option v-for="item in options" :key="item" :value="item">{{ item }}</option>
-    </select>
-    <br />
-    <br />
-    <vro-input v-model="value" :type="type" />
-    <br />
-    <input
-      data-v-5d93a0b6=""
-      data-v-07191213=""
-      type="tel"
-      inputmode="numeric"
-      maxlength="7"
-      placeholder="请填写表显里程"
-      class="as-field-input"
-    />
-    <br />
-    <input class="el-input__inner" name="x" type="text" id="x1" />
-    <br />
-    <br />
-    <p>值：{{ value }}</p>
+    <dl style="display: flex; flex-direction: column; gap: 16px">
+      <dd v-for="(item, key) in metadata" :key="key">
+        <span>{{ item.label }}：</span>
+
+        <select v-if="item.is === 'select'" v-model="item.value">
+          <option v-for="option in item.options" :key="option" :value="option">{{ option }}</option>
+        </select>
+        <input v-else-if="item.is === 'input'" v-model="item.value" :name="key" />
+      </dd>
+      <dd>
+        <vro-input v-model="value" v-bind="valueProps" />
+      </dd>
+      <dd>值：{{ value }}</dd>
+      <dd><button @click="handleSubmit">提交</button></dd>
+    </dl>
   </demo-block>
 </template>
 
 <script setup lang="ts">
   import { VroInput } from '@vrojs/core'
-  import { ref } from 'vue'
+  import { computed, reactive, ref } from 'vue'
 
-  const options = ['text', 'password', 'tel', 'number', 'decimal']
-  const type = ref('text')
-  const value = ref('1')
+  const value = ref('0')
+
+  const metadata = reactive({
+    type: {
+      is: 'select',
+      value: 'decimal',
+      label: '类型',
+      options: ['text', 'password', 'tel', 'number', 'decimal'],
+    },
+    precision: {
+      is: 'input',
+      value: '2',
+      label: '精度',
+    },
+    min: {
+      is: 'input',
+      value: '-1',
+      label: '最小值',
+    },
+    max: {
+      is: 'input',
+      value: '99999',
+      label: '最大值',
+    },
+  } as const)
+
+  const valueProps = computed(() => {
+    return Object.entries(metadata).reduce<Record<string, any>>((res, [key, item]) => {
+      res[key] = item.value
+      return res
+    }, {})
+  })
+
+  const handleSubmit = () => {
+    console.log('handleSubmit => ', value.value)
+  }
 </script>
