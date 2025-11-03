@@ -17,6 +17,7 @@
     "vue-router": "^4.6.3"
   },
   "devDependencies": {
+    "@vrojs/resolver": "workspace:*",
     "@daysnap/utils": "^0.1.20",
     "@types/humps": "^2.0.6",
     "@types/markdown-it": "^12.2.3",
