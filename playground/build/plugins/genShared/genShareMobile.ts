@@ -68,7 +68,7 @@ export function genShareMobile() {
   const demos = [...uiDemos, ...useDemos, ...jssdkDemos].filter((item) => existsSync(item.path))
 
   return `
-  ${genUIStylesImport()}
+  // ${genUIStylesImport()}
 
   ${genImports(demos)}
 

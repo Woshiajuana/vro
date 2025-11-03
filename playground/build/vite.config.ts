@@ -1,11 +1,12 @@
 import Vue from '@vitejs/plugin-vue'
+import { VroResolver } from '@vrojs/resolver'
 import path from 'path'
 import { VantResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import DefineOptions from 'unplugin-vue-define-options/vite'
 import { defineConfig } from 'vite'
 
-import { GenShared, Markdown } from './plugins'
+import { GenShared, Markdown } from './plugins/index'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -44,12 +45,13 @@ export default defineConfig({
         // vant 按需引入
         // https://vant-ui.github.io/vant/#/zh-CN/quickstart
         VantResolver(),
+        VroResolver(),
       ],
       include: [
         /\.vue$/,
         /\.vue\?vue/,
-        /[/\\]node_modules[/\\][@\\]daysnap[/\\]/,
-        /[/\\]shared-mobile[/\\]/,
+        // /[/\\]node_modules[/\\][@\\]vrojs[/\\]/,
+        // /[/\\]shared-mobile[/\\]/,
       ],
       exclude: [],
     }),

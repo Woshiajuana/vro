@@ -45,7 +45,7 @@
 </script>
 
 <style lang="scss">
-  @import '../assets/scss/base';
+  @use '../assets/scss/base' as *;
 
   body {
     min-width: 100vw;

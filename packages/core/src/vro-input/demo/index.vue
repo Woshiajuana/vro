@@ -19,7 +19,6 @@
 </template>
 
 <script setup lang="ts">
-  import { VroInput } from '@vrojs/core'
   import { computed, reactive, ref } from 'vue'
 
   const value = ref('0')

@@ -28,7 +28,7 @@ export function VroResolver(options: VroResolverOptions = {}) {
   const { importStyle } = options
 
   return {
-    type: 'component',
+    type: 'component' as const,
     resolve: (name: string) => {
       if (name.startsWith('VroEl')) {
         const packageName = '@vrojs/element-plus'

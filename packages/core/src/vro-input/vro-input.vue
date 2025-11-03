@@ -1,5 +1,6 @@
 <template>
   <input
+    class="vro-input"
     v-bind="dynamicProps"
     :value="modelValue"
     @compositionstart="handleCompositionstart"

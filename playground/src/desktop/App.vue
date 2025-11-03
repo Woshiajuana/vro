@@ -114,8 +114,8 @@
   }
 </script>
 <style lang="scss">
-  @import '../assets/scss/base';
-  @import '../assets/scss/highlight';
+  @use '../assets/scss/base' as *;
+  @use '../assets/scss/highlight' as *;
 
   .van-doc-intro {
     padding-top: 20px;
