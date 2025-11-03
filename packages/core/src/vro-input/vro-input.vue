@@ -15,7 +15,7 @@
   import { computed } from 'vue'
 
   import { useComposition, useId } from '../hooks'
-  import { createDecimalPattern, parseDecimalString, parseNumberString } from '../utils'
+  import { parseDecimalString, parseNumberString } from '../utils'
   import { vroInputProps } from './types'
 
   defineOptions({ name: 'VroInput' })
@@ -49,11 +49,16 @@
   const handleBlur = (e: FocusEvent) => {
     const { type, modelValue } = props
     if (type === 'decimal') {
-      if (modelValue === '-') {
+      const v = modelValue?.toString() ?? ''
+      if (v === '-') {
+        // 修复只输入 - 的情况
         emit('update:model-value', '')
-      } else if (modelValue?.toString()?.endsWith('.')) {
-        const v = modelValue.toString()
+      } else if (v.endsWith('.')) {
+        // 修复末尾只输入.的情况
         emit('update:model-value', v.substring(0, v.length - 1))
+      } else if (+v === 0) {
+        // 修复 -0、-0.0 这种情况
+        emit('update:model-value', '0')
       }
     }
     emit('blur', e)
@@ -76,10 +81,6 @@
       if (+value < +min || +value > +max) {
         value = modelValue?.toString() ?? ''
       }
-      // value = createDecimalPattern({ precision: +precision, allowNegativeNumber: +min < 0 })(
-      //   value,
-      //   modelValue?.toString() ?? '',
-      // )
     }
 
     if (pattern) {

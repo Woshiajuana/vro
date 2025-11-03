@@ -38,7 +38,7 @@
     },
     min: {
       is: 'input',
-      value: '-1',
+      value: Number.MIN_SAFE_INTEGER,
       label: '最小值',
     },
     max: {
