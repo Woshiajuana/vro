@@ -71,7 +71,7 @@
       return
     }
 
-    const { type, precision, min, max, pattern, modelValue } = props
+    const { type, precision, min, max, pattern, modelValue, autoFix } = props
     let value = target.value
 
     if (type === 'number') {
@@ -80,7 +80,15 @@
       value = parseDecimalString(value, { precision: +precision, allowNegativeNumber: +min < 0 })
 
       if (+value < +min || +value > +max) {
-        value = modelValue?.toString() ?? ''
+        if (autoFix) {
+          if (+value < +min) {
+            value = min.toString()
+          } else if (+value > +max) {
+            value = max.toString()
+          }
+        } else {
+          value = modelValue?.toString() ?? ''
+        }
       }
     }
 

@@ -7,7 +7,13 @@
         <select v-if="item.is === 'select'" v-model="item.value">
           <option v-for="option in item.options" :key="option" :value="option">{{ option }}</option>
         </select>
+
         <input v-else-if="item.is === 'input'" v-model="item.value" :name="key" />
+
+        <template v-else-if="item.is === 'radio'">
+          <label><input v-model="item.value" type="radio" :name="key" :value="true" />是</label>
+          <label><input v-model="item.value" type="radio" :name="key" :value="false" />否</label>
+        </template>
       </dd>
       <dd>
         <vro-input v-model="value" v-bind="valueProps" />
@@ -44,6 +50,11 @@
       is: 'input',
       value: '99999',
       label: '最大值',
+    },
+    autoFix: {
+      is: 'radio',
+      value: true,
+      label: '是否自动修正',
     },
   } as const)
 
