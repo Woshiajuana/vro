@@ -9,10 +9,6 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "moduleResolution": "bundler",
-    "lib": ["esnext", "dom"],
-
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "lib": ["esnext", "dom"]
   }
 }
