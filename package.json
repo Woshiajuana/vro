@@ -7,8 +7,9 @@
   "scripts": {
     "dev": "pnpm -C ./playground dev",
     "lint": "eslint . --fix",
-    "tput": "tput cvvis",
     "build:resolver": "pnpm -C ./packages/resolver build",
+    "npm-release:resolver": "pnpm -C ./packages/resolver release",
+    "sync:resolver": "pnpm -C ./packages/resolver sync",
     "plop": "plop --plopfile=./scripts/plopfile.ts",
     "preinstall": "npx only-allow pnpm"
   },
