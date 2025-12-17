@@ -3,6 +3,7 @@
 export * from './hooks'
 export * from './styles'
 export * from './utils'
+export * from './vro-aspect-ratio'
 export * from './vro-cell'
 export * from './vro-cell-group'
 export * from './vro-input'

@@ -1,0 +1,16 @@
+.vro-aspect-ratio {
+  position: relative;
+}
+
+.vro-aspect-ratio-inner {
+  position: relative;
+  width: 100%;
+}
+
+.vro-aspect-ratio-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
