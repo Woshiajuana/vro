@@ -24,8 +24,36 @@ function getSideEffects(options: {
   return `${packageName}/src/${kebabCase(componentName)}/style/index`
 }
 
+function getAPIMap() {
+  const apiMap = new Map<
+    string,
+    {
+      packageName: string
+      componentName: string
+    }
+  >()
+
+  const configs = {
+    '@vrojs/element-plus': {
+      VroElSchemaFormDialog: ['showVroElSchemaFormDialog', 'useVroElSchemaFormDialog'],
+      VroElSchemaDesc: ['createVroElSchemaDescDialog'],
+    },
+  }
+
+  Object.entries(configs).forEach(([packageName, api]) => {
+    Object.entries(api).forEach(([componentName, apiList]) => {
+      apiList.forEach((api) => {
+        apiMap.set(api, { packageName, componentName })
+      })
+    })
+  })
+
+  return apiMap
+}
+
 export function VroResolver(options: VroResolverOptions = {}) {
   const { importStyle } = options
+  const apiMap = getAPIMap()
 
   return {
     type: 'component' as const,
@@ -50,6 +78,13 @@ export function VroResolver(options: VroResolverOptions = {}) {
           name,
           from: packageName,
           sideEffects: getSideEffects({ importStyle, packageName, componentName: name }),
+        }
+      } else if (apiMap.has(name)) {
+        const { packageName, componentName } = apiMap.get(name)!
+        return {
+          name,
+          from: packageName,
+          sideEffects: getSideEffects({ importStyle, packageName, componentName }),
         }
       }
     },
