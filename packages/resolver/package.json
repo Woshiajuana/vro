@@ -7,7 +7,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "npm run clean && tsc -p ./tsconfig.json",
-    "clean": "rimraf ./es",
+    "clean": "rimraf ./dist",
     "release": "npm run build && dsc publish --pnpm",
     "sync": "dsc sync"
   },
