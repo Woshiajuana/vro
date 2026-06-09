@@ -12,6 +12,10 @@
     "typings",
     "!**/demo/**/*"
   ],
+  "sideEffects": [
+    "src/**/style/*",
+    "src/**/styles/*"
+  ],
   "keywords": [
     "vro",
     "vrojs",
@@ -24,14 +28,25 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
+  "dependencies": {
+    "copy-to-clipboard": "^3.3.3"
+  },
   "peerDependencies": {
-    "@vrojs/core": "workspace:*",
+    "@daysnap/banana": ">=0.0.15",
     "@daysnap/utils": ">=0.1.20",
+    "@daysnap/vue-use": ">=0.0.12",
+    "@element-plus/icons-vue": ">=2.3.2",
+    "@vrojs/core": "workspace:*",
+    "element-plus": "^2.11.9",
     "vue": ">=3.0.0"
   },
   "devDependencies": {
-    "@daysnap/utils": "^0.1.20",
+    "@daysnap/banana": "^0.0.15",
+    "@daysnap/utils": "^0.1.27",
+    "@daysnap/vue-use": "^0.0.12",
+    "@element-plus/icons-vue": "^2.3.2",
     "@vrojs/core": "workspace:*",
+    "element-plus": "^2.11.9",
     "rimraf": "^6.0.1",
     "typescript": "^5.9.3"
   }

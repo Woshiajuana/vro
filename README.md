@@ -1,5 +1,15 @@
 # .
 
+基于 vue 的UI组件库
+
+## 目录结构
+
+- packages/core 核心库，公共函数，基础UI库，不依赖第三方UI库
+- packages/element-plus 基于 element-plus 二次封装的UI库
+- packages/vant 基于 vant 二次封装的UI库
+- packages/resolver VroResolver 自动导入组件库
+- playground 演练场
+
 ## pnpm
 
 ```
@@ -13,19 +23,3 @@ pnpm add @daysnap/utils -r --filter @daysnap/horn
 
 pnpm up @daysnap/utils --latest -r
 ```
-
-
-js 正则
-
-1. 可以输入数字，可以是小数，只能小数点2位
-2. 可以是负数
-3. 如果第一位数是0 不能一直输入0， -00  000 这种都不行
-
-1.1 => 通过
-1.111 => 失败
--1.1 => 通过
--1 => 通过
-1. => 通过
-- => 通过
--. => 失败
--.0 => 失败

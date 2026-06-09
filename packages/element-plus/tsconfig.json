@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "types": ["element-plus/global"],
+    "allowJs": true,
+    "noImplicitThis": true
+  },
+  "include": ["src/**/*", "typings/**/*"]
+}
