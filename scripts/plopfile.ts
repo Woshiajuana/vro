@@ -50,6 +50,10 @@ const createAddAction = (pathSuffix: string, templateFileSuffix: string) => {
 }
 
 export default function (plop: NodePlopAPI) {
+  plop.setHelper('withInstallPath', (packageName: string) =>
+    packageName === 'core' ? '../utils' : '@vrojs/core',
+  )
+
   plop.setActionType('OK', async (answers) => {
     const { packageName } = answers
     await exec(`npm run plop entry ${packageName}`)
@@ -66,6 +70,7 @@ export default function (plop: NodePlopAPI) {
         .map((name) => {
           const entries = fg.sync([
             `packages/${name}/src/**/index.ts`,
+            `!packages/${name}/src/styles/index.ts`,
             `!packages/${name}/src/index.ts`,
             `!packages/${name}/src/**/style/index.ts`,
           ])
@@ -77,13 +82,22 @@ export default function (plop: NodePlopAPI) {
             })
             .filter(Boolean)
 
-          return {
-            type: 'add',
-            path: rc(`${name}/src/index.ts`),
-            templateFile: rt('entry.hbs'),
-            force: true,
-            data: { components },
-          } as AddActionConfig
+          return [
+            {
+              type: 'add',
+              path: rc(`${name}/src/index.ts`),
+              templateFile: rt('entry/index.hbs'),
+              force: true,
+              data: { components },
+            },
+            {
+              type: 'add',
+              path: rc(`${name}/src/styles/index.scss`),
+              templateFile: rt('entry/style.hbs'),
+              force: true,
+              data: { components: components.filter((item) => item?.startsWith('vro')) },
+            },
+          ] as AddActionConfig[]
         })
         .flat()
       return actions
