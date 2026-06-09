@@ -6,6 +6,6 @@ export const registerHelpers = (plop: NodePlopAPI) => {
   )
 
   plop.setHelper('withInstallImportBreak', (packageName: string) =>
-    packageName === 'core' ? '\n' : '',
+    packageName === 'core' ? '' : '\n',
   )
 }
