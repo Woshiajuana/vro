@@ -1,7 +1,6 @@
-/* 本文件自动生成 './scripts/plopfile.ts' */
+/* 本文件自动生成 './scripts/index.ts' */
 
 export * from './hooks'
-export * from './styles'
 export * from './utils'
 export * from './vro-aspect-ratio'
 export * from './vro-cell'
