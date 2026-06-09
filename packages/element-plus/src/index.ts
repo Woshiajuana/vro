@@ -1,3 +1,3 @@
-/* 本文件自动生成 './scripts/plopfile.ts' */
+/* 本文件自动生成 './scripts/index.ts' */
 
 export * from './vro-el-icon'

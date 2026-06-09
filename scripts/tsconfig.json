@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "moduleResolution": "bundler",
+    "noEmit": true
+  },
+  "include": ["**/*.ts"],
+  "exclude": []
+}

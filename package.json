@@ -10,7 +10,7 @@
     "build:resolver": "pnpm -C ./packages/resolver build",
     "npm-release:resolver": "pnpm -C ./packages/resolver release",
     "sync:resolver": "pnpm -C ./packages/resolver sync",
-    "plop": "plop --plopfile=./scripts/plopfile.ts",
+    "plop": "plop --plopfile=./scripts/index.ts",
     "clean": "rimraf --glob **/node_modules",
     "preinstall": "npx only-allow pnpm"
   },
@@ -42,7 +42,6 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-vue": "^10.5.1",
     "fast-glob": "^3.3.3",
-    "jiti": "^2.6.1",
     "plop": "^4.0.4",
     "prettier": "^3.6.2",
     "rimraf": "^6.1.2",
