@@ -1,2 +1,2 @@
-import '../../styles'
-import './index.scss'
+import './deps'
+import './css'

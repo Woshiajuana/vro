@@ -10,18 +10,28 @@ export interface VroResolverOptions {
    * @default true
    */
   importStyle?: boolean
+
+  /**
+   * 是否自动导入依赖组件的相应样式
+   *
+   * @default true
+   */
+  importDepsStyle?: boolean
 }
 
 function getSideEffects(options: {
   packageName: string
   componentName: string
   importStyle?: boolean
+  importDepsStyle?: boolean
 }) {
-  const { importStyle = true, packageName, componentName } = options
-  if (!importStyle) {
+  const { importStyle = true, importDepsStyle = importStyle, packageName, componentName } = options
+  if (!importStyle && !importDepsStyle) {
     return
   }
-  return `${packageName}/src/${kebabCase(componentName)}/style/index`
+
+  const styleEntry = importStyle ? (importDepsStyle ? 'index' : 'css') : 'deps'
+  return `${packageName}/src/${kebabCase(componentName)}/style/${styleEntry}`
 }
 
 function getAPIMap() {
@@ -52,7 +62,7 @@ function getAPIMap() {
 }
 
 export function VroResolver(options: VroResolverOptions = {}) {
-  const { importStyle } = options
+  const { importStyle, importDepsStyle } = options
   const apiMap = getAPIMap()
 
   return {
@@ -63,7 +73,12 @@ export function VroResolver(options: VroResolverOptions = {}) {
         return {
           name,
           from: packageName,
-          sideEffects: getSideEffects({ importStyle, packageName, componentName: name }),
+          sideEffects: getSideEffects({
+            importStyle,
+            importDepsStyle,
+            packageName,
+            componentName: name,
+          }),
         }
       } else if (name.startsWith('VroVan')) {
         const packageName = '@vrojs/vant'
@@ -84,7 +99,12 @@ export function VroResolver(options: VroResolverOptions = {}) {
         return {
           name,
           from: packageName,
-          sideEffects: getSideEffects({ importStyle, packageName, componentName }),
+          sideEffects: getSideEffects({
+            importStyle,
+            importDepsStyle,
+            packageName,
+            componentName,
+          }),
         }
       }
     },
