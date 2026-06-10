@@ -4,32 +4,6 @@ import hljs from 'highlight.js'
 import type MarkdownIt from 'markdown-it'
 import VitePluginMd from 'vite-plugin-md'
 
-const splitScriptSetup = (htmlCode: string) => {
-  const index = htmlCode.indexOf('<script')
-  if (index === -1) {
-    return [htmlCode, '']
-  }
-
-  return [htmlCode.slice(0, index), htmlCode.slice(index)]
-}
-
-const markdownCardWrapper = (htmlCode: string) => {
-  const [content, script] = splitScriptSetup(htmlCode)
-  const group = content.replace(/<h3/g, ':::<h3').replace(/<h2/g, ':::<h2').split(':::')
-
-  const html = group
-    .map((fragment) => {
-      if (fragment.includes('<h3')) {
-        return `<div class="van-doc-card">${fragment}</div>`
-      }
-
-      return fragment
-    })
-    .join('')
-
-  return `${html}${script}`
-}
-
 const markdownHighlight = (str: string, lang: string) => {
   if (lang && hljs.getLanguage(lang)) {
     return hljs.highlight(str, { language: lang, ignoreIllegals: true }).value
@@ -56,12 +30,48 @@ const markdownLinkOpen = (md: MarkdownIt) => {
   }
 }
 
+const markdownCardWrapper = (md: MarkdownIt) => {
+  md.core.ruler.after('block', 'van_doc_card_wrapper', (state) => {
+    const tokens = state.tokens
+    const nextTokens = []
+    let opened = false
+
+    const createHtmlToken = (content: string) => {
+      const token = new state.Token('html_block', '', 0)
+      token.content = content
+      return token
+    }
+
+    tokens.forEach((token) => {
+      const isHeadingOpen = token.type === 'heading_open'
+      const isH2 = isHeadingOpen && token.tag === 'h2'
+      const isH3 = isHeadingOpen && token.tag === 'h3'
+      const isScript = token.type === 'html_block' && /^<script\b/i.test(token.content.trim())
+
+      if (opened && (isH2 || isH3 || isScript)) {
+        nextTokens.push(createHtmlToken('</div>'))
+        opened = false
+      }
+
+      if (isH3) {
+        nextTokens.push(createHtmlToken('<div class="van-doc-card">'))
+        opened = true
+      }
+
+      nextTokens.push(token)
+    })
+
+    if (opened) {
+      nextTokens.push(createHtmlToken('</div>'))
+    }
+
+    state.tokens = nextTokens
+  })
+}
+
 export function Markdown() {
   return VitePluginMd({
     wrapperClasses: 'van-doc-markdown-body',
-    transforms: {
-      after: markdownCardWrapper,
-    },
     markdownItOptions: {
       html: true,
       typographer: false,
@@ -73,6 +83,7 @@ export function Markdown() {
       const markdownItAnchor = require('markdown-it-anchor')
 
       markdownLinkOpen(md)
+      markdownCardWrapper(md)
 
       md.use(markdownItAnchor, {
         level: 2,
