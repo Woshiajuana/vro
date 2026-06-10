@@ -17,54 +17,62 @@
 ### 属性 Props
 
 <table>
-  <tr>
-    <td>名称</td>
-    <td>类型</td>
-    <td>默认值</td>
-  </tr>
-  <tr v-for="(item, key) in vroElTestProps" :key="key">
-    <td>{{ key }}</td>
-    <td>{{ parseType(item.type || item) }}</td>
-    <td>{{ reserve(item.default, '-') }}</td>
-  </tr>
+  <tbody>
+    <tr>
+      <td>名称</td>
+      <td>类型</td>
+      <td>默认值</td>
+    </tr>
+    <tr v-for="(item, key) in vroElTestProps" :key="key">
+      <td>{{ key }}</td>
+      <td>{{ parseType(item.type || item) }}</td>
+      <td>{{ reserve(item.default, '-') }}</td>
+    </tr>
+  </tbody>
 </table>
 
 <table>
-  <tr>
-    <td>名称</td>
-    <td>说明</td>
-  </tr>
-  <tr>
-    <td>xx</td>
-    <td>xxx</td>
-  </tr>
+  <tbody>
+    <tr>
+      <td>名称</td>
+      <td>说明</td>
+    </tr>
+    <tr>
+      <td>xx</td>
+      <td>xxx</td>
+    </tr>
+  </tbody>
 </table>
 
 ### 插槽 Slots
 
 <table>
-  <tr>
-    <td>名称</td>
-    <td>说明</td>
-  </tr>
-  <tr>
-    <td>xx</td>
-    <td>xxx</td>
-  </tr>
+  <tbody>
+    <tr>
+      <td>名称</td>
+      <td>说明</td>
+    </tr>
+    <tr>
+      <td>xx</td>
+      <td>xxx</td>
+    </tr>
+  </tbody>
 </table>
 
 
 ### 实例方法
 
 <table>
-  <tr>
-    <td>名称</td>
-    <td>说明</td>
-  </tr>
-  <tr>
-    <td>xx</td>
-    <td>xxx</td>
-  </tr>
+  <tbody>
+    <tr>
+      <td>名称</td>
+      <td>说明</td>
+    </tr>
+    <tr>
+      <td>xx</td>
+      <td>xxx</td>
+    </tr>
+  </tbody>
 </table>
 
 
