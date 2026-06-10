@@ -69,8 +69,12 @@ const getVantStyle = (name: string) => {
   return `vant/es/${kebabCase(name.replace(/^Van/, ''))}/style`
 }
 
-const getPackageComponentStyle = (packageName: PackageName, componentDir: string) => {
-  return `@vrojs/${packageName}/src/${componentDir}/style/index`
+const getPackageComponentStyle = (
+  packageName: PackageName,
+  componentDir: string,
+  styleEntry: 'css' | 'deps' | 'index',
+) => {
+  return `@vrojs/${packageName}/src/${componentDir}/style/${styleEntry}`
 }
 
 const resolveRelativeComponent = (options: {
@@ -129,7 +133,8 @@ const collectStyleDeps = (packageName: PackageName, componentDir: string) => {
     absolute: true,
     onlyFiles: true,
   })
-  const internalDeps = new Set<string>()
+  const internalCssDeps = new Set<string>()
+  const internalDepsDeps = new Set<string>()
   const externalDeps = new Set<string>()
 
   files.forEach((file) => {
@@ -168,7 +173,8 @@ const collectStyleDeps = (packageName: PackageName, componentDir: string) => {
         })
 
         if (depComponent) {
-          internalDeps.add(getPackageComponentStyle(packageName, depComponent))
+          internalCssDeps.add(getPackageComponentStyle(packageName, depComponent, 'css'))
+          internalDepsDeps.add(getPackageComponentStyle(packageName, depComponent, 'deps'))
         }
         return
       }
@@ -178,7 +184,8 @@ const collectStyleDeps = (packageName: PackageName, componentDir: string) => {
         namedImports.forEach((name) => {
           const componentName = kebabCase(name)
           if (existsSync(resolvePackagePath(depPackageName, 'src', componentName, 'index.ts'))) {
-            internalDeps.add(getPackageComponentStyle(depPackageName, componentName))
+            internalCssDeps.add(getPackageComponentStyle(depPackageName, componentName, 'css'))
+            internalDepsDeps.add(getPackageComponentStyle(depPackageName, componentName, 'deps'))
           }
         })
       }
@@ -186,39 +193,53 @@ const collectStyleDeps = (packageName: PackageName, componentDir: string) => {
   })
 
   return {
-    internalDeps: Array.from(internalDeps),
+    internalCssDeps: Array.from(internalCssDeps),
+    internalDepsDeps: Array.from(internalDepsDeps),
     externalDeps: Array.from(externalDeps),
   }
 }
 
-const writeCssStyle = (packageName: PackageName, componentDir: string, internalDeps: string[]) => {
+const writeCssStyle = (
+  packageName: PackageName,
+  componentDir: string,
+  internalCssDeps: string[],
+) => {
   const cssPath = resolvePackagePath(packageName, 'src', componentDir, 'style/css.ts')
   if (!existsSync(cssPath)) {
     return
   }
 
-  const imports = toImportCode(packageName, componentDir, internalDeps).concat([
-    "import '../../styles/base.scss'",
-    "import './index.scss'",
-  ])
+  const imports = ["import '../../styles/base.scss'"]
+    .concat(toImportCode(packageName, componentDir, internalCssDeps))
+    .concat("import './index.scss'")
 
   writeFileSync(cssPath, `${imports.join('\n')}\n`)
 }
 
-const writeDepsStyle = (packageName: PackageName, componentDir: string, externalDeps: string[]) => {
+const writeDepsStyle = (
+  packageName: PackageName,
+  componentDir: string,
+  internalDepsDeps: string[],
+  externalDeps: string[],
+) => {
   const depsPath = resolvePackagePath(packageName, 'src', componentDir, 'style/deps.ts')
   if (!existsSync(depsPath)) {
     return
   }
 
-  const imports = toImportCode(packageName, componentDir, externalDeps).join('\n')
+  const imports = toImportCode(
+    packageName,
+    componentDir,
+    internalDepsDeps.concat(externalDeps),
+  ).join('\n')
   writeFileSync(depsPath, imports ? `${imports}\n` : '')
 }
 
 const writeIndexStyle = (
   packageName: PackageName,
   componentDir: string,
-  internalDeps: string[],
+  internalCssDeps: string[],
+  internalDepsDeps: string[],
   externalDeps: string[],
 ) => {
   const indexPath = resolvePackagePath(packageName, 'src', componentDir, 'style/index.ts')
@@ -230,10 +251,11 @@ const writeIndexStyle = (
     return
   }
 
-  const imports = toImportCode(packageName, componentDir, internalDeps.concat(externalDeps)).concat([
-    "import '../../styles'",
-    "import './index.scss'",
-  ])
+  const imports = toImportCode(
+    packageName,
+    componentDir,
+    internalCssDeps.concat(internalDepsDeps, externalDeps),
+  ).concat(["import '../../styles'", "import './index.scss'"])
 
   writeFileSync(indexPath, `${imports.join('\n')}\n`)
 }
@@ -245,11 +267,20 @@ export const syncStyleDeps = (packageName: string) => {
 
   const currentPackageName = packageName as PackageName
   getComponentDirs(currentPackageName).forEach((componentDir) => {
-    const { internalDeps, externalDeps } = collectStyleDeps(currentPackageName, componentDir)
+    const { internalCssDeps, internalDepsDeps, externalDeps } = collectStyleDeps(
+      currentPackageName,
+      componentDir,
+    )
 
-    writeCssStyle(currentPackageName, componentDir, internalDeps)
-    writeDepsStyle(currentPackageName, componentDir, externalDeps)
-    writeIndexStyle(currentPackageName, componentDir, internalDeps, externalDeps)
+    writeCssStyle(currentPackageName, componentDir, internalCssDeps)
+    writeDepsStyle(currentPackageName, componentDir, internalDepsDeps, externalDeps)
+    writeIndexStyle(
+      currentPackageName,
+      componentDir,
+      internalCssDeps,
+      internalDepsDeps,
+      externalDeps,
+    )
   })
 }
 
