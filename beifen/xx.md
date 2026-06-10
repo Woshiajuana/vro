@@ -1,1 +1,0 @@
-[packages](packages/) 下的组件库 [element-plus](packages/element-plus/) 、 [vant](packages/vant/) 、 [core](packages/core/) 下的组件，内部组件可能会自行引用内部组件、或者第三方组件，这样引入的内部组件样式、第三方组件的样式需要添加到组件样式，手动添加有点麻烦，能不能写一个脚本放到  [registers](scripts/registers/) 下，遍历组件内各自引用的内部组件、三方组件，然后把 引用组件的样式添加到对应组件的 style里
