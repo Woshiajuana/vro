@@ -8,6 +8,7 @@ declare module 'vue-router' {
   interface RouteMeta {
     title?: string // 标题
     type?: 'docs' | 'demo'
+    group?: string
     packageName?: string
     componentDir?: string
   }

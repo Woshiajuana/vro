@@ -1,6 +1,6 @@
 <template>
   <nav class="van-doc-nav" :class="{ 'van-doc-nav-fixed': isFixed }">
-    <section v-for="group in navs" :key="group.packageName" class="van-doc-nav__group">
+    <section v-for="group in navs" :key="group.name" class="van-doc-nav__group">
       <h2 class="van-doc-nav__title">{{ group.title }}</h2>
       <div v-for="item in group.items" :key="item.path" class="van-doc-nav__item">
         <NavLink :item="item" />
@@ -19,9 +19,10 @@
   const isFixed = ref(false)
 
   const packageGroups = [
-    { packageName: 'core', title: 'Core' },
-    { packageName: 'element-plus', title: 'Element Plus' },
-    { packageName: 'vant', title: 'Vant' },
+    { name: 'guide', title: '指南' },
+    { name: 'core', packageName: 'core', title: 'Core' },
+    { name: 'element-plus', packageName: 'element-plus', title: 'Element Plus' },
+    { name: 'vant', packageName: 'vant', title: 'Vant' },
   ] as const
 
   const navs = computed(() => {
@@ -33,7 +34,13 @@
     return packageGroups
       .map((group) => ({
         ...group,
-        items: routes.filter((route) => route.meta.packageName === group.packageName),
+        items: routes.filter((route) => {
+          if (group.name === 'guide') {
+            return route.meta.group === 'guide'
+          }
+
+          return route.meta.packageName === group.packageName
+        }),
       }))
       .filter((group) => group.items.length > 0)
   })
