@@ -10,14 +10,25 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted } from 'vue'
+  import { watch } from 'vue'
+
+  import { useCurrentTheme } from '@/utils'
 
   import DemoNav from './components/DemoNav.vue'
   import DemoSection from './components/DemoSection.vue'
 
-  onMounted(() => {
-    document.documentElement.classList.add('van-doc-theme-light')
-  })
+  const theme = useCurrentTheme()
+
+  watch(
+    theme,
+    (newVal, oldVal) => {
+      if (oldVal) {
+        document.documentElement.classList.remove(`van-doc-theme-${oldVal}`)
+      }
+      document.documentElement.classList.add(`van-doc-theme-${newVal}`)
+    },
+    { immediate: true },
+  )
 </script>
 
 <style lang="scss">

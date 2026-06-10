@@ -5,16 +5,16 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, onMounted, watch } from 'vue'
+  import { computed, watch } from 'vue'
   import { useRoute } from 'vue-router'
+
+  import { getDefaultTheme } from '@/utils'
 
   import DocLayout from './components/index.vue'
 
   const route = useRoute()
 
-  onMounted(() => {
-    document.documentElement.classList.add('van-doc-theme-light')
-  })
+  document.documentElement.classList.add(`van-doc-theme-${getDefaultTheme()}`)
 
   const simulator = computed(() => {
     const path = location.pathname.replace(/\/index(\.html)?/, '/')

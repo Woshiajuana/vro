@@ -1,6 +1,8 @@
 import { ref } from 'vue'
 import type { Router } from 'vue-router'
 
+export type Theme = 'light' | 'dark'
+
 let queue: Array<() => void> = []
 let isIframeReady = false
 
@@ -57,6 +59,50 @@ export const syncPathToChild = () => {
       '*',
     )
   })
+}
+
+export const syncThemeToChild = (theme: Theme) => {
+  const iframe = document.querySelector('iframe')
+  if (!iframe?.contentWindow) {
+    return
+  }
+
+  iframeReady(() => {
+    iframe.contentWindow?.postMessage(
+      {
+        type: 'updateTheme',
+        value: theme,
+      },
+      '*',
+    )
+  })
+}
+
+export const getDefaultTheme = (): Theme => {
+  const cache = window.localStorage.getItem('vantTheme')
+  if (cache === 'light' || cache === 'dark') {
+    return cache
+  }
+
+  const useDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches
+  return useDark ? 'dark' : 'light'
+}
+
+export const useCurrentTheme = () => {
+  const theme = ref<Theme>(getDefaultTheme())
+
+  window.addEventListener('message', (event) => {
+    if (event.data?.type !== 'updateTheme') {
+      return
+    }
+
+    const newTheme = event.data?.value
+    if (newTheme === 'light' || newTheme === 'dark') {
+      theme.value = newTheme
+    }
+  })
+
+  return theme
 }
 
 export const listenToSyncPath = (router: Router) => {
