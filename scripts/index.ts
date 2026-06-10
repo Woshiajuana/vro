@@ -5,6 +5,7 @@ import { registerCreate } from './registers/create.ts'
 import { registerDelete } from './registers/delete.ts'
 import { registerEntry } from './registers/entry.ts'
 import { registerHelpers } from './registers/helpers.ts'
+import { registerSyncStyleDeps } from './registers/sync-style-deps.ts'
 
 export default function (plop: NodePlopAPI) {
   registerHelpers(plop)
@@ -16,4 +17,6 @@ export default function (plop: NodePlopAPI) {
   registerCreate(plop)
 
   registerDelete(plop)
+
+  registerSyncStyleDeps(plop)
 }
