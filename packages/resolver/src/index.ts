@@ -85,7 +85,12 @@ export function VroResolver(options: VroResolverOptions = {}) {
         return {
           name,
           from: packageName,
-          sideEffects: getSideEffects({ importStyle, packageName, componentName: name }),
+          sideEffects: getSideEffects({
+            importStyle,
+            importDepsStyle,
+            packageName,
+            componentName: name,
+          }),
         }
       } else if (name.startsWith('Vro')) {
         const packageName = '@vrojs/core'
