@@ -46,8 +46,8 @@
     "@daysnap/vue-use": "^0.0.12",
     "@element-plus/icons-vue": "^2.3.2",
     "@vrojs/core": "workspace:*",
-    "vue": "^3.5.22",
     "element-plus": "^2.11.9",
+    "vue": "^3.5.22",
     "rimraf": "^6.0.1",
     "typescript": "^5.9.3"
   }

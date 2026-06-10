@@ -12,6 +12,9 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElSp: typeof import('element-plus/es')['ElSp']
+    ElSplitter: typeof import('element-plus/es')['ElSplitter']
+    ElSplitterPanel: typeof import('element-plus/es')['ElSplitterPanel']
     LangSwitcher: typeof import('./../src/components/LangSwitcher.vue')['default']
     LogoBox: typeof import('./../src/components/LogoBox.vue')['default']
     MemberFloating: typeof import('./../src/components/MemberFloating/MemberFloating.vue')['default']
