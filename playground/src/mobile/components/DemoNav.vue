@@ -1,11 +1,11 @@
 <template>
-  <div v-show="title" class="vro-demo-nav">
-    <button class="vro-demo-nav__back" type="button" aria-label="返回" @click="onBack">
+  <div v-show="title" class="demo-nav">
+    <button class="demo-nav__back" type="button" aria-label="返回" @click="onBack">
       <svg viewBox="0 0 1000 1000">
         <path fill="currentColor" fill-rule="evenodd" :d="backPath" />
       </svg>
     </button>
-    <div class="vro-demo-nav__title">{{ title }}</div>
+    <div class="demo-nav__title">{{ title }}</div>
   </div>
 </template>
 
@@ -32,33 +32,29 @@
 </script>
 
 <style lang="scss" scoped>
-  .vro-demo-nav {
-    position: sticky;
-    top: 0;
-    z-index: 10;
+  .demo-nav {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 56px;
-    background-color: var(--vro-doc-background-2);
-    border-bottom: 1px solid var(--vro-doc-border-color);
+    background-color: var(--van-doc-background-3);
   }
 
-  .vro-demo-nav__title {
-    color: var(--vro-doc-text-color-1);
-    font-size: 17px;
+  .demo-nav__title {
     font-weight: 600;
+    font-size: 17px;
     text-transform: capitalize;
   }
 
-  .vro-demo-nav__back {
+  .demo-nav__back {
     position: absolute;
-    top: 14px;
-    left: 12px;
-    width: 28px;
-    height: 28px;
+    top: 16px;
+    left: 16px;
+    width: 24px;
+    height: 24px;
     padding: 0;
-    color: var(--vro-doc-text-color-4);
+    color: #969799;
     background: transparent;
     border: 0;
     cursor: pointer;

@@ -1,12 +1,12 @@
 <template>
-  <header class="vro-doc-header">
-    <div class="vro-doc-row">
-      <div class="vro-doc-header__top">
-        <RouterLink class="vro-doc-header__logo" to="/">
+  <header class="van-doc-header">
+    <div class="van-doc-row">
+      <div class="van-doc-header__top">
+        <RouterLink class="van-doc-header__logo" to="/">
           <img src="/img/logo.png" alt="Vro" />
-          <span>Vro</span>
+          <span class="van-doc-header__title">Vro</span>
         </RouterLink>
-        <div class="vro-doc-header__subtitle">组件文档</div>
+        <span class="van-doc-header__subtitle">组件文档</span>
       </div>
     </div>
   </header>
@@ -15,39 +15,44 @@
 <script setup lang="ts"></script>
 
 <style lang="scss" scoped>
-  .vro-doc-header {
+  .van-doc-header {
+    width: 100%;
+    background-color: var(--van-doc-header-background);
+    user-select: none;
     position: relative;
     z-index: 2;
-    width: 100%;
-    background-color: var(--vro-doc-background-2);
-    border-bottom: 1px solid var(--vro-doc-border-color);
-    user-select: none;
   }
 
-  .vro-doc-header__top {
+  .van-doc-header__top {
     display: flex;
     align-items: center;
-    height: var(--vro-doc-header-height);
-    padding: 0 var(--vro-doc-padding);
+    height: var(--van-doc-header-top-height);
+    padding: 0 var(--van-doc-padding);
   }
 
-  .vro-doc-header__logo {
-    display: inline-flex;
-    align-items: center;
-    min-width: calc(var(--vro-doc-nav-width) - var(--vro-doc-padding));
-    color: var(--vro-doc-text-color-1);
-    font-size: 22px;
-    font-weight: 700;
+  .van-doc-header__logo {
+    display: block;
 
     img {
-      width: 30px;
-      height: 30px;
-      margin-right: 10px;
+      display: inline-block;
+      width: 28px;
+      margin-right: 12px;
+      vertical-align: middle;
     }
   }
 
-  .vro-doc-header__subtitle {
-    color: var(--vro-doc-text-color-3);
+  .van-doc-header__title {
+    color: var(--van-doc-white);
+    font-size: 22px;
+    font-weight: 600;
+    vertical-align: middle;
+  }
+
+  .van-doc-header__subtitle {
+    display: inline-block;
+    margin-left: 16px;
+    color: var(--van-doc-gray-5);
     font-size: 14px;
+    vertical-align: middle;
   }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <RouterLink class="vro-doc-nav-link" :class="{ active }" :to="item.path">
+  <RouterLink class="van-doc-nav-link" :class="{ active }" :to="item.path">
     {{ item.meta?.title }}
   </RouterLink>
 </template>
@@ -21,7 +21,7 @@
     (value) => {
       if (value) {
         nextTick(() => {
-          document.querySelector('.vro-doc-nav-link.active')?.scrollIntoView({
+          document.querySelector('.van-doc-nav-link.active')?.scrollIntoView({
             block: 'nearest',
           })
         })
@@ -32,17 +32,10 @@
 </script>
 
 <style lang="scss" scoped>
-  .vro-doc-nav-link {
-    display: block;
-    padding: 6px 0 6px var(--vro-doc-padding);
-    color: var(--vro-doc-text-color-3);
-    font-size: 14px;
-    line-height: 20px;
-    transition: color 0.2s;
-
+  .van-doc-nav-link {
     &:hover,
     &.active {
-      color: var(--vro-doc-link-color);
+      color: var(--van-doc-link-color);
     }
 
     &.active {

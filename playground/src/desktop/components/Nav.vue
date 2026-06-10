@@ -1,8 +1,8 @@
 <template>
-  <nav class="vro-doc-nav" :class="{ 'vro-doc-nav-fixed': isFixed }">
-    <section v-for="group in navs" :key="group.packageName" class="vro-doc-nav__group">
-      <h2 class="vro-doc-nav__title">{{ group.title }}</h2>
-      <div v-for="item in group.items" :key="item.path" class="vro-doc-nav__item">
+  <nav class="van-doc-nav" :class="{ 'van-doc-nav-fixed': isFixed }">
+    <section v-for="group in navs" :key="group.packageName" class="van-doc-nav__group">
+      <h2 class="van-doc-nav__title">{{ group.title }}</h2>
+      <div v-for="item in group.items" :key="item.path" class="van-doc-nav__item">
         <NavLink :item="item" />
       </div>
     </section>
@@ -53,37 +53,76 @@
 </script>
 
 <style lang="scss" scoped>
-  .vro-doc-nav {
+  .van-doc-nav {
     position: absolute;
-    top: var(--vro-doc-header-height);
-    bottom: 0;
     left: 0;
+    top: var(--van-doc-header-top-height);
+    bottom: 0;
     z-index: 1;
-    width: var(--vro-doc-nav-width);
+    min-width: var(--van-doc-nav-width);
+    max-width: var(--van-doc-nav-width);
     padding: 8px 0;
-    overflow-y: auto;
-    background-color: var(--vro-doc-background-2);
+    overflow-y: scroll;
+    background-color: var(--van-doc-background-2);
 
-    &.vro-doc-nav-fixed {
+    @media (min-width: var(--van-doc-row-max-width)) {
+      left: 50%;
+      margin-left: calc((var(--van-doc-row-max-width) / 2 * -1));
+    }
+
+    &.van-doc-nav-fixed {
       position: fixed;
       top: 0;
     }
+
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: transparent;
+      border-radius: 6px;
+    }
+
+    &:hover::-webkit-scrollbar-thumb {
+      background-color: rgba(69, 90, 100, 0.2);
+    }
   }
 
-  .vro-doc-nav__group {
+  .van-doc-nav__group {
     margin-bottom: 16px;
     padding-left: 6px;
   }
 
-  .vro-doc-nav__title {
-    padding: 24px 0 0 var(--vro-doc-padding);
-    color: var(--vro-doc-text-color-2);
-    font-size: 16px;
+  .van-doc-nav__title {
+    padding: 24px 0 0 var(--van-doc-padding);
+    color: var(--van-doc-text-color-2);
     font-weight: 600;
+    font-size: 16px;
     line-height: 28px;
   }
 
-  .vro-doc-nav__item {
-    margin: 4px 0;
+  .van-doc-nav__item {
+    a {
+      display: block;
+      margin: 4px 0;
+      padding: 6px 0 6px var(--van-doc-padding);
+      color: var(--van-doc-text-color-3);
+      font-size: 14px;
+      line-height: 20px;
+      transition: color 0.2s;
+    }
+
+    @media (max-width: 1300px) {
+      a {
+        font-size: 13px;
+      }
+
+      &:active {
+        font-size: 14px;
+      }
+    }
   }
 </style>

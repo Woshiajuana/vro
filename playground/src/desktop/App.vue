@@ -5,12 +5,16 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, watch } from 'vue'
+  import { computed, onMounted, watch } from 'vue'
   import { useRoute } from 'vue-router'
 
   import DocLayout from './components/index.vue'
 
   const route = useRoute()
+
+  onMounted(() => {
+    document.documentElement.classList.add('van-doc-theme-light')
+  })
 
   const simulator = computed(() => {
     const { packageName, componentDir } = route.meta

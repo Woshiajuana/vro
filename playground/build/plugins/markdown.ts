@@ -20,7 +20,7 @@ const markdownCardWrapper = (htmlCode: string) => {
   const html = group
     .map((fragment) => {
       if (fragment.includes('<h3')) {
-        return `<div class="vro-doc-card">${fragment}</div>`
+        return `<div class="van-doc-card">${fragment}</div>`
       }
 
       return fragment
@@ -58,7 +58,7 @@ const markdownLinkOpen = (md: MarkdownIt) => {
 
 export function Markdown() {
   return VitePluginMd({
-    wrapperClasses: 'vro-doc-markdown-body',
+    wrapperClasses: 'van-doc-markdown-body',
     transforms: {
       after: markdownCardWrapper,
     },

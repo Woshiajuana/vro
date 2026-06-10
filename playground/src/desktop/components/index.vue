@@ -1,5 +1,5 @@
 <template>
-  <div class="vro-doc">
+  <div class="van-doc">
     <DocHeader />
     <DocNav />
     <DocContainer>

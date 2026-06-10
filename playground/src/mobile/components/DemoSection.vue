@@ -1,5 +1,5 @@
 <template>
-  <section class="vro-demo-section" :class="sectionClass">
+  <section class="van-doc-demo-section" :class="sectionClass">
     <slot />
   </section>
 </template>
@@ -13,9 +13,9 @@
 </script>
 
 <style lang="scss" scoped>
-  .vro-demo-section {
+  .van-doc-demo-section {
+    box-sizing: border-box;
     min-height: calc(100vh - 56px);
     padding-bottom: 20px;
-    background: var(--vro-doc-background-3);
   }
 </style>

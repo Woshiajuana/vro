@@ -1,23 +1,34 @@
 <template>
-  <div class="vro-demo-home">
-    <h1 class="vro-demo-home__title">
+  <div class="demo-home">
+    <h1 class="demo-home__title">
       <img src="/img/logo.png" alt="Vro" />
       <span>Vro</span>
     </h1>
-    <p class="vro-demo-home__desc">组件演练场</p>
+    <h2 class="demo-home__desc">组件演练场</h2>
 
-    <section v-for="group in navs" :key="group.packageName" class="vro-demo-home__group">
-      <h2 class="vro-demo-home__group-title">{{ group.title }}</h2>
-      <RouterLink
-        v-for="item in group.items"
-        :key="item.path"
-        class="vro-demo-home__link"
-        :to="item.path"
-      >
-        <span>{{ item.meta?.title }}</span>
-        <span class="vro-demo-home__arrow" />
-      </RouterLink>
-    </section>
+    <div v-for="group in navs" :key="group.packageName" class="demo-home-nav">
+      <div class="demo-home-nav__title">{{ group.title }}</div>
+      <div class="demo-home-nav__group">
+        <RouterLink
+          v-for="item in group.items"
+          :key="item.path"
+          class="demo-home-nav__block"
+          :to="item.path"
+        >
+          {{ item.meta?.title }}
+          <svg class="demo-home-nav__icon" viewBox="0 0 1024 1024">
+            <path
+              fill="#B6C3D2"
+              d="M601.1 556.5L333.8 289.3c-24.5-24.5-24.5-64.6 0-89.1s64.6-24.5 89.1 0l267.3 267.3c24.5 24.5 24.5 64.6 0 89.1-24.5 24.4-64.6 24.4-89.1-.1z"
+            />
+            <path
+              fill="#B6C3D2"
+              d="M690.2 556.5L422.9 823.8c-24.5 24.5-64.6 24.5-89.1 0s-24.5-64.6 0-89.1l267.3-267.3c24.5-24.5 64.6-24.5 89.1 0 24.5 24.6 24.5 64.6 0 89.1z"
+            />
+          </svg>
+        </RouterLink>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -49,73 +60,83 @@
 </script>
 
 <style lang="scss" scoped>
-  .vro-demo-home {
+  .demo-home {
+    box-sizing: border-box;
+    width: 100%;
     min-height: 100vh;
     padding: 46px 20px 28px;
-    background: var(--vro-doc-background-3);
-  }
 
-  .vro-demo-home__title,
-  .vro-demo-home__desc {
-    padding-left: 16px;
-    font-weight: 400;
-    line-height: 1;
-    user-select: none;
-  }
+    &__title,
+    &__desc {
+      padding-left: 16px;
+      font-weight: normal;
+      line-height: 1;
+      user-select: none;
+    }
 
-  .vro-demo-home__title {
-    display: flex;
-    align-items: center;
-    margin: 0 0 16px;
-    color: var(--vro-doc-text-color-1);
-    font-size: 32px;
+    &__title {
+      margin: 0 0 16px;
+      font-size: 32px;
 
-    img {
-      width: 32px;
-      height: 32px;
-      margin-right: 16px;
+      img,
+      span {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      img {
+        width: 32px;
+      }
+
+      span {
+        margin-left: 16px;
+      }
+    }
+
+    &__desc {
+      margin: 0 0 40px;
+      color: var(--van-doc-text-color-4);
+      font-size: 14px;
+      line-height: 1.6;
     }
   }
 
-  .vro-demo-home__desc {
-    margin: 0 0 32px;
-    color: var(--vro-doc-text-color-4);
-    font-size: 14px;
-    line-height: 1.6;
-  }
+  .demo-home-nav {
+    &__title {
+      margin: 24px 0 8px 16px;
+      color: var(--van-doc-text-color-4);
+      font-size: 14px;
+    }
 
-  .vro-demo-home__group {
-    margin-bottom: 24px;
-  }
+    &__block {
+      position: relative;
+      display: flex;
+      margin: 0 0 12px;
+      padding-left: 20px;
+      color: var(--van-doc-text-color-3);
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 40px;
+      background-color: var(--van-doc-background-3);
+      border-radius: 99px;
+      transition: opacity 0.3s;
 
-  .vro-demo-home__group-title {
-    margin: 0;
-    padding: 0 16px 10px;
-    color: var(--vro-doc-text-color-4);
-    font-size: 14px;
-    font-weight: 400;
-  }
+      &:hover {
+        opacity: 0.8;
+      }
 
-  .vro-demo-home__link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 44px;
-    margin-bottom: 12px;
-    padding: 0 16px;
-    color: var(--vro-doc-text-color-2);
-    font-size: 14px;
-    line-height: 44px;
-    background-color: var(--vro-doc-background-2);
-    border-radius: 22px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  }
+      &:active {
+        opacity: 0.6;
+      }
+    }
 
-  .vro-demo-home__arrow {
-    width: 7px;
-    height: 7px;
-    border: 1px solid var(--vro-doc-text-color-4);
-    border-width: 1px 1px 0 0;
-    transform: rotate(45deg);
+    &__icon {
+      position: absolute;
+      top: 50%;
+      right: 16px;
+      width: 16px;
+      height: 16px;
+      margin-top: -8px;
+    }
   }
 </style>

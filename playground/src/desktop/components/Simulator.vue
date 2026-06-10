@@ -1,5 +1,5 @@
 <template>
-  <div class="vro-doc-simulator" :class="{ 'vro-doc-simulator-fixed': isFixed }">
+  <div class="van-doc-simulator" :class="{ 'van-doc-simulator-fixed': isFixed }">
     <iframe :src="src" :style="simulatorStyle" frameborder="0" />
   </div>
 </template>
@@ -24,26 +24,36 @@
 </script>
 
 <style lang="scss" scoped>
-  .vro-doc-simulator {
+  .van-doc-simulator {
     position: absolute;
-    top: calc(var(--vro-doc-padding) + var(--vro-doc-header-height));
-    right: var(--vro-doc-padding);
+    top: calc(var(--van-doc-padding) + var(--van-doc-header-top-height));
+    right: var(--van-doc-padding);
     z-index: 1;
-    width: var(--vro-doc-simulator-width);
+    box-sizing: border-box;
+    width: var(--van-doc-simulator-width);
+    min-width: var(--van-doc-simulator-width);
     overflow: hidden;
-    background: var(--vro-doc-background-2);
-    border-radius: var(--vro-doc-border-radius);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    background: var(--van-doc-background-2);
+    border-radius: var(--van-doc-border-radius);
 
-    &.vro-doc-simulator-fixed {
+    @media (max-width: 1100px) {
+      right: auto;
+      left: 750px;
+    }
+
+    @media (min-width: var(--van-doc-row-max-width)) {
+      right: 50%;
+      margin-right: calc(var(--van-doc-row-max-width) / 2 * -1 + 24px);
+    }
+
+    &.van-doc-simulator-fixed {
       position: fixed;
-      top: var(--vro-doc-padding);
+      top: var(--van-doc-padding);
     }
 
     iframe {
       display: block;
       width: 100%;
-      background: var(--vro-doc-background-3);
     }
   }
 </style>
