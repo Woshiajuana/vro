@@ -1,4 +1,4 @@
-# VroElButton
+# VroElTest
 
 
 ### 介绍
@@ -22,7 +22,7 @@
     <td>类型</td>
     <td>默认值</td>
   </tr>
-  <tr v-for="(item, key) in vroElButtonProps" :key="key">
+  <tr v-for="(item, key) in vroElTestProps" :key="key">
     <td>{{ key }}</td>
     <td>{{ parseType(item.type || item) }}</td>
     <td>{{ reserve(item.default, '-') }}</td>
@@ -71,6 +71,6 @@
 
 <script setup lang="ts">
   import { reserve } from '@daysnap/utils'
-  import { VroElButton, vroElButtonProps } from '.'
+  import { VroElTest, vroElTestProps } from '.'
   import { parseType } from '../utils'
 </script>

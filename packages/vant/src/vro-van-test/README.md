@@ -1,0 +1,76 @@
+# VroVanTest
+
+
+### 介绍
+
+...
+
+
+## 代码演示
+
+
+### 基础用法
+
+
+## API
+
+### 属性 Props
+
+<table>
+  <tr>
+    <td>名称</td>
+    <td>类型</td>
+    <td>默认值</td>
+  </tr>
+  <tr v-for="(item, key) in vroVanTestProps" :key="key">
+    <td>{{ key }}</td>
+    <td>{{ parseType(item.type || item) }}</td>
+    <td>{{ reserve(item.default, '-') }}</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td>名称</td>
+    <td>说明</td>
+  </tr>
+  <tr>
+    <td>xx</td>
+    <td>xxx</td>
+  </tr>
+</table>
+
+### 插槽 Slots
+
+<table>
+  <tr>
+    <td>名称</td>
+    <td>说明</td>
+  </tr>
+  <tr>
+    <td>xx</td>
+    <td>xxx</td>
+  </tr>
+</table>
+
+
+### 实例方法
+
+<table>
+  <tr>
+    <td>名称</td>
+    <td>说明</td>
+  </tr>
+  <tr>
+    <td>xx</td>
+    <td>xxx</td>
+  </tr>
+</table>
+
+
+
+<script setup lang="ts">
+  import { reserve } from '@daysnap/utils'
+  import { VroVanTest, vroVanTestProps } from '.'
+  import { parseType } from '../utils'
+</script>

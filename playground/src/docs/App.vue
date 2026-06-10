@@ -5,6 +5,10 @@
     <br />
 
     <VroInput></VroInput>
+
+    <br />
+
+    <VroVanButton />
   </div>
 </template>
 

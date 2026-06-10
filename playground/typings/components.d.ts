@@ -11,6 +11,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ElButton: typeof import('element-plus/es')['ElButton']
     LangSwitcher: typeof import('./../src/components/LangSwitcher.vue')['default']
     LogoBox: typeof import('./../src/components/LogoBox.vue')['default']
     MemberFloating: typeof import('./../src/components/MemberFloating/MemberFloating.vue')['default']
@@ -27,5 +28,7 @@ declare module 'vue' {
     VanSwipeItem: typeof import('vant/es')['SwipeItem']
     VideoPlayPopup: typeof import('./../src/components/VideoPlayPopup/VideoPlayPopup.vue')['default']
     VroElButton: typeof import('@vrojs/element-plus')['VroElButton']
+    VroInput: typeof import('@vrojs/core')['VroInput']
+    VroVanButton: typeof import('@vrojs/vant')['VroVanButton']
   }
 }
