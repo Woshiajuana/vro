@@ -14,9 +14,10 @@ export const getTemplateFile = (
   templateFileSuffix: string,
 ) => {
   const packageTemplate = resolveTemplatePath(scope, packageName, templateFileSuffix)
+  const defaultTemplate = resolveTemplatePath(scope, 'default', templateFileSuffix)
   return existsSync(packageTemplate)
     ? packageTemplate
-    : resolveTemplatePath(scope, templateFileSuffix)
+    : defaultTemplate
 }
 
 export const hasPackageTemplate = (
