@@ -256,11 +256,15 @@ const writeIndexStyle = (
     return
   }
 
-  const imports = toImportCode(
-    packageName,
-    componentDir,
-    internalCssDeps.concat(internalDepsDeps, externalDeps),
-  ).concat(["import '../../styles'", "import './index.scss'"])
+  const imports = ["import '../../styles/base.scss'"]
+    .concat(
+      toImportCode(
+        packageName,
+        componentDir,
+        internalCssDeps.concat(internalDepsDeps, externalDeps),
+      ),
+    )
+    .concat("import './index.scss'")
 
   writeFileSync(indexPath, `${imports.join('\n')}\n`)
 }
