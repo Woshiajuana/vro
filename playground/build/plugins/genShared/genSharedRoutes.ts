@@ -1,15 +1,11 @@
 import fg from 'fast-glob'
 import { existsSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
-import type { Plugin } from 'vite'
-
-const virtualModuleId = 'virtual:vro-playground-routes'
-const resolvedVirtualModuleId = `\0${virtualModuleId}`
 
 const packageNames = ['core', 'element-plus', 'vant'] as const
 type PackageName = (typeof packageNames)[number]
 
-const packagesRoot = fileURLToPath(new URL('../../../packages', import.meta.url))
+const packagesRoot = fileURLToPath(new URL('../../../../packages', import.meta.url))
 
 const titleCase = (value: string) => {
   return value
@@ -66,21 +62,8 @@ const getRoutesCode = (type: 'docs' | 'demo') => {
     .join(',\n')
 }
 
-export const playgroundRoutes = (): Plugin => {
-  return {
-    name: 'vro-playground-routes',
-    enforce: 'pre',
-    resolveId(id) {
-      if (id === virtualModuleId) {
-        return resolvedVirtualModuleId
-      }
-    },
-    load(id) {
-      if (id !== resolvedVirtualModuleId) {
-        return
-      }
-
-      return `export const docsRoutes = [
+export function genSharedRoutes() {
+  return `export const docsRoutes = [
 ${getRoutesCode('docs')}
 ]
 
@@ -88,6 +71,4 @@ export const demoRoutes = [
 ${getRoutesCode('demo')}
 ]
 `
-    },
-  }
 }

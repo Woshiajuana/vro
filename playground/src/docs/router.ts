@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import { demoRoutes, docsRoutes } from 'virtual:vro-playground-routes'
+import { docsRoutes } from 'virtual:vro-playground-routes'
 
 import { errorHandler } from '@/utils'
 
@@ -10,12 +10,18 @@ export const router = createRouter({
   routes: [
     { path: '/', redirect: firstDocsRoute?.path ?? '/404' },
     ...docsRoutes,
-    ...demoRoutes,
 
     // 404
     // https://router.vuejs.org/zh/guide/essentials/dynamic-matching.html
     { path: '/:pathMatch(.*)*', name: '404', redirect: '/' },
   ],
+  scrollBehavior(to) {
+    if (to.hash) {
+      return { el: to.hash }
+    }
+
+    return { top: 0 }
+  },
 })
 
 router.onError(errorHandler)

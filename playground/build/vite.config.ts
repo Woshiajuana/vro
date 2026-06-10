@@ -1,3 +1,4 @@
+import path from 'node:path'
 import { fileURLToPath, URL } from 'node:url'
 
 import { VantResolver } from '@vant/auto-import-resolver'
@@ -6,9 +7,8 @@ import { VroResolver } from '@vrojs/resolver'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
-import Markdown from 'vite-plugin-md'
 
-import { playgroundRoutes } from './plugins/playground-routes'
+import { GenShared, Markdown } from './plugins'
 
 // https://vitejs.dev/config/
 export default defineConfig(() => {
@@ -55,12 +55,8 @@ export default defineConfig(() => {
     },
 
     plugins: [
-      playgroundRoutes(),
-      Markdown({
-        markdownItOptions: {
-          html: true,
-        },
-      }),
+      GenShared(),
+      Markdown(),
       Vue({
         include: [/\.vue$/, /\.md$/],
       }),
@@ -70,5 +66,14 @@ export default defineConfig(() => {
         resolvers: [VroResolver(), VantResolver(), ElementPlusResolver()],
       }),
     ],
+
+    build: {
+      rollupOptions: {
+        input: {
+          main: path.join(fileURLToPath(new URL('..', import.meta.url)), 'index.html'),
+          demo: path.join(fileURLToPath(new URL('..', import.meta.url)), 'demo.html'),
+        },
+      },
+    },
   }
 })
