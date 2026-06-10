@@ -1,7 +1,8 @@
 import { demos } from 'virtual:shared-mobile'
+import { nextTick, watch } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-import { errorHandler, useIframePathSync } from '@/utils'
+import { errorHandler, listenToSyncPath, syncPathToParent } from '@/utils'
 
 import DemoHome from './components/DemoHome.vue'
 
@@ -26,4 +27,13 @@ export const router = createRouter({
 })
 
 router.onError(errorHandler)
-useIframePathSync(router, 'mobile')
+
+watch(router.currentRoute, () => {
+  if (!router.currentRoute.value.redirectedFrom) {
+    nextTick(syncPathToParent)
+  }
+})
+
+listenToSyncPath(router)
+
+window.vueRouter = router

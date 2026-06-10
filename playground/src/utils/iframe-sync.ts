@@ -1,4 +1,4 @@
-import { nextTick, ref, watch } from 'vue'
+import { ref } from 'vue'
 import type { Router } from 'vue-router'
 
 let queue: Array<() => void> = []
@@ -25,19 +25,24 @@ if (window.top === window) {
   window.top?.postMessage({ type: 'iframeReady' }, '*')
 }
 
-const getCurrentPath = (router: Router) => router.currentRoute.value.path
+const getCurrentDir = () => {
+  const router = window.vueRouter
+  const { path } = router.currentRoute.value
 
-export const syncPathToParent = (router: Router) => {
+  return path
+}
+
+export const syncPathToParent = () => {
   window.top?.postMessage(
     {
       type: 'replacePath',
-      value: getCurrentPath(router),
+      value: getCurrentDir(),
     },
     '*',
   )
 }
 
-export const syncPathToChild = (router: Router) => {
+export const syncPathToChild = () => {
   const iframe = document.querySelector('iframe')
   if (!iframe?.contentWindow) {
     return
@@ -47,44 +52,25 @@ export const syncPathToChild = (router: Router) => {
     iframe.contentWindow?.postMessage(
       {
         type: 'replacePath',
-        value: getCurrentPath(router).replace(/^\/docs/, '/demo'),
+        value: getCurrentDir(),
       },
       '*',
     )
   })
 }
 
-export const listenToSyncPath = (router: Router, mode: 'desktop' | 'mobile') => {
+export const listenToSyncPath = (router: Router) => {
   window.addEventListener('message', (event) => {
     if (event.data?.type !== 'replacePath') {
       return
     }
 
     const path = String(event.data?.value || '')
-    const nextPath = mode === 'desktop' ? path.replace(/^\/demo/, '/docs') : path
 
-    if (router.currentRoute.value.path !== nextPath) {
-      router.replace(nextPath).catch(() => {})
+    if (router.currentRoute.value.path !== path) {
+      router.replace(path).catch(() => {})
     }
   })
-}
-
-export const useIframePathSync = (router: Router, mode: 'desktop' | 'mobile') => {
-  listenToSyncPath(router, mode)
-
-  watch(
-    router.currentRoute,
-    () => {
-      nextTick(() => {
-        if (mode === 'desktop') {
-          syncPathToChild(router)
-        } else {
-          syncPathToParent(router)
-        }
-      })
-    },
-    { immediate: true },
-  )
 }
 
 export const useWindowScroll = () => {

@@ -9,6 +9,8 @@
 </template>
 
 <script setup lang="ts">
+  import { computed } from 'vue'
+
   import { vroAspectRatioProps } from './types'
 
   defineOptions({ name: 'VroAspectRatio' })

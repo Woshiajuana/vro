@@ -1,7 +1,8 @@
 import { documents } from 'virtual:shared-desktop'
+import { nextTick } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-import { errorHandler, useIframePathSync } from '@/utils'
+import { errorHandler, listenToSyncPath, syncPathToChild } from '@/utils'
 
 const firstDocument = documents[0]
 
@@ -29,4 +30,11 @@ export const router = createRouter({
 })
 
 router.onError(errorHandler)
-useIframePathSync(router, 'desktop')
+
+router.afterEach(() => {
+  nextTick(syncPathToChild)
+})
+
+listenToSyncPath(router)
+
+window.vueRouter = router

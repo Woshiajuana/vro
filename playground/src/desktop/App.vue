@@ -17,12 +17,8 @@
   })
 
   const simulator = computed(() => {
-    const { packageName, componentDir } = route.meta
-    if (!packageName || !componentDir) {
-      return './demo.html#/'
-    }
-
-    return `./demo.html#/demo/${packageName}/${componentDir}`
+    const path = location.pathname.replace(/\/index(\.html)?/, '/')
+    return `${path}demo.html${location.hash}`
   })
 
   watch(

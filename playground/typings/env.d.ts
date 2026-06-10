@@ -1,6 +1,7 @@
 /// <reference types="vite/client" />
 
 import 'vue-router'
+import type { Router } from 'vue-router'
 
 // router
 declare module 'vue-router' {
@@ -9,5 +10,11 @@ declare module 'vue-router' {
     type?: 'docs' | 'demo'
     packageName?: string
     componentDir?: string
+  }
+}
+
+declare global {
+  interface Window {
+    vueRouter: Router
   }
 }

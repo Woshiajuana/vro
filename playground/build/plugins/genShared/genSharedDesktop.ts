@@ -7,7 +7,7 @@ export function genSharedDesktop() {
 ${documents
   .map(
     (item) => `  {
-    path: '/docs/${item.packageName}/${item.componentDir}',
+    path: '/${item.packageName}/${item.componentDir}',
     name: 'docs-${item.packageName}-${item.componentDir}',
     component: () => import('${toImportPath(item.readmePath)}'),
     meta: {

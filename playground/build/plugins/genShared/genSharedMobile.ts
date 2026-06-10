@@ -7,7 +7,7 @@ export function genSharedMobile() {
 ${demos
   .map(
     (item) => `  {
-    path: '/demo/${item.packageName}/${item.componentDir}',
+    path: '/${item.packageName}/${item.componentDir}',
     name: 'demo-${item.packageName}-${item.componentDir}',
     component: () => import('${toImportPath(item.demoPath)}'),
     meta: {
