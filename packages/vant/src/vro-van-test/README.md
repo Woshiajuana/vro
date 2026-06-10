@@ -1,16 +1,12 @@
 # VroVanTest
 
-
 ### 介绍
 
 ...
 
-
 ## 代码演示
 
-
 ### 基础用法
-
 
 ## API
 
@@ -31,19 +27,6 @@
   </tbody>
 </table>
 
-<table>
-  <tbody>
-    <tr>
-      <td>名称</td>
-      <td>说明</td>
-    </tr>
-    <tr>
-      <td>xx</td>
-      <td>xxx</td>
-    </tr>
-  </tbody>
-</table>
-
 ### 插槽 Slots
 
 <table>
@@ -59,7 +42,6 @@
   </tbody>
 </table>
 
-
 ### 实例方法
 
 <table>
@@ -74,8 +56,6 @@
     </tr>
   </tbody>
 </table>
-
-
 
 <script setup lang="ts">
   import { reserve } from '@daysnap/utils'
