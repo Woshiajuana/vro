@@ -9,12 +9,11 @@
   },
   "files": [
     "src",
-    "typings",
-    "!**/demo/**/*"
+    "!src/**/demo",
+    "!src/**/README.md"
   ],
   "sideEffects": [
-    "src/**/style/*",
-    "src/**/styles/*"
+    "src/**/style/*"
   ],
   "keywords": [
     "vro",

@@ -225,7 +225,7 @@ const writeCssStyle = (
     return
   }
 
-  const imports = ["import '../../styles/base.scss'"]
+  const imports = ["import '../../style/base.scss'"]
     .concat(toImportCode(packageName, componentDir, internalCssDeps))
     .concat("import './index.scss'")
 
@@ -272,7 +272,7 @@ const writeIndexStyle = (
     return
   }
 
-  const imports = ["import '../../styles/base.scss'"]
+  const imports = ["import '../../style/base.scss'"]
     .concat(
       toImportCode(
         packageName,

@@ -7,7 +7,7 @@ import { createPackageNamePrompt } from '../utils/prompts.ts'
 const getComponents = (packageName: string) => {
   const entries = fg.sync([
     `packages/${packageName}/src/**/index.ts`,
-    `!packages/${packageName}/src/styles/index.ts`,
+    `!packages/${packageName}/src/style/index.ts`,
     `!packages/${packageName}/src/index.ts`,
     `!packages/${packageName}/src/**/style/index.ts`,
   ])
@@ -24,15 +24,15 @@ const createPackageStyleEntryActions = (packageName: string, components: string[
   const configs = [
     {
       path: 'index.ts',
-      template: 'styles/index.ts.hbs',
+      template: 'style/index.ts.hbs',
     },
     {
       path: 'css.ts',
-      template: 'styles/css.ts.hbs',
+      template: 'style/css.ts.hbs',
     },
     {
       path: 'deps.ts',
-      template: 'styles/deps.ts.hbs',
+      template: 'style/deps.ts.hbs',
       data: { components: components.filter((item) => item?.startsWith('vro')) },
     },
   ]
@@ -41,7 +41,7 @@ const createPackageStyleEntryActions = (packageName: string, components: string[
     .filter(({ template }) => hasPackageTemplate('entry', packageName, template))
     .map(({ path: pathSuffix, template, data }) => ({
       type: 'add',
-      path: resolvePackagePath(`${packageName}/src/styles/${pathSuffix}`),
+      path: resolvePackagePath(`${packageName}/src/style/${pathSuffix}`),
       templateFile: getTemplateFile('entry', packageName, template),
       force: true,
       data,
@@ -67,7 +67,7 @@ export const registerEntry = (plop: NodePlopAPI) => {
             },
             {
               type: 'add',
-              path: resolvePackagePath(`${name}/src/styles/index.scss`),
+              path: resolvePackagePath(`${name}/src/style/index.scss`),
               templateFile: getTemplateFile('entry', name, 'index.scss.hbs'),
               force: true,
               data: { components: components.filter((item) => item?.startsWith('vro')) },
