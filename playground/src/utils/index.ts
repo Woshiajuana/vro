@@ -1,2 +1,2 @@
-export * from './constants'
 export * from './errorHandler'
+export * from './iframe-sync'

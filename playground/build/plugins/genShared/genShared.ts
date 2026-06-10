@@ -1,24 +1,36 @@
 import type { PluginOption } from 'vite'
 
-import { genSharedRoutes } from './genSharedRoutes'
+import { genSharedDesktop } from './genSharedDesktop'
+import { genSharedMobile } from './genSharedMobile'
 
 export function GenShared(): PluginOption {
-  const virtualSharedModuleId = 'virtual:vro-playground-routes'
-  const resolvedVirtualSharedModuleId = `resolved:${virtualSharedModuleId}`
+  const virtualSharedDesktopModuleId = 'virtual:shared-desktop'
+  const resolvedVirtualSharedDesktopModuleId = `resolved:${virtualSharedDesktopModuleId}`
+
+  const virtualSharedMobileModuleId = 'virtual:shared-mobile'
+  const resolvedVirtualSharedMobileModuleId = `resolved:${virtualSharedMobileModuleId}`
 
   return {
     name: 'vro:shared',
     enforce: 'pre',
 
     resolveId(id) {
-      if (id === virtualSharedModuleId) {
-        return resolvedVirtualSharedModuleId
+      if (id === virtualSharedDesktopModuleId) {
+        return resolvedVirtualSharedDesktopModuleId
+      }
+
+      if (id === virtualSharedMobileModuleId) {
+        return resolvedVirtualSharedMobileModuleId
       }
     },
 
     load(id) {
-      if (id === resolvedVirtualSharedModuleId) {
-        return genSharedRoutes()
+      if (id === resolvedVirtualSharedDesktopModuleId) {
+        return genSharedDesktop()
+      }
+
+      if (id === resolvedVirtualSharedMobileModuleId) {
+        return genSharedMobile()
       }
     },
   }

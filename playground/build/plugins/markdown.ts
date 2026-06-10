@@ -4,6 +4,32 @@ import hljs from 'highlight.js'
 import type MarkdownIt from 'markdown-it'
 import VitePluginMd from 'vite-plugin-md'
 
+const splitScriptSetup = (htmlCode: string) => {
+  const index = htmlCode.indexOf('<script')
+  if (index === -1) {
+    return [htmlCode, '']
+  }
+
+  return [htmlCode.slice(0, index), htmlCode.slice(index)]
+}
+
+const markdownCardWrapper = (htmlCode: string) => {
+  const [content, script] = splitScriptSetup(htmlCode)
+  const group = content.replace(/<h3/g, ':::<h3').replace(/<h2/g, ':::<h2').split(':::')
+
+  const html = group
+    .map((fragment) => {
+      if (fragment.includes('<h3')) {
+        return `<div class="vro-doc-card">${fragment}</div>`
+      }
+
+      return fragment
+    })
+    .join('')
+
+  return `${html}${script}`
+}
+
 const markdownHighlight = (str: string, lang: string) => {
   if (lang && hljs.getLanguage(lang)) {
     return hljs.highlight(str, { language: lang, ignoreIllegals: true }).value
@@ -32,7 +58,10 @@ const markdownLinkOpen = (md: MarkdownIt) => {
 
 export function Markdown() {
   return VitePluginMd({
-    wrapperClasses: 'docs-markdown-body',
+    wrapperClasses: 'vro-doc-markdown-body',
+    transforms: {
+      after: markdownCardWrapper,
+    },
     markdownItOptions: {
       html: true,
       typographer: false,

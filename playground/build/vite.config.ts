@@ -10,70 +10,65 @@ import { defineConfig } from 'vite'
 
 import { GenShared, Markdown } from './plugins'
 
-// https://vitejs.dev/config/
-export default defineConfig(() => {
-  return {
-    root: './',
-    base: './',
-    server: {
-      host: '0.0.0.0',
-    },
-
-    resolve: {
-      alias: [
-        {
-          find: '@',
-          replacement: fileURLToPath(new URL('../src', import.meta.url)),
-        },
-        {
-          find: /^@vrojs\/core$/,
-          replacement: fileURLToPath(new URL('../../packages/core/src/index.ts', import.meta.url)),
-        },
-        {
-          find: /^@vrojs\/core\/(.*)$/,
-          replacement: `${fileURLToPath(new URL('../../packages/core', import.meta.url))}/$1`,
-        },
-        {
-          find: /^@vrojs\/element-plus$/,
-          replacement: fileURLToPath(
-            new URL('../../packages/element-plus/src/index.ts', import.meta.url),
-          ),
-        },
-        {
-          find: /^@vrojs\/element-plus\/(.*)$/,
-          replacement: `${fileURLToPath(new URL('../../packages/element-plus', import.meta.url))}/$1`,
-        },
-        {
-          find: /^@vrojs\/vant$/,
-          replacement: fileURLToPath(new URL('../../packages/vant/src/index.ts', import.meta.url)),
-        },
-        {
-          find: /^@vrojs\/vant\/(.*)$/,
-          replacement: `${fileURLToPath(new URL('../../packages/vant', import.meta.url))}/$1`,
-        },
-      ],
-    },
-
-    plugins: [
-      GenShared(),
-      Markdown(),
-      Vue({
-        include: [/\.vue$/, /\.md$/],
-      }),
-      Components({
-        dts: 'typings/components.d.ts',
-        extensions: ['ts', 'jsx', 'tsx', 'js', 'vue'],
-        resolvers: [VroResolver(), VantResolver(), ElementPlusResolver()],
-      }),
+export default defineConfig({
+  root: './',
+  base: './',
+  publicDir: './public',
+  server: {
+    host: '0.0.0.0',
+  },
+  resolve: {
+    alias: [
+      {
+        find: '@',
+        replacement: fileURLToPath(new URL('../src', import.meta.url)),
+      },
+      {
+        find: /^@vrojs\/core$/,
+        replacement: fileURLToPath(new URL('../../packages/core/src/index.ts', import.meta.url)),
+      },
+      {
+        find: /^@vrojs\/core\/(.*)$/,
+        replacement: `${fileURLToPath(new URL('../../packages/core', import.meta.url))}/$1`,
+      },
+      {
+        find: /^@vrojs\/element-plus$/,
+        replacement: fileURLToPath(
+          new URL('../../packages/element-plus/src/index.ts', import.meta.url),
+        ),
+      },
+      {
+        find: /^@vrojs\/element-plus\/(.*)$/,
+        replacement: `${fileURLToPath(new URL('../../packages/element-plus', import.meta.url))}/$1`,
+      },
+      {
+        find: /^@vrojs\/vant$/,
+        replacement: fileURLToPath(new URL('../../packages/vant/src/index.ts', import.meta.url)),
+      },
+      {
+        find: /^@vrojs\/vant\/(.*)$/,
+        replacement: `${fileURLToPath(new URL('../../packages/vant', import.meta.url))}/$1`,
+      },
     ],
-
-    build: {
-      rollupOptions: {
-        input: {
-          main: path.join(fileURLToPath(new URL('..', import.meta.url)), 'index.html'),
-          demo: path.join(fileURLToPath(new URL('..', import.meta.url)), 'demo.html'),
-        },
+  },
+  plugins: [
+    GenShared(),
+    Markdown(),
+    Vue({
+      include: [/\.vue$/, /\.md$/],
+    }),
+    Components({
+      dts: 'typings/components.d.ts',
+      extensions: ['ts', 'jsx', 'tsx', 'js', 'vue'],
+      resolvers: [VroResolver(), VantResolver(), ElementPlusResolver()],
+    }),
+  ],
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.join(fileURLToPath(new URL('..', import.meta.url)), 'index.html'),
+        mobile: path.join(fileURLToPath(new URL('..', import.meta.url)), 'demo.html'),
       },
     },
-  }
+  },
 })

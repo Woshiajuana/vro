@@ -15,12 +15,12 @@
 </script>
 
 <style lang="scss">
-  @use '@/assets/scss/global.scss' as *;
+  @use '../assets/scss/base.scss' as *;
 
   html,
   body {
     min-width: 100vw;
-    background-color: var(--bg-color-2);
+    background-color: var(--vro-doc-background-3);
   }
 
   body {
