@@ -27,19 +27,6 @@
   </tbody>
 </table>
 
-<table>
-  <tbody>
-    <tr>
-      <td>名称</td>
-      <td>说明</td>
-    </tr>
-    <tr>
-      <td>xx</td>
-      <td>xxx</td>
-    </tr>
-  </tbody>
-</table>
-
 ### 插槽 Slots
 
 <table>
