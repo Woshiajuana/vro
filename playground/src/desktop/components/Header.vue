@@ -6,9 +6,20 @@
           <img src="/img/logo.png" alt="Vro" />
           <span class="van-doc-header__title">Vro</span>
         </RouterLink>
-        <span class="van-doc-header__subtitle">组件文档</span>
 
         <ul class="van-doc-header__top-nav">
+          <li class="van-doc-header__top-nav-item">
+            <a
+              class="van-doc-header__link"
+              href="https://github.com/Woshiajuana/vrojs"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="GitHub"
+            >
+              <img src="https://fastly.jsdelivr.net/npm/@vant/assets/github.svg" alt="GitHub" />
+            </a>
+          </li>
+
           <li class="van-doc-header__top-nav-item">
             <button
               class="van-doc-header__link van-doc-header__theme"
@@ -94,26 +105,11 @@
     vertical-align: middle;
   }
 
-  .van-doc-header__subtitle {
-    display: inline-block;
-    margin-left: 16px;
-    color: var(--van-doc-gray-5);
-    font-size: 14px;
-    vertical-align: middle;
-  }
-
   .van-doc-header__top-nav {
-    flex: 1;
-    margin: 0;
-    padding: 0;
-    font-size: 0;
-    text-align: right;
-    list-style: none;
-  }
-
-  .van-doc-header__top-nav-item {
-    display: inline-block;
-    vertical-align: middle;
+    margin-left: auto;
+    gap: 16px;
+    display: flex;
+    align-items: center;
   }
 
   .van-doc-header__link {
@@ -123,7 +119,7 @@
     width: 32px;
     height: 32px;
     padding: 0;
-    border: 0;
+    border: none;
     background: transparent;
     cursor: pointer;
     transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
