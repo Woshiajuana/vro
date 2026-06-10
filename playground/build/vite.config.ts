@@ -1,5 +1,6 @@
 import { fileURLToPath, URL } from 'node:url'
 
+import { VantResolver } from '@vant/auto-import-resolver'
 import Vue from '@vitejs/plugin-vue'
 import { VroResolver } from '@vrojs/resolver'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
@@ -26,7 +27,7 @@ export default defineConfig(() => {
       Components({
         dts: 'typings/components.d.ts',
         extensions: ['ts', 'jsx', 'tsx', 'js', 'vue'],
-        resolvers: [VroResolver(), ElementPlusResolver()],
+        resolvers: [VroResolver(), VantResolver(), ElementPlusResolver()],
       }),
     ],
   }

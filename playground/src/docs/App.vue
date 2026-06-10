@@ -1,6 +1,10 @@
 <template>
   <div>
     <VroElButton></VroElButton>
+
+    <br />
+
+    <VroInput></VroInput>
   </div>
 </template>
 

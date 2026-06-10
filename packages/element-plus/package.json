@@ -37,7 +37,7 @@
     "@daysnap/vue-use": ">=0.0.12",
     "@element-plus/icons-vue": ">=2.3.2",
     "@vrojs/core": "workspace:*",
-    "element-plus": "^2.11.9",
+    "element-plus": ">=2.11.9",
     "vue": ">=3.0.0"
   },
   "devDependencies": {
