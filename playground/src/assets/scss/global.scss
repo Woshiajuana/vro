@@ -2,6 +2,7 @@
 
 :root {
   --bg-color: #fff;
+  --body-color: #eff2f5;
   --border-color: #dcdfe6;
   --header-height: 64px;
   --sidebar-width: 270px;
@@ -16,6 +17,7 @@ html,
 body {
   width: 100%;
   min-height: 100vh;
+  background-color: var(--body-color);
 }
 
 #app {

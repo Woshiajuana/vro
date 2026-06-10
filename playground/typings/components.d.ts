@@ -11,27 +11,8 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    ElButton: typeof import('element-plus/es')['ElButton']
-    ElSp: typeof import('element-plus/es')['ElSp']
-    ElSplitter: typeof import('element-plus/es')['ElSplitter']
-    ElSplitterPanel: typeof import('element-plus/es')['ElSplitterPanel']
-    LangSwitcher: typeof import('./../src/components/LangSwitcher.vue')['default']
-    LogoBox: typeof import('./../src/components/LogoBox.vue')['default']
-    MemberFloating: typeof import('./../src/components/MemberFloating/MemberFloating.vue')['default']
-    ReturnBack: typeof import('./../src/components/ReturnBack.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    ScreenSaver: typeof import('./../src/components/ScreenSaver.vue')['default']
-    UseMembers: typeof import('./../src/components/MemberFloating/useMembers.ts')['default']
-    UseVideoPlayPopup: typeof import('./../src/components/VideoPlayPopup/useVideoPlayPopup.ts')['default']
-    VanIcon: typeof import('vant/es')['Icon']
-    VanLoading: typeof import('vant/es')['Loading']
-    VanPopup: typeof import('vant/es')['Popup']
-    VanSwipe: typeof import('vant/es')['Swipe']
-    VanSwipeItem: typeof import('vant/es')['SwipeItem']
-    VideoPlayPopup: typeof import('./../src/components/VideoPlayPopup/VideoPlayPopup.vue')['default']
-    VroElButton: typeof import('@vrojs/element-plus')['VroElButton']
     VroInput: typeof import('@vrojs/core')['VroInput']
-    VroVanButton: typeof import('@vrojs/vant')['VroVanButton']
   }
 }
