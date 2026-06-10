@@ -251,6 +251,11 @@ const writeIndexStyle = (
     return
   }
 
+  if (existsSync(cssPath)) {
+    writeFileSync(indexPath, "import './css'\n")
+    return
+  }
+
   const imports = toImportCode(
     packageName,
     componentDir,
