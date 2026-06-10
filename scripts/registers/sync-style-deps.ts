@@ -77,6 +77,14 @@ const getPackageComponentStyle = (
   return `@vrojs/${packageName}/src/${componentDir}/style/${styleEntry}`
 }
 
+const hasPackageComponentStyle = (
+  packageName: PackageName,
+  componentDir: string,
+  styleEntry: 'css' | 'deps' | 'index',
+) => {
+  return existsSync(resolvePackagePath(packageName, 'src', componentDir, `style/${styleEntry}.ts`))
+}
+
 const resolveRelativeComponent = (options: {
   packageName: PackageName
   componentDir: string
@@ -173,8 +181,12 @@ const collectStyleDeps = (packageName: PackageName, componentDir: string) => {
         })
 
         if (depComponent) {
-          internalCssDeps.add(getPackageComponentStyle(packageName, depComponent, 'css'))
-          internalDepsDeps.add(getPackageComponentStyle(packageName, depComponent, 'deps'))
+          if (hasPackageComponentStyle(packageName, depComponent, 'css')) {
+            internalCssDeps.add(getPackageComponentStyle(packageName, depComponent, 'css'))
+          }
+          if (hasPackageComponentStyle(packageName, depComponent, 'deps')) {
+            internalDepsDeps.add(getPackageComponentStyle(packageName, depComponent, 'deps'))
+          }
         }
         return
       }
@@ -184,8 +196,12 @@ const collectStyleDeps = (packageName: PackageName, componentDir: string) => {
         namedImports.forEach((name) => {
           const componentName = kebabCase(name)
           if (existsSync(resolvePackagePath(depPackageName, 'src', componentName, 'index.ts'))) {
-            internalCssDeps.add(getPackageComponentStyle(depPackageName, componentName, 'css'))
-            internalDepsDeps.add(getPackageComponentStyle(depPackageName, componentName, 'deps'))
+            if (hasPackageComponentStyle(depPackageName, componentName, 'css')) {
+              internalCssDeps.add(getPackageComponentStyle(depPackageName, componentName, 'css'))
+            }
+            if (hasPackageComponentStyle(depPackageName, componentName, 'deps')) {
+              internalDepsDeps.add(getPackageComponentStyle(depPackageName, componentName, 'deps'))
+            }
           }
         })
       }
