@@ -24,15 +24,15 @@ const createPackageStyleEntryActions = (packageName: string, components: string[
   const configs = [
     {
       path: 'index.ts',
-      template: 'styles/index.hbs',
+      template: 'styles/index.ts.hbs',
     },
     {
       path: 'css.ts',
-      template: 'styles/css.hbs',
+      template: 'styles/css.ts.hbs',
     },
     {
       path: 'deps.ts',
-      template: 'styles/deps.hbs',
+      template: 'styles/deps.ts.hbs',
       data: { components: components.filter((item) => item?.startsWith('vro')) },
     },
   ]
@@ -61,14 +61,14 @@ export const registerEntry = (plop: NodePlopAPI) => {
             {
               type: 'add',
               path: resolvePackagePath(`${name}/src/index.ts`),
-              templateFile: getTemplateFile('entry', name, 'index.hbs'),
+              templateFile: getTemplateFile('entry', name, 'index.ts.hbs'),
               force: true,
               data: { components },
             },
             {
               type: 'add',
               path: resolvePackagePath(`${name}/src/styles/index.scss`),
-              templateFile: getTemplateFile('entry', name, 'style.hbs'),
+              templateFile: getTemplateFile('entry', name, 'index.scss.hbs'),
               force: true,
               data: { components: components.filter((item) => item?.startsWith('vro')) },
             },

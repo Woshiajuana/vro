@@ -11,18 +11,18 @@ export const registerCreate = (plop: NodePlopAPI) => {
     actions: (answers) => {
       const { packageName } = answers ?? {}
       const actions = [
-        createAddAction(packageName, `index.ts`, `index.hbs`),
-        createAddAction(packageName, `{{ dashCase name }}.vue`, `vue.hbs`),
-        createAddAction(packageName, `types.ts`, `types.hbs`),
-        createAddAction(packageName, `README.md`, `md.hbs`),
-        createAddAction(packageName, `demo/index.vue`, `demo/vue.hbs`),
-        createAddAction(packageName, `style/index.ts`, `style/index.hbs`),
-        createAddAction(packageName, `style/index.scss`, `style/scss.hbs`),
+        createAddAction(packageName, `index.ts`, `index.ts.hbs`),
+        createAddAction(packageName, `{{ dashCase name }}.vue`, `component.vue.hbs`),
+        createAddAction(packageName, `types.ts`, `types.ts.hbs`),
+        createAddAction(packageName, `README.md`, `README.md.hbs`),
+        createAddAction(packageName, `demo/index.vue`, `demo/index.vue.hbs`),
+        createAddAction(packageName, `style/index.ts`, `style/index.ts.hbs`),
+        createAddAction(packageName, `style/index.scss`, `style/index.scss.hbs`),
       ] as ActionType[]
 
       const packageStyleActions = [
-        ['style/css.ts', 'style/css.hbs'],
-        ['style/deps.ts', 'style/deps.hbs'],
+        ['style/css.ts', 'style/css.ts.hbs'],
+        ['style/deps.ts', 'style/deps.ts.hbs'],
       ]
 
       packageStyleActions.forEach(([pathSuffix, templateFileSuffix]) => {
