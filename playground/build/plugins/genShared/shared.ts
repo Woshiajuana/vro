@@ -1,8 +1,10 @@
-import fg from 'fast-glob'
 import { existsSync } from 'node:fs'
 import path from 'node:path'
 
-import { PACKAGE_NAMES, PACKAGES_DIR, type PackageName, toFsImportPath } from '../../utils'
+import { pascalCase } from '@daysnap/utils'
+import fg from 'fast-glob'
+
+import { PACKAGE_NAMES, type PackageName, PACKAGES_DIR, toFsImportPath } from '../../utils'
 
 export interface ComponentRecord {
   packageName: PackageName
@@ -10,14 +12,6 @@ export interface ComponentRecord {
   title: string
   readmePath: string
   demoPath: string
-}
-
-export const titleCase = (value: string) => {
-  return value
-    .split('-')
-    .filter(Boolean)
-    .map((item) => item[0].toUpperCase() + item.slice(1))
-    .join(' ')
 }
 
 export const getComponentRecords = () => {
@@ -33,7 +27,7 @@ export const getComponentRecords = () => {
       .map<ComponentRecord>((componentDir) => ({
         packageName,
         componentDir,
-        title: titleCase(componentDir),
+        title: pascalCase(componentDir),
         readmePath: path.join(srcDir, componentDir, 'README.md'),
         demoPath: path.join(srcDir, componentDir, 'demo/index.vue'),
       }))
