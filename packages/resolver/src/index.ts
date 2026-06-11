@@ -93,7 +93,7 @@ export function VroResolver(options: VroResolverOptions = {}) {
           }),
         }
       } else if (name.startsWith('Vro')) {
-        const packageName = '@vrojs/core'
+        const packageName = '@vrojs/base'
         return {
           name,
           from: packageName,

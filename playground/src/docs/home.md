@@ -10,4 +10,4 @@
 
 基于 vue3 定制的组件库，应用与快速开发混合APP应用、H5页面。
 
-目前 [VRO](https://github.com/Woshiajuana/vro) 提供了 [@vrojs/core](https://github.com/Woshiajuana/vro)、 [@vrojs/vant](https://github.com/Woshiajuana/vro)、[@vrojs/element-plus](https://github.com/Woshiajuana/vro)，涵盖了 pc 、移动端等方面的UI组件库。
+目前 [VRO](https://github.com/Woshiajuana/vro) 提供了 [@vrojs/base](https://github.com/Woshiajuana/vro)、 [@vrojs/vant](https://github.com/Woshiajuana/vro)、[@vrojs/element-plus](https://github.com/Woshiajuana/vro)，涵盖了 pc 、移动端等方面的UI组件库。

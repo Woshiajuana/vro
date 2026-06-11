@@ -5,5 +5,5 @@
 </template>
 
 <script setup lang="ts">
-  import { VroAspectRatio } from '@vrojs/core'
+  import { VroAspectRatio } from '@vrojs/base'
 </script>

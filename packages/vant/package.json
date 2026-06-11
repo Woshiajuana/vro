@@ -30,14 +30,14 @@
     "registry": "https://registry.npmjs.org/"
   },
   "peerDependencies": {
-    "@vrojs/core": "workspace:*",
+    "@vrojs/base": "workspace:*",
     "@daysnap/utils": ">=0.1.20",
     "vant": ">=4.9.21",
     "vue": ">=3.0.0"
   },
   "devDependencies": {
     "@daysnap/utils": "^0.1.20",
-    "@vrojs/core": "workspace:*",
+    "@vrojs/base": "workspace:*",
     "vant": "^4.9.21",
     "vue": "^3.5.22",
     "rimraf": "^6.0.1",

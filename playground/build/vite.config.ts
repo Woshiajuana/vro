@@ -24,12 +24,12 @@ export default defineConfig({
         replacement: fileURLToPath(new URL('../src', import.meta.url)),
       },
       {
-        find: /^@vrojs\/core$/,
-        replacement: fileURLToPath(new URL('../../packages/core/src/index.ts', import.meta.url)),
+        find: /^@vrojs\/base$/,
+        replacement: fileURLToPath(new URL('../../packages/base/src/index.ts', import.meta.url)),
       },
       {
-        find: /^@vrojs\/core\/(.*)$/,
-        replacement: `${fileURLToPath(new URL('../../packages/core', import.meta.url))}/$1`,
+        find: /^@vrojs\/base\/(.*)$/,
+        replacement: `${fileURLToPath(new URL('../../packages/base', import.meta.url))}/$1`,
       },
       {
         find: /^@vrojs\/element-plus$/,

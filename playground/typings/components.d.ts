@@ -13,6 +13,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    VroInput: typeof import('@vrojs/core')['VroInput']
+    VroInput: typeof import('@vrojs/base')['VroInput']
   }
 }

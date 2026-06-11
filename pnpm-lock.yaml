@@ -42,7 +42,7 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
-  packages/core:
+  packages/base:
     devDependencies:
       '@daysnap/utils':
         specifier: ^0.1.20
@@ -75,9 +75,9 @@ importers:
       '@element-plus/icons-vue':
         specifier: ^2.3.2
         version: 2.3.2(vue@3.5.22(typescript@5.9.3))
-      '@vrojs/core':
+      '@vrojs/base':
         specifier: workspace:*
-        version: link:../core
+        version: link:../base
       element-plus:
         specifier: ^2.11.9
         version: 2.14.1(vue@3.5.22(typescript@5.9.3))
@@ -105,9 +105,9 @@ importers:
       '@daysnap/utils':
         specifier: ^0.1.20
         version: 0.1.20
-      '@vrojs/core':
+      '@vrojs/base':
         specifier: workspace:*
-        version: link:../core
+        version: link:../base
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
@@ -126,9 +126,9 @@ importers:
       '@vant/touch-emulator':
         specifier: ^1.4.0
         version: 1.4.0
-      '@vrojs/core':
+      '@vrojs/base':
         specifier: workspace:*
-        version: link:../packages/core
+        version: link:../packages/base
       '@vrojs/element-plus':
         specifier: workspace:*
         version: link:../packages/element-plus

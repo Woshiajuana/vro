@@ -6,11 +6,11 @@ import { type ActionType, type NodePlopAPI } from 'plop'
 import { resolvePackagePath } from '../utils/paths.ts'
 import { createPackageNamePrompt } from '../utils/prompts.ts'
 
-const packageNames = ['core', 'element-plus', 'vant'] as const
+const packageNames = ['base', 'element-plus', 'vant'] as const
 type PackageName = (typeof packageNames)[number]
 
 const packageImportMap: Record<string, PackageName> = {
-  '@vrojs/core': 'core',
+  '@vrojs/base': 'base',
   '@vrojs/element-plus': 'element-plus',
   '@vrojs/vant': 'vant',
 }

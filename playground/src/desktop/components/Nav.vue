@@ -20,7 +20,7 @@
 
   const packageGroups = [
     { name: 'guide', title: '指南' },
-    { name: 'core', packageName: 'core', title: 'Core' },
+    { name: 'base', packageName: 'base', title: 'Base' },
     { name: 'element-plus', packageName: 'element-plus', title: 'Element Plus' },
     { name: 'vant', packageName: 'vant', title: 'Vant' },
   ] as const

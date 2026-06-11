@@ -39,7 +39,7 @@
   const router = useRouter()
 
   const packageGroups = [
-    { packageName: 'core', title: 'Core' },
+    { packageName: 'base', title: 'Base' },
     { packageName: 'element-plus', title: 'Element Plus' },
     { packageName: 'vant', title: 'Vant' },
   ] as const

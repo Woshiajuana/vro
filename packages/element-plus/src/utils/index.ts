@@ -1,1 +1,1 @@
-export { parseType } from '@vrojs/core'
+export { parseType } from '@vrojs/base'
