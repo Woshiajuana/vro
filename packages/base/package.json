@@ -29,13 +29,13 @@
     "registry": "https://registry.npmjs.org/"
   },
   "peerDependencies": {
-    "@daysnap/utils": ">=0.1.20",
+    "@daysnap/utils": ">=0.1.33",
     "vue": ">=3.0.0"
   },
   "devDependencies": {
-    "@daysnap/utils": "^0.1.20",
-    "vue": "^3.5.22",
+    "@daysnap/utils": "^0.1.33",
     "rimraf": "^6.0.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vue": "^3.5.22"
   }
 }

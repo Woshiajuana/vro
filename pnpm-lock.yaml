@@ -45,8 +45,8 @@ importers:
   packages/base:
     devDependencies:
       '@daysnap/utils':
-        specifier: ^0.1.20
-        version: 0.1.20
+        specifier: ^0.1.33
+        version: 0.1.33
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
@@ -67,7 +67,7 @@ importers:
         specifier: ^0.0.15
         version: 0.0.15
       '@daysnap/utils':
-        specifier: ^0.1.27
+        specifier: ^0.1.33
         version: 0.1.33
       '@daysnap/vue-use':
         specifier: ^0.0.12
@@ -122,8 +122,8 @@ importers:
   packages/vant:
     devDependencies:
       '@daysnap/utils':
-        specifier: ^0.1.20
-        version: 0.1.20
+        specifier: ^0.1.33
+        version: 0.1.33
       '@vrojs/base':
         specifier: workspace:*
         version: link:../base
@@ -174,8 +174,8 @@ importers:
         version: 4.6.3(vue@3.5.22(typescript@5.9.3))
     devDependencies:
       '@daysnap/utils':
-        specifier: ^0.1.20
-        version: 0.1.20
+        specifier: ^0.1.33
+        version: 0.1.33
       '@types/humps':
         specifier: ^2.0.6
         version: 2.0.6
@@ -253,9 +253,6 @@ packages:
 
   '@daysnap/banana@0.0.15':
     resolution: {integrity: sha512-GB+Kqmmx4mtpyFQFLzKWMXfpg7kptUwUvon//GhSJnYaf4mNdOwEVJz+I1Ge6p4F/dylDMPmRTY/exf9LfQYkQ==}
-
-  '@daysnap/utils@0.1.20':
-    resolution: {integrity: sha512-A2llFB0241/MN7vVTyT7eQ0LqUhziTbneF6UBIufFh95xNcu3/4cFfNoo9J2CM3RiqLS3xezhY2tmEeKpbRn2A==}
 
   '@daysnap/utils@0.1.33':
     resolution: {integrity: sha512-+Hk2NXJ88jTMEcW/Cx+XO2shCH+/jTRLr7i5S99yfh5e0C14VbdW1vZbayREJUq+r7ZT5BHzQulBS4qa0ha/7w==}
@@ -2603,8 +2600,6 @@ snapshots:
   '@ctrl/tinycolor@4.2.0': {}
 
   '@daysnap/banana@0.0.15': {}
-
-  '@daysnap/utils@0.1.20': {}
 
   '@daysnap/utils@0.1.33': {}
 
