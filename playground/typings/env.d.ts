@@ -1,6 +1,7 @@
 /// <reference types="vite/client" />
 
 import 'vue-router'
+
 import type { Router } from 'vue-router'
 
 // router
