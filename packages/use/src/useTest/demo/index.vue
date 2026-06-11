@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-  import { useTest } from '.'
+  import { useTest } from '@vrojs/use'
 
   useTest()
 </script>

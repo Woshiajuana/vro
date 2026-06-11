@@ -42,6 +42,7 @@
     { packageName: 'base', title: 'Base' },
     { packageName: 'element-plus', title: 'Element Plus' },
     { packageName: 'vant', title: 'Vant' },
+    { packageName: 'use', title: 'Use' },
   ] as const
 
   const navs = computed(() => {

@@ -49,6 +49,14 @@ export default defineConfig({
         find: /^@vrojs\/vant\/(.*)$/,
         replacement: `${fileURLToPath(new URL('../../packages/vant', import.meta.url))}/$1`,
       },
+      {
+        find: /^@vrojs\/use$/,
+        replacement: fileURLToPath(new URL('../../packages/use/src/index.ts', import.meta.url)),
+      },
+      {
+        find: /^@vrojs\/use\/(.*)$/,
+        replacement: `${fileURLToPath(new URL('../../packages/use', import.meta.url))}/$1`,
+      },
     ],
   },
   plugins: [

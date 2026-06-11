@@ -15,6 +15,7 @@
     "@vrojs/base": "workspace:*",
     "@vrojs/element-plus": "workspace:*",
     "@vrojs/resolver": "workspace:*",
+    "@vrojs/use": "workspace:*",
     "@vrojs/vant": "workspace:*",
     "element-plus": "^2.11.9",
     "vant": "^4.9.21",

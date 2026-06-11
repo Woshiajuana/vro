@@ -18,7 +18,7 @@ export const getComponentRecords = () => {
   return PACKAGE_NAMES.flatMap((packageName) => {
     const srcDir = path.join(PACKAGES_DIR, packageName, 'src')
     return fg
-      .sync('vro*/index.ts', {
+      .sync(['vro*/index.ts', 'use*/index.ts'], {
         cwd: srcDir,
         onlyFiles: true,
       })
