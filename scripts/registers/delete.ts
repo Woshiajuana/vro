@@ -1,6 +1,7 @@
 import { type NodePlopAPI } from 'plop'
 import { rimraf } from 'rimraf'
 
+import { getComponentDirPattern } from '../utils/actions.ts'
 import { resolvePackagePath } from '../utils/paths.ts'
 import { createComponentNamePrompt, createPackageNamePrompt } from '../utils/prompts.ts'
 
@@ -11,7 +12,7 @@ export const registerDelete = (plop: NodePlopAPI) => {
     actions: [
       (answers) => {
         const { packageName, name } = answers ?? {}
-        const dirname = plop.getHelper('dashCase')(name)
+        const dirname = plop.renderString(getComponentDirPattern(packageName), { name })
         const pathname = resolvePackagePath(`${packageName}/src/${dirname}`)
         rimraf.sync(pathname)
         return `delete ${pathname}`
