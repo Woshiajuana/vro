@@ -69,11 +69,11 @@ export const registerEntry = (plop: NodePlopAPI) => {
             })
           }
 
-          if (hasPackageTemplate('entry', name, 'index.scss.hbs')) {
+          if (hasPackageTemplate('entry', name, 'style/index.scss.hbs')) {
             actions.push({
               type: 'add',
               path: resolvePackagePath(`${name}/src/style/index.scss`),
-              templateFile: getTemplateFile('entry', name, 'index.scss.hbs'),
+              templateFile: getTemplateFile('entry', name, 'style/index.scss.hbs'),
               force: true,
               data: { components: components.filter((item) => item?.startsWith('vro')) },
             })
