@@ -24,6 +24,7 @@
   const emit = defineEmits<{
     (event: 'update:modelValue', value: string): void
     (event: 'blur', value: FocusEvent): void
+    (event: 'input', value: InputEvent): void
   }>()
 
   const inputRef = ref<HTMLInputElement>()
@@ -110,6 +111,7 @@
     }
 
     emit('update:modelValue', value)
+    emit('input', e)
   }
 
   defineExpose({

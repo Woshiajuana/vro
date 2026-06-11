@@ -71,6 +71,8 @@
 
 ### 事件 Events
 
+其他同 input 原生事件
+
 <table>
   <tbody>
     <tr>
@@ -82,11 +84,6 @@
       <td>update:modelValue</td>
       <td>value: string</td>
       <td>输入值处理后触发</td>
-    </tr>
-    <tr>
-      <td>blur</td>
-      <td>event: FocusEvent</td>
-      <td>失去焦点时触发</td>
     </tr>
   </tbody>
 </table>
