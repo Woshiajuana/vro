@@ -6,10 +6,6 @@
   </demo-block>
 </template>
 
-<script setup lang="ts">
-  import { VroAspectRatio } from '@vrojs/base'
-</script>
-
 <style lang="scss" scoped>
   .demo-aspect-ratio {
     display: flex;

@@ -3,7 +3,3 @@
     <vro-van-test />
   </demo-block>
 </template>
-
-<script setup lang="ts">
-  import { VroVanTest } from '@vrojs/vant'
-</script>

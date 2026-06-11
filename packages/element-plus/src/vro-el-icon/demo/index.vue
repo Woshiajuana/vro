@@ -3,7 +3,3 @@
     <vro-el-icon />
   </demo-block>
 </template>
-
-<script setup lang="ts">
-  import { VroElIcon } from '@vrojs/element-plus'
-</script>

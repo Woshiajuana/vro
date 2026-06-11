@@ -14,6 +14,9 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     VroAspectRatio: typeof import('@vrojs/base')['VroAspectRatio']
+    VroElIcon: typeof import('@vrojs/element-plus')['VroElIcon']
+    VroElTest: typeof import('@vrojs/element-plus')['VroElTest']
     VroInput: typeof import('@vrojs/base')['VroInput']
+    VroVanTest: typeof import('@vrojs/vant')['VroVanTest']
   }
 }

@@ -3,7 +3,3 @@
     <vro-el-test />
   </demo-block>
 </template>
-
-<script setup lang="ts">
-  import { VroElTest } from '@vrojs/element-plus'
-</script>
