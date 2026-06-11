@@ -1,3 +1,5 @@
+type ImportStyle = boolean | 'css' | 'deps'
+
 function kebabCase(key: string) {
   const result = key.replace(/([A-Z])/g, ' $1').trim()
   return result.split(' ').join('-').toLowerCase()
@@ -9,28 +11,24 @@ export interface VroResolverOptions {
    *
    * @default true
    */
-  importStyle?: boolean
-
-  /**
-   * 是否自动导入依赖组件的相应样式
-   *
-   * @default true
-   */
-  importDepsStyle?: boolean
+  importStyle?: ImportStyle
 }
 
 function getSideEffects(options: {
   packageName: string
   componentName: string
-  importStyle?: boolean
-  importDepsStyle?: boolean
+  importStyle?: ImportStyle
 }) {
-  const { importStyle = true, importDepsStyle = importStyle, packageName, componentName } = options
-  if (!importStyle && !importDepsStyle) {
+  const { importStyle = true, packageName, componentName } = options
+  if (!importStyle) {
     return
   }
 
-  const styleEntry = importStyle ? (importDepsStyle ? 'index' : 'css') : 'deps'
+  if (packageName === '@vrojs/base' && importStyle === 'deps') {
+    return
+  }
+
+  const styleEntry = importStyle === true ? 'index' : importStyle
   return `${packageName}/src/${kebabCase(componentName)}/style/${styleEntry}`
 }
 
@@ -62,7 +60,7 @@ function getAPIMap() {
 }
 
 export function VroResolver(options: VroResolverOptions = {}) {
-  const { importStyle, importDepsStyle } = options
+  const { importStyle } = options
   const apiMap = getAPIMap()
 
   return {
@@ -75,7 +73,6 @@ export function VroResolver(options: VroResolverOptions = {}) {
           from: packageName,
           sideEffects: getSideEffects({
             importStyle,
-            importDepsStyle,
             packageName,
             componentName: name,
           }),
@@ -87,7 +84,6 @@ export function VroResolver(options: VroResolverOptions = {}) {
           from: packageName,
           sideEffects: getSideEffects({
             importStyle,
-            importDepsStyle,
             packageName,
             componentName: name,
           }),
@@ -106,7 +102,6 @@ export function VroResolver(options: VroResolverOptions = {}) {
           from: packageName,
           sideEffects: getSideEffects({
             importStyle,
-            importDepsStyle,
             packageName,
             componentName,
           }),
