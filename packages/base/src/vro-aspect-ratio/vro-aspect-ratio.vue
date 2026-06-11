@@ -1,6 +1,6 @@
 <template>
   <div class="vro-aspect-ratio">
-    <div class="vro-aspect-ratio-inner" :style="style">
+    <div class="vro-aspect-ratio-inner" :style="innerStyle">
       <div class="vro-aspect-ratio-content">
         <slot></slot>
       </div>
@@ -17,7 +17,7 @@
 
   const props = defineProps(vroAspectRatioProps)
 
-  const style = computed(() => ({
-    paddingTop: `${100 / props.value}%`,
+  const innerStyle = computed(() => ({
+    paddingTop: `${100 / props.ratio}%`,
   }))
 </script>

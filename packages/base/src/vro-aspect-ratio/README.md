@@ -2,11 +2,17 @@
 
 ### 介绍
 
-...
+按照指定宽高比撑开容器，常用于图片、视频、卡片封面等固定比例区域。
 
 ## 代码演示
 
 ### 基础用法
+
+```html
+<vro-aspect-ratio :ratio="16 / 9">
+  <div>16:9</div>
+</vro-aspect-ratio>
+```
 
 ## API
 
@@ -36,23 +42,8 @@
       <td>说明</td>
     </tr>
     <tr>
-      <td>xx</td>
-      <td>xxx</td>
-    </tr>
-  </tbody>
-</table>
-
-### 实例方法
-
-<table>
-  <tbody>
-    <tr>
-      <td>名称</td>
-      <td>说明</td>
-    </tr>
-    <tr>
-      <td>xx</td>
-      <td>xxx</td>
+      <td>default</td>
+      <td>内容</td>
     </tr>
   </tbody>
 </table>
