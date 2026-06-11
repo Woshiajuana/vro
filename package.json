@@ -6,6 +6,7 @@
   "description": "基于 vue 的 ui 组件库",
   "scripts": {
     "dev": "pnpm -C ./playground dev",
+    "build": "pnpm -C ./playground build",
     "lint": "eslint . --fix",
     "build:resolver": "pnpm -C ./packages/resolver build",
     "npm-release:resolver": "pnpm -C ./packages/resolver release",
