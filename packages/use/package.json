@@ -1,17 +1,27 @@
 {
   "name": "@vrojs/use",
   "version": "0.0.1",
+  "type": "module",
   "description": "vrojs composables",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
-    "release": "dsc publish --pnpm",
+    "build": "npm run clean && tsup",
+    "clean": "rimraf ./dist",
+    "release": "pnpm run build && dsc publish --pnpm",
     "sync": "dsc sync"
   },
   "files": [
-    "src",
-    "!src/**/demo",
-    "!src/**/README.md"
+    "dist"
   ],
   "sideEffects": false,
   "keywords": [
@@ -34,6 +44,7 @@
   "devDependencies": {
     "@daysnap/utils": "^0.1.33",
     "rimraf": "^6.0.1",
+    "tsup": "^8.5.1",
     "typescript": "^5.9.3",
     "vue": "^3.5.22"
   }
