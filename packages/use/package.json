@@ -1,0 +1,40 @@
+{
+  "name": "@vrojs/use",
+  "version": "0.0.1",
+  "description": "vrojs composables",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "release": "dsc publish --pnpm",
+    "sync": "dsc sync"
+  },
+  "files": [
+    "src",
+    "!src/**/demo",
+    "!src/**/README.md"
+  ],
+  "sideEffects": false,
+  "keywords": [
+    "vro",
+    "vrojs",
+    "composables",
+    "vue"
+  ],
+  "author": "woshiajuana",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "peerDependencies": {
+    "@daysnap/utils": ">=0.1.33",
+    "vue": ">=3.0.0",
+    "vue-router": ">=4.2.4"
+  },
+  "devDependencies": {
+    "@daysnap/utils": "^0.1.33",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.9.3",
+    "vue": "^3.5.22"
+  }
+}

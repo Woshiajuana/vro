@@ -100,6 +100,18 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
+  packages/use:
+    devDependencies:
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.3
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vue:
+        specifier: ^3.5.22
+        version: 3.5.22(typescript@5.9.3)
+
   packages/vant:
     devDependencies:
       '@daysnap/utils':

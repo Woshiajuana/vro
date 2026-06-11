@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "allowJs": true,
+    "noImplicitThis": true,
+    "paths": {
+      "@vrojs/use": ["./src/index.ts"]
+    }
+  },
+  "include": ["src/**/*"]
+}
