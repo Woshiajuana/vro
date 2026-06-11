@@ -32,6 +32,24 @@
 <vro-input v-model="value" :formatter="formatter" />
 ```
 
+### 获取 input 元素
+
+```vue
+<template>
+  <vro-input ref="inputRef" v-model="value" />
+</template>
+
+<script setup lang="ts">
+  import { ref } from 'vue'
+  import type { VroInputInstance } from '@vrojs/base'
+
+  const value = ref('')
+  const inputRef = ref<VroInputInstance>()
+
+  inputRef.value?.input?.focus()
+</script>
+```
+
 ## API
 
 ### 属性 Props

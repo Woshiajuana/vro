@@ -2,6 +2,7 @@
   <input
     v-bind="dynamicProps"
     class="vro-input"
+    ref="inputRef"
     :value="modelValue ?? ''"
     @compositionstart="handleCompositionStart"
     @compositionend="handleCompositionEnd"
@@ -13,7 +14,7 @@
 <script setup lang="ts">
   import { isNumber, omit } from '@daysnap/utils'
   import { useComposition, useId } from '@vrojs/use'
-  import { computed } from 'vue'
+  import { computed, ref } from 'vue'
 
   import { parseDecimalString, parseNumberString } from '../utils'
   import { vroInputProps } from './types'
@@ -25,6 +26,7 @@
     (event: 'blur', value: FocusEvent): void
   }>()
 
+  const inputRef = ref<HTMLInputElement>()
   const fallbackId = useId()
 
   const dynamicProps = computed(() => {
@@ -109,4 +111,10 @@
 
     emit('update:modelValue', value)
   }
+
+  defineExpose({
+    get input() {
+      return inputRef.value!
+    },
+  })
 </script>
