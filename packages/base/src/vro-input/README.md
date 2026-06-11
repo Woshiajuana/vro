@@ -2,11 +2,29 @@
 
 ### 介绍
 
-...
+对原生 input 的轻量封装，只处理输入值的格式限制，不包含任何样式。ref、原生事件监听和其他原生属性由使用方按普通 input 方式处理。
 
 ## 代码演示
 
 ### 基础用法
+
+```html
+<vro-input v-model="value" placeholder="请输入内容" />
+```
+
+### 数字输入
+
+```html
+<vro-input v-model="value" type="number" />
+```
+
+### 小数输入
+
+`type="decimal"` 会将输入限制为小数，并根据 `precision`、`min`、`max`、`auto-fix` 处理边界。
+
+```html
+<vro-input v-model="value" type="decimal" :precision="2" :min="0" :max="9999" auto-fix />
+```
 
 ## API
 
@@ -27,32 +45,19 @@
   </tbody>
 </table>
 
-### 插槽 Slots
+### 事件 Events
 
 <table>
   <tbody>
     <tr>
       <td>名称</td>
+      <td>参数</td>
       <td>说明</td>
     </tr>
     <tr>
-      <td>xx</td>
-      <td>xxx</td>
-    </tr>
-  </tbody>
-</table>
-
-### 实例方法
-
-<table>
-  <tbody>
-    <tr>
-      <td>名称</td>
-      <td>说明</td>
-    </tr>
-    <tr>
-      <td>xx</td>
-      <td>xxx</td>
+      <td>update:modelValue</td>
+      <td>value: string</td>
+      <td>输入值处理后触发</td>
     </tr>
   </tbody>
 </table>

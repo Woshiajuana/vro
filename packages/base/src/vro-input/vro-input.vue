@@ -2,11 +2,10 @@
   <input
     class="vro-input"
     v-bind="dynamicProps"
-    :value="modelValue"
+    :value="modelValue ?? ''"
     @compositionstart="handleCompositionStart"
     @compositionend="handleCompositionEnd"
     @input="handleInput"
-    @focus="$emit('focus', $event)"
     @blur="handleBlur"
   />
 </template>
@@ -21,7 +20,11 @@
 
   defineOptions({ name: 'VroInput' })
   const props = defineProps(vroInputProps)
-  const emit = defineEmits(['update:model-value', 'change', 'focus', 'blur'])
+  const emit = defineEmits<{
+    (event: 'update:modelValue', value: string): void
+  }>()
+
+  const fallbackId = useId()
 
   const dynamicProps = computed(() => {
     // eslint-disable-next-line prefer-const
@@ -35,11 +38,9 @@
       inputmode = 'numeric'
     }
 
-    const id = props.id ?? useId()
-
     return {
-      ...omit(rest, ['pattern', 'modelValue', 'precision', 'max', 'min']),
-      id,
+      ...omit(rest, ['autoFix', 'pattern', 'modelValue', 'precision', 'max', 'min']),
+      id: props.id ?? fallbackId,
       type,
       inputmode,
     }
@@ -47,22 +48,21 @@
 
   const { handleCompositionStart, handleCompositionEnd } = useComposition()
 
-  const handleBlur = (e: FocusEvent) => {
+  const handleBlur = () => {
     const { type, modelValue } = props
     if (type === 'decimal') {
       const v = modelValue?.toString() ?? ''
       if (v === '-') {
         // 修复只输入 - 的情况
-        emit('update:model-value', '')
+        emit('update:modelValue', '')
       } else if (v.endsWith('.')) {
         // 修复末尾只输入.的情况
-        emit('update:model-value', v.substring(0, v.length - 1))
-      } else if (+v === 0) {
+        emit('update:modelValue', v.substring(0, v.length - 1))
+      } else if (v !== '' && +v === 0) {
         // 修复 -0、-0.0 这种情况
-        emit('update:model-value', '0')
+        emit('update:modelValue', '0')
       }
     }
-    emit('blur', e)
   }
 
   const handleInput = (e: InputEvent) => {
@@ -79,11 +79,16 @@
     } else if (type === 'decimal') {
       value = parseDecimalString(value, { precision: +precision, allowNegativeNumber: +min < 0 })
 
-      if (+value < +min || +value > +max) {
+      const valueNumber = Number(value)
+      const minNumber = Number(min)
+      const maxNumber = Number(max)
+      const canCompare = value !== '' && value !== '-' && Number.isFinite(valueNumber)
+
+      if (canCompare && (valueNumber < minNumber || valueNumber > maxNumber)) {
         if (autoFix) {
-          if (+value < +min) {
+          if (valueNumber < minNumber) {
             value = min.toString()
-          } else if (+value > +max) {
+          } else if (valueNumber > maxNumber) {
             value = max.toString()
           }
         } else {
@@ -100,7 +105,6 @@
       target.value = value
     }
 
-    emit('update:model-value', value)
-    emit('change', value)
+    emit('update:modelValue', value)
   }
 </script>

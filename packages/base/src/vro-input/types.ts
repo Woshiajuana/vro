@@ -12,7 +12,7 @@ export const vroInputProps = {
     default: 'text',
   },
   modelValue: {
-    type: definePropType<string | number | null | undefined>([String, Number, Object]),
+    type: definePropType<string | number | null | undefined>([String, Number]),
     default: '',
   },
   /**
