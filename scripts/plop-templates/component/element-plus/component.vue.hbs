@@ -1,0 +1,13 @@
+<template>
+  <div class="{{ dashCase name }}">
+    <span>{{ dashCase name }}</span>
+  </div>
+</template>
+
+<script setup lang="ts">
+  import { {{ camelCase name }}Props } from './types'
+
+  defineOptions({ name: '{{ pascalCase name }}' })
+
+  defineProps({{ camelCase name }}Props)
+</script>

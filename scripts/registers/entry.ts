@@ -57,22 +57,27 @@ export const registerEntry = (plop: NodePlopAPI) => {
       return packageName
         .map((name) => {
           const components = getComponents(name)
-          const actions = [
-            {
+          const actions = [] as ActionType[]
+
+          if (hasPackageTemplate('entry', name, 'index.ts.hbs')) {
+            actions.push({
               type: 'add',
               path: resolvePackagePath(`${name}/src/index.ts`),
               templateFile: getTemplateFile('entry', name, 'index.ts.hbs'),
               force: true,
               data: { components },
-            },
-            {
+            })
+          }
+
+          if (hasPackageTemplate('entry', name, 'index.scss.hbs')) {
+            actions.push({
               type: 'add',
               path: resolvePackagePath(`${name}/src/style/index.scss`),
               templateFile: getTemplateFile('entry', name, 'index.scss.hbs'),
               force: true,
               data: { components: components.filter((item) => item?.startsWith('vro')) },
-            },
-          ] as ActionType[]
+            })
+          }
 
           actions.push(...createPackageStyleEntryActions(name, components))
           return actions

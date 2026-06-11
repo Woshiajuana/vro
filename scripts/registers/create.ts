@@ -10,22 +10,21 @@ export const registerCreate = (plop: NodePlopAPI) => {
     prompts: [createPackageNamePrompt(), createComponentNamePrompt()],
     actions: (answers) => {
       const { packageName } = answers ?? {}
-      const actions = [
-        createAddAction(packageName, `index.ts`, `index.ts.hbs`),
-        createAddAction(packageName, `{{ dashCase name }}.vue`, `component.vue.hbs`),
-        createAddAction(packageName, `types.ts`, `types.ts.hbs`),
-        createAddAction(packageName, `README.md`, `README.md.hbs`),
-        createAddAction(packageName, `demo/index.vue`, `demo/index.vue.hbs`),
-        createAddAction(packageName, `style/index.ts`, `style/index.ts.hbs`),
-        createAddAction(packageName, `style/index.scss`, `style/index.scss.hbs`),
-      ] as ActionType[]
-
-      const packageStyleActions = [
+      const configs = [
+        ['index.ts', 'index.ts.hbs'],
+        ['{{ dashCase name }}.vue', 'component.vue.hbs'],
+        ['types.ts', 'types.ts.hbs'],
+        ['README.md', 'README.md.hbs'],
+        ['demo/index.vue', 'demo/index.vue.hbs'],
+        ['style/index.ts', 'style/index.ts.hbs'],
+        ['style/index.scss', 'style/index.scss.hbs'],
         ['style/css.ts', 'style/css.ts.hbs'],
         ['style/deps.ts', 'style/deps.ts.hbs'],
       ]
 
-      packageStyleActions.forEach(([pathSuffix, templateFileSuffix]) => {
+      const actions = [] as ActionType[]
+
+      configs.forEach(([pathSuffix, templateFileSuffix]) => {
         if (hasPackageTemplate('component', packageName, templateFileSuffix)) {
           actions.push(createAddAction(packageName, pathSuffix, templateFileSuffix))
         }

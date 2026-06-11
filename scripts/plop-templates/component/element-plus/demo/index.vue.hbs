@@ -1,11 +1,9 @@
 <template>
   <demo-block title="基础用法">
-    <div>{{ pascalCase name }}</div>
+    <{{ dashCase name  }} />
   </demo-block>
 </template>
 
 <script setup lang="ts">
-  import { {{ camelCase name }} } from '.'
-
-  {{ camelCase name }}()
+  import { {{ pascalCase name }} } from '@vrojs/{{ packageName }}'
 </script>

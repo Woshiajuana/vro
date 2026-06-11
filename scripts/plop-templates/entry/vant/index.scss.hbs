@@ -1,0 +1,6 @@
+/* 本文件自动生成 './scripts/index.ts' */
+
+@use './base.scss' as *;
+{{#each components}}
+@use '../{{ this }}/style/index.scss' as *;
+{{/each}}
