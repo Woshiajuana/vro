@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
   import { isNumber, omit } from '@daysnap/utils'
-  import { useId } from '@vrojs/use'
+  import { useComposition, useId } from '@vrojs/use'
   import { computed } from 'vue'
 
   import { parseDecimalString, parseNumberString } from '../utils'
