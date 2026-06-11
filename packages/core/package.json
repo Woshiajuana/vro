@@ -5,7 +5,8 @@
   "main": "src/index.ts",
   "types": "src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "release": "dsc publish --pnpm",
+    "sync": "dsc sync"
   },
   "files": [
     "src",
@@ -24,6 +25,7 @@
   "author": "woshiajuana",
   "license": "MIT",
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "peerDependencies": {
