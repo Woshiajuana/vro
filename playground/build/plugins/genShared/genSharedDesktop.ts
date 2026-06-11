@@ -5,14 +5,6 @@ import fg from 'fast-glob'
 import { normalizePath, ROOT } from '../../utils'
 import { getComponentRecords, hasFile, toImportPath } from './shared'
 
-const titleCase = (value: string) => {
-  return value
-    .split(/[-/]/)
-    .filter(Boolean)
-    .map((item) => item[0].toUpperCase() + item.slice(1))
-    .join(' ')
-}
-
 const getGuideDocuments = () => {
   const docsDir = path.join(ROOT, 'src/docs')
   return fg
@@ -23,12 +15,16 @@ const getGuideDocuments = () => {
     .sort()
     .map((filename) => {
       const name = normalizePath(filename).replace(/\.md$/, '')
-      const routePath = name === 'home' ? '/' : `/${name}`
+      const routePath = name === 'index' ? '/' : `/${name}`
+      const maps: Record<string, string> = {
+        index: '介绍',
+        quickstart: '快速上手',
+      }
 
       return {
         name,
         path: routePath,
-        title: name === 'home' ? '介绍' : titleCase(name),
+        title: maps[name] ?? name,
         filepath: path.join(docsDir, filename),
       }
     })
