@@ -19,7 +19,7 @@
   }>()
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .van-doc-demo-block {
     &__title {
       margin: 0;
@@ -43,6 +43,17 @@
     &:first-of-type {
       .van-doc-demo-block__title {
         padding-top: 20px;
+      }
+    }
+    > ul {
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      li {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
       }
     }
   }

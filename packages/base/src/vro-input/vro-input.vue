@@ -3,8 +3,8 @@
     class="vro-input"
     v-bind="dynamicProps"
     :value="modelValue"
-    @compositionstart="handleCompositionstart"
-    @compositionend="handleCompositionend"
+    @compositionstart="handleCompositionStart"
+    @compositionend="handleCompositionEnd"
     @input="handleInput"
     @focus="$emit('focus', $event)"
     @blur="handleBlur"
@@ -45,7 +45,7 @@
     }
   })
 
-  const { handleCompositionstart, handleCompositionend } = useComposition()
+  const { handleCompositionStart, handleCompositionEnd } = useComposition()
 
   const handleBlur = (e: FocusEvent) => {
     const { type, modelValue } = props

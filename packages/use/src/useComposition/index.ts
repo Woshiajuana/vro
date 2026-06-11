@@ -1,13 +1,15 @@
 export function useComposition() {
-  const handleCompositionstart = (e: CompositionEvent) => {
-    ;(e.target as any).composing = true
+  const handleCompositionStart = (event: CompositionEvent) => {
+    ;(event.target as any).composing = true
   }
-  const handleCompositionend = (e: CompositionEvent) => {
-    ;(e.target as any).composing = false
-    e.target?.dispatchEvent(new InputEvent('input'))
+
+  const handleCompositionEnd = (event: CompositionEvent) => {
+    ;(event.target as any).composing = false
+    event.target?.dispatchEvent(new Event('input', { bubbles: true }))
   }
+
   return {
-    handleCompositionstart,
-    handleCompositionend,
+    handleCompositionStart,
+    handleCompositionEnd,
   }
 }
