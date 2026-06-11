@@ -34,7 +34,7 @@
 
 ### 获取 input 元素
 
-```vue
+```html
 <template>
   <vro-input ref="inputRef" v-model="value" />
 </template>

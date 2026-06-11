@@ -1,7 +1,7 @@
 <template>
   <demo-block title="基础用法">
-    <dl style="display: flex; flex-direction: column; gap: 16px">
-      <dd v-for="(item, key) in metadata" :key="key">
+    <ul>
+      <li v-for="(item, key) in metadata" :key="key">
         <span>{{ item.label }}：</span>
 
         <select v-if="item.is === 'select'" v-model="item.value">
@@ -10,22 +10,28 @@
 
         <input v-else-if="item.is === 'input'" v-model="item.value" :name="key" />
 
-        <template v-else-if="item.is === 'radio'">
+        <div v-else-if="item.is === 'radio'">
           <label><input v-model="item.value" type="radio" :name="key" :value="true" />是</label>
           <label><input v-model="item.value" type="radio" :name="key" :value="false" />否</label>
-        </template>
-      </dd>
-      <dd>
-        <vro-input v-model="value" v-bind="valueProps" />
-      </dd>
-      <dd>值：{{ value }}</dd>
-      <dd><button @click="handleSubmit">提交</button></dd>
-    </dl>
+        </div>
+      </li>
+      <li>
+        <vro-input v-model="value" v-bind="valueProps" ref="refVroInput" @change="handleChange" />
+      </li>
+      <li>值：{{ value }}</li>
+      <li style="flex-flow: row; gap: 10px">
+        <button @click="handleSubmit">提交</button>
+        <button @click="refVroInput?.input.focus()">聚焦</button>
+        <button @click="refVroInput?.input.blur()">失焦</button>
+      </li>
+    </ul>
   </demo-block>
 </template>
 
 <script setup lang="ts">
-  import { computed, reactive, ref } from 'vue'
+  import { computed, reactive, ref, useTemplateRef } from 'vue'
+
+  const refVroInput = useTemplateRef('refVroInput')
 
   const value = ref('0')
 
@@ -67,5 +73,9 @@
 
   const handleSubmit = () => {
     console.log('handleSubmit => ', value.value)
+  }
+
+  const handleChange = (event: any) => {
+    console.log('event => ', event)
   }
 </script>
