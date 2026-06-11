@@ -1,8 +1,17 @@
 <template>
   <demo-block title="基础用法">
-    <vro-aspect-ratio :ratio="16 / 9">
-      <div class="demo-aspect-ratio">16:9</div>
-    </vro-aspect-ratio>
+    <ul>
+      <li>
+        <vro-aspect-ratio :ratio="1" style="width: 100px">
+          <div class="demo-aspect-ratio">1:1</div>
+        </vro-aspect-ratio>
+      </li>
+      <li>
+        <vro-aspect-ratio :ratio="16 / 9">
+          <div class="demo-aspect-ratio">16:9</div>
+        </vro-aspect-ratio>
+      </li>
+    </ul>
   </demo-block>
 </template>
 
