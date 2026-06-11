@@ -1,7 +1,7 @@
 <template>
   <input
-    class="vro-input"
     v-bind="dynamicProps"
+    class="vro-input"
     :value="modelValue ?? ''"
     @compositionstart="handleCompositionStart"
     @compositionend="handleCompositionEnd"
@@ -22,6 +22,7 @@
   const props = defineProps(vroInputProps)
   const emit = defineEmits<{
     (event: 'update:modelValue', value: string): void
+    (event: 'blur', value: FocusEvent): void
   }>()
 
   const fallbackId = useId()
@@ -39,7 +40,7 @@
     }
 
     return {
-      ...omit(rest, ['autoFix', 'pattern', 'modelValue', 'precision', 'max', 'min']),
+      ...omit(rest, ['autoFix', 'formatter', 'modelValue', 'precision', 'max', 'min']),
       id: props.id ?? fallbackId,
       type,
       inputmode,
@@ -48,7 +49,7 @@
 
   const { handleCompositionStart, handleCompositionEnd } = useComposition()
 
-  const handleBlur = () => {
+  const handleBlur = (event: FocusEvent) => {
     const { type, modelValue } = props
     if (type === 'decimal') {
       const v = modelValue?.toString() ?? ''
@@ -63,6 +64,7 @@
         emit('update:modelValue', '0')
       }
     }
+    emit('blur', event)
   }
 
   const handleInput = (e: InputEvent) => {
@@ -71,7 +73,7 @@
       return
     }
 
-    const { type, precision, min, max, pattern, modelValue, autoFix } = props
+    const { type, precision, min, max, formatter, modelValue, autoFix } = props
     let value = target.value
 
     if (type === 'number') {
@@ -97,8 +99,8 @@
       }
     }
 
-    if (pattern) {
-      value = pattern(value, isNumber(modelValue) ? modelValue.toString() : (modelValue ?? ''))
+    if (formatter) {
+      value = formatter(value, isNumber(modelValue) ? modelValue.toString() : (modelValue ?? ''))
     }
 
     if (target.value !== value) {

@@ -26,6 +26,12 @@
 <vro-input v-model="value" type="decimal" :precision="2" :min="0" :max="9999" auto-fix />
 ```
 
+### 自定义格式化
+
+```html
+<vro-input v-model="value" :formatter="formatter" />
+```
+
 ## API
 
 ### 属性 Props
@@ -58,6 +64,11 @@
       <td>update:modelValue</td>
       <td>value: string</td>
       <td>输入值处理后触发</td>
+    </tr>
+    <tr>
+      <td>blur</td>
+      <td>event: FocusEvent</td>
+      <td>失去焦点时触发</td>
     </tr>
   </tbody>
 </table>
