@@ -13,9 +13,9 @@
 
 <script setup lang="ts">
   import { isNumber, omit } from '@daysnap/utils'
+  import { useId } from '@vrojs/use'
   import { computed } from 'vue'
 
-  import { useComposition, useId } from '../hooks'
   import { parseDecimalString, parseNumberString } from '../utils'
   import { vroInputProps } from './types'
 
