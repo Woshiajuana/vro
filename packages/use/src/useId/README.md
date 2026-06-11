@@ -1,4 +1,4 @@
-# useTest
+# useId
 
 ### 介绍
 
@@ -9,5 +9,5 @@
 ### 基础用法
 
 ```ts
-import { useTest } from '@vrojs/use'
+import { useId } from '@vrojs/use'
 ```

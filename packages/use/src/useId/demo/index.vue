@@ -1,11 +1,11 @@
 <template>
   <demo-block title="基础用法">
-    <div>UseTest</div>
+    <div>UseId</div>
   </demo-block>
 </template>
 
 <script setup lang="ts">
-  import { useTest } from '@vrojs/use'
+  import { useId } from '@vrojs/use'
 
-  useTest()
+  useId()
 </script>
