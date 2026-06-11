@@ -10,6 +10,24 @@ import { defineConfig } from 'vite'
 
 import { GenShared, Markdown } from './plugins'
 
+const vroPackages = ['base', 'element-plus', 'vant', 'use']
+
+const createVroAliases = () =>
+  vroPackages.flatMap((packageName) => {
+    const packageDir = fileURLToPath(new URL(`../../packages/${packageName}`, import.meta.url))
+
+    return [
+      {
+        find: new RegExp(`^@vrojs/${packageName}$`),
+        replacement: `${packageDir}/src/index.ts`,
+      },
+      {
+        find: new RegExp(`^@vrojs/${packageName}/(.*)$`),
+        replacement: `${packageDir}/$1`,
+      },
+    ]
+  })
+
 export default defineConfig({
   root: './',
   base: './',
@@ -23,40 +41,7 @@ export default defineConfig({
         find: '@',
         replacement: fileURLToPath(new URL('../src', import.meta.url)),
       },
-      {
-        find: /^@vrojs\/base$/,
-        replacement: fileURLToPath(new URL('../../packages/base/src/index.ts', import.meta.url)),
-      },
-      {
-        find: /^@vrojs\/base\/(.*)$/,
-        replacement: `${fileURLToPath(new URL('../../packages/base', import.meta.url))}/$1`,
-      },
-      {
-        find: /^@vrojs\/element-plus$/,
-        replacement: fileURLToPath(
-          new URL('../../packages/element-plus/src/index.ts', import.meta.url),
-        ),
-      },
-      {
-        find: /^@vrojs\/element-plus\/(.*)$/,
-        replacement: `${fileURLToPath(new URL('../../packages/element-plus', import.meta.url))}/$1`,
-      },
-      {
-        find: /^@vrojs\/vant$/,
-        replacement: fileURLToPath(new URL('../../packages/vant/src/index.ts', import.meta.url)),
-      },
-      {
-        find: /^@vrojs\/vant\/(.*)$/,
-        replacement: `${fileURLToPath(new URL('../../packages/vant', import.meta.url))}/$1`,
-      },
-      {
-        find: /^@vrojs\/use$/,
-        replacement: fileURLToPath(new URL('../../packages/use/src/index.ts', import.meta.url)),
-      },
-      {
-        find: /^@vrojs\/use\/(.*)$/,
-        replacement: `${fileURLToPath(new URL('../../packages/use', import.meta.url))}/$1`,
-      },
+      ...createVroAliases(),
     ],
   },
   plugins: [
