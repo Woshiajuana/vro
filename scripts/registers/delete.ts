@@ -7,7 +7,7 @@ import { createComponentNamePrompt, createPackageNamePrompt } from '../utils/pro
 
 export const registerDelete = (plop: NodePlopAPI) => {
   plop.setGenerator(`delete`, {
-    description: `删除一个组件`,
+    description: `删除一个模块`,
     prompts: [createPackageNamePrompt(), createComponentNamePrompt()],
     actions: [
       (answers) => {

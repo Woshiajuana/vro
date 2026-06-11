@@ -312,7 +312,7 @@ export const syncStyleDeps = (packageName: string) => {
 export const registerSyncStyleDeps = (plop: NodePlopAPI) => {
   plop.setGenerator('sync-style-deps', {
     description: `同步组件样式依赖`,
-    prompts: [createPackageNamePrompt({ type: 'checkbox' })],
+    prompts: [createPackageNamePrompt({ type: 'checkbox', choices: [...packageNames] })],
     actions: (answers) => {
       const packageName: string[] = answers?.packageName ?? []
       return packageName.map((name) => {

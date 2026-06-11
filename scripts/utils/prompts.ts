@@ -1,4 +1,6 @@
-export const createPackageNamePrompt = (options: { type?: 'list' | 'checkbox' } = {}) => {
+export const createPackageNamePrompt = (
+  options: { type?: 'list' | 'checkbox'; choices?: string[] } = {},
+) => {
   return {
     type: 'list',
     name: 'packageName',

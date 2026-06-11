@@ -6,7 +6,7 @@ import { createComponentNamePrompt, createPackageNamePrompt } from '../utils/pro
 
 export const registerCreate = (plop: NodePlopAPI) => {
   plop.setGenerator(`create`, {
-    description: `创建一个新组件`,
+    description: `创建一个新模块`,
     prompts: [createPackageNamePrompt(), createComponentNamePrompt()],
     actions: (answers) => {
       const { packageName } = answers ?? {}
