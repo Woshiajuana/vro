@@ -1,23 +1,16 @@
-<template>
-  <el-config-provider v-bind="elConfigProps">
-    <component v-if="is" :is="is" ref="refComponent" v-bind="$attrs" />
-  </el-config-provider>
-</template>
-
 <script setup lang="ts">
   import { ElConfigProvider } from 'element-plus'
-  import { onBeforeUnmount, onUnmounted, useTemplateRef } from 'vue'
+  import { h, ref, useAttrs, useSlots } from 'vue'
 
   import { vroElWithConfigProps } from './types'
 
   defineOptions({ name: 'VroElWithConfig' })
 
-  defineProps(vroElWithConfigProps)
+  const props = defineProps(vroElWithConfigProps)
+  const attrs = useAttrs()
+  const slots = useSlots()
 
-  const refComponent = useTemplateRef<any>('refComponent')
-
-  onBeforeUnmount(() => console.log('with-config 即将销毁'))
-  onUnmounted(() => console.log('with-config 销毁了'))
+  const refComponent = ref<any>()
 
   defineExpose(
     new Proxy(
@@ -27,9 +20,23 @@
           return refComponent.value?.[prop]
         },
         has(_target, prop) {
-          return prop in refComponent.value
+          return refComponent.value ? prop in refComponent.value : false
         },
       },
     ),
   )
+
+  const renderContent = () => {
+    if (props.is) {
+      return h(props.is, { ...attrs, ref: refComponent }, slots)
+    }
+
+    return slots.default?.()
+  }
+
+  const Render = () => h(ElConfigProvider, props.elConfigProps, renderContent)
 </script>
+
+<template>
+  <Render />
+</template>

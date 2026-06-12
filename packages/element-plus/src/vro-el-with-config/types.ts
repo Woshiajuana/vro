@@ -1,9 +1,12 @@
 import type { ConfigProviderProps } from 'element-plus'
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { Component, ExtractPropTypes, PropType } from 'vue'
 
 export const vroElWithConfigProps = {
-  elConfigProps: Object as PropType<ConfigProviderProps>,
-  is: [String, Object] as PropType<any>,
+  elConfigProps: {
+    type: Object as PropType<Partial<ConfigProviderProps>>,
+    default: () => ({}),
+  },
+  is: [String, Object] as PropType<string | Component>,
 }
 
 export type VroElWithConfigProps = ExtractPropTypes<typeof vroElWithConfigProps>
