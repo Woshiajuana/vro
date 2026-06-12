@@ -1,13 +1,20 @@
 <template>
-  <el-dialog class="vro-el-schema-form-dialog">
+  <el-dialog v-model="visible" class="vro-el-schema-form-dialog">
     <span>vro-el-schema-form-dialog</span>
   </el-dialog>
 </template>
 
 <script setup lang="ts">
-  import { vroElSchemaFormDialogProps } from './types'
+  import { useVisible } from '@vrojs/use'
+  import { ref } from 'vue'
+
+  import { VroElSchemaFormDialogProps, vroElSchemaFormDialogProps } from './types'
 
   defineOptions({ name: 'VroElSchemaFormDialog' })
+  defineProps(vroElSchemaFormDialogProps)
+  const emit = defineEmits(['cancel', 'confirm'])
+
+  const dynamicProps = ref<any>()
 
   const { show, hide, confirm, visible } = useVisible<Partial<VroElSchemaFormDialogProps>, any>({
     showCallback: (options) => {
@@ -17,5 +24,9 @@
     confirmCallback: (data) => emit('confirm', data),
   })
 
-  defineProps(vroElSchemaFormDialogProps)
+  defineExpose({
+    show,
+    hide,
+    confirm,
+  })
 </script>
