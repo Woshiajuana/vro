@@ -2,6 +2,7 @@
   import { ElConfigProvider } from 'element-plus'
   import { h, ref, useAttrs, useSlots } from 'vue'
 
+  import { VroElConfigProvider } from '../vro-el-config-provider'
   import { vroElWithConfigProps } from './types'
 
   defineOptions({ name: 'VroElWithConfig' })
@@ -34,7 +35,12 @@
     return slots.default?.()
   }
 
-  const Render = () => h(ElConfigProvider, props.elConfigProps, renderContent)
+  const renderVroConfigProvider = () =>
+    h(VroElConfigProvider, props.vroConfigProps, {
+      default: renderContent,
+    })
+
+  const Render = () => h(ElConfigProvider, props.elConfigProps, renderVroConfigProvider)
 </script>
 
 <template>

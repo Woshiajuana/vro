@@ -1,15 +1,18 @@
 <template>
-  <DemoNav />
-  <RouterView v-slot="{ Component }">
-    <DemoSection>
-      <KeepAlive>
-        <component :is="Component" />
-      </KeepAlive>
-    </DemoSection>
-  </RouterView>
+  <ElConfigProvider :locale="zhCn">
+    <DemoNav />
+    <RouterView v-slot="{ Component }">
+      <DemoSection>
+        <KeepAlive>
+          <component :is="Component" />
+        </KeepAlive>
+      </DemoSection>
+    </RouterView>
+  </ElConfigProvider>
 </template>
 
 <script setup lang="ts">
+  import zhCn from 'element-plus/es/locale/lang/zh-cn'
   import { watch } from 'vue'
 
   import { useCurrentTheme } from '@/utils'

@@ -2,7 +2,7 @@
 
 ### 介绍
 
-用于给局部内容或动态组件包裹一层 `ElConfigProvider`。传入 `is` 时会渲染对应动态组件，并将 `attrs`、插槽透传给内部组件；未传入 `is` 时直接渲染默认插槽。
+用于给局部内容或动态组件同时包裹 `ElConfigProvider` 和 `VroElConfigProvider`。传入 `is` 时会渲染对应动态组件，并将 `attrs`、插槽透传给内部组件；未传入 `is` 时直接渲染默认插槽。
 
 ## 代码演示
 
@@ -11,6 +11,14 @@
 ```html
 <vro-el-with-config :el-config-props="{ size: 'large' }">
   <el-button>按钮</el-button>
+</vro-el-with-config>
+```
+
+### Vro 文案配置
+
+```html
+<vro-el-with-config :vro-config-props="{ locale }">
+  <app />
 </vro-el-with-config>
 ```
 

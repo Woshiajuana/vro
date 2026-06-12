@@ -1,10 +1,13 @@
 <template>
-  <DocLayout :simulator="simulator">
-    <RouterView />
-  </DocLayout>
+  <ElConfigProvider :locale="zhCn">
+    <DocLayout :simulator="simulator">
+      <RouterView />
+    </DocLayout>
+  </ElConfigProvider>
 </template>
 
 <script setup lang="ts">
+  import zhCn from 'element-plus/es/locale/lang/zh-cn'
   import { computed, watch } from 'vue'
   import { useRoute } from 'vue-router'
 
