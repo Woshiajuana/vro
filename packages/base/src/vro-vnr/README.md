@@ -2,11 +2,23 @@
 
 ### 介绍
 
-...
+用于渲染由 `h`、`render` 函数或其他逻辑生成的 VNode 数组。
 
 ## 代码演示
 
 ### 基础用法
+
+```html
+<template>
+  <vro-vnr :nodes="nodes" />
+</template>
+
+<script setup lang="ts">
+  import { h } from 'vue'
+
+  const nodes = [h('span', '文本'), h('button', { type: 'button' }, '按钮')]
+</script>
+```
 
 ## API
 
@@ -23,36 +35,6 @@
       <td>{{ key }}</td>
       <td>{{ parseType(item.type || item) }}</td>
       <td>{{ reserve(item.default, '-') }}</td>
-    </tr>
-  </tbody>
-</table>
-
-### 插槽 Slots
-
-<table>
-  <tbody>
-    <tr>
-      <td>名称</td>
-      <td>说明</td>
-    </tr>
-    <tr>
-      <td>xx</td>
-      <td>xxx</td>
-    </tr>
-  </tbody>
-</table>
-
-### 实例方法
-
-<table>
-  <tbody>
-    <tr>
-      <td>名称</td>
-      <td>说明</td>
-    </tr>
-    <tr>
-      <td>xx</td>
-      <td>xxx</td>
     </tr>
   </tbody>
 </table>

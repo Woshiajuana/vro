@@ -1,11 +1,13 @@
-<template>
-  <component v-for="(vn, index) in nodes" :is="vn" :key="vn.key ?? index" />
-</template>
+<script lang="ts">
+  import { defineComponent } from 'vue'
 
-<script setup lang="ts">
   import { vroVnrProps } from './types'
 
-  defineOptions({ name: 'VroVnr' })
-
-  defineProps(vroVnrProps)
+  export default defineComponent({
+    name: 'VroVnr',
+    props: vroVnrProps,
+    setup(props) {
+      return () => props.nodes
+    },
+  })
 </script>

@@ -19,5 +19,6 @@ declare module 'vue' {
     VroElTest: typeof import('@vrojs/element-plus')['VroElTest']
     VroInput: typeof import('@vrojs/base')['VroInput']
     VroVanTest: typeof import('@vrojs/vant')['VroVanTest']
+    VroVnr: typeof import('@vrojs/base')['VroVnr']
   }
 }
