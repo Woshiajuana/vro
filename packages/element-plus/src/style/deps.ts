@@ -1,3 +1,5 @@
+import '../vro-el-checkbox-group/style/deps'
 import '../vro-el-config-provider/style/deps'
 import '../vro-el-icon/style/deps'
 import '../vro-el-schema-form-dialog/style/deps'
+import '../vro-el-select/style/deps'

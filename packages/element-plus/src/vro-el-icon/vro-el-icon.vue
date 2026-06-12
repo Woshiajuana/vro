@@ -1,10 +1,10 @@
 <template>
-  <ElIcon class="vro-el-icon" v-bind="props">
+  <el-icon class="vro-el-icon" v-bind="props">
     <slot>
-      <Component v-if="isElement" :is="name" />
+      <component v-if="isElement" :is="name" />
       <i v-else class="iconfont" :class="[name]"></i>
     </slot>
-  </ElIcon>
+  </el-icon>
 </template>
 
 <script setup lang="ts">
@@ -14,6 +14,7 @@
 
   import { vroElIconProps } from './types'
 
+  defineOptions({ name: 'VroElIcon' })
   const props = defineProps(vroElIconProps)
 
   const isElement = computed(() => {
