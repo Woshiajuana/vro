@@ -1,2 +1,0 @@
-import './deps'
-import './css'
