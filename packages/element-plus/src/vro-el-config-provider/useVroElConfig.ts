@@ -1,6 +1,6 @@
 import { inject } from 'vue'
 
-import { LOCALE } from '../utils'
+import { LOCALE } from '../locale'
 import { vroElConfigInjectionKey } from './injection'
 
 export function useVroElConfig() {

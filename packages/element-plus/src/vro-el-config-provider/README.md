@@ -2,11 +2,26 @@
 
 ### 介绍
 
-...
+为 Vro Element Plus 组件提供全局配置，目前用于统一内部文案。`locale` 支持局部覆盖，未传入的字段会使用默认中文文案。
 
 ## 代码演示
 
 ### 基础用法
+
+```html
+<vro-el-config-provider :locale="locale">
+  <app />
+</vro-el-config-provider>
+```
+
+```ts
+const locale = {
+  schemaFilter: {
+    query: '搜索',
+    reset: '清空',
+  },
+}
+```
 
 ## API
 
@@ -36,23 +51,8 @@
       <td>说明</td>
     </tr>
     <tr>
-      <td>xx</td>
-      <td>xxx</td>
-    </tr>
-  </tbody>
-</table>
-
-### 实例方法
-
-<table>
-  <tbody>
-    <tr>
-      <td>名称</td>
-      <td>说明</td>
-    </tr>
-    <tr>
-      <td>xx</td>
-      <td>xxx</td>
+      <td>default</td>
+      <td>默认内容</td>
     </tr>
   </tbody>
 </table>

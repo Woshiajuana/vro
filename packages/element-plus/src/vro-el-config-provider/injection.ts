@@ -1,7 +1,7 @@
 import type { InjectionKey } from 'vue'
 
-import type { VroElConfigProviderProps } from './types'
+import type { VroElConfigProviderContext } from './types'
 
 export const vroElConfigInjectionKey = Symbol(
-  'vroElConfigInjectionKeys',
-) as InjectionKey<VroElConfigProviderProps>
+  'vroElConfigInjectionKey',
+) as InjectionKey<VroElConfigProviderContext>
