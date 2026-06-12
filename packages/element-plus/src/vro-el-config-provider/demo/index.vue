@@ -9,23 +9,24 @@
 <script setup lang="ts">
   import { defineComponent, h } from 'vue'
 
-  import { useVroElConfig } from '../useVroElConfig'
+  import { useLocale } from '../../locale'
 
   const locale = {
-    schemaFilter: {
-      query: '搜索',
-      reset: '清空',
+    el: {
+      table: {
+        refresh: '重新加载',
+      },
     },
   }
 
   const ConfigContent = defineComponent({
     setup() {
-      const config = useVroElConfig()
+      const { t } = useLocale()
 
       return () =>
         h('div', { class: 'demo-config-provider' }, [
-          h('span', config.locale.schemaFilter.query),
-          h('span', config.locale.schemaFilter.reset),
+          h('span', t('table.refresh')),
+          h('span', t('table.description', { color: '蓝色' })),
         ])
     },
   })

@@ -16,9 +16,10 @@
 
 ```ts
 const locale = {
-  schemaFilter: {
-    query: '搜索',
-    reset: '清空',
+  el: {
+    table: {
+      refresh: '重新加载',
+    },
   },
 }
 ```
