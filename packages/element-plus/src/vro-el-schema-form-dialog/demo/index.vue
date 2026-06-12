@@ -3,3 +3,5 @@
     <vro-el-schema-form-dialog />
   </demo-block>
 </template>
+
+<script setup lang="ts"></script>
