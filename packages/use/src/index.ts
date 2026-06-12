@@ -2,3 +2,4 @@
 
 export * from './useComposition'
 export * from './useId'
+export * from './useVisible'
