@@ -29,4 +29,7 @@ declare module 'vue' {
     VroVanTest: typeof import('@vrojs/vant')['VroVanTest']
     VroVnr: typeof import('@vrojs/base')['VroVnr']
   }
+  export interface GlobalDirectives {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
+  }
 }

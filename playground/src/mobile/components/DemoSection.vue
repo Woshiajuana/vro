@@ -1,16 +1,10 @@
 <template>
-  <section class="van-doc-demo-section" :class="sectionClass">
+  <section class="van-doc-demo-section">
     <slot />
   </section>
 </template>
 
-<script setup lang="ts">
-  import { computed } from 'vue'
-  import { useRoute } from 'vue-router'
-
-  const route = useRoute()
-  const sectionClass = computed(() => route.meta.componentDir || '')
-</script>
+<script setup lang="ts"></script>
 
 <style lang="scss" scoped>
   .van-doc-demo-section {
