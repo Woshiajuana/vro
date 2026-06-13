@@ -12,5 +12,8 @@ export default {
       errorTitle: '哦嗬！出错了哦~',
       errorBtnText: '刷新',
     },
+    fileUpload: {
+      btnText: '上传',
+    },
   },
 }
