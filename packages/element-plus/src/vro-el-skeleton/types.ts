@@ -1,3 +1,4 @@
+import type { VroLoadingType } from '@vrojs/base'
 import type { ExtractPropTypes, PropType } from 'vue'
 
 export const vroElSkeletonProps = {
@@ -50,19 +51,27 @@ export const vroElSkeletonProps = {
   errorBtnText: String,
 
   /**
-   * 加载骨架屏段落行数。
+   * 加载图标类型。
    */
-  rows: {
-    type: Number,
-    default: 4,
+  loadingType: {
+    type: String as PropType<VroLoadingType>,
+    default: 'circular',
   },
 
   /**
-   * 是否显示骨架屏动画。
+   * 加载图标尺寸，传入数字时单位为 px。
    */
-  animated: {
-    type: Boolean,
-    default: true,
+  loadingSize: {
+    type: [String, Number] as PropType<string | number>,
+    default: 32,
+  },
+
+  /**
+   * 加载图标颜色。
+   */
+  loadingColor: {
+    type: String,
+    default: 'currentColor',
   },
 
   /**

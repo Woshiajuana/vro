@@ -3,10 +3,13 @@
     <template v-if="loading">
       <slot name="loading">
         <div class="vro-el-skeleton__state vro-el-skeleton__loading">
-          <el-skeleton :animated="animated" :rows="rows" />
-          <p class="vro-el-skeleton__description">
-            {{ loadingDescription ?? t('skeleton.loadingDescription') }}
-          </p>
+          <vro-loading
+            :type="loadingType"
+            :size="loadingSize"
+            :color="loadingColor"
+            :text="loadingDescription ?? t('skeleton.loadingDescription')"
+            vertical
+          />
         </div>
       </slot>
     </template>
@@ -47,7 +50,8 @@
 
 <script setup lang="ts">
   import { formatMessage } from '@daysnap/utils'
-  import { ElButton, ElEmpty, ElResult, ElSkeleton } from 'element-plus'
+  import { VroLoading } from '@vrojs/base'
+  import { ElButton, ElEmpty, ElResult } from 'element-plus'
   import { computed } from 'vue'
 
   import { useLocale } from '../locale'

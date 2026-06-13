@@ -2,7 +2,7 @@
 
 ### 介绍
 
-用于统一处理内容区域的加载、错误和空状态。`loading` 时显示骨架屏，`error` 时显示错误结果，`empty` 时显示空状态，其余情况渲染默认内容。
+用于统一处理内容区域的加载、错误和空状态。`loading` 时显示 `VroLoading` 加载指示器，`error` 时显示错误结果，`empty` 时显示空状态，其余情况渲染默认内容。
 
 ## 代码演示
 
@@ -26,6 +26,12 @@
     </el-result>
   </template>
 </vro-el-skeleton>
+```
+
+### 加载样式
+
+```html
+<vro-el-skeleton loading loading-type="spinner" :loading-size="40" loading-color="#409eff" />
 ```
 
 ### 国际化文案

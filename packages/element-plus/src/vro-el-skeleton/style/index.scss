@@ -11,14 +11,5 @@
 }
 
 .vro-el-skeleton__loading {
-  flex-direction: column;
-  align-items: stretch;
-}
-
-.vro-el-skeleton__description {
-  margin: 16px 0 0;
   color: var(--el-text-color-secondary);
-  font-size: var(--el-font-size-base);
-  line-height: 1.5;
-  text-align: center;
 }

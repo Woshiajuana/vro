@@ -11,6 +11,8 @@
       :loading="status === 'loading'"
       :empty="status === 'empty'"
       :error="status === 'error' ? error : undefined"
+      loading-type="spinner"
+      loading-color="#409eff"
       @refresh="setStatus('loading')"
     >
       <div class="demo-content">
