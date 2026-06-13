@@ -8,49 +8,6 @@ export const vroElSkeletonProps = {
   loading: Boolean,
 
   /**
-   * 错误信息。传入后会显示错误状态。
-   */
-  error: [Object, String] as PropType<unknown>,
-
-  /**
-   * 是否显示空状态。
-   */
-  empty: Boolean,
-
-  /**
-   * 加载状态描述文案，未传时使用 locale 中的 skeleton.loadingDescription。
-   */
-  loadingDescription: String,
-
-  /**
-   * 空状态描述文案，未传时使用 locale 中的 skeleton.emptyDescription。
-   */
-  emptyDescription: String,
-
-  /**
-   * 是否展示空状态刷新按钮
-   */
-  showEmptyBtn: {
-    type: Boolean,
-    default: true,
-  },
-
-  /**
-   * 空状态按钮文案，未传时使用 locale 中的 skeleton.emptyBtnText。
-   */
-  emptyBtnText: String,
-
-  /**
-   * 错误状态标题，未传时使用 locale 中的 skeleton.errorTitle。
-   */
-  errorTitle: String,
-
-  /**
-   * 错误状态按钮文案，未传时使用 locale 中的 skeleton.errorBtnText。
-   */
-  errorBtnText: String,
-
-  /**
    * 加载图标类型。
    */
   loadingType: {
@@ -73,6 +30,49 @@ export const vroElSkeletonProps = {
     type: String,
     default: 'currentColor',
   },
+
+  /**
+   * 加载状态描述文案，未传时使用 locale 中的 skeleton.loadingDescription。
+   */
+  loadingDescription: String,
+
+  /**
+   * 错误信息。传入后会显示错误状态。
+   */
+  error: [Object, String] as PropType<unknown>,
+
+  /**
+   * 错误状态标题，未传时使用 locale 中的 skeleton.errorTitle。
+   */
+  errorTitle: String,
+
+  /**
+   * 错误状态按钮文案，未传时使用 locale 中的 skeleton.errorBtnText。
+   */
+  errorBtnText: String,
+
+  /**
+   * 是否显示空状态。
+   */
+  empty: Boolean,
+
+  /**
+   * 空状态描述文案，未传时使用 locale 中的 skeleton.emptyDescription。
+   */
+  emptyDescription: String,
+
+  /**
+   * 是否展示空状态刷新按钮。
+   */
+  showEmptyBtn: {
+    type: Boolean,
+    default: true,
+  },
+
+  /**
+   * 空状态按钮文案，未传时使用 locale 中的 skeleton.emptyBtnText。
+   */
+  emptyBtnText: String,
 
   /**
    * 状态容器最小高度，传入数字时单位为 px。
