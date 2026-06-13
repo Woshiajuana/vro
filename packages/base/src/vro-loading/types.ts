@@ -16,7 +16,7 @@ export const vroLoadingProps = {
    */
   size: {
     type: [String, Number] as PropType<string | number>,
-    default: 32,
+    default: 24,
   },
 
   /**
