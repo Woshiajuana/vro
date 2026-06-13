@@ -25,10 +25,8 @@ declare module 'vue' {
     VroElSkeleton: typeof import('@vrojs/element-plus')['VroElSkeleton']
     VroElWithConfig: typeof import('@vrojs/element-plus')['VroElWithConfig']
     VroInput: typeof import('@vrojs/base')['VroInput']
+    VroLoading: typeof import('@vrojs/base')['VroLoading']
     VroVanTest: typeof import('@vrojs/vant')['VroVanTest']
     VroVnr: typeof import('@vrojs/base')['VroVnr']
-  }
-  export interface GlobalDirectives {
-    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

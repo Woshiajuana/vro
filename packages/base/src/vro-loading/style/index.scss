@@ -1,0 +1,132 @@
+.vro-loading {
+  --vro-loading-size: 32px;
+  --vro-loading-color: currentColor;
+  --vro-loading-text-color: var(--vro-loading-color);
+  --vro-loading-text-size: 14px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--vro-loading-color);
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.vro-loading--vertical {
+  flex-direction: column;
+}
+
+.vro-loading__text {
+  color: var(--vro-loading-text-color);
+  font-size: var(--vro-loading-text-size);
+  line-height: 1.4;
+}
+
+.vro-loading__circular {
+  width: var(--vro-loading-size);
+  height: var(--vro-loading-size);
+  animation: vro-loading-rotate 1.6s linear infinite;
+
+  circle {
+    stroke: currentColor;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: 0;
+    animation: vro-loading-circular 1.6s ease-in-out infinite;
+  }
+}
+
+.vro-loading__spinner {
+  position: relative;
+  width: var(--vro-loading-size);
+  height: var(--vro-loading-size);
+  animation: vro-loading-fade 1.2s linear infinite;
+
+  i {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 2px;
+    height: 28%;
+    background: currentColor;
+    border-radius: 999px;
+    transform-origin: center calc(var(--vro-loading-size) / 2);
+
+    @for $i from 1 through 12 {
+      &:nth-child(#{$i}) {
+        opacity: calc(#{$i} / 12);
+        transform: translateX(-50%) rotate(#{($i - 1) * 30deg});
+      }
+    }
+  }
+}
+
+.vro-loading__dots {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--vro-loading-size) * 0.12);
+  width: var(--vro-loading-size);
+  height: var(--vro-loading-size);
+
+  i {
+    width: calc(var(--vro-loading-size) * 0.18);
+    height: calc(var(--vro-loading-size) * 0.18);
+    background: currentColor;
+    border-radius: 50%;
+    animation: vro-loading-dot 1s ease-in-out infinite;
+
+    &:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+  }
+}
+
+@keyframes vro-loading-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes vro-loading-circular {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -40;
+  }
+
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -120;
+  }
+}
+
+@keyframes vro-loading-fade {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes vro-loading-dot {
+  0%,
+  80%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.72);
+  }
+
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
