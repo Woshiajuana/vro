@@ -1,6 +1,24 @@
 .vro-el-skeleton {
+  width: 100%;
+}
+
+.vro-el-skeleton__state {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 240px;
+  width: 100%;
+  min-height: inherit;
+}
+
+.vro-el-skeleton__loading {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.vro-el-skeleton__description {
+  margin: 16px 0 0;
+  color: var(--el-text-color-secondary);
+  font-size: var(--el-font-size-base);
+  line-height: 1.5;
+  text-align: center;
 }
