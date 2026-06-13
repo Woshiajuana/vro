@@ -1,6 +1,6 @@
 <template>
   <div class="vro-el-file-upload">
-    <ElButton
+    <el-button
       v-if="computeValue.length < max && !disabled"
       class="vro-el-file-upload-btn"
       :loading="loading"
@@ -8,16 +8,16 @@
       type="primary"
       icon="upload"
     >
-      {{ t('el.fileUpload.btnText') }}
-      <input type="file" :accept="accept" @change="handleUpload" />
-    </ElButton>
+      {{ t('fileUpload.btnText') }}
+      <input type="file" :accept="accept" :multiple="max > 1" @change="handleUpload" />
+    </el-button>
 
     <ul class="vro-el-file-upload-content">
       <li class="vro-el-file-upload-item" v-for="(item, index) in computeValue" :key="index">
         <a :href="item" target="_blank">{{ item }}</a>
-        <ElIcon v-if="!disabled" @click="handleDelete(index)">
-          <CircleCloseFilled />
-        </ElIcon>
+        <el-icon v-if="!disabled" @click="handleDelete(index)">
+          <circle-close-filled />
+        </el-icon>
       </li>
     </ul>
   </div>
@@ -36,7 +36,9 @@
 
   defineOptions({ name: 'VroElFileUpload' })
 
-  const emit = defineEmits(['update:modelValue'])
+  const emit = defineEmits<{
+    (event: 'update:modelValue', value: string | string[]): void
+  }>()
 
   const rawProps = defineProps(vroElFileUploadProps)
 
@@ -78,7 +80,7 @@
         throw new Error('not set upload')
       }
 
-      const res = await upload(files.slice(0, max - (modelValue?.length ?? 0)), { params })
+      const res = await upload(files.slice(0, max - computeValue.value.length), { params })
 
       let value: string | string[] = res[0]
       if (isArray(modelValue)) {
