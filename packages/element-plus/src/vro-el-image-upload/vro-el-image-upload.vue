@@ -1,53 +1,60 @@
 <template>
   <div class="vro-el-image-upload">
-    <VueDraggable
+    <vue-draggable
       class="vro-el-image-upload-content"
-      :disabled="max <= 1"
+      :disabled="props.disabled || props.max <= 1"
       :animation="150"
       :model-value="computeValue"
       filter=".vro-el-image-upload-btn"
       @update:model-value="handleUpdate"
     >
       <div class="vro-el-image-upload-item" v-for="(item, index) in computeValue" :key="item">
-        <VroElImage
+        <el-image
           class="vro-el-image-upload-image"
-          v-bind="imageProps"
+          v-bind="props.imageProps"
           :src="item"
           :preview-src-list="computeValue"
           :initial-index="index"
         />
-        <ElIcon v-if="!disabled" class="vro-el-image-upload-clear" @click="handleDelete(index)">
-          <CircleCloseFilled />
-        </ElIcon>
+        <el-icon
+          v-if="!props.disabled"
+          class="vro-el-image-upload-clear"
+          @click="handleDelete(index)"
+        >
+          <circle-close-filled />
+        </el-icon>
       </div>
       <div
-        v-if="computeValue.length < max && !disabled"
+        v-if="computeValue.length < props.max && !props.disabled"
         v-loading="loading"
         class="vro-el-image-upload-item vro-el-image-upload-btn"
       >
-        <ElIcon class="vro-el-image-upload-add"><Plus /></ElIcon>
-        <input type="file" accept="image/*" :multiple="max > 1" @change="handleUpload" />
+        <el-icon class="vro-el-image-upload-add"><plus /></el-icon>
+        <input type="file" accept="image/*" :multiple="props.max > 1" @change="handleUpload" />
       </div>
-    </VueDraggable>
-    <ElCheckbox v-if="!disabled && compressible" v-model="compress">是否压缩</ElCheckbox>
+    </vue-draggable>
+    <el-checkbox v-if="!props.disabled && props.compressible" v-model="compress">
+      是否压缩
+    </el-checkbox>
   </div>
 </template>
 
 <script setup lang="ts">
   import { isArray, isBoolean, isUndefined, omitBy } from '@daysnap/utils'
-  import { useAsyncTask } from '@daysnap/vue-use'
   import { CircleCloseFilled, Plus } from '@element-plus/icons-vue'
-  import { ElCheckbox, ElIcon, ElLoading } from 'element-plus'
+  import { useAsyncTask } from '@vrojs/use'
+  import { ElCheckbox, ElIcon, ElImage, ElLoading } from 'element-plus'
   import { computed, ref } from 'vue'
   import { VueDraggable } from 'vue-draggable-plus'
 
-  import { VroElImage } from '../vro-el-image'
   import { type VroElImageUploadProps, vroElImageUploadProps } from './types'
   import { getVroElImageUploadOptions } from './utils'
 
   defineOptions({ name: 'VroElImageUpload' })
 
-  const emit = defineEmits(['update:modelValue'])
+  const emit = defineEmits<{
+    'update:modelValue': [value: string | string[]]
+  }>()
   const rawProps = defineProps(vroElImageUploadProps)
 
   const props = computed(() => {
@@ -101,20 +108,20 @@
         return
       }
 
-      const { modelValue, max, upload, params } = props.value
+      const { max, upload, params } = props.value
 
       if (!upload) {
         throw new Error('not set upload')
       }
 
-      const res = await upload(files.slice(0, max - (modelValue?.length ?? 0)), {
+      const res = await upload(files.slice(0, max - computeValue.value.length), {
         compress: compress.value,
         params,
       })
 
       let value: string | string[] = res[0]
-      if (isArray(modelValue)) {
-        value = [...modelValue, ...res]
+      if (isArray(props.value.modelValue)) {
+        value = [...props.value.modelValue, ...res]
       }
       emit('update:modelValue', value)
     },

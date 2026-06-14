@@ -30,7 +30,8 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "copy-to-clipboard": "^3.3.3"
+    "copy-to-clipboard": "^3.3.3",
+    "vue-draggable-plus": "^0.6.1"
   },
   "peerDependencies": {
     "@daysnap/banana": ">=0.0.15",

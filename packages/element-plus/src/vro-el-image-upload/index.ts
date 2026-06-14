@@ -1,4 +1,4 @@
-import { withInstall } from '@vrojs/core'
+import { withInstall } from '@vrojs/base'
 
 import Component from './vro-el-image-upload.vue'
 
