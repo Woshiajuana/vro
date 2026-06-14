@@ -34,7 +34,7 @@
       </div>
     </vue-draggable>
     <el-checkbox v-if="!props.disabled && props.compressible" v-model="compress">
-      是否压缩
+      {{ t('imageUpload.compressText') }}
     </el-checkbox>
   </div>
 </template>
@@ -47,6 +47,7 @@
   import { computed, ref } from 'vue'
   import { VueDraggable } from 'vue-draggable-plus'
 
+  import { useLocale } from '../locale'
   import { type VroElImageUploadProps, vroElImageUploadProps } from './types'
   import { getVroElImageUploadOptions } from './utils'
 
@@ -56,6 +57,7 @@
     'update:modelValue': [value: string | string[]]
   }>()
   const rawProps = defineProps(vroElImageUploadProps)
+  const { t } = useLocale()
 
   const props = computed(() => {
     const {

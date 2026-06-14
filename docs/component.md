@@ -6,6 +6,7 @@
 - 补充完善demo
 - 组件 types.ts 属性添加注释
 - 组件 types.ts 属性归类顺序排列
+- 中文提取到 locale 里
 
 ## 要求
 

@@ -15,5 +15,8 @@ export default {
     fileUpload: {
       btnText: '上传',
     },
+    imageUpload: {
+      compressText: '是否压缩',
+    },
   },
 }
