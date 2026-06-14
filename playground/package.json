@@ -15,7 +15,6 @@
     "@vant/touch-emulator": "^1.4.0",
     "@vrojs/base": "workspace:*",
     "@vrojs/element-plus": "workspace:*",
-    "@vrojs/resolver": "workspace:*",
     "@vrojs/use": "workspace:*",
     "@vrojs/vant": "workspace:*",
     "element-plus": "^2.11.9",
