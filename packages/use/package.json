@@ -9,7 +9,7 @@
   "scripts": {
     "build": "npm run clean && tsup",
     "clean": "rimraf ./dist",
-    "release": "pnpm run build && dsc publish --pnpm",
+    "release": "npm run build && dsc publish --pnpm",
     "sync": "dsc sync"
   },
   "files": [
