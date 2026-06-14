@@ -3,13 +3,10 @@
     <template v-if="loading">
       <slot name="loading">
         <div class="vro-el-skeleton__state vro-el-skeleton__loading">
-          <vro-loading
-            :type="loadingType"
-            :size="loadingSize"
-            :color="loadingColor"
-            :text="loadingDescription ?? t('skeleton.loadingDescription')"
-            vertical
-          />
+          <vro-loading :type="loadingType" :size="loadingSize" :color="loadingColor" />
+          <p class="vro-el-skeleton__description">
+            {{ loadingDescription ?? t('skeleton.loadingDescription') }}
+          </p>
         </div>
       </slot>
     </template>

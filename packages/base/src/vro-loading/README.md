@@ -2,14 +2,14 @@
 
 ### 介绍
 
-纯 Vue/CSS 的加载指示器，不依赖第三方库。支持圆环、线圈、点状三种形态，可配置尺寸、颜色、文案和排列方向。
+纯 Vue/CSS 的加载图标，不依赖第三方库。支持圆环、线圈、点状三种形态，可配置尺寸和颜色。
 
 ## 代码演示
 
 ### 基础用法
 
 ```html
-<vro-loading text="加载中..." />
+<vro-loading />
 ```
 
 ### 加载类型
@@ -23,13 +23,13 @@
 ### 自定义样式
 
 ```html
-<vro-loading type="spinner" color="#409eff" :size="40" text="请稍候" vertical />
+<vro-loading type="spinner" color="#409eff" :size="40" />
 ```
 
 ### 自定义图标
 
 ```html
-<vro-loading text="加载中">
+<vro-loading>
   <template #icon>
     <span class="custom-loading-icon"></span>
   </template>
@@ -62,10 +62,6 @@
     <tr>
       <td>名称</td>
       <td>说明</td>
-    </tr>
-    <tr>
-      <td>default</td>
-      <td>自定义加载文案</td>
     </tr>
     <tr>
       <td>icon</td>

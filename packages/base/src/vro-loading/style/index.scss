@@ -1,26 +1,13 @@
 .vro-loading {
   --vro-loading-size: 32px;
   --vro-loading-color: currentColor;
-  --vro-loading-text-color: var(--vro-loading-color);
-  --vro-loading-text-size: 14px;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
   color: var(--vro-loading-color);
   line-height: 1;
   vertical-align: middle;
-}
-
-.vro-loading--vertical {
-  flex-direction: column;
-}
-
-.vro-loading__text {
-  color: var(--vro-loading-text-color);
-  font-size: var(--vro-loading-text-size);
-  line-height: 1.4;
 }
 
 .vro-loading__circular {
