@@ -1,4 +1,4 @@
-import { DeepPartial } from '@vrojs/base'
+import { type DeepPartial } from '@vrojs/base'
 import type { ExtractPropTypes, PropType } from 'vue'
 
 import type { Locale } from '../locale'

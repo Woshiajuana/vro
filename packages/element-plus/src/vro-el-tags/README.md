@@ -2,11 +2,29 @@
 
 ### 介绍
 
-...
+基于 `ElTag`、`ElInput` 和 `ElButton` 的标签编辑组件。支持通过 `v-model` 新增、删除标签，也可以设置为只读禁用状态。
 
 ## 代码演示
 
 ### 基础用法
+
+```html
+<template>
+  <vro-el-tags v-model="value" />
+</template>
+
+<script setup lang="ts">
+  import { ref } from 'vue'
+
+  const value = ref(['Vue', 'Element Plus'])
+</script>
+```
+
+### 禁用状态
+
+```html
+<vro-el-tags v-model="value" disabled />
+```
 
 ## API
 
@@ -29,30 +47,21 @@
 
 ### 插槽 Slots
 
-<table>
-  <tbody>
-    <tr>
-      <td>名称</td>
-      <td>说明</td>
-    </tr>
-    <tr>
-      <td>xx</td>
-      <td>xxx</td>
-    </tr>
-  </tbody>
-</table>
+暂无。
 
-### 实例方法
+### 事件 Events
 
 <table>
   <tbody>
     <tr>
       <td>名称</td>
+      <td>参数</td>
       <td>说明</td>
     </tr>
     <tr>
-      <td>xx</td>
-      <td>xxx</td>
+      <td>update:modelValue</td>
+      <td>value</td>
+      <td>标签列表变化时触发</td>
     </tr>
   </tbody>
 </table>

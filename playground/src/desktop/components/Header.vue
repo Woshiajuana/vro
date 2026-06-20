@@ -16,7 +16,7 @@
               rel="noopener noreferrer"
               title="GitHub"
             >
-              <img src="https://fastly.jsdelivr.net/npm/@vant/assets/github.svg" alt="GitHub" />
+              <img src="@/assets/svg/github.svg" alt="GitHub" />
             </a>
           </li>
 

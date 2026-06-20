@@ -1,11 +1,15 @@
 <template>
-  <ElTree
+  <el-tree
     v-bind="$attrs"
     class="vro-el-tree"
     :data="options"
     :default-checked-keys="checkedKeys"
     @check="handleCheck"
-  />
+  >
+    <template v-if="$slots.default" #default="scope">
+      <slot v-bind="scope" />
+    </template>
+  </el-tree>
 </template>
 
 <script setup lang="ts">
@@ -13,11 +17,13 @@
   import { ElTree } from 'element-plus'
   import { computed } from 'vue'
 
-  import { vroElTreeProps } from './types'
+  import { type VroElTreeKey, type VroElTreeOption, vroElTreeProps } from './types'
 
   defineOptions({ name: 'VroElTree' })
 
-  const emit = defineEmits(['update:modelValue'])
+  const emit = defineEmits<{
+    (event: 'update:modelValue', value: VroElTreeKey[]): void
+  }>()
   const props = defineProps(vroElTreeProps)
 
   const checkedKeys = computed(() => {
@@ -28,17 +34,18 @@
         acc[id] = true
         return acc
       },
-      {} as Record<string, boolean>,
+      {} as Record<VroElTreeKey, boolean>,
     )
 
-    const loop = (id: string): boolean => {
+    const loop = (id: VroElTreeKey): boolean => {
       if (id === rootId) {
         return true
       }
       if (!modelValueMap[id]) {
         return false
       }
-      return loop(mapping[id])
+      const parentId = mapping[id]
+      return !isUndefined(parentId) && loop(parentId)
     }
 
     return childIds.filter(loop)
@@ -49,28 +56,23 @@
     emit('update:modelValue', [...halfCheckedKeys, ...checkedKeys])
   }
 
-  interface TreeItem {
-    id: string
-    parentId?: string
-    children?: TreeItem[]
-  }
-  function parseNodeIds(data: TreeItem[], mapping: Record<string, string> = {}) {
-    const childIds: string[] = []
-    const parentIds: string[] = []
+  function parseNodeIds(
+    data: VroElTreeOption[],
+    mapping: Partial<Record<VroElTreeKey, VroElTreeKey>> = {},
+  ) {
+    const childIds: VroElTreeKey[] = []
 
     data.forEach((item) => {
       if (!isUndefined(item.parentId)) {
         mapping[item.id] = item.parentId
       }
       if (item.children && item.children.length > 0) {
-        parentIds.push(item.id)
         const res = parseNodeIds(item.children ?? [], mapping)
-        parentIds.push(...res.parentIds)
         childIds.push(...res.childIds)
       } else {
         childIds.push(item.id)
       }
     })
-    return { childIds, parentIds, mapping }
+    return { childIds, mapping }
   }
 </script>

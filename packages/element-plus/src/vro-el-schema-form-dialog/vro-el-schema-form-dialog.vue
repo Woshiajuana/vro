@@ -8,7 +8,7 @@
   import { useVisible } from '@vrojs/use'
   import { ref } from 'vue'
 
-  import { VroElSchemaFormDialogProps, vroElSchemaFormDialogProps } from './types'
+  import { type VroElSchemaFormDialogProps, vroElSchemaFormDialogProps } from './types'
 
   defineOptions({ name: 'VroElSchemaFormDialog' })
   defineProps(vroElSchemaFormDialogProps)

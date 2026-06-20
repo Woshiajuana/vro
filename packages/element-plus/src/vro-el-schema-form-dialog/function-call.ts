@@ -1,7 +1,7 @@
 import { showComponent } from '@vrojs/base'
-import { AppContext } from 'vue'
+import { type AppContext } from 'vue'
 
-import { VroElSchemaFormDialogProps } from './types'
+import { type VroElSchemaFormDialogProps } from './types'
 import VroElSchemaFormDialog from './vro-el-schema-form-dialog.vue'
 
 export function showVroElSchemaFormDialog<T = any>(

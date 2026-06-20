@@ -18,5 +18,8 @@ export default {
     imageUpload: {
       compressText: '是否压缩',
     },
+    tags: {
+      addText: '新增',
+    },
   },
 }
