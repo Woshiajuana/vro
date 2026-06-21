@@ -39,7 +39,6 @@
   import { computed, ref, useTemplateRef, watchEffect } from 'vue'
 
   import { datePickerValueFormat } from '../utils'
-  import { useVroElConfig } from '../vro-el-config-provider'
   import { defineVroElSchemaFormFieldTrigger } from './defineVroElSchemaFormFieldTrigger'
   import { vroElSchemaFormProps, type VroElSchemaFormSchema } from './types'
   import { vroElSchemaFormFieldManager } from './vroElSchemaFormFieldManager'
@@ -53,7 +52,7 @@
     return pick(props, Object.keys(formProps) as any)
   })
 
-  const vec = useVroElConfig()
+  const vec: any = {}
 
   // 规则
   const rules = ref<Record<string, any>>({})

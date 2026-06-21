@@ -1,19 +1,19 @@
 <template>
-  <ElRadioGroup
+  <el-radio-group
     v-bind="restProps"
     class="vro-el-radio-group"
     @update:model-value="$emit('update:modelValue', $event)"
     @change="$emit('change', $event)"
   >
-    <ElRadio
+    <el-radio
       v-for="(option, index) in options"
       v-bind="option.props"
       :key="index"
       :value="option[valueKey || 'value'] ?? option"
     >
       {{ option[labelKey || 'label'] ?? option }}
-    </ElRadio>
-  </ElRadioGroup>
+    </el-radio>
+  </el-radio-group>
 </template>
 
 <script setup lang="ts">
