@@ -48,6 +48,11 @@ export interface VroElSchemaFormSchemaField {
   defaultValue?: any
 
   /**
+   * 字段重置值，重置的时候使用。
+   */
+  resetValue?: any
+
+  /**
    * 透传给字段组件的属性。
    */
   props?: Record<string, any>

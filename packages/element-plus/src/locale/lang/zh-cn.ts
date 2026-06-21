@@ -34,5 +34,9 @@ export default {
         endPlaceholder: '请选择',
       },
     },
+    schemaFilter: {
+      searchText: '搜索',
+      resetText: '重置',
+    },
   },
 }

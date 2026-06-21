@@ -24,6 +24,7 @@ declare module 'vue' {
     VroElIcon: typeof import('@vrojs/element-plus')['VroElIcon']
     VroElImageUpload: typeof import('@vrojs/element-plus')['VroElImageUpload']
     VroElRadioGroup: typeof import('@vrojs/element-plus')['VroElRadioGroup']
+    VroElSchemaFilter: typeof import('@vrojs/element-plus')['VroElSchemaFilter']
     VroElSchemaForm: typeof import('@vrojs/element-plus')['VroElSchemaForm']
     VroElSchemaFormDialog: typeof import('@vrojs/element-plus')['VroElSchemaFormDialog']
     VroElSelect: typeof import('@vrojs/element-plus')['VroElSelect']
