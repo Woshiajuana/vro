@@ -2,11 +2,108 @@
 
 ### 介绍
 
-...
+基于 `ElForm` 的 schema 表单封装。组件通过 `schema` 描述字段、布局、校验和事件，适合快速搭建中后台表单，同时保留 Element Plus Form、Row、Col、FormItem 的透传能力。
 
 ## 代码演示
 
 ### 基础用法
+
+```html
+<template>
+  <vro-el-schema-form
+    ref="refVroElSchemaForm"
+    :schema="schema"
+    :form-props="{ labelWidth: '90px' }"
+    :col-props="{ span: 12 }"
+  />
+  <el-button type="primary" :loading="loading" @click="trigger">提交</el-button>
+</template>
+
+<script setup lang="ts">
+  import { ref } from 'vue'
+  import { useVroElSchemaForm, type VroElSchemaFormInstance } from '@vrojs/element-plus'
+
+  const refVroElSchemaForm = ref<VroElSchemaFormInstance>()
+  const { schema, loading, trigger } = useVroElSchemaForm(
+    {
+      username: {
+        label: '用户名',
+        value: '',
+        is: 'ElInput',
+        rules: [{ required: true, message: '请填写用户名', trigger: 'blur' }],
+      },
+      role: {
+        label: '角色',
+        value: '',
+        is: 'VroElSelect',
+        options: [
+          { label: '管理员', value: 'admin' },
+          { label: '运营', value: 'operator' },
+        ],
+      },
+    },
+    async (data) => {
+      console.log(data)
+    },
+    {
+      instanceRef: refVroElSchemaForm,
+    },
+  )
+</script>
+```
+
+### 动态显示
+
+```ts
+const schema = {
+  accountType: {
+    label: '账号类型',
+    value: 'personal',
+    is: 'VroElRadioGroup',
+    options: [
+      { label: '个人', value: 'personal' },
+      { label: '企业', value: 'company' },
+    ],
+  },
+  realName: {
+    label: '姓名',
+    value: '',
+    is: 'ElInput',
+    hidden: (_, __, metadata) => metadata.accountType.value !== 'personal',
+  },
+  companyName: {
+    label: '企业名称',
+    value: '',
+    is: 'ElInput',
+    hidden: (_, __, metadata) => metadata.accountType.value !== 'company',
+  },
+}
+```
+
+### 字段插槽
+
+字段的 `slots` 配置用于把外部同名插槽转发给实际渲染组件。
+
+```html
+<vro-el-schema-form :schema="schema">
+  <template #prepend>
+    <span>https://</span>
+  </template>
+</vro-el-schema-form>
+```
+
+```ts
+const schema = {
+  website: {
+    label: '网址',
+    value: '',
+    is: 'ElInput',
+    slots: {
+      prepend: 'prepend',
+    },
+  },
+}
+```
 
 ## API
 
@@ -36,8 +133,12 @@
       <td>说明</td>
     </tr>
     <tr>
-      <td>xx</td>
-      <td>xxx</td>
+      <td>default</td>
+      <td>表单尾部内容，会渲染在 ElRow 内部</td>
+    </tr>
+    <tr>
+      <td>schema 字段 slots 配置中的 key</td>
+      <td>转发给字段组件的插槽，插槽参数为 { item }</td>
     </tr>
   </tbody>
 </table>
@@ -51,8 +152,50 @@
       <td>说明</td>
     </tr>
     <tr>
-      <td>xx</td>
-      <td>xxx</td>
+      <td>form</td>
+      <td>ElForm 实例</td>
+    </tr>
+    <tr>
+      <td>validate</td>
+      <td>校验表单和支持 validate 的字段组件</td>
+    </tr>
+    <tr>
+      <td>validateField</td>
+      <td>校验指定字段</td>
+    </tr>
+    <tr>
+      <td>resetFields</td>
+      <td>重置表单字段</td>
+    </tr>
+    <tr>
+      <td>extractValues</td>
+      <td>提取 schema 字段值和支持 extractValues 的字段组件值</td>
+    </tr>
+    <tr>
+      <td>trigger</td>
+      <td>触发支持 trigger 的字段组件</td>
+    </tr>
+  </tbody>
+</table>
+
+### 事件 Events
+
+<table>
+  <tbody>
+    <tr>
+      <td>名称</td>
+      <td>参数</td>
+      <td>说明</td>
+    </tr>
+    <tr>
+      <td>change-field</td>
+      <td>{ key, value }</td>
+      <td>字段 change 时触发</td>
+    </tr>
+    <tr>
+      <td>input-field</td>
+      <td>{ key, value }</td>
+      <td>字段 input 时触发</td>
     </tr>
   </tbody>
 </table>

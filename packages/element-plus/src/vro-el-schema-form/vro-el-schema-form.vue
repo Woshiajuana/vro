@@ -1,19 +1,19 @@
 <template>
-  <ElForm
+  <el-form
     v-bind="elFormProps"
-    class="vro-el-schema-form"
     ref="refForm"
+    class="vro-el-schema-form"
     :model="model"
     :rules="rules"
   >
-    <ElRow :gutter="16" v-bind="rowProps">
-      <ElCol v-for="(item, key) in metadata" :key="key" v-bind="{ ...colProps, ...item.colProps }">
-        <ElFormItem
+    <el-row :gutter="16" v-bind="rowProps">
+      <el-col v-for="(item, key) in metadata" :key="key" v-bind="{ ...colProps, ...item.colProps }">
+        <el-form-item
           :label="item.label"
           :prop="key"
           v-bind="{ ...formItemProps, ...item.formItemProps }"
         >
-          <Component
+          <component
             v-model="item.value"
             v-bind="mapping?.[key]?.props"
             :is="mapping?.[key]?.is"
@@ -24,12 +24,12 @@
             <template v-for="(slot, key) in item.slots" #[slot] :key="slot">
               <slot :name="key" :item="item" />
             </template>
-          </Component>
-        </ElFormItem>
-      </ElCol>
+          </component>
+        </el-form-item>
+      </el-col>
       <slot></slot>
-    </ElRow>
-  </ElForm>
+    </el-row>
+  </el-form>
 </template>
 
 <script setup lang="ts">
