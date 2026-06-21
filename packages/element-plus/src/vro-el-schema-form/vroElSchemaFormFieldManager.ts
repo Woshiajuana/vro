@@ -12,12 +12,12 @@ import {
 } from 'element-plus'
 
 import { VroElCheckboxGroup } from '../vro-el-checkbox-group'
-import VroElFileUpload from '../vro-el-file-upload'
-import VroElImageUpload from '../vro-el-image-upload'
+import { VroElFileUpload } from '../vro-el-file-upload'
+import { VroElImageUpload } from '../vro-el-image-upload'
 import { VroElRadioGroup } from '../vro-el-radio-group'
 import { VroElSelect } from '../vro-el-select'
-import VroElTags from '../vro-el-tags'
-import VroElTree from '../vro-el-tree'
+import { VroElTags } from '../vro-el-tags'
+import { VroElTree } from '../vro-el-tree'
 
 export const vroElSchemaFormFieldManager = new ComponentManager()
 

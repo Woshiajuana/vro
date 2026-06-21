@@ -1,6 +1,5 @@
 import '../../style/base.scss'
 import '../../vro-el-checkbox-group/style/css'
-import '../../vro-el-config-provider/style/css'
 import '../../vro-el-file-upload/style/css'
 import '../../vro-el-image-upload/style/css'
 import '../../vro-el-radio-group/style/css'

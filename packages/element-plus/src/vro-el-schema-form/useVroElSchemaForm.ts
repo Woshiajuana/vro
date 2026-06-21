@@ -11,7 +11,7 @@ export function useVroElSchemaForm<T extends (data: any) => Promise<any>>(
   task?: T,
   options: {
     initialValue?: Record<string, any>
-    instanceRef?: Ref<VroElSchemaFormInstance | null>
+    instanceRef?: Ref<VroElSchemaFormInstance | undefined>
   } = {},
 ) {
   const { instanceRef, initialValue } = options

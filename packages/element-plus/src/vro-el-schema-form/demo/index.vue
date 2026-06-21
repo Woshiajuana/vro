@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
   import { ElMessage } from 'element-plus'
-  import { ref } from 'vue'
+  import { ref, watch } from 'vue'
 
   import { useVroElSchemaForm, type VroElSchemaFormInstance, type VroElSchemaFormSchema } from '..'
 
@@ -57,6 +57,11 @@
     {
       instanceRef: refVroElSchemaForm,
     },
+  )
+
+  watch(
+    () => schema.username.value,
+    (v) => console.log('v => ', v),
   )
 
   const dynamicSchema = ref<VroElSchemaFormSchema>({

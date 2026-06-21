@@ -1,5 +1,4 @@
 import '../../vro-el-checkbox-group/style/deps'
-import '../../vro-el-config-provider/style/deps'
 import '../../vro-el-file-upload/style/deps'
 import '../../vro-el-image-upload/style/deps'
 import '../../vro-el-radio-group/style/deps'
