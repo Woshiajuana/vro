@@ -1,10 +1,9 @@
-import { omit } from '@daysnap/utils'
 import type { Arrayable } from '@vrojs/base'
 import {
   type ColProps,
   type FormItemProps,
   type FormItemRule,
-  formProps,
+  type FormProps,
   type RowProps,
 } from 'element-plus'
 import { type ExtractPropTypes, type PropType, type Raw } from 'vue'
@@ -56,12 +55,12 @@ export interface VroElSchemaFormSchemaField {
 }
 
 export type VroElSchemaFormSchema = Record<string, VroElSchemaFormSchemaField>
+export type VroElSchemaFormFormProps = Partial<Omit<FormProps, 'model' | 'rules'>>
 
 export const vroElSchemaFormProps = {
-  ...omit(formProps, ['model', 'rules']),
-  validateOnRuleChange: {
-    type: Boolean,
-    default: false,
+  formProps: {
+    type: Object as PropType<VroElSchemaFormFormProps>,
+    default: () => ({}),
   },
   rowProps: {
     type: Object as PropType<Partial<RowProps>>,

@@ -21,5 +21,18 @@ export default {
     tags: {
       addText: '新增',
     },
+    schemaForm: {
+      ElInput: {
+        placeholder: '请填写',
+      },
+      ElSelect: {
+        placeholder: '请选择',
+      },
+      ElDatePicker: {
+        placeholder: '请选择',
+        startPlaceholder: '请选择',
+        endPlaceholder: '请选择',
+      },
+    },
   },
 }

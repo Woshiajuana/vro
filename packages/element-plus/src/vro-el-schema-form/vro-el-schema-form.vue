@@ -1,6 +1,6 @@
 <template>
   <ElForm
-    v-bind="formRestProps"
+    v-bind="elFormProps"
     class="vro-el-schema-form"
     ref="refForm"
     :model="model"
@@ -34,10 +34,11 @@
 
 <script setup lang="ts">
   import banana from '@daysnap/banana'
-  import { filterEmptyValue, isFunction, isString, pick } from '@daysnap/utils'
-  import { ElCol, ElForm, ElFormItem, ElRow, formProps } from 'element-plus'
+  import { filterEmptyValue, isFunction, isString } from '@daysnap/utils'
+  import { ElCol, ElForm, ElFormItem, ElRow } from 'element-plus'
   import { computed, ref, useTemplateRef, watchEffect } from 'vue'
 
+  import { useLocale } from '../locale'
   import { datePickerValueFormat } from '../utils'
   import { defineVroElSchemaFormFieldTrigger } from './defineVroElSchemaFormFieldTrigger'
   import { vroElSchemaFormProps, type VroElSchemaFormSchema } from './types'
@@ -48,11 +49,14 @@
   const emit = defineEmits(['change-field', 'input-field'])
   const props = defineProps(vroElSchemaFormProps)
 
-  const formRestProps = computed(() => {
-    return pick(props, Object.keys(formProps) as any)
+  const elFormProps = computed(() => {
+    return {
+      validateOnRuleChange: false,
+      ...props.formProps,
+    }
   })
 
-  const vec: any = {}
+  const { locale } = useLocale()
 
   // 规则
   const rules = ref<Record<string, any>>({})
@@ -93,7 +97,7 @@
         if (data) {
           let loc: Record<string, any> = {}
           if (isString(is)) {
-            loc = (vec.locale.schemaForm as any)[is]
+            loc = (locale.value.el['schemaForm'] as any)[is]
           }
 
           if (is === 'ElDatePicker') {
@@ -159,7 +163,7 @@
   })
 
   defineExpose({
-    get formInstance() {
+    get form() {
       return refForm.value!
     },
     validate,
