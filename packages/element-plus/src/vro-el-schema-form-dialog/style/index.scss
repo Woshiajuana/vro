@@ -1,1 +1,4 @@
-.vro-el-schema-form-dialog { }
+.vro-el-schema-form-dialog {
+  --el-dialog-width: 520px;
+  width: var(--el-dialog-width);
+}
