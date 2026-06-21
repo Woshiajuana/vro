@@ -1,0 +1,4 @@
+import '../../vro-el-schema-form/style/deps'
+import 'element-plus/es/components/button/style/css'
+import 'element-plus/es/components/col/style/css'
+import 'element-plus/es/components/form-item/style/css'

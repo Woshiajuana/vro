@@ -1,0 +1,20 @@
+.vro-el-schema-filter {
+  display: block;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 0 16px 16px;
+  background-color: var(--el-bg-color);
+  .el-form-item__label {
+    display: flex;
+    align-items: center;
+    text-align: right;
+    line-height: 1.1;
+    margin-bottom: 0;
+  }
+  .el-form-item {
+    margin-bottom: 0;
+  }
+  .el-col {
+    margin-top: 16px;
+  }
+}
