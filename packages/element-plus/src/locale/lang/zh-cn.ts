@@ -38,5 +38,9 @@ export default {
       searchText: '搜索',
       resetText: '重置',
     },
+    schemaFormDialog: {
+      cancelText: '取消',
+      confirmText: '确认',
+    },
   },
 }

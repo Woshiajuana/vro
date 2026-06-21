@@ -1,9 +1,9 @@
 <template>
-  <ElDialog
+  <el-dialog
     v-model="visible"
+    ref="containerRef"
     class="vro-el-schema-form-dialog"
     :class="[id]"
-    ref="containerRef"
     :title="computedProps.title"
     destroy-on-close
     append-to-body
@@ -12,7 +12,7 @@
     @close="hide()"
     @closed="$emit('closed')"
   >
-    <VroElSchemaForm
+    <vro-el-schema-form
       v-bind="schemaFormProps"
       ref="refVroElSchemaForm"
       @change-field="$emit('change-field', $event)"
@@ -20,41 +20,33 @@
       @submit.prevent="handleSubmit()"
     >
       <slot></slot>
-    </VroElSchemaForm>
+    </vro-el-schema-form>
 
     <template v-if="computedProps.showCancelButton || computedProps.showConfirmButton" #footer>
       <span class="dialog-footer">
-        <ElButton v-if="computedProps.showCancelButton" @click="hide('cancel')">
-          {{ computedProps.cancelButtonText || '取消' }}
-        </ElButton>
-        <ElButton
+        <el-button v-if="computedProps.showCancelButton" @click="hide('cancel')">
+          {{ computedProps.cancelButtonText || t('schemaFormDialog.cancelText') }}
+        </el-button>
+        <el-button
           v-if="computedProps.showConfirmButton"
           type="primary"
           @click="handleSubmit"
           :loading="loading"
         >
-          {{ computedProps.confirmButtonText || '确认' }}
-        </ElButton>
+          {{ computedProps.confirmButtonText || t('schemaFormDialog.confirmText') }}
+        </el-button>
       </span>
     </template>
-  </ElDialog>
+  </el-dialog>
 </template>
 
 <script setup lang="ts">
   import { getRandom, pick } from '@daysnap/utils'
   import { useAsyncTask, useVisible } from '@vrojs/use'
   import { ElButton, ElDialog } from 'element-plus'
-  import {
-    computed,
-    nextTick,
-    onBeforeUnmount,
-    onUnmounted,
-    provide,
-    ref,
-    useTemplateRef,
-    watch,
-  } from 'vue'
+  import { computed, nextTick, provide, ref, useTemplateRef, watch } from 'vue'
 
+  import { useLocale } from '../locale'
   import { VroElSchemaForm, vroElSchemaFormProps } from '../vro-el-schema-form'
   import { vroElSchemaFormDialogInjectionKey } from './injection'
   import { type VroElSchemaFormDialogProps, vroElSchemaFormDialogProps } from './types'
@@ -64,16 +56,22 @@
   const emit = defineEmits(['change-field', 'input-field', 'cancel', 'confirm', 'closed'])
 
   const props = defineProps(vroElSchemaFormDialogProps)
+  const { t } = useLocale()
   const dynamicProps = ref<Partial<VroElSchemaFormDialogProps>>()
   const computedProps = computed<VroElSchemaFormDialogProps>(() =>
     Object.assign({}, props, dynamicProps.value),
   )
   const schemaFormProps = computed(() => {
-    return pick(computedProps.value, Object.keys(vroElSchemaFormProps) as any)
+    const value = pick(computedProps.value, Object.keys(vroElSchemaFormProps) as any)
+    return {
+      ...value,
+      formProps: {
+        labelPosition: computedProps.value.labelPosition,
+        labelWidth: computedProps.value.labelWidth,
+        ...value.formProps,
+      },
+    }
   })
-
-  onBeforeUnmount(() => console.log('dialog 即将销毁'))
-  onUnmounted(() => console.log('dialog 销毁了'))
 
   const { show, hide, confirm, visible } = useVisible<Partial<VroElSchemaFormDialogProps>, any>({
     showCallback: (options) => {
