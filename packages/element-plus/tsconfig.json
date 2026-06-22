@@ -5,9 +5,10 @@
     "types": ["element-plus/global"],
     "allowJs": true,
     "noImplicitThis": true,
+    "moduleResolution": "Bundler",
     "paths": {
       "@vrojs/element-plus": ["./src/index.ts"]
     }
   },
-  "include": ["src/**/*", "typings/**/*"]
+  "include": ["src/**/*", "typings/**/*", "vite.config.ts"]
 }

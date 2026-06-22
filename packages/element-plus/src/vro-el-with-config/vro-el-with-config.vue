@@ -32,7 +32,7 @@
       return h(props.is, { ...attrs, ref: refComponent }, slots)
     }
 
-    return slots.default?.()
+    return (slots as any).default?.()
   }
 
   const renderVroConfigProvider = () =>
