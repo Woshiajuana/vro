@@ -9,6 +9,7 @@
     "dev": "pnpm -C ./playground dev",
     "build": "pnpm -C ./playground build",
     "lint": "eslint . --fix",
+    "build:element-plus": "pnpm -C ./packages/element-plus build",
     "build:resolver": "pnpm -C ./packages/resolver build",
     "build:use": "pnpm -C ./packages/use build",
     "npm-release": "npm run npm-release:use && npm run npm-release:resolvers && npm run npm-release:base && npm run npm-release:element-plus && npm run npm-release:vant",

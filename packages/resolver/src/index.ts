@@ -1,4 +1,5 @@
 type ImportStyle = boolean | 'css' | 'deps'
+type Module = 'dist' | 'src'
 
 function kebabCase(key: string) {
   const result = key.replace(/([A-Z])/g, ' $1').trim()
@@ -12,14 +13,22 @@ export interface VroResolverOptions {
    * @default true
    */
   importStyle?: ImportStyle
+
+  /**
+   * 自动导入样式的模块路径。
+   *
+   * @default 'dist'
+   */
+  module?: Module
 }
 
 function getSideEffects(options: {
   packageName: string
   componentName: string
   importStyle?: ImportStyle
+  module?: Module
 }) {
-  const { importStyle = true, packageName, componentName } = options
+  const { importStyle = true, module = 'dist', packageName, componentName } = options
   if (!importStyle) {
     return
   }
@@ -29,7 +38,13 @@ function getSideEffects(options: {
   }
 
   const styleEntry = importStyle === true ? 'index' : importStyle
-  return `${packageName}/src/${kebabCase(componentName)}/style/${styleEntry}`
+  const componentDir = kebabCase(componentName)
+
+  if (packageName !== '@vrojs/element-plus' || module === 'src') {
+    return `${packageName}/src/${componentDir}/style/${styleEntry}`
+  }
+
+  return `${packageName}/${componentDir}/style/${styleEntry}`
 }
 
 function getAPIMap() {
@@ -60,7 +75,7 @@ function getAPIMap() {
 }
 
 export function VroResolver(options: VroResolverOptions = {}) {
-  const { importStyle } = options
+  const { importStyle, module } = options
   const apiMap = getAPIMap()
 
   return {
@@ -73,6 +88,7 @@ export function VroResolver(options: VroResolverOptions = {}) {
           from: packageName,
           sideEffects: getSideEffects({
             importStyle,
+            module,
             packageName,
             componentName: name,
           }),
@@ -84,6 +100,7 @@ export function VroResolver(options: VroResolverOptions = {}) {
           from: packageName,
           sideEffects: getSideEffects({
             importStyle,
+            module,
             packageName,
             componentName: name,
           }),
@@ -93,7 +110,7 @@ export function VroResolver(options: VroResolverOptions = {}) {
         return {
           name,
           from: packageName,
-          sideEffects: getSideEffects({ importStyle, packageName, componentName: name }),
+          sideEffects: getSideEffects({ importStyle, module, packageName, componentName: name }),
         }
       } else if (apiMap.has(name)) {
         const { packageName, componentName } = apiMap.get(name)!
@@ -102,6 +119,7 @@ export function VroResolver(options: VroResolverOptions = {}) {
           from: packageName,
           sideEffects: getSideEffects({
             importStyle,
+            module,
             packageName,
             componentName,
           }),

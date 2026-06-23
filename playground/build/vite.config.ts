@@ -53,7 +53,7 @@ export default defineConfig({
     Components({
       dts: 'typings/components.d.ts',
       extensions: ['ts', 'jsx', 'tsx', 'js', 'vue'],
-      resolvers: [VroResolver(), VantResolver(), ElementPlusResolver()],
+      resolvers: [VroResolver({ module: 'src' }), VantResolver(), ElementPlusResolver()],
     }),
   ],
   build: {
