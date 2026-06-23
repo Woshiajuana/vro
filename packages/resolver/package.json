@@ -1,7 +1,7 @@
 {
   "name": "@vrojs/resolver",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "vro auto import resolver based on unplugin-vue-components",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
