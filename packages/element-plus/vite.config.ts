@@ -12,8 +12,6 @@ const importRE = /import\s+['"]([^'"]+)['"]/g
 
 const entries = collectEntries(srcDir)
 
-console.log('entries => ', JSON.stringify(entries))
-
 export default defineConfig({
   plugins: [
     Vue(),

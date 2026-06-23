@@ -30,6 +30,8 @@ coverage
 
 *.tsbuildinfo
 
+.DS_Store
+
 # auto
 /typings/auto-imports.d.ts
 /typings/components.d.ts
