@@ -14,7 +14,7 @@
     "build:vant": "pnpm -C ./packages/vant build",
     "build:resolver": "pnpm -C ./packages/resolver build",
     "build:use": "pnpm -C ./packages/use build",
-    "npm-release": "npm run npm-release:use && npm run npm-release:resolvers && npm run npm-release:base && npm run npm-release:element-plus && npm run npm-release:vant",
+    "npm-release": "npm run npm-release:use && npm run npm-release:resolver && npm run npm-release:base && npm run npm-release:element-plus && npm run npm-release:vant",
     "npm-release:base": "npm run plop sync-style-deps base && pnpm -C ./packages/base release",
     "npm-release:element-plus": "npm run plop sync-style-deps element-plus && pnpm -C ./packages/element-plus release",
     "npm-release:resolver": "pnpm -C ./packages/resolver release",
