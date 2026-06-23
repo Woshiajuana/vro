@@ -40,11 +40,7 @@ function getSideEffects(options: {
   const styleEntry = importStyle === true ? 'index' : importStyle
   const componentDir = kebabCase(componentName)
 
-  if (packageName !== '@vrojs/element-plus' || module === 'src') {
-    return `${packageName}/src/${componentDir}/style/${styleEntry}`
-  }
-
-  return `${packageName}/${componentDir}/style/${styleEntry}`
+  return `${packageName}/${module}/${componentDir}/style/${styleEntry}`
 }
 
 function getAPIMap() {

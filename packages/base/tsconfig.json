@@ -4,9 +4,10 @@
     "baseUrl": ".",
     "allowJs": true,
     "noImplicitThis": true,
+    "moduleResolution": "Bundler",
     "paths": {
       "@vrojs/base": ["./src/index.ts"]
     }
   },
-  "include": ["src/**/*", "typings/**/*"]
+  "include": ["src/**/*", "typings/**/*", "vite.config.ts"]
 }
