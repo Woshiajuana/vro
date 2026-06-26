@@ -57,8 +57,8 @@
     type VroElImageUploadItem,
     type VroElImageUploadModelValue,
     type VroElImageUploadProps,
-    type VroElImageUploadUploadResult,
     vroElImageUploadProps,
+    type VroElImageUploadUploadResult,
   } from './types'
   import { getVroElImageUploadOptions } from './utils'
 
