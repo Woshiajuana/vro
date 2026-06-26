@@ -8,12 +8,16 @@
       filter=".vro-el-image-upload-btn"
       @update:model-value="handleUpdate"
     >
-      <div class="vro-el-image-upload-item" v-for="(item, index) in computeValue" :key="item">
+      <div
+        class="vro-el-image-upload-item"
+        v-for="(item, index) in computeValue"
+        :key="getItemKey(item, index)"
+      >
         <el-image
           class="vro-el-image-upload-image"
           v-bind="props.imageProps"
-          :src="item"
-          :preview-src-list="computeValue"
+          :src="previewValue[index]"
+          :preview-src-list="previewValue"
           :initial-index="index"
         />
         <el-icon
@@ -44,25 +48,35 @@
   import { CircleCloseFilled, Plus } from '@element-plus/icons-vue'
   import { useAsyncTask } from '@vrojs/use'
   import { ElCheckbox, ElIcon, ElImage, ElLoading } from 'element-plus'
-  import { computed, ref } from 'vue'
+  import { computed, onBeforeUnmount, ref } from 'vue'
   import { VueDraggable } from 'vue-draggable-plus'
 
   import { useLocale } from '../locale'
-  import { type VroElImageUploadProps, vroElImageUploadProps } from './types'
+  import {
+    type VroElImageUploadCallback,
+    type VroElImageUploadItem,
+    type VroElImageUploadModelValue,
+    type VroElImageUploadProps,
+    type VroElImageUploadUploadResult,
+    vroElImageUploadProps,
+  } from './types'
   import { getVroElImageUploadOptions } from './utils'
 
   defineOptions({ name: 'VroElImageUpload' })
 
   const emit = defineEmits<{
-    'update:modelValue': [value: string | string[]]
+    'update:modelValue': [value: VroElImageUploadModelValue]
   }>()
   const rawProps = defineProps(vroElImageUploadProps)
   const { t } = useLocale()
+  const previewUrlMap = new Map<File, string>()
+
+  const defaultUpload: VroElImageUploadCallback = async (files) => files
 
   const props = computed(() => {
     const {
       compressible = false,
-      upload,
+      upload = defaultUpload,
       ...rest
     } = {
       ...getVroElImageUploadOptions(),
@@ -85,14 +99,40 @@
     return isArray(modelValue) ? modelValue : modelValue ? [modelValue] : []
   })
 
-  const handleUpdate = (value: string[]) => {
+  const previewValue = computed(() => computeValue.value.map((item) => getPreviewSrc(item)))
+
+  const getPreviewSrc = (item: VroElImageUploadItem) => {
+    if (typeof item === 'string') {
+      return item
+    }
+
+    let url = previewUrlMap.get(item)
+    if (!url) {
+      url = URL.createObjectURL(item)
+      previewUrlMap.set(item, url)
+    }
+    return url
+  }
+
+  const getItemKey = (item: VroElImageUploadItem, index: number) => {
+    if (typeof item === 'string') {
+      return item
+    }
+    return `${item.name}-${item.size}-${item.lastModified}-${index}`
+  }
+
+  const isFileList = (value: VroElImageUploadUploadResult): value is File[] => {
+    return value.some((item) => item instanceof File)
+  }
+
+  const handleUpdate = (value: VroElImageUploadItem[]) => {
     if (isArray(props.value.modelValue)) {
       emit('update:modelValue', value)
     }
   }
 
   const handleDelete = (index: number) => {
-    let value: string | string[] = ''
+    let value: VroElImageUploadModelValue = ''
     if (isArray(props.value.modelValue)) {
       value = [...props.value.modelValue]
       value.splice(index, 1)
@@ -110,18 +150,14 @@
         return
       }
 
-      const { max, upload, params } = props.value
-
-      if (!upload) {
-        throw new Error('not set upload')
-      }
+      const { max, upload = defaultUpload, params } = props.value
 
       const res = await upload(files.slice(0, max - computeValue.value.length), {
         compress: compress.value,
         params,
       })
 
-      let value: string | string[] = res[0]
+      let value: VroElImageUploadModelValue = isFileList(res) ? res : res[0]
       if (isArray(props.value.modelValue)) {
         value = [...props.value.modelValue, ...res]
       }
@@ -131,4 +167,9 @@
       throwError: true,
     },
   )
+
+  onBeforeUnmount(() => {
+    previewUrlMap.forEach((url) => URL.revokeObjectURL(url))
+    previewUrlMap.clear()
+  })
 </script>

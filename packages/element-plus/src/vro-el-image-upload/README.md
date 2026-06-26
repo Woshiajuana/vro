@@ -2,7 +2,7 @@
 
 ### 介绍
 
-基于 Element Plus Image 的图片上传组件。组件负责图片选择、预览、删除和拖拽排序，实际上传逻辑由 `upload` 回调提供。
+基于 Element Plus Image 的图片上传组件。组件负责图片选择、预览、删除和拖拽排序。默认不立即上传，`modelValue` 返回本地 `File[]`，业务可以在提交表单时自行处理文件；也可以通过 `upload` 回调返回图片访问地址。
 
 ## 代码演示
 
@@ -10,24 +10,34 @@
 
 ```html
 <template>
-  <vro-el-image-upload v-model="value" :upload="upload" />
+  <vro-el-image-upload v-model="value" />
 </template>
 
 <script setup lang="ts">
   import { ref } from 'vue'
 
-  const value = ref('')
-
-  const upload = async (files: File[]) => {
-    return files.map((file) => URL.createObjectURL(file))
-  }
+  const value = ref<File[]>([])
 </script>
 ```
 
 ### 多图上传
 
+```vue
+<template>
+  <vro-el-image-upload v-model="value" :max="3" />
+</template>
+
+<script setup lang="ts">
+  import { ref } from 'vue'
+
+  const value = ref<File[]>([])
+</script>
+```
+
+### 自定义上传
+
 ```html
-<vro-el-image-upload v-model="value" :max="3" :upload="upload" />
+<vro-el-image-upload v-model="value" :upload="upload" />
 ```
 
 ### 图片压缩
@@ -86,8 +96,8 @@ setVroElImageUploadOptions({
     </tr>
     <tr>
       <td>update:modelValue</td>
-      <td>value: string | string[]</td>
-      <td>上传、删除或排序后触发</td>
+      <td>value: string | Array&lt;string | File&gt;</td>
+      <td>选择、上传、删除或排序后触发</td>
     </tr>
   </tbody>
 </table>

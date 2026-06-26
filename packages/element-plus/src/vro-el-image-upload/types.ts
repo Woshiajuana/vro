@@ -2,6 +2,9 @@ import type { ElImage } from 'element-plus'
 import type { ExtractPropTypes, PropType } from 'vue'
 
 export type VroElImageUploadImageProps = InstanceType<typeof ElImage>['$props']
+export type VroElImageUploadItem = string | File
+export type VroElImageUploadModelValue = string | VroElImageUploadItem[]
+export type VroElImageUploadUploadResult = string[] | File[]
 
 export interface VroElImageUploadCallback<T = any> {
   (
@@ -13,13 +16,13 @@ export interface VroElImageUploadCallback<T = any> {
       /** 上传时透传的自定义参数 */
       params: T
     },
-  ): Promise<string[]>
+  ): Promise<VroElImageUploadUploadResult>
 }
 
 export const vroElImageUploadProps = {
-  /** 绑定值，字符串为单图模式，数组为多图模式 */
+  /** 绑定值，字符串为单图远程地址，数组为多图或本地 File 列表 */
   modelValue: {
-    type: [String, Array] as PropType<string | string[]>,
+    type: [String, Array] as PropType<VroElImageUploadModelValue>,
     default: '',
   },
   /** 最多可上传的图片数量 */
@@ -35,7 +38,7 @@ export const vroElImageUploadProps = {
   params: Object as PropType<Record<string, any>>,
   /** 透传给 Element Plus Image 的属性 */
   imageProps: Object as PropType<Partial<VroElImageUploadImageProps>>,
-  /** 自定义上传方法，需要返回图片访问地址列表 */
+  /** 自定义上传方法，默认返回 File 列表用于本地预览和后续业务处理 */
   upload: Function as PropType<VroElImageUploadCallback>,
 }
 
