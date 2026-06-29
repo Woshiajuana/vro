@@ -46,6 +46,7 @@
 <script setup lang="ts">
   import banana from '@daysnap/banana'
   import { filterEmptyValue, isFunction, isString } from '@daysnap/utils'
+  import { getSlotEntries } from '@vrojs/base'
   import { ElCol, ElForm, ElFormItem, ElRow } from 'element-plus'
   import { computed, ref, useTemplateRef, watchEffect } from 'vue'
 
@@ -59,10 +60,6 @@
 
   const emit = defineEmits(['change-field', 'input-field'])
   const props = defineProps(vroElSchemaFormProps)
-
-  const getSlotEntries = (slots?: Record<string, string>) => {
-    return Object.entries(slots ?? {}).map(([source, target]) => ({ source, target }))
-  }
 
   const elFormProps = computed(() => {
     return {

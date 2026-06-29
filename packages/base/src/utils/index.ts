@@ -1,5 +1,6 @@
 export * from './ComponentManager'
 export * from './format'
+export * from './getSlotEntries'
 export * from './mountComponent'
 export * from './parseType'
 export * from './props'
