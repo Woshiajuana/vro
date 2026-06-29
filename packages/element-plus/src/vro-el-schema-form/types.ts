@@ -83,6 +83,16 @@ export interface VroElSchemaFormSchemaField {
   formItemProps?: Partial<FormItemProps>
 
   /**
+   * 转发给 ElFormItem 的插槽映射，key 为外部插槽名，value 为 ElFormItem 插槽名。
+   */
+  itemSlots?: Record<string, string>
+
+  /**
+   * 转发给字段组件的插槽映射，key 为外部插槽名，value 为字段组件插槽名。
+   */
+  slots?: Record<string, string>
+
+  /**
    * 从字段值转换提交值。
    */
   get?: (value: any, filed: VroElSchemaFormSchemaField, metadata: VroElSchemaFormSchema) => any

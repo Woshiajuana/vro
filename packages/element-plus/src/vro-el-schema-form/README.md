@@ -82,12 +82,15 @@ const schema = {
 
 ### 字段插槽
 
-字段的 `slots` 配置用于把外部同名插槽转发给实际渲染组件。
+字段的 `slots` 配置用于把外部插槽转发给实际渲染组件，`itemSlots` 配置用于把外部插槽转发给 `ElFormItem`。映射对象的 key 是外部插槽名，value 是目标组件插槽名。
 
 ```html
 <vro-el-schema-form :schema="schema">
   <template #prepend>
     <span>https://</span>
+  </template>
+  <template #websiteLabel="{ item }">
+    <span>{{ item.label }}</span>
   </template>
 </vro-el-schema-form>
 ```
@@ -98,6 +101,9 @@ const schema = {
     label: '网址',
     value: '',
     is: 'ElInput',
+    itemSlots: {
+      websiteLabel: 'label',
+    },
     slots: {
       prepend: 'prepend',
     },
@@ -138,7 +144,11 @@ const schema = {
     </tr>
     <tr>
       <td>schema 字段 slots 配置中的 key</td>
-      <td>转发给字段组件的插槽，插槽参数为 { item }</td>
+      <td>转发给字段组件的插槽，插槽参数包含字段组件 slot props 和 { item }</td>
+    </tr>
+    <tr>
+      <td>schema 字段 itemSlots 配置中的 key</td>
+      <td>转发给 ElFormItem 的插槽，插槽参数包含 ElFormItem slot props 和 { item }</td>
     </tr>
   </tbody>
 </table>

@@ -13,8 +13,12 @@
           :prop="key"
           v-bind="{ ...formItemProps, ...item.formItemProps }"
         >
-          <template v-for="(slot, key) in item.itemSlots" #[slot] :key="slot">
-            <slot :name="key" :item="item" />
+          <template
+            v-for="{ source, target } in getSlotEntries(item.itemSlots)"
+            #[target]="slotProps"
+            :key="target"
+          >
+            <slot :name="source" v-bind="slotProps ?? {}" :item="item" />
           </template>
           <component
             v-model="item.value"
@@ -24,8 +28,12 @@
             @change="handleChange(key, $event)"
             @input="handleInput(key, $event)"
           >
-            <template v-for="(slot, key) in item.slots" #[slot] :key="slot">
-              <slot :name="key" :item="item" />
+            <template
+              v-for="{ source, target } in getSlotEntries(item.slots)"
+              #[target]="slotProps"
+              :key="target"
+            >
+              <slot :name="source" v-bind="slotProps ?? {}" :item="item" />
             </template>
           </component>
         </el-form-item>
@@ -51,6 +59,10 @@
 
   const emit = defineEmits(['change-field', 'input-field'])
   const props = defineProps(vroElSchemaFormProps)
+
+  const getSlotEntries = (slots?: Record<string, string>) => {
+    return Object.entries(slots ?? {}).map(([source, target]) => ({ source, target }))
+  }
 
   const elFormProps = computed(() => {
     return {
