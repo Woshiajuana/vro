@@ -1,7 +1,7 @@
-import type { ElImage } from 'element-plus'
 import type { ExtractPropTypes, PropType } from 'vue'
 
-export type VroElImageUploadImageProps = InstanceType<typeof ElImage>['$props']
+import type { VroElImageProps } from '../vro-el-image/types'
+
 export type VroElImageUploadItem = string | File
 export type VroElImageUploadModelValue = string | VroElImageUploadItem[]
 export type VroElImageUploadUploadResult = string[] | File[]
@@ -37,7 +37,7 @@ export const vroElImageUploadProps = {
   /** 上传时透传给 upload 回调的自定义参数 */
   params: Object as PropType<Record<string, any>>,
   /** 透传给 Element Plus Image 的属性 */
-  imageProps: Object as PropType<Partial<VroElImageUploadImageProps>>,
+  imageProps: Object as PropType<Partial<VroElImageProps>>,
   /** 自定义上传方法，默认返回 File 列表用于本地预览和后续业务处理 */
   upload: Function as PropType<VroElImageUploadCallback>,
 }

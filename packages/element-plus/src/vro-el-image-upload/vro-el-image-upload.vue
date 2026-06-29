@@ -13,9 +13,9 @@
         v-for="(item, index) in computeValue"
         :key="getItemKey(item, index)"
       >
-        <el-image
-          class="vro-el-image-upload-image"
+        <VroElImage
           v-bind="props.imageProps"
+          class="vro-el-image-upload-image"
           :src="previewValue[index]"
           :preview-src-list="previewValue"
           :initial-index="index"
@@ -47,11 +47,12 @@
   import { isArray, isBoolean, isUndefined, omitBy } from '@daysnap/utils'
   import { CircleCloseFilled, Plus } from '@element-plus/icons-vue'
   import { useAsyncTask } from '@vrojs/use'
-  import { ElCheckbox, ElIcon, ElImage, ElLoading } from 'element-plus'
+  import { ElCheckbox, ElIcon, ElLoading } from 'element-plus'
   import { computed, onBeforeUnmount, ref } from 'vue'
   import { VueDraggable } from 'vue-draggable-plus'
 
   import { useLocale } from '../locale'
+  import { VroElImage } from '../vro-el-image'
   import {
     type VroElImageUploadCallback,
     type VroElImageUploadItem,

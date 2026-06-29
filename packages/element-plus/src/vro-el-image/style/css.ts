@@ -1,3 +1,2 @@
 import '../../style/base.scss'
-import '../../vro-el-image/style/css'
 import './index.scss'
