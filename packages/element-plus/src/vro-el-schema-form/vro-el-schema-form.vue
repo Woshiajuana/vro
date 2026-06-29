@@ -13,6 +13,9 @@
           :prop="key"
           v-bind="{ ...formItemProps, ...item.formItemProps }"
         >
+          <template v-for="(slot, key) in item.itemSlots" #[slot] :key="slot">
+            <slot :name="key" :item="item" />
+          </template>
           <component
             v-model="item.value"
             v-bind="mapping?.[key]?.props"
