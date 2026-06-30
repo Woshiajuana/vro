@@ -13,7 +13,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     ElButton: typeof import('element-plus/es')['ElButton']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
-    ElDialog: typeof import('element-plus/es')['ElDialog']
     ElSpace: typeof import('element-plus/es')['ElSpace']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
@@ -22,6 +21,7 @@ declare module 'vue' {
     VroElConfigProvider: typeof import('@vrojs/element-plus')['VroElConfigProvider']
     VroElFileUpload: typeof import('@vrojs/element-plus')['VroElFileUpload']
     VroElIcon: typeof import('@vrojs/element-plus')['VroElIcon']
+    VroElImage: typeof import('@vrojs/element-plus')['VroElImage']
     VroElImageUpload: typeof import('@vrojs/element-plus')['VroElImageUpload']
     VroElRadioGroup: typeof import('@vrojs/element-plus')['VroElRadioGroup']
     VroElSchemaFilter: typeof import('@vrojs/element-plus')['VroElSchemaFilter']
@@ -29,14 +29,12 @@ declare module 'vue' {
     VroElSchemaFormDialog: typeof import('@vrojs/element-plus')['VroElSchemaFormDialog']
     VroElSelect: typeof import('@vrojs/element-plus')['VroElSelect']
     VroElSkeleton: typeof import('@vrojs/element-plus')['VroElSkeleton']
+    VroElTags: typeof import('@vrojs/element-plus')['VroElTags']
     VroElTree: typeof import('@vrojs/element-plus')['VroElTree']
     VroElWithConfig: typeof import('@vrojs/element-plus')['VroElWithConfig']
     VroInput: typeof import('@vrojs/base')['VroInput']
     VroLoading: typeof import('@vrojs/base')['VroLoading']
     VroVanTest: typeof import('@vrojs/vant')['VroVanTest']
     VroVnr: typeof import('@vrojs/base')['VroVnr']
-  }
-  export interface GlobalDirectives {
-    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

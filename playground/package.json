@@ -5,8 +5,9 @@
   "description": "vrojs 演练场",
   "type": "module",
   "scripts": {
-    "dev": "vite --force --config ./build/vite.config.ts  --port 10086",
-    "build": "vite build --config ./build/vite.config.ts"
+    "dev": "vite --force --config ./build/vite.config.ts --port 10086",
+    "build": "vite build --config ./build/vite.config.ts",
+    "preview": "vite preview --port 10086"
   },
   "author": "woshiajuana",
   "license": "MIT",

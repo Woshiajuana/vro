@@ -78,9 +78,13 @@
   watchEffect(() => {
     const { schema } = props
     metadata.value = {}
+
+    const rawRules: Record<string, any> = {}
+    const rawModel: Record<string, any> = {}
+
     Object.entries(schema).forEach(([key, item]) => {
       // eslint-disable-next-line prefer-const
-      let { hidden, value, rules: itemRules, is } = item
+      let { hidden, value, rules, is } = item
 
       if (isFunction(hidden)) {
         hidden = hidden(value, item, schema)
@@ -89,15 +93,18 @@
         hidden = true
       }
       if (!hidden) {
-        model.value[key] = value
+        rawModel[key] = value
         metadata.value[key] = item
       }
 
       if (isFunction(rules)) {
-        rules.value = rules(value, item, schema)
+        rules = rules(value, item, schema)
       }
-      rules.value[key] = itemRules
+      rawRules[key] = rules
     })
+
+    Object.assign(model.value, rawModel)
+    Object.assign(rules.value, rawRules)
   })
 
   const mapping = computed(() => {
