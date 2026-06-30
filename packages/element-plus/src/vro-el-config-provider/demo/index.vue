@@ -23,11 +23,7 @@
     setup() {
       const { t } = useLocale()
 
-      return () =>
-        h('div', { class: 'demo-config-provider' }, [
-          h('span', t('table.refresh')),
-          h('span', t('table.description', { color: '蓝色' })),
-        ])
+      return () => h('div', { class: 'demo-config-provider' }, [h('span', t('table.refresh'))])
     },
   })
 </script>

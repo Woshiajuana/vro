@@ -22,21 +22,18 @@ export function useVroElSchemaForm<T extends Record<string, any> = Record<string
 
   const refVroElSchemaForm = instanceRef ?? ref<VroElSchemaFormInstance>()
 
-  const { loading, trigger, error, data } = useAsyncTask(
-    async () => {
-      if (!refVroElSchemaForm.value) {
-        return
-      }
-      try {
-        await refVroElSchemaForm.value.validate()
-      } catch {
-        throw ''
-      }
-      const data = await refVroElSchemaForm.value.extractValues()
-      await task?.(data as T)
-    },
-    { throwError: true, ...rest },
-  )
+  const { loading, trigger, error, data } = useAsyncTask(async () => {
+    if (!refVroElSchemaForm.value) {
+      return
+    }
+    try {
+      await refVroElSchemaForm.value.validate()
+    } catch {
+      throw ''
+    }
+    const data = await refVroElSchemaForm.value.extractValues()
+    await task?.(data as T)
+  }, rest)
 
   if (source) {
     banana.assignment(source, schema as any)

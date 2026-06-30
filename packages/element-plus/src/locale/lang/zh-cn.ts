@@ -3,7 +3,6 @@ export default {
   el: {
     table: {
       refresh: '刷新',
-      description: '当前颜色 {color}，按 Enter 键选择新颜色',
     },
     skeleton: {
       loadingDescription: '正在加载数据...',
