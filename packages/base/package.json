@@ -18,7 +18,9 @@
   "sideEffects": [
     "src/**/style/*",
     "src/**/*.css",
-    "src/**/*.scss"
+    "src/**/*.scss",
+    "dist/**/style/*",
+    "dist/**/*.css"
   ],
   "keywords": [
     "vro",
@@ -33,11 +35,7 @@
     "registry": "https://registry.npmjs.org/",
     "main": "dist/index.js",
     "module": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "sideEffects": [
-      "dist/**/style/*",
-      "dist/**/*.css"
-    ]
+    "types": "dist/index.d.ts"
   },
   "peerDependencies": {
     "@daysnap/utils": ">=0.1.34",
