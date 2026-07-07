@@ -1,1 +1,1 @@
-import '../vro-van-test/style/deps'
+import '../vro-van-cell/style/deps'

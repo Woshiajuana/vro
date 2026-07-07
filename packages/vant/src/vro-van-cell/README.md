@@ -1,4 +1,4 @@
-# VroVanTest
+# VroVanCell
 
 ### 介绍
 
@@ -19,7 +19,7 @@
       <td>类型</td>
       <td>默认值</td>
     </tr>
-    <tr v-for="(item, key) in vroVanTestProps" :key="key">
+    <tr v-for="(item, key) in vroVanCellProps" :key="key">
       <td>{{ key }}</td>
       <td>{{ parseType(item.type || item) }}</td>
       <td>{{ reserve(item.default, '-') }}</td>
@@ -59,6 +59,6 @@
 
 <script setup lang="ts">
   import { reserve } from '@daysnap/utils'
-  import { VroVanTest, vroVanTestProps } from '.'
+  import { VroVanCell, vroVanCellProps } from '.'
   import { parseType } from '../utils'
 </script>

@@ -1,5 +1,7 @@
 <template>
   <demo-block title="基础用法">
-    <vro-van-test />
+    <vro-van-cell />
   </demo-block>
 </template>
+
+<script setup lang="ts"></script>
