@@ -2,3 +2,4 @@
 
 export * from './utils'
 export * from './vro-van-cell'
+export * from './vro-van-icon'

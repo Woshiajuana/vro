@@ -34,6 +34,7 @@ declare module 'vue' {
     VroElWithConfig: typeof import('@vrojs/element-plus')['VroElWithConfig']
     VroInput: typeof import('@vrojs/base')['VroInput']
     VroLoading: typeof import('@vrojs/base')['VroLoading']
+    VroVanCell: typeof import('@vrojs/vant')['VroVanCell']
     VroVanTest: typeof import('@vrojs/vant')['VroVanTest']
     VroVnr: typeof import('@vrojs/base')['VroVnr']
   }

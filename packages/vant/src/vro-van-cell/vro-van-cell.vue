@@ -1,7 +1,5 @@
 <template>
-  <div class="vro-van-cell">
-    <span>vro-van-cell</span>
-  </div>
+  <div class="vro-van-cell"></div>
 </template>
 
 <script setup lang="ts">

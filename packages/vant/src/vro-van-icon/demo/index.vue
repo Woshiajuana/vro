@@ -1,6 +1,6 @@
 <template>
   <demo-block title="基础用法">
-    <vro-van-cell label="1" value="1" />
+    <vro-van-icon />
   </demo-block>
 </template>
 
