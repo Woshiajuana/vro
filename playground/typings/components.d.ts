@@ -16,6 +16,7 @@ declare module 'vue' {
     ElSpace: typeof import('element-plus/es')['ElSpace']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    VanIcon: typeof import('vant/es')['Icon']
     VroAspectRatio: typeof import('@vrojs/base')['VroAspectRatio']
     VroElCheckboxGroup: typeof import('@vrojs/element-plus')['VroElCheckboxGroup']
     VroElConfigProvider: typeof import('@vrojs/element-plus')['VroElConfigProvider']
@@ -35,6 +36,7 @@ declare module 'vue' {
     VroInput: typeof import('@vrojs/base')['VroInput']
     VroLoading: typeof import('@vrojs/base')['VroLoading']
     VroVanCell: typeof import('@vrojs/vant')['VroVanCell']
+    VroVanIcon: typeof import('@vrojs/vant')['VroVanIcon']
     VroVanTest: typeof import('@vrojs/vant')['VroVanTest']
     VroVnr: typeof import('@vrojs/base')['VroVnr']
   }
