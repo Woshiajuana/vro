@@ -1,5 +1,6 @@
 <template>
   <van-icon name="chat-o" />
+  <i class="van-icon van-icon-chat-o"></i>
 </template>
 
 <script setup lang="ts">
