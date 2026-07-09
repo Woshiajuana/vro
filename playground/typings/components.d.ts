@@ -33,6 +33,7 @@ declare module 'vue' {
     VroElTags: typeof import('@vrojs/element-plus')['VroElTags']
     VroElTree: typeof import('@vrojs/element-plus')['VroElTree']
     VroElWithConfig: typeof import('@vrojs/element-plus')['VroElWithConfig']
+    VroIcon: typeof import('@vrojs/base')['VroIcon']
     VroInput: typeof import('@vrojs/base')['VroInput']
     VroLoading: typeof import('@vrojs/base')['VroLoading']
     VroVanCell: typeof import('@vrojs/vant')['VroVanCell']

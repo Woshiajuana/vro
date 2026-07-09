@@ -1,6 +1,16 @@
-.vor-icon-image {
-  display: block;
-  width: 1em;
-  height: 1em;
-  object-fit: contain;
+.vro-icon {
+  display: inline-block;
+  position: relative;
+
+  img {
+    display: block;
+    width: 1em;
+    height: 1em;
+    object-fit: contain;
+  }
+
+  svg {
+    height: 1em;
+    width: 1em;
+  }
 }

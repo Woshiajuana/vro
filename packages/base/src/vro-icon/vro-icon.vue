@@ -1,12 +1,13 @@
 <template>
-  <i class="vro-icon" :class="classes" :style="">
+  <i class="vro-icon" :class="classes" :style="style">
     <slot>
-      <img v-if="isImage" class="vor-icon-image" />
+      <img v-if="isImage" :src="name" />
     </slot>
   </i>
 </template>
 
 <script setup lang="ts">
+  import { isNumeric } from '@daysnap/utils'
   import { computed, type HTMLAttributes } from 'vue'
 
   import { vroIconProps } from './types'
@@ -22,7 +23,7 @@
   })
 
   const style = computed<HTMLAttributes['style']>(() => {
-    const { color } = props
-    return { color, fontSize: }
+    const { color, size } = props
+    return { color, fontSize: isNumeric(size) ? `${size}px` : size }
   })
 </script>
