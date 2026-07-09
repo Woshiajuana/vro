@@ -43,9 +43,9 @@
     "vue": ">=3.0.0"
   },
   "devDependencies": {
-    "@daysnap/utils": "^0.1.34",
-    "@vrojs/use": "workspace:*",
+    "@daysnap/utils": "^0.1.35",
     "@vitejs/plugin-vue": "^6.0.1",
+    "@vrojs/use": "workspace:*",
     "rimraf": "^6.0.1",
     "typescript": "^5.9.3",
     "vite": "^7.1.12",

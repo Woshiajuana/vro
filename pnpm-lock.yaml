@@ -48,8 +48,8 @@ importers:
   packages/base:
     devDependencies:
       '@daysnap/utils':
-        specifier: ^0.1.34
-        version: 0.1.34
+        specifier: ^0.1.35
+        version: 0.1.35
       '@vitejs/plugin-vue':
         specifier: ^6.0.1
         version: 6.0.1(vite@7.1.12(@types/node@24.10.0)(jiti@2.7.0)(sass@1.93.3))(vue@3.5.22(typescript@5.9.3))
@@ -85,8 +85,8 @@ importers:
         specifier: ^0.0.15
         version: 0.0.15
       '@daysnap/utils':
-        specifier: ^0.1.34
-        version: 0.1.34
+        specifier: ^0.1.35
+        version: 0.1.35
       '@element-plus/icons-vue':
         specifier: ^2.3.2
         version: 2.3.2(vue@3.5.22(typescript@5.9.3))
@@ -134,8 +134,8 @@ importers:
         version: 4.6.3(vue@3.5.22(typescript@5.9.3))
     devDependencies:
       '@daysnap/utils':
-        specifier: ^0.1.34
-        version: 0.1.34
+        specifier: ^0.1.35
+        version: 0.1.35
       rimraf:
         specifier: ^6.0.1
         version: 6.1.3
@@ -152,8 +152,8 @@ importers:
   packages/vant:
     devDependencies:
       '@daysnap/utils':
-        specifier: ^0.1.34
-        version: 0.1.34
+        specifier: ^0.1.35
+        version: 0.1.35
       '@vitejs/plugin-vue':
         specifier: ^6.0.1
         version: 6.0.1(vite@7.1.12(@types/node@24.10.0)(jiti@2.7.0)(sass@1.93.3))(vue@3.5.22(typescript@5.9.3))
@@ -182,8 +182,8 @@ importers:
   playground:
     dependencies:
       '@daysnap/utils':
-        specifier: ^0.1.34
-        version: 0.1.34
+        specifier: ^0.1.35
+        version: 0.1.35
       '@vant/touch-emulator':
         specifier: ^1.4.0
         version: 1.4.0
@@ -293,8 +293,8 @@ packages:
   '@daysnap/banana@0.0.15':
     resolution: {integrity: sha512-GB+Kqmmx4mtpyFQFLzKWMXfpg7kptUwUvon//GhSJnYaf4mNdOwEVJz+I1Ge6p4F/dylDMPmRTY/exf9LfQYkQ==}
 
-  '@daysnap/utils@0.1.34':
-    resolution: {integrity: sha512-9zpxwM0s4KJMLnl0ZwMP6BigMuGTaOuFHVGPWWRL9+O3xSvy1pleND6EOPlrAYiIQL9Q7zRNGpTUGojW5Y7iHw==}
+  '@daysnap/utils@0.1.35':
+    resolution: {integrity: sha512-14zrj4lLjvBQAgivYVBr6MPJ7xnHWT8E7O0DyjkmJxAhB5lV3PIofhgAAXrvrZ0/+MJR4xOeSPvx6ptw875UgQ==}
 
   '@element-plus/icons-vue@2.3.2':
     resolution: {integrity: sha512-OzIuTaIfC8QXEPmJvB4Y4kw34rSXdCJzxcD1kFStBvr8bK6X1zQAYDo0CNMjojnfTqRQCJ0I7prlErcoRiET2A==}
@@ -3114,7 +3114,7 @@ snapshots:
 
   '@daysnap/banana@0.0.15': {}
 
-  '@daysnap/utils@0.1.34': {}
+  '@daysnap/utils@0.1.35': {}
 
   '@element-plus/icons-vue@2.3.2(vue@3.5.22(typescript@5.9.3))':
     dependencies:

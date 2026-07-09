@@ -53,11 +53,11 @@
   },
   "devDependencies": {
     "@daysnap/banana": "^0.0.15",
-    "@daysnap/utils": "^0.1.34",
+    "@daysnap/utils": "^0.1.35",
     "@element-plus/icons-vue": "^2.3.2",
+    "@vitejs/plugin-vue": "^6.0.1",
     "@vrojs/base": "workspace:*",
     "@vrojs/use": "workspace:*",
-    "@vitejs/plugin-vue": "^6.0.1",
     "element-plus": "^2.11.9",
     "rimraf": "^6.0.1",
     "typescript": "^5.9.3",
