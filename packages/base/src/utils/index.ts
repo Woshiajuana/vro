@@ -1,3 +1,4 @@
+export * from './addUnit'
 export * from './ComponentManager'
 export * from './format'
 export * from './getSlotEntries'
