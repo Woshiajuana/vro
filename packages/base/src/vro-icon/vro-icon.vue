@@ -7,9 +7,9 @@
 </template>
 
 <script setup lang="ts">
-  import { isNumeric } from '@daysnap/utils'
   import { computed, type HTMLAttributes } from 'vue'
 
+  import { addUnit } from '../utils'
   import { vroIconProps } from './types'
 
   defineOptions({ name: 'VroIcon' })
@@ -24,6 +24,6 @@
 
   const style = computed<HTMLAttributes['style']>(() => {
     const { color, size } = props
-    return { color, fontSize: isNumeric(size) ? `${size}px` : size }
+    return { color, fontSize: addUnit(size) }
   })
 </script>
