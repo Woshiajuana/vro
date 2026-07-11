@@ -18,8 +18,15 @@
   const isImage = computed(() => props.name?.includes('/') ?? false)
 
   const classes = computed<HTMLAttributes['class']>(() => {
-    const { fontFamily, name } = props
-    return isImage.value ? [] : [fontFamily, name]
+    const { fontFamily, name, loading } = props
+    const res: HTMLAttributes['class'] = []
+    if (isImage.value) {
+      res.push(fontFamily, name)
+    }
+    if (loading) {
+      res.push('is-loading')
+    }
+    return res
   })
 
   const style = computed<HTMLAttributes['style']>(() => {

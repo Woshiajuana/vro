@@ -3,6 +3,7 @@
     <div class="demo-icons">
       <vro-el-icon :name="Search" />
       <vro-el-icon :name="Edit" color="red" />
+      <vro-el-icon :name="Edit" color="red" />
       <el-icon color="red">
         <svg
           t="1783576926751"

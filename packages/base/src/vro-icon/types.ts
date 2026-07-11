@@ -14,6 +14,7 @@ export const vroIconProps = {
     type: [String, Number],
     default: 'inherit',
   },
+  loading: Boolean,
 }
 
 export type VroIconProps = ExtractPropTypes<typeof vroIconProps>

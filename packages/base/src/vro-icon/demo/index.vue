@@ -4,6 +4,7 @@
   </demo-block>
   <demo-block title="使用图片">
     <vro-icon name="https://fastly.jsdelivr.net/npm/@vant/assets/icon-demo.png" size="20" />
+    <vro-icon name="https://fastly.jsdelivr.net/npm/@vant/assets/icon-demo.png" size="20" loading />
   </demo-block>
   <demo-block title="使用svg">
     <vro-icon size="20" color="red">
