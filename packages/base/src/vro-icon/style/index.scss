@@ -1,3 +1,8 @@
+:root,
+:host {
+  --vro-icon-duration: 2s;
+}
+
 .vro-icon {
   display: inline-block;
   position: relative;
@@ -17,7 +22,7 @@
   }
 
   &.is-loading {
-    animation: rotating 2s linear infinite;
+    animation: rotating var(--vro-icon-duration) linear infinite;
   }
 }
 

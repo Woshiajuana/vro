@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 
 export const vroIconProps = {
   name: String,
@@ -14,7 +14,7 @@ export const vroIconProps = {
     type: [String, Number],
     default: 'inherit',
   },
-  loading: Boolean,
+  loading: [Boolean, String] as PropType<boolean | string>,
 }
 
 export type VroIconProps = ExtractPropTypes<typeof vroIconProps>

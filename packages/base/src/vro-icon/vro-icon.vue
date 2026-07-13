@@ -7,6 +7,7 @@
 </template>
 
 <script setup lang="ts">
+  import { isBoolean } from '@daysnap/utils'
   import { computed, type HTMLAttributes } from 'vue'
 
   import { addUnit } from '../utils'
@@ -30,7 +31,11 @@
   })
 
   const style = computed<HTMLAttributes['style']>(() => {
-    const { color, size } = props
-    return { color, fontSize: addUnit(size) }
+    const { color, size, loading } = props
+    let duration: string = `var(--vro-icon-duration)`
+    if (!isBoolean(loading) && loading) {
+      duration = loading
+    }
+    return { color, fontSize: addUnit(size), '--duration': duration }
   })
 </script>
