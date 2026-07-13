@@ -1,5 +1,17 @@
 <template>
-  <div class="vro-van-cell">
+  <div
+    class="vro-van-cell"
+    :class="{
+      'is-row': direction === 'row',
+      'is-column': direction === 'column',
+      'is-required': required,
+      'is-arrow': arrow,
+      'is-ellipsis': ellipsis,
+      'is-clickable': clickable,
+      'is-line-clamp': lineClamp && !!+lineClamp,
+    }"
+    :style="{ '--vro-van-cell-line-clamp': lineClamp }"
+  >
     <slot name="before"></slot>
     <div class="vro-van-cell-label">
       <slot name="prefix">
@@ -11,12 +23,12 @@
         <span v-html="label"></span>
       </slot>
     </div>
-    <div class="hor-cell-value">
+    <div class="vro-van-cell-value">
       <slot>
         <span v-html="formatter(value)"></span>
       </slot>
       <slot name="suffix">
-        <vro-van-icon v-if="arrow" class="vro-van-cell-icon" name="van-icon-arrow" />
+        <vro-van-icon v-if="arrow" class="vro-van-cell-arrow" name="van-icon-arrow" />
       </slot>
     </div>
     <slot name="after"></slot>

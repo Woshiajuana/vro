@@ -16,6 +16,11 @@ export const vroVanCellProps = {
   ellipsis: Boolean,
   lineClamp: [String, Number] as PropType<string | number>,
   iconProps: Object as PropType<VroVanIconProps>,
+  clickable: Boolean,
+  formatter: {
+    default: (v: any) => v,
+    type: Function as PropType<(v: any) => any>,
+  },
 }
 
 export type VroVanCellProps = ExtractPropTypes<typeof vroVanCellProps>

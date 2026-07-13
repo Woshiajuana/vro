@@ -1,5 +1,5 @@
 import { isArray, isBoolean, isFunction, isObject, isString } from '@daysnap/utils'
-import { computed, onBeforeMount, reactive, ref, type Ref } from 'vue'
+import { computed, onBeforeMount, reactive, type Ref, ref } from 'vue'
 
 export interface UsePagingStatus {
   pagingIndex: number
@@ -164,7 +164,10 @@ export function usePaging<T = any>(task: UsePagingTask<T>, options: UsePagingOpt
       if (isFunction(options)) {
         options()
       }
-      return console.log('没有更多了')
+      return console.log('没有更多了...')
+    }
+    if (pagingStatus.pagingLoading) {
+      return console.log('正在加载中...')
     }
     pagingTrigger(pagingStatus.pagingIndex + 1, options)
   }
