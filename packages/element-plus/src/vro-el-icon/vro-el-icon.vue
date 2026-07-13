@@ -1,15 +1,14 @@
 <template>
-  <el-icon class="vro-el-icon" v-bind="props">
+  <vro-icon class="vro-el-icon" v-bind="resolved.attrs">
     <slot>
-      <component v-if="isElement" :is="name" />
-      <i v-else class="iconfont" :class="[name]"></i>
+      <component v-if="resolved.is" :is="resolved.is" />
     </slot>
-  </el-icon>
+  </vro-icon>
 </template>
 
 <script setup lang="ts">
-  import { isString } from '@daysnap/utils'
-  import { ElIcon } from 'element-plus'
+  import { isObject, isString } from '@daysnap/utils'
+  import { VroIcon } from '@vrojs/base'
   import { computed } from 'vue'
 
   import { vroElIconProps } from './types'
@@ -17,12 +16,23 @@
   defineOptions({ name: 'VroElIcon' })
   const props = defineProps(vroElIconProps)
 
-  const isElement = computed(() => {
-    const { name } = props
+  const resolved = computed(() => {
+    const { name, ...attrs } = props
+    let is: string | object | null = null
     if (isString(name)) {
       const char = name.substring(0, 1)
-      return char >= 'A' && char <= 'Z'
+      if (char >= 'A' && char <= 'Z') {
+        is = name
+      } else {
+        Object.assign(attrs, { name })
+      }
+    } else if (isObject(name)) {
+      is = name
     }
-    return true
+
+    return {
+      is,
+      attrs,
+    }
   })
 </script>

@@ -1,8 +1,8 @@
-import { iconProps } from 'element-plus'
+import { vroIconProps } from '@vrojs/base'
 import type { ExtractPropTypes, PropType, Raw } from 'vue'
 
 export const vroElIconProps = {
-  ...iconProps,
+  ...vroIconProps,
   name: {
     type: [String, Object] as PropType<string | Raw<object>>,
     default: '',

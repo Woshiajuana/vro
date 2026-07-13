@@ -4,9 +4,13 @@
 }
 
 .vro-icon {
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   fill: currentColor;
+  line-height: 1em;
+  font-size: inherit;
 
   img {
     display: block;
@@ -19,6 +23,7 @@
     height: 1em;
     width: 1em;
     fill: currentColor;
+    stroke: currentColor;
   }
 
   &.is-loading {
