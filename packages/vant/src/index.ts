@@ -2,4 +2,5 @@
 
 export * from './utils'
 export * from './vro-van-cell'
+export * from './vro-van-config-provider'
 export * from './vro-van-icon'
