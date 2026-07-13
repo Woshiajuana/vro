@@ -1,14 +1,26 @@
 <template>
-  <van-icon name="chat-o" />
-  <i class="van-icon van-icon-chat-o"></i>
+  <vro-icon v-bind="resolved" class="vro-van-icon">
+    <slot></slot>
+  </vro-icon>
 </template>
 
 <script setup lang="ts">
-  import { Icon as VanIcon } from 'vant'
+  import { VroIcon } from '@vrojs/base'
+  import { computed } from 'vue'
 
   import { vroVanIconProps } from './types'
 
   defineOptions({ name: 'VroVanIcon' })
 
-  defineProps(vroVanIconProps)
+  const props = defineProps(vroVanIconProps)
+
+  const resolved = computed(() => {
+    // eslint-disable-next-line prefer-const
+    let { name, fontFamily, ...rest } = props
+    if (fontFamily === 'iconfont' && name?.startsWith('van-icon-')) {
+      fontFamily = 'van-icon'
+    }
+
+    return { ...rest, fontFamily, name }
+  })
 </script>

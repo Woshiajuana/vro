@@ -21,7 +21,7 @@
   const classes = computed<HTMLAttributes['class']>(() => {
     const { fontFamily, name, loading } = props
     const res: HTMLAttributes['class'] = []
-    if (isImage.value) {
+    if (!isImage.value) {
       res.push(fontFamily, name)
     }
     if (loading) {
