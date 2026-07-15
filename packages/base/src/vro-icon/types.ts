@@ -6,14 +6,8 @@ export const vroIconProps = {
     type: String,
     default: 'iconfont',
   },
-  color: {
-    type: String,
-    default: 'inherit',
-  },
-  size: {
-    type: [String, Number],
-    default: 'inherit',
-  },
+  color: String,
+  size: [String, Number],
   loading: [Boolean, String] as PropType<boolean | string>,
 }
 

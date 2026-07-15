@@ -18,7 +18,7 @@
     // eslint-disable-next-line prefer-const
     let { name, fontFamily, ...rest } = props
     if (fontFamily === 'iconfont' && name?.startsWith('van-icon-')) {
-      fontFamily = 'van-icon'
+      fontFamily = 'is-van-icon'
     }
 
     return { ...rest, fontFamily, name }

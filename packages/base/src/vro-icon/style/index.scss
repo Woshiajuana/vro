@@ -1,6 +1,8 @@
 :root,
 :host {
   --vro-icon-duration: 2s;
+  --vro-icon-size: inherit;
+  --vro-icon-color: inherit;
 }
 
 .vro-icon {
@@ -10,7 +12,11 @@
   position: relative;
   fill: currentColor;
   line-height: 1em;
-  font-size: inherit;
+  font-size: var(--size);
+  color: var(--color);
+
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
 
   img {
     display: block;
@@ -27,7 +33,7 @@
   }
 
   &.is-loading {
-    animation: rotating var(--vro-icon-duration) linear infinite;
+    animation: rotating var(--duration) linear infinite;
   }
 }
 

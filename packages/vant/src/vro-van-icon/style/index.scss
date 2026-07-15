@@ -1,1 +1,10 @@
 @forward 'vant/es/icon/index.css';
+
+.vro-van-icon {
+  &.is-van-icon {
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    font-family: var(--van-icon-font-family, 'vant-icon');
+  }
+}

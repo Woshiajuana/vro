@@ -6,6 +6,7 @@
       'is-column': direction === 'column',
       'is-required': required,
       'is-arrow': arrow,
+      'is-align-item-center': alignItemCenter,
       'is-ellipsis': ellipsis,
       'is-clickable': clickable,
       'is-line-clamp': lineClamp && !!+lineClamp,
@@ -15,7 +16,7 @@
     <slot name="before"></slot>
     <div class="vro-van-cell-label">
       <slot name="prefix">
-        <vro-van-icon v-if="iconProps" v-bind="iconProps">
+        <vro-van-icon v-if="iconProps" v-bind="iconProps" class="vro-van-cell-icon">
           <slot name="icon-default"></slot>
         </vro-van-icon>
       </slot>

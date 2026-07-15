@@ -32,10 +32,10 @@
 
   const style = computed<HTMLAttributes['style']>(() => {
     const { color, size, loading } = props
-    let duration: string = `var(--vro-icon-duration)`
-    if (!isBoolean(loading) && loading) {
-      duration = loading
+    return {
+      '--color': color || `var(--vro-icon-color)`,
+      '--size': size ? addUnit(size) : `var(--vro-icon-size)`,
+      '--duration': !isBoolean(loading) && loading ? loading : `var(--vro-icon-duration)`,
     }
-    return { color, fontSize: addUnit(size), '--duration': duration }
   })
 </script>

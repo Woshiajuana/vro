@@ -1,9 +1,12 @@
 :root,
 :host {
+  --var-van-cell-font-size: 14px;
+  --var-van-cell-icon-size: 20px;
   --vro-van-cell-background: var(--van-background-2);
-  --vro-van-cell-text-color: var(--van-text-color);
+  --vro-van-cell-label-color: var(--van-text-color);
   --vro-van-cell-value-color: var(--van-text-color-2);
   --vro-van-cell-border-color: var(--van-border-color);
+  --vro-van-cell-asterisk-color: var(--van-danger-color);
 }
 
 .vro-van-cell {
@@ -11,7 +14,7 @@
   box-sizing: border-box;
   width: 100%;
   position: relative;
-  font-size: 14px;
+  font-size: var(--var-van-cell-font-size);
   padding: 10px 16px;
   line-height: 1.6;
   background-color: var(--vro-van-cell-background);
@@ -27,13 +30,86 @@
     border-bottom: 1PX solid var(--vro-van-cell-border-color);
     transform: scaleY(0.5);
   }
+
+  &.is-row {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    .vro-van-cell-label {
+      margin-right: 10px;
+    }
+    .vro-van-cell-value {
+      justify-content: flex-end;
+      span {
+        text-align: right;
+      }
+    }
+  }
+
+  &.is-clickable {
+    cursor: pointer;
+    &:active {
+      opacity: 0.8;
+    }
+  }
+
+  &.is-column {
+    flex-direction: column;
+  }
+
+  &.is-required:not(.is-no-asterisk) {
+    .vro-van-cell-label {
+      &:before {
+        position: absolute;
+        left: -8px;
+        content: '*';
+        color: var(--vro-van-cell-asterisk-color);
+      }
+    }
+  }
+
+  &.is-arrow {
+    cursor: pointer;
+    &:active {
+      opacity: 0.8;
+    }
+  }
+
+  &.is-align-item-center {
+    align-items: center;
+  }
+
+  &.is-ellipsis {
+    .vro-van-cell-value {
+      overflow: hidden;
+      span {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        min-width: 0;
+      }
+    }
+  }
+
+  &.is-line-clamp {
+    .vro-van-cell-value {
+      span {
+        padding-bottom: 4px;
+        word-break: break-all;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: var(--vro-van-cell-line-clamp);
+        -webkit-box-orient: vertical;
+      }
+    }
+  }
 }
 
 .vro-van-cell-label {
   position: relative;
   display: flex;
   align-items: center;
-  color: var(--vro-van-cell-text-color);
+  color: var(--vro-van-cell-label-color);
   span {
     padding: 4px 0;
   }
@@ -50,13 +126,13 @@
     flex: 1;
     padding: 4px 0;
   }
-  i {
-    margin-left: 8px;
-    line-height: 30px;
-  }
 }
 
 .vro-van-cell-arrow {
+  margin-left: 8px;
+  line-height: 30px;
+}
+
+.vro-van-cell-icon {
   margin-right: 8px;
-  font-size: 20px;
 }

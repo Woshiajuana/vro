@@ -15,7 +15,8 @@ export const vroVanCellProps = {
   required: Boolean,
   ellipsis: Boolean,
   lineClamp: [String, Number] as PropType<string | number>,
-  iconProps: Object as PropType<VroVanIconProps>,
+  iconProps: Object as PropType<Partial<VroVanIconProps>>,
+  alignItemCenter: Boolean,
   clickable: Boolean,
   formatter: {
     default: (v: any) => v,

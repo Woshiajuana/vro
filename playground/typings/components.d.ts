@@ -17,6 +17,7 @@ declare module 'vue' {
     ElSpace: typeof import('element-plus/es')['ElSpace']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    VanCell: typeof import('vant/es')['Cell']
     VanIcon: typeof import('vant/es')['Icon']
     Vro: typeof import('@vrojs/base')['Vro']
     VroAspectRatio: typeof import('@vrojs/base')['VroAspectRatio']

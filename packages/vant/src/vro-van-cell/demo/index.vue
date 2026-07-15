@@ -1,8 +1,15 @@
 <template>
   <demo-block title="基础用法">
+    <van-cell title="11"></van-cell>
     <vro-van-cell label="单元格" value="内容" />
     <vro-van-cell label="单元格" value="内容" arrow />
-    <vro-van-cell required label="单元格" value="内容" icon="setting-o" arrow />
+    <vro-van-cell
+      required
+      label="单元格"
+      value="内容"
+      :icon-props="{ name: 'van-icon-setting-o' }"
+      arrow
+    />
   </demo-block>
 
   <demo-block title="内容多行">
