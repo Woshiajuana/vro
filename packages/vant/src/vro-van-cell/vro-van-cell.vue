@@ -5,6 +5,7 @@
       'is-row': direction === 'row',
       'is-column': direction === 'column',
       'is-required': required,
+      'is-no-asterisk': noAsterisk,
       'is-arrow': arrow,
       'is-align-item-center': alignItemCenter,
       'is-ellipsis': ellipsis,
