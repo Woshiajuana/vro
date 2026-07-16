@@ -10,14 +10,23 @@
   <demo-block title="字体图标">
     <div class="demo-icon-row">
       <vro-el-icon name="demo-el-icon-search" font-family="demo-el-iconfont" size="24" />
-      <vro-el-icon name="demo-el-icon-check" font-family="demo-el-iconfont" size="24" color="#409eff" />
+      <vro-el-icon
+        name="demo-el-icon-check"
+        font-family="demo-el-iconfont"
+        size="24"
+        color="#409eff"
+      />
     </div>
   </demo-block>
 
   <demo-block title="图片图标">
     <div class="demo-icon-row">
       <vro-el-icon name="https://fastly.jsdelivr.net/npm/@vant/assets/icon-demo.png" size="28" />
-      <vro-el-icon name="https://fastly.jsdelivr.net/npm/@vant/assets/icon-demo.png" size="28" loading />
+      <vro-el-icon
+        name="https://fastly.jsdelivr.net/npm/@vant/assets/icon-demo.png"
+        size="28"
+        loading
+      />
     </div>
   </demo-block>
 

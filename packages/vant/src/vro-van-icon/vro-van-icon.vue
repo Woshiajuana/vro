@@ -15,12 +15,12 @@
   const props = defineProps(vroVanIconProps)
 
   const resolved = computed(() => {
-    // eslint-disable-next-line prefer-const
-    let { name, fontFamily, ...rest } = props
-    if (fontFamily === 'iconfont' && name?.startsWith('van-icon-')) {
-      fontFamily = 'is-van-icon'
+    const { name, fontFamily, ...rest } = props
+    return {
+      ...rest,
+      name,
+      fontFamily:
+        fontFamily === 'iconfont' && name?.startsWith('van-icon-') ? 'is-van-icon' : fontFamily,
     }
-
-    return { ...rest, fontFamily, name }
   })
 </script>
