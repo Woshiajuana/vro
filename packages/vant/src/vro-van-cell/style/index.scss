@@ -1,7 +1,7 @@
 :root,
 :host {
   --var-van-cell-font-size: 14px;
-  --var-van-cell-icon-size: 20px;
+  --var-van-cell-icon-size: 18px;
   --vro-van-cell-background: var(--van-background-2);
   --vro-van-cell-label-color: var(--van-text-color);
   --vro-van-cell-value-color: var(--van-text-color-2);
@@ -134,5 +134,6 @@
 }
 
 .vro-van-cell-icon {
+  --vro-icon-size: var(--var-van-cell-icon-size);
   margin-right: 8px;
 }
