@@ -1,12 +1,12 @@
 import {
-  type Ref,
-  watch,
   isRef,
-  unref,
-  onUnmounted,
+  onActivated,
   onDeactivated,
   onMounted,
-  onActivated,
+  onUnmounted,
+  type Ref,
+  unref,
+  watch,
 } from 'vue'
 type Loose<T> = T & { [key: string]: any }
 

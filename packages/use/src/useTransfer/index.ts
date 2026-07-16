@@ -1,4 +1,4 @@
-import { useRouter, type RouteLocationRaw } from 'vue-router'
+import { type RouteLocationRaw, useRouter } from 'vue-router'
 
 export interface TransferOptions {
   /**

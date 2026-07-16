@@ -1,5 +1,5 @@
 import { pick } from '@daysnap/utils'
-import { onActivated, nextTick, ref } from 'vue'
+import { nextTick, onActivated, ref } from 'vue'
 import { onBeforeRouteLeave } from 'vue-router'
 
 export interface UseKeepPositionOptions {

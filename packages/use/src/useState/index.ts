@@ -1,5 +1,5 @@
 import { isFunction } from '@daysnap/utils'
-import { ref, type Ref } from 'vue'
+import { type Ref, ref } from 'vue'
 
 export type UseSetStateAction<S> = S | ((prevState: S) => S)
 

@@ -1,6 +1,6 @@
-import { ref, watch, computed } from 'vue'
+import { isBoolean, isUndefined } from '@daysnap/utils'
+import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { isUndefined, isBoolean } from '@daysnap/utils'
 
 interface UseKeepAliveState {
   name: string
