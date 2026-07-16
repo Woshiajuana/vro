@@ -16,7 +16,9 @@
   defineOptions({ name: 'VroIcon' })
   const props = defineProps(vroIconProps)
 
-  const isImage = computed(() => props.name?.includes('/') ?? false)
+  const isImage = computed(() => {
+    return /^(?:https?:)?\/\/|^(?:data|blob):|[/.]\w+(?:[?#].*)?$/.test(props.name ?? '')
+  })
 
   const classes = computed<HTMLAttributes['class']>(() => {
     const { fontFamily, name, loading } = props
@@ -34,7 +36,7 @@
     const { color, size, loading } = props
     return {
       '--color': color || `var(--vro-icon-color)`,
-      '--size': size ? addUnit(size) : `var(--vro-icon-size)`,
+      '--size': size || size === 0 ? addUnit(size) : `var(--vro-icon-size)`,
       '--duration': !isBoolean(loading) && loading ? loading : `var(--vro-icon-duration)`,
     }
   })
