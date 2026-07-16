@@ -33,6 +33,7 @@ declare module 'vue' {
     VroElSchemaFormDialog: typeof import('@vrojs/element-plus')['VroElSchemaFormDialog']
     VroElSelect: typeof import('@vrojs/element-plus')['VroElSelect']
     VroElSkeleton: typeof import('@vrojs/element-plus')['VroElSkeleton']
+    VroElTable: typeof import('@vrojs/element-plus')['VroElTable']
     VroElTags: typeof import('@vrojs/element-plus')['VroElTags']
     VroElTree: typeof import('@vrojs/element-plus')['VroElTree']
     VroElWithConfig: typeof import('@vrojs/element-plus')['VroElWithConfig']
@@ -46,5 +47,8 @@ declare module 'vue' {
     VroVanTest: typeof import('@vrojs/vant')['VroVanTest']
     VroVantIcon: typeof import('@vrojs/vant')['VroVantIcon']
     VroVnr: typeof import('@vrojs/base')['VroVnr']
+  }
+  export interface GlobalDirectives {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }
