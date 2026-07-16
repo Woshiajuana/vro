@@ -1,5 +1,5 @@
 <template>
-  <vro-icon class="vro-el-icon" v-bind="resolved.attrs">
+  <vro-icon class="vro-el-icon" v-bind="resolved.attrs" :font-family="resolved.fontFamily">
     <slot>
       <component v-if="resolved.is" :is="resolved.is" />
     </slot>
@@ -9,7 +9,7 @@
 <script setup lang="ts">
   import { isObject, isString } from '@daysnap/utils'
   import { VroIcon } from '@vrojs/base'
-  import { computed } from 'vue'
+  import { type Component, computed } from 'vue'
 
   import { vroElIconProps } from './types'
 
@@ -18,21 +18,25 @@
 
   const resolved = computed(() => {
     const { name, ...attrs } = props
-    let is: string | object | null = null
+    let is: string | Component | null = null
+    let fontFamily = attrs.fontFamily
     if (isString(name)) {
       const char = name.substring(0, 1)
       if (char >= 'A' && char <= 'Z') {
         is = name
+        fontFamily = ''
       } else {
         Object.assign(attrs, { name })
       }
     } else if (isObject(name)) {
       is = name
+      fontFamily = ''
     }
 
     return {
       is,
       attrs,
+      fontFamily,
     }
   })
 </script>
