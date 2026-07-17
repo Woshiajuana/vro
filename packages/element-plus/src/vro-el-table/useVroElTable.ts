@@ -39,12 +39,7 @@ export function useVroElTable<
 ) {
   const { query: rawQuery } = options
   const schema = reactive<S>((isFunction(rowSchema) ? rowSchema() : rowSchema) as any)
-  const columns = reactive(
-    (isFunction(rawColumns) ? rawColumns() : rawColumns).filter((item) => {
-      const { hidden = false } = item
-      return isFunction(hidden) ? !hidden() : !hidden
-    }),
-  )
+  const columns = reactive(isFunction(rawColumns) ? rawColumns() : rawColumns)
 
   const query =
     rawQuery ?? ref<Record<string, any>>(filterEmptyValue(banana.extract(schema as any), true))
@@ -102,5 +97,6 @@ export function useVroElTable<
     trigger,
     data,
     loading,
+    state,
   }
 }

@@ -4,13 +4,21 @@ import type { ExtractPropTypes, PropType } from 'vue'
 import type { VroElSchemaFilterProps } from '../vro-el-schema-filter'
 import type { VroElTableColumnGroupColumn } from '../vro-el-table-column-group'
 
+export interface VroElTableRequestPayload {
+  currentPage?: number
+  pageSize?: number
+  query?: Record<string, any>
+}
+
 export interface VroElTableRequest<T = any> {
   (state: [number, number], query: any): Promise<[T[], number]>
 }
 
 export const vroElTableProps = {
   /**
-   * 可筛选
+   * 是否启用筛选区。
+   *
+   * 当 filterProps.schema 为空时不会渲染筛选区。
    */
   filterable: {
     type: Boolean,
@@ -18,12 +26,12 @@ export const vroElTableProps = {
   },
 
   /**
-   * 筛选属性
+   * 筛选区属性，透传给 VroElSchemaFilter。
    */
   filterProps: Object as PropType<Partial<VroElSchemaFilterProps>>,
 
   /**
-   * 列的数据
+   * 表格列配置。
    */
   columns: {
     type: Array as PropType<VroElTableColumnGroupColumn[]>,
@@ -31,7 +39,7 @@ export const vroElTableProps = {
   },
 
   /**
-   * 数据
+   * 表格数据。
    */
   data: {
     type: Array as PropType<any[]>,
@@ -39,17 +47,17 @@ export const vroElTableProps = {
   },
 
   /**
-   * loading
+   * 表格和筛选区 loading 状态。
    */
   loading: Boolean,
 
   /**
-   * 表格属性
+   * 表格属性，透传给 ElTable。
    */
   tableProps: Object as PropType<Partial<TableProps<any>>>,
 
   /**
-   * 可分页
+   * 是否启用分页。
    */
   pageable: {
     type: Boolean,
@@ -57,12 +65,12 @@ export const vroElTableProps = {
   },
 
   /**
-   * 分页属性
+   * 分页属性，透传给 ElPagination。
    */
   paginationProps: Object as PropType<Partial<PaginationProps>>,
 
   /**
-   * 可刷新
+   * 是否显示刷新按钮。
    */
   showRefresh: {
     type: Boolean,
@@ -70,7 +78,7 @@ export const vroElTableProps = {
   },
 
   /**
-   * 显示头部
+   * 是否显示头部区域。
    */
   showHeader: {
     type: Boolean,
