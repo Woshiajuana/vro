@@ -182,7 +182,7 @@
   })
 
   defineExpose({
-    get form() {
+    get elForm() {
       return refForm.value!
     },
     validate,

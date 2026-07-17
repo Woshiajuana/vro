@@ -3,7 +3,7 @@
     v-model="visible"
     ref="containerRef"
     class="vro-el-schema-form-dialog"
-    :class="[id]"
+    :id="id"
     :title="computedProps.title"
     destroy-on-close
     append-to-body
@@ -42,7 +42,7 @@
 
 <script setup lang="ts">
   import { getRandom, pick } from '@daysnap/utils'
-  import { useAsyncTask, useVisible } from '@vrojs/use'
+  import { useAsyncTask, useId, useVisible } from '@vrojs/use'
   import { ElButton, ElDialog } from 'element-plus'
   import { computed, nextTick, provide, ref, useTemplateRef, watch } from 'vue'
 
@@ -81,13 +81,13 @@
     confirmCallback: (data) => emit('confirm', data),
   })
 
-  const id = `id_${getRandom(10)}`
+  const id = useId()
   watch(visible, (v) => {
     if (v) {
       nextTick(() => {
-        const els = document.querySelectorAll(`.${id}`)
-        if (els.length) {
-          els.forEach((el) => (el.parentElement!.scrollTop = 0))
+        const el = document.getElementById(id)
+        if (el) {
+          el.parentElement!.scrollTop = 0
         }
       })
     }
@@ -133,7 +133,7 @@
   })
 
   defineExpose({
-    get schemaFormInstance() {
+    get vroElSchemaForm() {
       return refVroElSchemaForm.value!
     },
     show,

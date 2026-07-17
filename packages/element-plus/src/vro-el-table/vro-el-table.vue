@@ -26,7 +26,7 @@
       </div>
 
       <div v-loading="loading" class="vro-el-table-content">
-        <el-table-component
+        <el-table
           ref="refElTable"
           width="100%"
           table-layout="fixed"
@@ -39,7 +39,7 @@
           <vro-el-table-column-group v-if="columns.length" :columns="columns" />
 
           <slot></slot>
-        </el-table-component>
+        </el-table>
       </div>
 
       <el-pagination
@@ -60,7 +60,7 @@
 <script setup lang="ts">
   import { isEmptyObject } from '@daysnap/utils'
   import { RefreshRight } from '@element-plus/icons-vue'
-  import { ElButton, ElPagination } from 'element-plus'
+  import { ElButton, ElPagination, ElTable } from 'element-plus'
   import { computed, useTemplateRef } from 'vue'
 
   import { useLocale } from '../locale'
@@ -86,7 +86,7 @@
   })
 
   defineExpose({
-    get tableInstance() {
+    get elTable() {
       return refElTable.value!
     },
   })
