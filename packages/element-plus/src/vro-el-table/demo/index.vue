@@ -1,11 +1,6 @@
 <template>
   <demo-block title="基础用法">
-    <vro-el-table
-      v-bind="attrs"
-      :table-props="{ border: true }"
-      @request="trigger"
-      @selection-change="handleSelectionChange"
-    >
+    <vro-el-table v-bind="attrs" @request="trigger" @selection-change="handleSelectionChange">
       <template #title>
         <h2 class="demo-table-title">用户列表</h2>
       </template>
@@ -24,7 +19,7 @@
   import { h, ref } from 'vue'
 
   import type { VroElSchemaFormSchema } from '../../vro-el-schema-form'
-  import type { VroElTableColumnGroupColumn } from '..'
+  import type { VroElTableColumnGroupColumn } from '../../vro-el-table-column-group'
   import { useVroElTable } from '..'
 
   interface User {

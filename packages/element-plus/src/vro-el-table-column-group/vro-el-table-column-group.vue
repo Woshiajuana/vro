@@ -20,6 +20,7 @@
 
   const metadata = computed(() => {
     return props.columns.flatMap((item) => {
+      // eslint-disable-next-line prefer-const
       let { props: columnProps, is, hidden, ...rest } = item
 
       if (isFunction(hidden) ? hidden() : hidden) {
