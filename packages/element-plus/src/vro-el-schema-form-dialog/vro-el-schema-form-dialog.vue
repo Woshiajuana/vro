@@ -1,9 +1,8 @@
 <template>
   <el-dialog
     v-model="visible"
-    ref="containerRef"
+    ref="dialogRef"
     class="vro-el-schema-form-dialog"
-    :id="id"
     :title="computedProps.title"
     destroy-on-close
     append-to-body
@@ -11,6 +10,7 @@
     :style="computedProps.style"
     @close="hide()"
     @closed="$emit('closed')"
+    @opened="resetScrollTop"
   >
     <vro-el-schema-form
       v-bind="schemaFormProps"
@@ -41,10 +41,10 @@
 </template>
 
 <script setup lang="ts">
-  import { getRandom, pick } from '@daysnap/utils'
-  import { useAsyncTask, useId, useVisible } from '@vrojs/use'
+  import { pick } from '@daysnap/utils'
+  import { useAsyncTask, useVisible } from '@vrojs/use'
   import { ElButton, ElDialog } from 'element-plus'
-  import { computed, nextTick, provide, ref, useTemplateRef, watch } from 'vue'
+  import { computed, provide, ref, useTemplateRef } from 'vue'
 
   import { useLocale } from '../locale'
   import { VroElSchemaForm, vroElSchemaFormProps } from '../vro-el-schema-form'
@@ -81,17 +81,11 @@
     confirmCallback: (data) => emit('confirm', data),
   })
 
-  const id = useId()
-  watch(visible, (v) => {
-    if (v) {
-      nextTick(() => {
-        const el = document.getElementById(id)
-        if (el) {
-          el.parentElement!.scrollTop = 0
-        }
-      })
-    }
-  })
+  const dialogRef = useTemplateRef('dialogRef')
+  const resetScrollTop = () => {
+    const body = dialogRef.value?.$el?.querySelector('.el-dialog__body') as HTMLElement | null
+    body?.scrollTo({ top: 0 })
+  }
 
   const refVroElSchemaForm = useTemplateRef('refVroElSchemaForm')
   const { loading, trigger: handleSubmit } = useAsyncTask(
@@ -133,6 +127,9 @@
   })
 
   defineExpose({
+    get elDialog() {
+      return dialogRef.value!
+    },
     get vroElSchemaForm() {
       return refVroElSchemaForm.value!
     },
