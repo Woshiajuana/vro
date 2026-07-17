@@ -99,6 +99,7 @@
         text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-line-clamp: var(--vro-van-cell-line-clamp);
+        line-clamp: var(--vro-van-cell-line-clamp);
         -webkit-box-orient: vertical;
       }
     }

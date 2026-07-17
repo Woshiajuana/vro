@@ -1,5 +1,5 @@
 <template>
-  <Component
+  <component
     v-for="(item, index) in metadata"
     v-bind="item"
     :key="item.prop ?? index"
@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-  import { isString } from '@daysnap/utils'
+  import { isFunction, isString } from '@daysnap/utils'
   import { computed } from 'vue'
 
   import { vroElTableColumnGroupProps } from './types'
@@ -19,19 +19,22 @@
   const props = defineProps(vroElTableColumnGroupProps)
 
   const metadata = computed(() => {
-    return props.columns.map((item) => {
-      // eslint-disable-next-line prefer-const
-      let { props, is, ...rest } = item
+    return props.columns.flatMap((item) => {
+      let { props: columnProps, is, hidden, ...rest } = item
+
+      if (isFunction(hidden) ? hidden() : hidden) {
+        return []
+      }
 
       if (isString(is)) {
         const field = vroElTableColumnGroupColumnManager.get(is)
         if (field) {
           is = field.is
-          props = Object.assign({}, field.props, props)
+          columnProps = Object.assign({}, field.props, columnProps)
         }
       }
 
-      return Object.assign({}, rest, props, { is })
+      return Object.assign({}, rest, columnProps, { is })
     })
   })
 </script>
