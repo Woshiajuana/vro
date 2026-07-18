@@ -71,11 +71,13 @@ export const elTableColumnProps = {
 export const vroElTableColumnProps = {
   ...elTableColumnProps,
 
-  defaultValue: {
+  placeholder: {
     type: String,
     default: '-',
   },
+
   unit: String,
+
   map: [Object, Array] as PropType<Record<string, any> | any[]>,
   mapValueKey: {
     type: [String, Number],
