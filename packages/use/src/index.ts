@@ -3,6 +3,7 @@
 export * from './debounceRef'
 export * from './types'
 export * from './useAsyncTask'
+export * from './useBodyScrollLock'
 export * from './useComposition'
 export * from './useCountDown'
 export * from './useEventListener'
