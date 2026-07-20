@@ -1,13 +1,16 @@
 import { omit } from '@daysnap/utils'
 import { vroInputProps } from '@vrojs/base'
-import { vroVanCellProps } from 'src/vro-van-cell'
 import type { ExtractPropTypes } from 'vue'
 
-export const vroVanCellInFieldProps = omit(vroVanCellProps, ['value'])
+import { vroVanCellProps } from '../vro-van-cell'
+
+export const vroVanFieldCellProps = omit(vroVanCellProps, ['value', 'formatter'])
 
 export const vroVanFieldProps = {
-  ...vroVanCellInFieldProps,
+  ...vroVanFieldCellProps,
   ...vroInputProps,
+  clearable: Boolean,
+  unit: String,
 }
 
 export type VroVanFieldProps = ExtractPropTypes<typeof vroVanFieldProps>
