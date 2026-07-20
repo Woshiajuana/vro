@@ -12,7 +12,7 @@
   "author": "woshiajuana",
   "license": "MIT",
   "dependencies": {
-    "@daysnap/utils": "^0.1.35",
+    "@daysnap/utils": "^0.1.36",
     "@vant/touch-emulator": "^1.4.0",
     "@vrojs/base": "workspace:*",
     "@vrojs/element-plus": "workspace:*",
