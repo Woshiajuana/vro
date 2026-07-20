@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-  import { pick } from '@daysnap/utils'
+  import { pick, typedKeys } from '@daysnap/utils'
   import { ElRadio, ElRadioGroup, radioGroupProps } from 'element-plus'
   import { computed } from 'vue'
 
@@ -29,6 +29,6 @@
   const props = defineProps(vroElRadioGroupProps)
 
   const restProps = computed(() => {
-    return pick(props, Object.keys(radioGroupProps) as any[])
+    return pick(props, typedKeys(radioGroupProps))
   })
 </script>

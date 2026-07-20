@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-  import { pick } from '@daysnap/utils'
+  import { pick, typedKeys } from '@daysnap/utils'
   import { checkboxGroupProps, ElCheckbox, ElCheckboxGroup } from 'element-plus'
   import { computed } from 'vue'
 
@@ -28,6 +28,6 @@
   const props = defineProps(vroElCheckboxGroupProps)
 
   const restProps = computed(() => {
-    return pick(props, Object.keys(checkboxGroupProps) as any[])
+    return pick(props, typedKeys(checkboxGroupProps))
   })
 </script>

@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-  import { pick } from '@daysnap/utils'
+  import { pick, typedKeys } from '@daysnap/utils'
   import { ElOption, ElSelect, selectProps } from 'element-plus'
   import { computed } from 'vue'
 
@@ -28,6 +28,6 @@
   const props = defineProps(vroElSelectProps)
 
   const restProps = computed(() => {
-    return pick(props, Object.keys(selectProps) as any[])
+    return pick(props, typedKeys(selectProps))
   })
 </script>
