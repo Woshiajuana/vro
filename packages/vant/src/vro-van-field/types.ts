@@ -9,7 +9,14 @@ export const vroVanFieldCellProps = omit(vroVanCellProps, ['value', 'formatter']
 export const vroVanFieldProps = {
   ...vroVanFieldCellProps,
   ...vroInputProps,
+  /**
+   * 是否显示清除按钮。
+   */
   clearable: Boolean,
+
+  /**
+   * 输入框右侧单位。
+   */
   unit: String,
 }
 

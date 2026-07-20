@@ -39,9 +39,9 @@
     }
     .vro-van-cell-value {
       justify-content: flex-end;
-      span {
-        text-align: right;
-      }
+    }
+    .vro-van-cell-value-text {
+      text-align: right;
     }
   }
 
@@ -81,27 +81,25 @@
   &.is-ellipsis {
     .vro-van-cell-value {
       overflow: hidden;
-      span {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        min-width: 0;
-      }
+    }
+    .vro-van-cell-value-text {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      min-width: 0;
     }
   }
 
   &.is-line-clamp {
-    .vro-van-cell-value {
-      span {
-        padding-bottom: 4px;
-        word-break: break-all;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: var(--vro-van-cell-line-clamp);
-        line-clamp: var(--vro-van-cell-line-clamp);
-        -webkit-box-orient: vertical;
-      }
+    .vro-van-cell-value-text {
+      padding-bottom: 4px;
+      word-break: break-all;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: var(--vro-van-cell-line-clamp);
+      line-clamp: var(--vro-van-cell-line-clamp);
+      -webkit-box-orient: vertical;
     }
   }
 }
@@ -111,9 +109,10 @@
   display: flex;
   align-items: center;
   color: var(--vro-van-cell-label-color);
-  span {
-    padding: 4px 0;
-  }
+}
+
+.vro-van-cell-label-text {
+  padding: 4px 0;
 }
 
 .vro-van-cell-value {
@@ -123,10 +122,11 @@
   word-break: break-all;
   min-height: 30px;
   color: var(--vro-van-cell-value-color);
-  span {
-    flex: 1;
-    padding: 4px 0;
-  }
+}
+
+.vro-van-cell-value-text {
+  flex: 1;
+  padding: 4px 0;
 }
 
 .vro-van-cell-arrow {

@@ -22,12 +22,12 @@
         </vro-van-icon>
       </slot>
       <slot name="label">
-        <span v-html="label"></span>
+        <span class="vro-van-cell-label-text" v-html="label"></span>
       </slot>
     </div>
     <div class="vro-van-cell-value">
       <slot>
-        <span v-html="formatter(value)"></span>
+        <span class="vro-van-cell-value-text" v-html="formatter(value)"></span>
       </slot>
       <slot name="suffix">
         <vro-van-icon v-if="arrow" class="vro-van-cell-arrow" name="van-icon-arrow" />
