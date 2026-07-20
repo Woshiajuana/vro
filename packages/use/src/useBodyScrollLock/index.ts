@@ -1,51 +1,92 @@
 import type { Ref } from 'vue'
-import { onBeforeUnmount, watchEffect } from 'vue'
+import { getCurrentScope, isRef, onScopeDispose, ref, unref, watch } from 'vue'
+
+type MaybeRef<T> = T | Ref<T>
+
+export interface UseBodyScrollLockReturn {
+  locked: Ref<boolean>
+  lock: () => void
+  unlock: () => void
+  toggle: (value?: boolean) => void
+}
 
 // 全局状态（单例）
 let lockCount = 0
 let originalOverflow = ''
 
+function lockBody() {
+  if (typeof document === 'undefined') return
+
+  if (lockCount === 0) {
+    originalOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+  }
+  lockCount++
+}
+
+function unlockBody() {
+  if (typeof document === 'undefined' || lockCount <= 0) return
+
+  lockCount--
+  if (lockCount === 0) {
+    document.body.style.overflow = originalOverflow
+    originalOverflow = ''
+  }
+}
+
 /**
  * 锁定/解锁 body 滚动
- * @param locked - 响应式布尔值，true 锁定滚动，false 解锁
+ * @param initialLocked - 初始锁定状态，或外部响应式布尔值
  */
-export function useBodyScrollLock(locked: Ref<boolean>) {
-  // 组件卸载时强制解锁（减少计数）
-  onBeforeUnmount(() => {
-    if (typeof document === 'undefined') return
-    if (locked.value) {
-      // 如果当前是锁定状态，需要减少计数并可能恢复
-      unlock()
-    }
-    // 注意：如果 locked.value 为 false，说明已经解锁过，无需额外操作
-  })
+export function useBodyScrollLock(
+  initialLocked: MaybeRef<boolean> = false,
+): UseBodyScrollLockReturn {
+  const locked = isRef(initialLocked) ? initialLocked : ref(unref(initialLocked))
+  let currentLocked = false
 
-  watchEffect(() => {
-    if (typeof document === 'undefined') return
+  const sync = (value: boolean) => {
+    if (value === currentLocked) return
 
-    if (locked.value) {
-      lock()
+    if (value) {
+      lockBody()
     } else {
-      unlock()
+      unlockBody()
     }
-  })
 
-  function lock() {
-    if (lockCount === 0) {
-      // 只有第一个锁需要保存原始样式并设置 hidden
-      originalOverflow = document.body.style.overflow
-      document.body.style.overflow = 'hidden'
-    }
-    lockCount++
+    currentLocked = value
   }
 
-  function unlock() {
-    if (lockCount <= 0) return // 防御
-    lockCount--
-    if (lockCount === 0) {
-      // 所有锁都释放，恢复原始样式
-      document.body.style.overflow = originalOverflow
-      originalOverflow = '' // 清理
+  const stop = watch(locked, sync, { immediate: true })
+
+  const cleanup = () => {
+    stop()
+
+    if (currentLocked) {
+      unlockBody()
+      currentLocked = false
     }
+  }
+
+  if (getCurrentScope()) {
+    onScopeDispose(cleanup)
+  }
+
+  const lock = () => {
+    locked.value = true
+  }
+
+  const unlock = () => {
+    locked.value = false
+  }
+
+  const toggle = (value = !locked.value) => {
+    locked.value = value
+  }
+
+  return {
+    locked,
+    lock,
+    unlock,
+    toggle,
   }
 }
