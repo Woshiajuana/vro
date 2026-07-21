@@ -7,41 +7,27 @@
       'is-readonly': readonly,
     }"
   >
-    <template v-if="$slots.before" #before>
-      <slot name="before"></slot>
-    </template>
-    <template v-if="$slots.prefix" #prefix>
-      <slot name="prefix"></slot>
-    </template>
-    <template v-if="$slots['icon-default']" #icon-default>
-      <slot name="icon-default"></slot>
-    </template>
-    <template v-if="$slots.label" #label>
-      <slot name="label"></slot>
+    <template v-for="name in forwardedCellSlotNames" #[name] :key="name">
+      <slot :name="name"></slot>
     </template>
 
-    <slot>
-      <vro-input
-        v-bind="inputProps"
-        ref="inputRef"
-        @update:model-value="$emit('update:modelValue', $event)"
-        @input="$emit('input', $event)"
-        @blur="$emit('blur', $event)"
-      />
-      <vro-van-icon
-        v-show="showClear"
-        class="vro-van-field-clear"
-        name="van-icon-clear"
-        @click="handleClear"
-      />
-      <span v-if="unit" class="vro-van-field-unit">{{ unit }}</span>
-      <slot name="suffix">
-        <vro-van-icon v-if="arrow" class="vro-van-cell-arrow" name="van-icon-arrow" />
+    <template #default>
+      <slot>
+        <vro-input
+          v-bind="inputProps"
+          ref="inputRef"
+          @update:model-value="$emit('update:modelValue', $event)"
+          @input="$emit('input', $event)"
+          @blur="$emit('blur', $event)"
+        />
+        <vro-van-icon
+          v-show="showClear"
+          class="vro-van-field-clear"
+          name="van-icon-clear"
+          @click="handleClear"
+        />
+        <span v-if="unit" class="vro-van-field-unit">{{ unit }}</span>
       </slot>
-    </slot>
-
-    <template v-if="$slots.after" #after>
-      <slot name="after"></slot>
     </template>
   </vro-van-cell>
 </template>
@@ -57,6 +43,18 @@
 
   defineOptions({ name: 'VroVanField' })
 
+  const cellSlotNames = ['before', 'prefix', 'icon-default', 'label', 'suffix', 'after'] as const
+
+  const slots = defineSlots<{
+    default?: () => any
+    before?: () => any
+    prefix?: () => any
+    'icon-default'?: () => any
+    label?: () => any
+    suffix?: () => any
+    after?: () => any
+  }>()
+
   const emit = defineEmits<{
     (event: 'update:modelValue', value: string): void
     (event: 'input', value: InputEvent): void
@@ -69,6 +67,7 @@
 
   const cellProps = computed(() => pick(props, typedKeys(vroVanFieldCellProps)))
   const inputProps = computed(() => pick(props, typedKeys(vroInputProps)))
+  const forwardedCellSlotNames = computed(() => cellSlotNames.filter((name) => slots[name]))
   const showClear = computed(() => {
     const { clearable, disabled, readonly, modelValue } = props
     return clearable && !disabled && !readonly && modelValue !== '' && modelValue != null
