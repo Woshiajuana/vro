@@ -7,28 +7,24 @@
       'is-readonly': readonly,
     }"
   >
-    <template v-for="name in forwardedCellSlotNames" #[name] :key="name">
-      <slot :name="name"></slot>
+    <template v-for="(_, name) in $slots" #[name]="slotProps" :key="name">
+      <slot :name="name" v-bind="slotProps"></slot>
     </template>
 
-    <template #default>
-      <slot>
-        <vro-input
-          v-bind="inputProps"
-          ref="inputRef"
-          @update:model-value="$emit('update:modelValue', $event)"
-          @input="$emit('input', $event)"
-          @blur="$emit('blur', $event)"
-        />
-        <vro-van-icon
-          v-show="showClear"
-          class="vro-van-field-clear"
-          name="van-icon-clear"
-          @click="handleClear"
-        />
-        <span v-if="unit" class="vro-van-field-unit">{{ unit }}</span>
-      </slot>
-    </template>
+    <vro-input
+      v-bind="inputProps"
+      ref="inputRef"
+      @update:model-value="$emit('update:modelValue', $event)"
+      @input="$emit('input', $event)"
+      @blur="$emit('blur', $event)"
+    />
+    <vro-van-icon
+      v-show="showClear"
+      class="vro-van-field-clear"
+      name="van-icon-clear"
+      @click="handleClear"
+    />
+    <span v-if="unit" class="vro-van-field-unit">{{ unit }}</span>
   </vro-van-cell>
 </template>
 
@@ -43,18 +39,6 @@
 
   defineOptions({ name: 'VroVanField' })
 
-  const cellSlotNames = ['before', 'prefix', 'icon-default', 'label', 'suffix', 'after'] as const
-
-  const slots = defineSlots<{
-    default?: () => any
-    before?: () => any
-    prefix?: () => any
-    'icon-default'?: () => any
-    label?: () => any
-    suffix?: () => any
-    after?: () => any
-  }>()
-
   const emit = defineEmits<{
     (event: 'update:modelValue', value: string): void
     (event: 'input', value: InputEvent): void
@@ -67,7 +51,6 @@
 
   const cellProps = computed(() => pick(props, typedKeys(vroVanFieldCellProps)))
   const inputProps = computed(() => pick(props, typedKeys(vroInputProps)))
-  const forwardedCellSlotNames = computed(() => cellSlotNames.filter((name) => slots[name]))
   const showClear = computed(() => {
     const { clearable, disabled, readonly, modelValue } = props
     return clearable && !disabled && !readonly && modelValue !== '' && modelValue != null
