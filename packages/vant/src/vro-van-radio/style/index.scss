@@ -1,0 +1,15 @@
+.vro-van-radio-group {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px 16px;
+  min-width: 0;
+  padding: 4px 0;
+}
+
+.vro-van-radio.is-column {
+  .vro-van-radio-group {
+    justify-content: flex-start;
+  }
+}
