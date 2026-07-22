@@ -49,6 +49,7 @@ declare module 'vue' {
     VroVanField: typeof import('@vrojs/vant')['VroVanField']
     VroVanIcon: typeof import('@vrojs/vant')['VroVanIcon']
     VroVanRadio: typeof import('@vrojs/vant')['VroVanRadio']
+    VroVanRadioButton: typeof import('@vrojs/vant')['VroVanRadioButton']
     VroVnr: typeof import('@vrojs/base')['VroVnr']
   }
   export interface GlobalDirectives {

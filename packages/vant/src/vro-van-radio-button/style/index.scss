@@ -1,0 +1,65 @@
+:root,
+:host {
+  --vro-van-radio-button-columns: 4;
+  --vro-van-radio-button-gap: 8px;
+  --vro-van-radio-button-height: 30px;
+  --vro-van-radio-button-radius: 2px;
+  --vro-van-radio-button-font-size: 13px;
+  --vro-van-radio-button-color: var(--van-text-color);
+  --vro-van-radio-button-background: var(--van-background);
+  --vro-van-radio-button-border-color: var(--van-border-color);
+  --vro-van-radio-button-checked-color: var(--van-primary-color);
+  --vro-van-radio-button-checked-background: color-mix(
+    in srgb,
+    var(--vro-van-radio-button-checked-color) 8%,
+    transparent
+  );
+  --vro-van-radio-button-disabled-color: var(--van-text-color-2);
+  --vro-van-radio-button-disabled-border-color: var(--van-gray-4);
+  --vro-van-radio-button-disabled-background: var(--van-gray-1);
+}
+
+.vro-van-radio-button {
+  .vro-van-cell-value {
+    flex-wrap: wrap;
+    gap: var(--vro-van-radio-button-gap);
+  }
+
+  &.is-column {
+    .vro-van-cell-value {
+      margin-top: 4px;
+      display: grid;
+      grid-template-columns: repeat(var(--vro-van-radio-button-columns), minmax(0, 1fr));
+    }
+  }
+}
+
+.vro-van-radio-button-item {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  height: var(--vro-van-radio-button-height);
+  padding: 0 8px;
+  border: 1px solid var(--vro-van-radio-button-border-color);
+  border-radius: var(--vro-van-radio-button-radius);
+  color: var(--vro-van-radio-button-color);
+  font-size: var(--vro-van-radio-button-font-size);
+  line-height: 1.2;
+  background-color: var(--vro-van-radio-button-background);
+  cursor: pointer;
+
+  &.is-checked {
+    border-color: var(--vro-van-radio-button-checked-color);
+    color: var(--vro-van-radio-button-checked-color);
+    background-color: var(--vro-van-radio-button-checked-background);
+  }
+
+  &:disabled {
+    border-color: var(--vro-van-radio-button-disabled-border-color);
+    color: var(--vro-van-radio-button-disabled-color);
+    background-color: var(--vro-van-radio-button-disabled-background);
+    cursor: not-allowed;
+  }
+}
