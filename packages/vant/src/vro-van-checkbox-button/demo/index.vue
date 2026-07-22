@@ -47,7 +47,7 @@
   const limitValue = ref(['前端'])
   const slotValue = ref(['短信'])
 
-  const basicOptions = ['读书', '跑步', '旅行']
+  const basicOptions = ['读书', '跑步', '旅行', '吃饭', '看书', '打篮球']
   const cityOptions = [
     { id: 1, name: '杭州' },
     { id: 2, name: '上海' },

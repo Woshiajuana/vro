@@ -1,25 +1,36 @@
 :root,
 :host {
-  --vro-van-checkbox-button-columns: 3;
+  --vro-van-checkbox-button-columns: 4;
   --vro-van-checkbox-button-gap: 8px;
-  --vro-van-checkbox-button-height: 32px;
-  --vro-van-checkbox-button-radius: 4px;
+  --vro-van-checkbox-button-height: 30px;
+  --vro-van-checkbox-button-radius: 2px;
   --vro-van-checkbox-button-font-size: 13px;
   --vro-van-checkbox-button-color: var(--van-text-color);
   --vro-van-checkbox-button-background: var(--van-background);
-  --vro-van-checkbox-button-border-color: var(--van-border-color);
+  --vro-van-checkbox-button-border-color: var(--van-gray-4);
   --vro-van-checkbox-button-checked-color: var(--van-primary-color);
-  --vro-van-checkbox-button-checked-background: var(--van-primary-color);
-  --vro-van-checkbox-button-disabled-color: var(--van-text-color-3);
-  --vro-van-checkbox-button-disabled-background: var(--van-background);
+  --vro-van-checkbox-button-checked-background: color-mix(
+    in srgb,
+    var(--vro-van-checkbox-button-checked-color) 8%,
+    transparent
+  );
+  --vro-van-checkbox-button-disabled-color: var(--van-text-color-2);
+  --vro-van-checkbox-button-disabled-border-color: var(--van-border-color);
+  --vro-van-checkbox-button-disabled-background: var(--van-gray-1);
 }
 
 .vro-van-checkbox-button {
   .vro-van-cell-value {
-    display: grid;
-    grid-template-columns: repeat(var(--vro-van-checkbox-button-columns), minmax(0, 1fr));
+    flex-wrap: wrap;
     gap: var(--vro-van-checkbox-button-gap);
-    min-width: 0;
+  }
+
+  &.is-column {
+    .vro-van-cell-value {
+      margin-top: 4px;
+      display: grid;
+      grid-template-columns: repeat(var(--vro-van-checkbox-button-columns), minmax(0, 1fr));
+    }
   }
 }
 
@@ -41,14 +52,14 @@
 
   &.is-checked {
     border-color: var(--vro-van-checkbox-button-checked-color);
-    color: #fff;
+    color: var(--vro-van-checkbox-button-checked-color);
     background-color: var(--vro-van-checkbox-button-checked-background);
   }
 
   &:disabled {
+    border-color: var(--vro-van-checkbox-button-disabled-border-color);
     color: var(--vro-van-checkbox-button-disabled-color);
     background-color: var(--vro-van-checkbox-button-disabled-background);
     cursor: not-allowed;
-    opacity: 0.6;
   }
 }
