@@ -11,6 +11,15 @@ export type VroVanCheckboxOption =
       props?: Record<string, any>
     })
 
+export interface VroVanCheckboxNormalizedOption {
+  key: string | number
+  label: unknown
+  value: unknown
+  disabled: boolean
+  props: Record<string, any>
+  raw: VroVanCheckboxOption
+}
+
 export const vroVanCheckboxCellProps = omit(vroVanCellProps, ['value', 'formatter'])
 export const vroVanCheckboxGroupProps = omit(checkboxGroupProps, ['direction'])
 

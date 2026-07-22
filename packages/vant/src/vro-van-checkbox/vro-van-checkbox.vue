@@ -7,14 +7,21 @@
       @change="$emit('change', $event)"
     >
       <van-checkbox
-        v-for="(option, index) in options"
-        v-bind="getOptionProps(option)"
-        :key="getOptionValue(option, index)"
-        :name="getOptionValue(option, index)"
-        :disabled="disabled || getOptionDisabled(option)"
+        v-for="(option, index) in normalizedOptions"
+        v-bind="option.props"
+        :key="option.key"
+        :name="option.value"
+        :disabled="disabled || option.disabled"
       >
-        <slot name="option" :index="index" :option="option">
-          {{ getOptionLabel(option) }}
+        <slot
+          name="option"
+          :index="index"
+          :option="option.raw"
+          :label="option.label"
+          :value="option.value"
+          :disabled="option.disabled"
+        >
+          {{ option.label }}
         </slot>
       </van-checkbox>
     </van-checkbox-group>
@@ -31,6 +38,7 @@
     vroVanCheckboxCellProps,
     type VroVanCheckboxEmits,
     vroVanCheckboxGroupProps,
+    type VroVanCheckboxNormalizedOption,
     type VroVanCheckboxOption,
     vroVanCheckboxProps,
     type VroVanCheckboxSlots,
@@ -49,19 +57,19 @@
     }
   })
 
-  const getOptionLabel = (option: VroVanCheckboxOption) => {
-    return typeof option === 'string' ? option : (option[props.labelKey] ?? option)
-  }
+  const normalizedOptions = computed<VroVanCheckboxNormalizedOption[]>(() =>
+    props.options.map((option: VroVanCheckboxOption, index) => {
+      const isStringOption = typeof option === 'string'
+      const value = isStringOption ? option : (option[props.valueKey] ?? index)
 
-  const getOptionValue = (option: VroVanCheckboxOption, index: number) => {
-    return typeof option === 'string' ? option : (option[props.valueKey] ?? index)
-  }
-
-  const getOptionDisabled = (option: VroVanCheckboxOption) => {
-    return typeof option === 'string' ? false : !!option.disabled
-  }
-
-  const getOptionProps = (option: VroVanCheckboxOption) => {
-    return typeof option === 'string' ? {} : (option.props ?? {})
-  }
+      return {
+        key: typeof value === 'string' || typeof value === 'number' ? value : index,
+        label: isStringOption ? option : (option[props.labelKey] ?? value),
+        value,
+        disabled: isStringOption ? false : !!option.disabled,
+        props: isStringOption ? {} : (option.props ?? {}),
+        raw: option,
+      }
+    }),
+  )
 </script>
