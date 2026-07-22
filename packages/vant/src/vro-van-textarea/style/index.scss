@@ -1,0 +1,63 @@
+:root,
+:host {
+  --vro-van-textarea-input-color: var(--van-text-color);
+  --vro-van-textarea-placeholder-color: var(--van-text-color-3);
+  --vro-van-textarea-disabled-color: var(--van-text-color-3);
+  --vro-van-textarea-word-limit-color: var(--van-text-color-3);
+}
+
+.vro-van-textarea {
+  .vro-van-cell-value {
+    align-items: flex-start;
+  }
+}
+
+.vro-van-textarea-control {
+  flex: 1;
+  min-width: 0;
+}
+
+.vro-van-textarea-input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-height: 72px;
+  border: 0;
+  outline: 0;
+  resize: none;
+  padding: 0;
+  color: var(--vro-van-textarea-input-color);
+  font: inherit;
+  line-height: inherit;
+  background: transparent;
+  appearance: none;
+
+  &::placeholder {
+    color: var(--vro-van-textarea-placeholder-color);
+  }
+
+  &:disabled {
+    color: var(--vro-van-textarea-disabled-color);
+    cursor: not-allowed;
+    opacity: 1;
+    -webkit-text-fill-color: var(--vro-van-textarea-disabled-color);
+  }
+
+  &[readonly] {
+    cursor: default;
+  }
+}
+
+.vro-van-textarea-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 20px;
+  column-gap: 8px;
+}
+
+.vro-van-textarea-word-limit {
+  color: var(--vro-van-textarea-word-limit-color);
+  font-size: 12px;
+  line-height: 1.4;
+}

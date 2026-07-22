@@ -36,10 +36,10 @@
 
   import { VroVanCell } from '../vro-van-cell'
   import {
+    vroVanRadioButtonCellProps,
     type VroVanRadioButtonEmits,
     type VroVanRadioButtonNormalizedOption,
     type VroVanRadioButtonOption,
-    vroVanRadioButtonCellProps,
     vroVanRadioButtonProps,
     type VroVanRadioButtonSlots,
   } from './types'
