@@ -16,7 +16,8 @@
 ### 图标和必填
 
 ```html
-<vro-van-cell label="图标" value="内容" :icon-props="{ name: 'van-icon-setting-o' }" />
+<vro-van-cell label="前置图标" value="内容" prefix-icon="van-icon-setting-o" />
+<vro-van-cell label="后置图标" value="内容" suffix-icon="van-icon-info-o" />
 <vro-van-cell required label="必填项" value="内容" />
 <vro-van-cell required no-asterisk label="隐藏星号" value="内容" />
 ```
@@ -68,7 +69,7 @@
   <template #suffix>
     <vro-van-icon name="van-icon-plus" />
   </template>
-  <template #after>
+  <template #append>
     <div>附加内容</div>
   </template>
 </vro-van-cell>
@@ -110,16 +111,16 @@
       <td>自定义右侧内容</td>
     </tr>
     <tr>
-      <td>before</td>
-      <td>自定义最前置内容</td>
+      <td>prepend</td>
+      <td>自定义整体前置内容</td>
     </tr>
     <tr>
       <td>prefix</td>
-      <td>自定义标题前置内容，会覆盖 iconProps 渲染的图标</td>
+      <td>自定义标题前置内容，会覆盖 prefixIcon 渲染的图标</td>
     </tr>
     <tr>
       <td>icon-default</td>
-      <td>自定义 iconProps 图标的默认插槽内容</td>
+      <td>自定义 prefixIcon 图标的默认插槽内容</td>
     </tr>
     <tr>
       <td>label</td>
@@ -127,11 +128,11 @@
     </tr>
     <tr>
       <td>suffix</td>
-      <td>自定义右侧后置内容，会覆盖 arrow 渲染的箭头</td>
+      <td>自定义右侧后置内容，会覆盖 suffixIcon 渲染的图标</td>
     </tr>
     <tr>
-      <td>after</td>
-      <td>自定义最后置内容</td>
+      <td>append</td>
+      <td>自定义整体后置内容</td>
     </tr>
   </tbody>
 </table>

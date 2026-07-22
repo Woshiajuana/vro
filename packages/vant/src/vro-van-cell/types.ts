@@ -4,6 +4,7 @@ import type { ExtractPropTypes, PropType } from 'vue'
 import type { VroVanIconProps } from '../vro-van-icon'
 
 export type VroVanCellDirection = 'row' | 'column'
+export type VroVanCellIcon = string | Partial<VroVanIconProps>
 
 export const vroVanCellProps = {
   // Content props
@@ -76,9 +77,14 @@ export const vroVanCellProps = {
 
   // Icon props
   /**
-   * 左侧图标属性，透传给 VroVanIcon。
+   * 标题前置图标。传入字符串时作为 VroVanIcon 的 name 使用，传入对象时透传给 VroVanIcon。
    */
-  iconProps: Object as PropType<Partial<VroVanIconProps>>,
+  prefixIcon: [String, Object] as PropType<VroVanCellIcon>,
+
+  /**
+   * 右侧后置图标。传入字符串时作为 VroVanIcon 的 name 使用，传入对象时透传给 VroVanIcon。
+   */
+  suffixIcon: [String, Object] as PropType<VroVanCellIcon>,
 }
 
 export type VroVanCellProps = ExtractPropTypes<typeof vroVanCellProps>
@@ -90,17 +96,17 @@ export interface VroVanCellSlots extends VroSlots {
   default?: VroSlot
 
   /**
-   * 自定义最前置内容。
+   * 自定义整体前置内容。
    */
-  before?: VroSlot
+  prepend?: VroSlot
 
   /**
-   * 自定义标题前置内容，会覆盖 iconProps 渲染的图标。
+   * 自定义标题前置内容，会覆盖 prefixIcon 渲染的图标。
    */
   prefix?: VroSlot
 
   /**
-   * 自定义 iconProps 图标的默认插槽内容。
+   * 自定义 prefixIcon 图标的默认插槽内容。
    */
   'icon-default'?: VroSlot
 
@@ -110,12 +116,12 @@ export interface VroVanCellSlots extends VroSlots {
   label?: VroSlot
 
   /**
-   * 自定义右侧后置内容，会覆盖 arrow 渲染的箭头。
+   * 自定义右侧后置内容，会覆盖 suffixIcon 渲染的图标。
    */
   suffix?: VroSlot
 
   /**
-   * 自定义最后置内容。
+   * 自定义整体后置内容。
    */
-  after?: VroSlot
+  append?: VroSlot
 }

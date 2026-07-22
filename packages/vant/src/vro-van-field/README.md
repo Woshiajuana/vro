@@ -28,7 +28,8 @@
   required
   label="手机号"
   placeholder="请输入手机号"
-  :icon-props="{ name: 'van-icon-phone-o' }"
+  prefix-icon="van-icon-phone-o"
+  suffix-icon="van-icon-contact-o"
   clearable
 />
 
@@ -102,16 +103,16 @@
       <td>自定义输入区域内容</td>
     </tr>
     <tr>
-      <td>before</td>
-      <td>自定义最前置内容</td>
+      <td>prepend</td>
+      <td>自定义整体前置内容</td>
     </tr>
     <tr>
       <td>prefix</td>
-      <td>自定义标题前置内容，会覆盖 iconProps 渲染的图标</td>
+      <td>自定义标题前置内容，会覆盖 prefixIcon 渲染的图标</td>
     </tr>
     <tr>
       <td>icon-default</td>
-      <td>自定义 iconProps 图标的默认插槽内容</td>
+      <td>自定义 prefixIcon 图标的默认插槽内容</td>
     </tr>
     <tr>
       <td>label</td>
@@ -119,11 +120,11 @@
     </tr>
     <tr>
       <td>suffix</td>
-      <td>自定义输入区域后置内容，会覆盖 arrow 渲染的箭头</td>
+      <td>自定义输入区域后置内容，会覆盖 suffixIcon 渲染的图标</td>
     </tr>
     <tr>
-      <td>after</td>
-      <td>自定义最后置内容</td>
+      <td>append</td>
+      <td>自定义整体后置内容</td>
     </tr>
   </tbody>
 </table>

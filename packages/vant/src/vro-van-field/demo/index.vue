@@ -27,7 +27,8 @@
       required
       label="手机号"
       placeholder="请输入手机号"
-      :icon-props="{ name: 'van-icon-phone-o' }"
+      prefix-icon="van-icon-phone-o"
+      suffix-icon="van-icon-contact-o"
       clearable
     />
     <vro-van-field v-model="address" direction="column" label="详细地址" placeholder="请输入地址" />

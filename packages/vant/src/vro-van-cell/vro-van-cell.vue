@@ -14,10 +14,14 @@
     }"
     :style="{ '--vro-van-cell-line-clamp': lineClamp }"
   >
-    <slot name="before"></slot>
+    <slot name="prepend"></slot>
     <div class="vro-van-cell-label">
       <slot name="prefix">
-        <vro-van-icon v-if="iconProps" v-bind="iconProps" class="vro-van-cell-icon">
+        <vro-van-icon
+          v-if="prefixIcon"
+          v-bind="resolveIcon(prefixIcon)"
+          class="vro-van-cell-prefix-icon"
+        >
           <slot name="icon-default"></slot>
         </vro-van-icon>
       </slot>
@@ -30,18 +34,27 @@
         <span class="vro-van-cell-value-text" v-html="formatter(value)"></span>
       </slot>
       <slot name="suffix">
-        <vro-van-icon v-if="arrow" class="vro-van-cell-arrow" name="van-icon-arrow" />
+        <vro-van-icon
+          v-if="suffixIcon"
+          v-bind="resolveIcon(suffixIcon)"
+          class="vro-van-cell-suffix-icon"
+        />
       </slot>
+      <vro-van-icon v-if="arrow" class="vro-van-cell-arrow" name="van-icon-arrow" />
     </div>
-    <slot name="after"></slot>
+    <slot name="append"></slot>
   </div>
 </template>
 
 <script setup lang="ts">
   import { VroVanIcon } from '../vro-van-icon'
-  import { vroVanCellProps, type VroVanCellSlots } from './types'
+  import { type VroVanCellIcon, vroVanCellProps, type VroVanCellSlots } from './types'
 
   defineOptions({ name: 'VroVanCell' })
   defineSlots<VroVanCellSlots>()
   defineProps(vroVanCellProps)
+
+  const resolveIcon = (icon: VroVanCellIcon) => {
+    return typeof icon === 'string' ? { name: icon } : icon
+  }
 </script>

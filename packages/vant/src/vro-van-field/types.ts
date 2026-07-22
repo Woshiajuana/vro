@@ -29,17 +29,17 @@ export type VroVanFieldProps = ExtractPropTypes<typeof vroVanFieldProps>
 
 export interface VroVanFieldSlots extends VroSlots {
   /**
-   * 自定义最前置内容。
+   * 自定义整体前置内容。
    */
-  before?: VroSlot
+  prepend?: VroSlot
 
   /**
-   * 自定义标题前置内容，会覆盖 iconProps 渲染的图标。
+   * 自定义标题前置内容，会覆盖 prefixIcon 渲染的图标。
    */
   prefix?: VroSlot
 
   /**
-   * 自定义 iconProps 图标的默认插槽内容。
+   * 自定义 prefixIcon 图标的默认插槽内容。
    */
   'icon-default'?: VroSlot
 
@@ -49,14 +49,14 @@ export interface VroVanFieldSlots extends VroSlots {
   label?: VroSlot
 
   /**
-   * 自定义输入区域后置内容，会覆盖 arrow 渲染的箭头。
+   * 自定义输入区域后置内容，会覆盖 suffixIcon 渲染的图标。
    */
   suffix?: VroSlot
 
   /**
-   * 自定义最后置内容。
+   * 自定义整体后置内容。
    */
-  after?: VroSlot
+  append?: VroSlot
 }
 
 export interface VroVanFieldEmits {

@@ -6,7 +6,8 @@
   </demo-block>
 
   <demo-block title="图标和必填">
-    <vro-van-cell label="图标" value="内容" :icon-props="{ name: 'van-icon-setting-o' }" />
+    <vro-van-cell label="前置图标" value="内容" prefix-icon="van-icon-setting-o" />
+    <vro-van-cell label="后置图标" value="内容" suffix-icon="van-icon-info-o" />
     <vro-van-cell required label="必填项" value="内容" arrow />
     <vro-van-cell required no-asterisk label="隐藏星号" value="内容" arrow />
   </demo-block>
@@ -33,10 +34,10 @@
 
     <vro-van-cell value="自定义标题">
       <template #prefix>
-        <vro-van-icon class="demo-cell-prefix" name="van-icon-smile-o" />
+        <vro-van-icon name="van-icon-smile-o" size="20" />
       </template>
       <template #label>
-        <strong>标题插槽</strong>
+        <strong style="padding: 4px 0">标题插槽</strong>
       </template>
     </vro-van-cell>
 
@@ -45,7 +46,7 @@
       <template #suffix>
         <vro-van-icon name="van-icon-plus" />
       </template>
-      <template #after>
+      <template #append>
         <div class="demo-cell-after">附加内容</div>
       </template>
     </vro-van-cell>
@@ -68,10 +69,6 @@
     background: transparent;
     border: 0;
     outline: none;
-  }
-
-  .demo-cell-prefix {
-    margin-right: 8px;
   }
 
   .demo-cell-after {

@@ -1,7 +1,8 @@
 :root,
 :host {
-  --vro-van-cell-font-size: var(--var-van-cell-font-size, 14px);
-  --vro-van-cell-icon-size: var(--var-van-cell-icon-size, 18px);
+  --vro-van-cell-font-size: 14px;
+  --vro-van-cell-prefix-icon-size: 18px;
+  --vro-van-cell-suffix-icon-size: 18px;
   --vro-van-cell-background: var(--van-background-2);
   --vro-van-cell-label-color: var(--van-text-color);
   --vro-van-cell-value-color: var(--van-text-color-2);
@@ -34,9 +35,7 @@
   &.is-row {
     flex-wrap: wrap;
     align-items: flex-start;
-    .vro-van-cell-label {
-      margin-right: 10px;
-    }
+    column-gap: 10px;
     .vro-van-cell-value {
       justify-content: flex-end;
     }
@@ -109,6 +108,7 @@
   display: flex;
   align-items: center;
   color: var(--vro-van-cell-label-color);
+  column-gap: 8px;
 }
 
 .vro-van-cell-label-text {
@@ -122,6 +122,7 @@
   word-break: break-all;
   min-height: 30px;
   color: var(--vro-van-cell-value-color);
+  column-gap: 8px;
 }
 
 .vro-van-cell-value-text {
@@ -130,11 +131,10 @@
 }
 
 .vro-van-cell-arrow {
-  margin-left: 8px;
   line-height: 30px;
 }
 
-.vro-van-cell-icon {
-  --vro-icon-size: var(--vro-van-cell-icon-size);
-  margin-right: 8px;
+.vro-van-cell-suffix-icon,
+.vro-van-cell-prefix-icon {
+  --vro-icon-size: var(--vro-van-cell-prefix-icon-size);
 }
