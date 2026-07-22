@@ -9,14 +9,14 @@
     @click-prefix-icon="$emit('click-prefix-icon', $event)"
     @click-suffix-icon="$emit('click-suffix-icon', $event)"
   >
-    <template v-for="(_, name) in $slots" #[name]="slotProps" :key="name">
+    <template v-for="(_, name) in slots" #[name]="slotProps" :key="name">
       <slot :name="name" v-bind="slotProps"></slot>
     </template>
 
     <vro-input
       v-bind="inputProps"
       class="vro-van-field-input"
-      ref="inputRef"
+      ref="vroInputRef"
       @update:model-value="$emit('update:modelValue', $event)"
       @input="$emit('input', $event)"
       @blur="$emit('blur', $event)"
@@ -36,7 +36,7 @@
 <script setup lang="ts">
   import { pick, typedKeys } from '@daysnap/utils'
   import { VroInput, type VroInputInstance, vroInputProps } from '@vrojs/base'
-  import { computed, ref } from 'vue'
+  import { computed, useTemplateRef } from 'vue'
 
   import { VroVanCell } from '../vro-van-cell'
   import { VroVanIcon } from '../vro-van-icon'
@@ -48,11 +48,11 @@
   } from './types'
 
   defineOptions({ name: 'VroVanField' })
-  defineSlots<VroVanFieldSlots>()
+  const slots = defineSlots<VroVanFieldSlots>()
   const emit = defineEmits<VroVanFieldEmits>()
   const props = defineProps(vroVanFieldProps)
 
-  const vroInputRef = ref<VroInputInstance>()
+  const vroInputRef = useTemplateRef<VroInputInstance>('vroInputRef')
 
   const cellProps = computed(() => pick(props, typedKeys(vroVanFieldCellProps)))
   const inputProps = computed(() => pick(props, typedKeys(vroInputProps)))

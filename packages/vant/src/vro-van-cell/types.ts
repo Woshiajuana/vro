@@ -1,4 +1,4 @@
-import type { VroSlot, VroSlots } from '@vrojs/base'
+import type { VroSlot } from '@vrojs/base'
 import type { ExtractPropTypes, PropType } from 'vue'
 
 import type { VroVanIconProps } from '../vro-van-icon'
@@ -89,7 +89,7 @@ export const vroVanCellProps = {
 
 export type VroVanCellProps = ExtractPropTypes<typeof vroVanCellProps>
 
-export interface VroVanCellSlots extends VroSlots {
+export interface VroVanCellSlots {
   /**
    * 自定义右侧内容。
    */
