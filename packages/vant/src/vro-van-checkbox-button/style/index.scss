@@ -1,1 +1,54 @@
-.vro-van-checkbox-button { }
+:root,
+:host {
+  --vro-van-checkbox-button-columns: 3;
+  --vro-van-checkbox-button-gap: 8px;
+  --vro-van-checkbox-button-height: 32px;
+  --vro-van-checkbox-button-radius: 4px;
+  --vro-van-checkbox-button-font-size: 13px;
+  --vro-van-checkbox-button-color: var(--van-text-color);
+  --vro-van-checkbox-button-background: var(--van-background);
+  --vro-van-checkbox-button-border-color: var(--van-border-color);
+  --vro-van-checkbox-button-checked-color: var(--van-primary-color);
+  --vro-van-checkbox-button-checked-background: var(--van-primary-color);
+  --vro-van-checkbox-button-disabled-color: var(--van-text-color-3);
+  --vro-van-checkbox-button-disabled-background: var(--van-background);
+}
+
+.vro-van-checkbox-button {
+  .vro-van-cell-value {
+    display: grid;
+    grid-template-columns: repeat(var(--vro-van-checkbox-button-columns), minmax(0, 1fr));
+    gap: var(--vro-van-checkbox-button-gap);
+    min-width: 0;
+  }
+}
+
+.vro-van-checkbox-button-item {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  height: var(--vro-van-checkbox-button-height);
+  padding: 0 8px;
+  border: 1px solid var(--vro-van-checkbox-button-border-color);
+  border-radius: var(--vro-van-checkbox-button-radius);
+  color: var(--vro-van-checkbox-button-color);
+  font-size: var(--vro-van-checkbox-button-font-size);
+  line-height: 1.2;
+  background-color: var(--vro-van-checkbox-button-background);
+  cursor: pointer;
+
+  &.is-checked {
+    border-color: var(--vro-van-checkbox-button-checked-color);
+    color: #fff;
+    background-color: var(--vro-van-checkbox-button-checked-background);
+  }
+
+  &:disabled {
+    color: var(--vro-van-checkbox-button-disabled-color);
+    background-color: var(--vro-van-checkbox-button-disabled-background);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
