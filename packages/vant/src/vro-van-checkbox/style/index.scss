@@ -1,1 +1,21 @@
-.vro-van-checkbox { }
+.vro-van-checkbox {
+  .vro-van-cell-value {
+    min-width: 0;
+  }
+}
+
+.vro-van-checkbox-group {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px 16px;
+  min-width: 0;
+  padding: 4px 0;
+}
+
+.vro-van-checkbox.is-column {
+  .vro-van-checkbox-group {
+    justify-content: flex-start;
+  }
+}
