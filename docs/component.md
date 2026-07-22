@@ -13,3 +13,5 @@
 - 尽量定义少的变量来完善功能
 - 命名要规范有含义
 - 模板里面组件使用 kebab-case 风格
+- 如果有 `defineEmits` 需要采用 typescript 元组类型写法，类型提取到 type.ts 下
+- 如果有 `defineSlots` 需要将类型提取到 type.ts 下

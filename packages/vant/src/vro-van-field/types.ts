@@ -1,5 +1,5 @@
 import { omit } from '@daysnap/utils'
-import { vroInputProps } from '@vrojs/base'
+import { vroInputProps, type VroSlot, type VroSlots } from '@vrojs/base'
 import type { ExtractPropTypes } from 'vue'
 
 import { vroVanCellProps } from '../vro-van-cell'
@@ -21,3 +21,35 @@ export const vroVanFieldProps = {
 }
 
 export type VroVanFieldProps = ExtractPropTypes<typeof vroVanFieldProps>
+
+export interface VroVanFieldSlots extends VroSlots {
+  /**
+   * 自定义最前置内容。
+   */
+  before?: VroSlot
+
+  /**
+   * 自定义标题前置内容，会覆盖 iconProps 渲染的图标。
+   */
+  prefix?: VroSlot
+
+  /**
+   * 自定义 iconProps 图标的默认插槽内容。
+   */
+  'icon-default'?: VroSlot
+
+  /**
+   * 自定义标题内容。
+   */
+  label?: VroSlot
+
+  /**
+   * 自定义输入区域后置内容，会覆盖 arrow 渲染的箭头。
+   */
+  suffix?: VroSlot
+
+  /**
+   * 自定义最后置内容。
+   */
+  after?: VroSlot
+}

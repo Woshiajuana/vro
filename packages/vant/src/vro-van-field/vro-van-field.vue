@@ -18,12 +18,14 @@
       @input="$emit('input', $event)"
       @blur="$emit('blur', $event)"
     />
+
     <vro-van-icon
       v-show="showClear"
       class="vro-van-field-clear"
       name="van-icon-clear"
       @click="handleClear"
     />
+
     <span v-if="unit" class="vro-van-field-unit">{{ unit }}</span>
   </vro-van-cell>
 </template>
@@ -35,9 +37,10 @@
 
   import { VroVanCell } from '../vro-van-cell'
   import { VroVanIcon } from '../vro-van-icon'
-  import { vroVanFieldCellProps, vroVanFieldProps } from './types'
+  import { vroVanFieldCellProps, vroVanFieldProps, type VroVanFieldSlots } from './types'
 
   defineOptions({ name: 'VroVanField' })
+  defineSlots<VroVanFieldSlots>()
 
   const emit = defineEmits<{
     (event: 'update:modelValue', value: string): void
