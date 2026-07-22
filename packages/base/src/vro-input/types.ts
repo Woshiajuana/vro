@@ -1,6 +1,4 @@
-import type { ExtractPropTypes, HTMLAttributes, InputTypeHTMLAttribute } from 'vue'
-
-import { definePropType } from '../utils'
+import type { ExtractPropTypes, HTMLAttributes, InputTypeHTMLAttribute, PropType } from 'vue'
 
 export const vroInputProps = {
   /**
@@ -13,7 +11,7 @@ export const vroInputProps = {
    * @default text
    */
   type: {
-    type: definePropType<InputTypeHTMLAttribute | 'decimal'>(String),
+    type: String as PropType<InputTypeHTMLAttribute | 'decimal'>,
     default: 'text',
   },
 
@@ -21,7 +19,7 @@ export const vroInputProps = {
    * 输入框绑定值。
    */
   modelValue: {
-    type: definePropType<string | number | null | undefined>([String, Number]),
+    type: [String, Number] as PropType<string | number | null | undefined>,
     default: '',
   },
 
@@ -84,7 +82,7 @@ export const vroInputProps = {
    *
    * value 为当前输入值，preValue 为上一次 modelValue。
    */
-  formatter: definePropType<(value: string, preValue: string) => string>(Function),
+  formatter: Function as PropType<(value: string, preValue: string) => string>,
 
   /**
    * 原生 id 属性。未传入时会自动生成一个 id。
@@ -106,7 +104,7 @@ export const vroInputProps = {
    *
    * 当 type 为 number 或 decimal 时，组件会自动设置更适合移动端的键盘类型。
    */
-  inputmode: definePropType<HTMLAttributes['inputmode']>(String),
+  inputmode: String as PropType<HTMLAttributes['inputmode']>,
 }
 
 export type VroInputProps = ExtractPropTypes<typeof vroInputProps>

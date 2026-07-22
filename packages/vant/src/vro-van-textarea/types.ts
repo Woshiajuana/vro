@@ -1,6 +1,5 @@
 import { omit } from '@daysnap/utils'
-import { definePropType } from '@vrojs/base'
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 
 import { type VroVanCellEmits, vroVanCellProps, type VroVanCellSlots } from '../vro-van-cell'
 
@@ -16,7 +15,7 @@ export const vroVanTextareaInputProps = {
    * 文本域绑定值。
    */
   modelValue: {
-    type: definePropType<string | number | null | undefined>([String, Number]),
+    type: [String, Number] as PropType<string | number | null | undefined>,
     default: '',
   },
 
@@ -63,9 +62,7 @@ export const vroVanTextareaInputProps = {
   /**
    * 是否自适应内容高度，也可传入最小/最大行数配置。
    */
-  autosize: [Boolean, Object] as any as ReturnType<
-    typeof definePropType<boolean | VroVanTextareaAutosize>
-  >,
+  autosize: [Boolean, Object] as PropType<boolean | VroVanTextareaAutosize>,
 
   /**
    * 是否显示字数统计，需要配合 maxlength 使用。

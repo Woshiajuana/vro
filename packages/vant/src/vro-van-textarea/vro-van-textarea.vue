@@ -40,7 +40,6 @@
 
   import { VroVanCell } from '../vro-van-cell'
   import {
-    type VroVanTextareaAutosize,
     vroVanTextareaCellProps,
     type VroVanTextareaEmits,
     vroVanTextareaInputProps,
@@ -77,31 +76,26 @@
       return
     }
 
-    const autosize =
-      typeof props.autosize === 'object' ? props.autosize : ({} as VroVanTextareaAutosize)
+    const autosize = typeof props.autosize === 'object' ? props.autosize : {}
     const lineHeight = Number.parseFloat(getComputedStyle(textarea).lineHeight)
 
     textarea.style.height = 'auto'
+    textarea.style.maxHeight = ''
+    textarea.style.overflowY = 'hidden'
 
     if (Number.isFinite(lineHeight)) {
       const { minRows, maxRows } = autosize
       const minHeight = minRows ? lineHeight * minRows : undefined
       const maxHeight = maxRows ? lineHeight * maxRows : undefined
+      const height = Math.max(textarea.scrollHeight, minHeight ?? 0)
 
-      if (minHeight) {
-        textarea.style.height = `${Math.max(textarea.scrollHeight, minHeight)}px`
-      }
+      textarea.style.height = `${height}px`
 
       if (maxHeight) {
         textarea.style.maxHeight = `${maxHeight}px`
         textarea.style.overflowY = textarea.scrollHeight > maxHeight ? 'auto' : 'hidden'
-      } else {
-        textarea.style.maxHeight = ''
-        textarea.style.overflowY = 'hidden'
       }
-    }
-
-    if (!textarea.style.height) {
+    } else {
       textarea.style.height = `${textarea.scrollHeight}px`
     }
   }
