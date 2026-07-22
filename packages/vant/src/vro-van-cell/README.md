@@ -52,8 +52,24 @@
 ```html
 <vro-van-cell label="自定义内容">
   <strong>插槽内容</strong>
+</vro-van-cell>
+
+<vro-van-cell value="自定义标题">
+  <template #prefix>
+    <vro-van-icon name="van-icon-smile-o" />
+  </template>
+  <template #label>
+    <strong>标题插槽</strong>
+  </template>
+</vro-van-cell>
+
+<vro-van-cell label="自定义区域" arrow>
+  <input type="text" placeholder="请输入内容" />
   <template #suffix>
     <vro-van-icon name="van-icon-plus" />
+  </template>
+  <template #after>
+    <div>附加内容</div>
   </template>
 </vro-van-cell>
 ```
@@ -76,6 +92,10 @@
     </tr>
   </tbody>
 </table>
+
+### 事件 Events
+
+暂无。
 
 ### 插槽 Slots
 

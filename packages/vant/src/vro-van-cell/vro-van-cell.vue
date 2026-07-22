@@ -39,9 +39,9 @@
 
 <script setup lang="ts">
   import { VroVanIcon } from '../vro-van-icon'
-  import { vroVanCellProps } from './types'
+  import { vroVanCellProps, type VroVanCellSlots } from './types'
 
   defineOptions({ name: 'VroVanCell' })
-
+  defineSlots<VroVanCellSlots>()
   defineProps(vroVanCellProps)
 </script>

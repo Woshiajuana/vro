@@ -31,6 +31,15 @@
       <vro-van-icon name="van-icon-setting-o" />
     </vro-van-cell>
 
+    <vro-van-cell value="自定义标题">
+      <template #prefix>
+        <vro-van-icon class="demo-cell-prefix" name="van-icon-smile-o" />
+      </template>
+      <template #label>
+        <strong>标题插槽</strong>
+      </template>
+    </vro-van-cell>
+
     <vro-van-cell label="自定义区域" arrow>
       <input class="demo-cell-input" type="text" placeholder="请输入内容" />
       <template #suffix>
@@ -59,6 +68,10 @@
     background: transparent;
     border: 0;
     outline: none;
+  }
+
+  .demo-cell-prefix {
+    margin-right: 8px;
   }
 
   .demo-cell-after {
