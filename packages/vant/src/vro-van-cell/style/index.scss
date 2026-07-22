@@ -3,6 +3,8 @@
   --vro-van-cell-font-size: 14px;
   --vro-van-cell-prefix-icon-size: 18px;
   --vro-van-cell-suffix-icon-size: 18px;
+  --vro-van-cell-vertical-padding: 10px;
+  --vro-van-cell-horizontal-padding: 16px;
   --vro-van-cell-background: var(--van-background-2);
   --vro-van-cell-label-color: var(--van-text-color);
   --vro-van-cell-value-color: var(--van-text-color-2);
@@ -16,7 +18,7 @@
   width: 100%;
   position: relative;
   font-size: var(--vro-van-cell-font-size);
-  padding: 10px 16px;
+  padding: var(--vro-van-cell-vertical-padding) var(--vro-van-cell-horizontal-padding);
   line-height: 1.6;
   background-color: var(--vro-van-cell-background);
   &::after {

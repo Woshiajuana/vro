@@ -40,6 +40,7 @@ declare module 'vue' {
     VroInput: typeof import('@vrojs/base')['VroInput']
     VroLoading: typeof import('@vrojs/base')['VroLoading']
     VroVanCell: typeof import('@vrojs/vant')['VroVanCell']
+    VroVanCellGroup: typeof import('@vrojs/vant')['VroVanCellGroup']
     VroVanConfigProvider: typeof import('@vrojs/vant')['VroVanConfigProvider']
     VroVanField: typeof import('@vrojs/vant')['VroVanField']
     VroVanIcon: typeof import('@vrojs/vant')['VroVanIcon']
