@@ -7,7 +7,6 @@ export type VroVanCellDirection = 'row' | 'column'
 export type VroVanCellIcon = string | Partial<VroVanIconProps>
 
 export const vroVanCellProps = {
-  // Content props
   /**
    * 左侧标题内容。
    */
@@ -26,7 +25,6 @@ export const vroVanCellProps = {
     type: Function as PropType<(v: any) => any>,
   },
 
-  // Layout props
   /**
    * 内容排列方向。
    *
@@ -42,7 +40,6 @@ export const vroVanCellProps = {
    */
   alignItemCenter: Boolean,
 
-  // Status props
   /**
    * 是否显示必填星号。
    */
@@ -53,7 +50,6 @@ export const vroVanCellProps = {
    */
   noAsterisk: Boolean,
 
-  // Action props
   /**
    * 是否显示右侧箭头。
    */
@@ -64,7 +60,6 @@ export const vroVanCellProps = {
    */
   clickable: Boolean,
 
-  // Text overflow props
   /**
    * 是否单行省略右侧内容。
    */
@@ -75,7 +70,6 @@ export const vroVanCellProps = {
    */
   lineClamp: [String, Number] as PropType<string | number>,
 
-  // Icon props
   /**
    * 标题前置图标。传入字符串时作为 VroVanIcon 的 name 使用，传入对象时透传给 VroVanIcon。
    */

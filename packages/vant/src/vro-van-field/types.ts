@@ -7,13 +7,10 @@ import { type VroVanCellEmits, vroVanCellProps, type VroVanCellSlots } from '../
 export const vroVanFieldCellProps = omit(vroVanCellProps, ['value', 'formatter'])
 
 export const vroVanFieldProps = {
-  // Cell props
   ...vroVanFieldCellProps,
 
-  // Input props
   ...vroInputProps,
 
-  // Field props
   /**
    * 是否显示清除按钮。
    */
