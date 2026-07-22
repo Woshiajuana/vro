@@ -8,6 +8,14 @@
   <demo-block title="图标和必填">
     <vro-van-cell label="前置图标" value="内容" prefix-icon="van-icon-setting-o" />
     <vro-van-cell label="后置图标" value="内容" suffix-icon="van-icon-info-o" />
+    <vro-van-cell
+      label="图标点击"
+      :value="iconClickText"
+      prefix-icon="van-icon-setting-o"
+      suffix-icon="van-icon-info-o"
+      @click-prefix-icon="iconClickText = '点击了前置图标'"
+      @click-suffix-icon="iconClickText = '点击了后置图标'"
+    />
     <vro-van-cell required label="必填项" value="内容" arrow />
     <vro-van-cell required no-asterisk label="隐藏星号" value="内容" arrow />
   </demo-block>
@@ -54,8 +62,11 @@
 </template>
 
 <script setup lang="ts">
+  import { ref } from 'vue'
+
   const price = '12800'
   const longText = '这是一段较长的内容，用来展示单元格在内容超出时的省略效果。'
+  const iconClickText = ref('点击左右图标')
 
   const formatPrice = (value: string) => `¥${Number(value).toLocaleString()}`
 </script>

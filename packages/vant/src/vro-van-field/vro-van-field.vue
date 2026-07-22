@@ -6,6 +6,8 @@
       'is-disabled': disabled,
       'is-readonly': readonly,
     }"
+    @click-prefix-icon="$emit('click-prefix-icon', $event)"
+    @click-suffix-icon="$emit('click-suffix-icon', $event)"
   >
     <template v-for="(_, name) in $slots" #[name]="slotProps" :key="name">
       <slot :name="name" v-bind="slotProps"></slot>

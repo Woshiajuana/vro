@@ -21,8 +21,9 @@
           v-if="prefixIcon"
           v-bind="resolveIcon(prefixIcon)"
           class="vro-van-cell-prefix-icon"
+          @click="$emit('click-prefix-icon', $event)"
         >
-          <slot name="icon-default"></slot>
+          <slot name="prefix-icon-default"></slot>
         </vro-van-icon>
       </slot>
       <slot name="label">
@@ -38,7 +39,10 @@
           v-if="suffixIcon"
           v-bind="resolveIcon(suffixIcon)"
           class="vro-van-cell-suffix-icon"
-        />
+          @click="$emit('click-suffix-icon', $event)"
+        >
+          <slot name="suffix-icon-default"></slot>
+        </vro-van-icon>
       </slot>
       <vro-van-icon v-if="arrow" class="vro-van-cell-arrow" name="van-icon-arrow" />
     </div>
@@ -48,10 +52,16 @@
 
 <script setup lang="ts">
   import { VroVanIcon } from '../vro-van-icon'
-  import { type VroVanCellIcon, vroVanCellProps, type VroVanCellSlots } from './types'
+  import {
+    type VroVanCellEmits,
+    type VroVanCellIcon,
+    vroVanCellProps,
+    type VroVanCellSlots,
+  } from './types'
 
   defineOptions({ name: 'VroVanCell' })
   defineSlots<VroVanCellSlots>()
+  defineEmits<VroVanCellEmits>()
   defineProps(vroVanCellProps)
 
   const resolveIcon = (icon: VroVanCellIcon) => {

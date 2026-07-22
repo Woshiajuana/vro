@@ -87,6 +87,16 @@
       <td>-</td>
       <td>点击清除按钮时触发</td>
     </tr>
+    <tr>
+      <td>click-prefix-icon</td>
+      <td>event: MouseEvent</td>
+      <td>点击 prefixIcon 时触发</td>
+    </tr>
+    <tr>
+      <td>click-suffix-icon</td>
+      <td>event: MouseEvent</td>
+      <td>点击 suffixIcon 时触发</td>
+    </tr>
   </tbody>
 </table>
 
@@ -111,7 +121,7 @@
       <td>自定义标题前置内容，会覆盖 prefixIcon 渲染的图标</td>
     </tr>
     <tr>
-      <td>icon-default</td>
+      <td>prefix-icon-default</td>
       <td>自定义 prefixIcon 图标的默认插槽内容</td>
     </tr>
     <tr>
@@ -121,6 +131,10 @@
     <tr>
       <td>suffix</td>
       <td>自定义输入区域后置内容，会覆盖 suffixIcon 渲染的图标</td>
+    </tr>
+    <tr>
+      <td>suffix-icon-default</td>
+      <td>自定义 suffixIcon 图标的默认插槽内容</td>
     </tr>
     <tr>
       <td>append</td>

@@ -108,7 +108,7 @@ export interface VroVanCellSlots extends VroSlots {
   /**
    * 自定义 prefixIcon 图标的默认插槽内容。
    */
-  'icon-default'?: VroSlot
+  'prefix-icon-default'?: VroSlot
 
   /**
    * 自定义标题内容。
@@ -121,7 +121,24 @@ export interface VroVanCellSlots extends VroSlots {
   suffix?: VroSlot
 
   /**
+   * 自定义 suffixIcon 图标的默认插槽内容。
+   */
+  'suffix-icon-default'?: VroSlot
+
+  /**
    * 自定义整体后置内容。
    */
   append?: VroSlot
+}
+
+export interface VroVanCellEmits {
+  /**
+   * 点击 prefixIcon 时触发。
+   */
+  'click-prefix-icon': [event: MouseEvent]
+
+  /**
+   * 点击 suffixIcon 时触发。
+   */
+  'click-suffix-icon': [event: MouseEvent]
 }

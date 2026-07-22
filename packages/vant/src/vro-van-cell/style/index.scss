@@ -136,8 +136,10 @@
 
 .vro-van-cell-prefix-icon {
   --vro-icon-size: var(--vro-van-cell-prefix-icon-size);
+  cursor: pointer;
 }
 
 .vro-van-cell-suffix-icon {
   --vro-icon-size: var(--vro-van-cell-suffix-icon-size);
+  cursor: pointer;
 }
