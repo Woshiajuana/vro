@@ -150,7 +150,11 @@
       <td>14px</td>
     </tr>
     <tr>
-      <td>--vro-van-cell-icon-size</td>
+      <td>--vro-van-cell-prefix-icon-size</td>
+      <td>18px</td>
+    </tr>
+    <tr>
+      <td>--vro-van-cell-suffix-icon-size</td>
       <td>18px</td>
     </tr>
     <tr>

@@ -134,7 +134,10 @@
   line-height: 30px;
 }
 
-.vro-van-cell-suffix-icon,
 .vro-van-cell-prefix-icon {
   --vro-icon-size: var(--vro-van-cell-prefix-icon-size);
+}
+
+.vro-van-cell-suffix-icon {
+  --vro-icon-size: var(--vro-van-cell-suffix-icon-size);
 }
