@@ -4,7 +4,7 @@
   --vro-van-field-placeholder-color: var(--van-text-color-3);
   --vro-van-field-disabled-color: var(--van-text-color-3);
   --vro-van-field-clear-color: var(--van-gray-5);
-  --vro-van-field-unit-color: var(--van-text-color-2);
+  --vro-van-field-unit-color: var(--van-text-color);
 }
 
 .vro-van-field {
@@ -50,7 +50,6 @@
 .vro-van-field-clear {
   --vro-icon-size: 16px;
   flex: none;
-  margin-left: 8px;
   color: var(--vro-van-field-clear-color);
   line-height: 1;
   cursor: pointer;
@@ -58,7 +57,6 @@
 
 .vro-van-field-unit {
   flex: none;
-  margin-left: 8px;
   color: var(--vro-van-field-unit-color);
   white-space: nowrap;
 }
