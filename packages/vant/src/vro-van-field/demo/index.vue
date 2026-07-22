@@ -33,6 +33,9 @@
     />
     <vro-van-field v-model="address" direction="column" label="详细地址" placeholder="请输入地址" />
     <vro-van-field v-model="readonlyValue" label="只读字段" readonly arrow />
+    <vro-van-field>
+      <template #append></template>
+    </vro-van-field>
   </demo-block>
 </template>
 
