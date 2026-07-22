@@ -7,8 +7,13 @@ import { vroVanCellProps } from '../vro-van-cell'
 export const vroVanFieldCellProps = omit(vroVanCellProps, ['value', 'formatter'])
 
 export const vroVanFieldProps = {
+  // Cell props
   ...vroVanFieldCellProps,
+
+  // Input props
   ...vroInputProps,
+
+  // Field props
   /**
    * 是否显示清除按钮。
    */
@@ -52,4 +57,26 @@ export interface VroVanFieldSlots extends VroSlots {
    * 自定义最后置内容。
    */
   after?: VroSlot
+}
+
+export interface VroVanFieldEmits {
+  /**
+   * 输入值变化或清空时触发。
+   */
+  'update:modelValue': [value: string]
+
+  /**
+   * 输入时触发。
+   */
+  input: [event: InputEvent]
+
+  /**
+   * 失焦时触发。
+   */
+  blur: [event: FocusEvent]
+
+  /**
+   * 点击清除按钮时触发。
+   */
+  clear: []
 }

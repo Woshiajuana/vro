@@ -8,46 +8,42 @@
 }
 
 .vro-van-field {
-  .vro-van-cell-value {
-    min-width: 0;
-  }
-
-  .vro-input {
-    box-sizing: border-box;
-    display: block;
-    flex: 1;
-    min-width: 0;
-    width: 100%;
-    padding: 4px 0;
-    border: 0;
-    outline: 0;
-    color: var(--vro-van-field-input-color);
-    font: inherit;
-    line-height: inherit;
-    text-align: right;
-    background: transparent;
-    appearance: none;
-
-    &::placeholder {
-      color: var(--vro-van-field-placeholder-color);
-    }
-
-    &:disabled {
-      color: var(--vro-van-field-disabled-color);
-      cursor: not-allowed;
-      opacity: 1;
-      -webkit-text-fill-color: var(--vro-van-field-disabled-color);
-    }
-
-    &[readonly] {
-      cursor: default;
-    }
-  }
-
   &.is-column {
-    .vro-input {
+    .vro-van-field-input {
       text-align: left;
     }
+  }
+}
+
+.vro-van-field-input {
+  box-sizing: border-box;
+  display: block;
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  padding: 4px 0;
+  border: 0;
+  outline: 0;
+  color: var(--vro-van-field-input-color);
+  font: inherit;
+  line-height: inherit;
+  text-align: right;
+  background: transparent;
+  appearance: none;
+
+  &::placeholder {
+    color: var(--vro-van-field-placeholder-color);
+  }
+
+  &:disabled {
+    color: var(--vro-van-field-disabled-color);
+    cursor: not-allowed;
+    opacity: 1;
+    -webkit-text-fill-color: var(--vro-van-field-disabled-color);
+  }
+
+  &[readonly] {
+    cursor: default;
   }
 }
 

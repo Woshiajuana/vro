@@ -13,6 +13,7 @@
 
     <vro-input
       v-bind="inputProps"
+      class="vro-van-field-input"
       ref="inputRef"
       @update:model-value="$emit('update:modelValue', $event)"
       @input="$emit('input', $event)"
@@ -37,20 +38,19 @@
 
   import { VroVanCell } from '../vro-van-cell'
   import { VroVanIcon } from '../vro-van-icon'
-  import { vroVanFieldCellProps, vroVanFieldProps, type VroVanFieldSlots } from './types'
+  import {
+    vroVanFieldCellProps,
+    type VroVanFieldEmits,
+    vroVanFieldProps,
+    type VroVanFieldSlots,
+  } from './types'
 
   defineOptions({ name: 'VroVanField' })
   defineSlots<VroVanFieldSlots>()
-
-  const emit = defineEmits<{
-    (event: 'update:modelValue', value: string): void
-    (event: 'input', value: InputEvent): void
-    (event: 'blur', value: FocusEvent): void
-    (event: 'clear'): void
-  }>()
-
+  const emit = defineEmits<VroVanFieldEmits>()
   const props = defineProps(vroVanFieldProps)
-  const inputRef = ref<VroInputInstance>()
+
+  const vroInputRef = ref<VroInputInstance>()
 
   const cellProps = computed(() => pick(props, typedKeys(vroVanFieldCellProps)))
   const inputProps = computed(() => pick(props, typedKeys(vroInputProps)))
@@ -66,7 +66,10 @@
 
   defineExpose({
     get input() {
-      return inputRef.value?.input
+      return vroInputRef.value!.input
+    },
+    get vroInput() {
+      return vroInputRef.value!
     },
   })
 </script>
