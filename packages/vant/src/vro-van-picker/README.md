@@ -2,7 +2,7 @@
 
 ### 介绍
 
-基于 Vant Picker 和 Popup 封装的弹出选择器。支持实例方法打开、动态传入 Picker 配置、筛选选项和自定义筛选区域，适合配合 TriggerCell 等触发型表单项使用。
+基于 Vant Picker 和 Popup 封装的弹出选择器。支持实例方法打开、动态传入 Picker 配置和筛选选项，适合配合 TriggerCell 等触发型表单项使用。
 
 ## 代码演示
 
@@ -60,20 +60,6 @@ const openArea = () => {
 }
 ```
 
-### 自定义筛选
-
-```html
-<vro-van-picker ref="pickerRef">
-  <template #filter="{ keyword, placeholder, setKeyword }">
-    <input
-      :value="keyword"
-      :placeholder="placeholder"
-      @input="setKeyword($event.target.value)"
-    />
-  </template>
-</vro-van-picker>
-```
-
 ## API
 
 ### 属性 Props
@@ -91,25 +77,6 @@ const openArea = () => {
       <td>{{ key }}</td>
       <td>{{ parseType(item.type || item) }}</td>
       <td>{{ reserve(item.default, '-') }}</td>
-    </tr>
-  </tbody>
-</table>
-
-### 插槽 Slots
-
-<table>
-  <tbody>
-    <tr>
-      <td>名称</td>
-      <td>说明</td>
-    </tr>
-    <tr>
-      <td>default</td>
-      <td>自定义 Picker 顶部内容</td>
-    </tr>
-    <tr>
-      <td>filter</td>
-      <td>自定义筛选区域，参数为 { keyword, placeholder, setKeyword }</td>
     </tr>
   </tbody>
 </table>

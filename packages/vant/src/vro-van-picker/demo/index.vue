@@ -27,27 +27,6 @@
     />
   </demo-block>
 
-  <demo-block title="自定义筛选">
-    <vro-van-trigger-cell
-      v-model="customFilterCityText"
-      label="目的地"
-      placeholder="请选择目的地"
-      @click="openCustomFilterCity"
-    />
-    <vro-van-picker ref="customPickerRef">
-      <template #filter="{ keyword, placeholder, setKeyword }">
-        <div class="demo-picker-filter">
-          <input
-            :value="keyword"
-            :placeholder="placeholder"
-            class="demo-picker-filter-input"
-            type="text"
-            @input="setKeyword(($event.target as HTMLInputElement).value)"
-          />
-        </div>
-      </template>
-    </vro-van-picker>
-  </demo-block>
 </template>
 
 <script setup lang="ts">
@@ -56,17 +35,14 @@
   import type { VroVanPickerInstance, VroVanPickerProps, VroVanPickerResult } from '..'
 
   const pickerRef = useTemplateRef<VroVanPickerInstance>('pickerRef')
-  const customPickerRef = useTemplateRef<VroVanPickerInstance>('customPickerRef')
 
   const cityValue = ref(['hangzhou'])
   const filterCityValue = ref<string[]>([])
   const areaValue = ref(['zhejiang', 'hangzhou'])
-  const customFilterCityValue = ref<string[]>([])
 
   const cityText = ref('杭州')
   const filterCityText = ref('')
   const areaText = ref('浙江 / 杭州')
-  const customFilterCityText = ref('')
 
   const cityColumns = [
     { text: '杭州', value: 'hangzhou' },
@@ -139,41 +115,7 @@
     )
   }
 
-  const openCustomFilterCity = () => {
-    customPickerRef.value
-      ?.show<VroVanPickerResult>({
-        title: '选择目的地',
-        columns: cityColumns,
-        modelValue: customFilterCityValue.value,
-        filterable: true,
-      })
-      .then((result) => {
-        customFilterCityValue.value = result.selectedValues as string[]
-        customFilterCityText.value = getSelectedText(result)
-      })
-      .catch(() => undefined)
-  }
-
   const getSelectedText = (result: VroVanPickerResult) => {
     return result.selectedOptions.map((option) => option?.text).join(' / ')
   }
 </script>
-
-<style lang="scss" scoped>
-  .demo-picker-filter {
-    padding: 8px 16px 12px;
-  }
-
-  .demo-picker-filter-input {
-    box-sizing: border-box;
-    width: 100%;
-    height: 36px;
-    padding: 0 12px;
-    color: var(--van-primary-color);
-    font-size: var(--van-font-size-md);
-    background: rgba(25, 137, 250, 8%);
-    border: 1px solid rgba(25, 137, 250, 35%);
-    border-radius: var(--van-radius-sm);
-    outline: none;
-  }
-</style>

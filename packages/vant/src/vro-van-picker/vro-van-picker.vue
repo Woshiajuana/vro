@@ -6,23 +6,6 @@
     @click-overlay="hide('overlay')"
     @click-close-icon="hide('close')"
   >
-    <slot></slot>
-
-    <slot
-      v-if="computedProps.filterable"
-      name="filter"
-      :keyword="keyword"
-      :placeholder="filterInputPlaceholder"
-      :set-keyword="setKeyword"
-    >
-      <input
-        v-model="keyword"
-        :placeholder="filterInputPlaceholder"
-        class="vro-van-picker-filter"
-        type="text"
-      />
-    </slot>
-
     <van-picker
       v-bind="pickerAttrs"
       ref="pickerRef"
@@ -34,6 +17,14 @@
       @click-option="$emit('clickOption', $event)"
       @scroll-into="$emit('scrollInto', $event)"
     ></van-picker>
+
+    <input
+      v-if="computedProps.filterable"
+      v-model="keyword"
+      :placeholder="filterInputPlaceholder"
+      class="vro-van-picker-filter"
+      type="text"
+    />
   </van-popup>
 </template>
 
@@ -50,11 +41,9 @@
     type VroVanPickerProps,
     vroVanPickerProps,
     type VroVanPickerResult,
-    type VroVanPickerSlots,
   } from './types'
 
   defineOptions({ name: 'VroVanPicker' })
-  defineSlots<VroVanPickerSlots>()
   const emit = defineEmits<VroVanPickerEmits>()
   const props = defineProps(vroVanPickerProps)
 
@@ -108,10 +97,6 @@
       return result
     },
   })
-
-  const setKeyword = (value: string) => {
-    keyword.value = value
-  }
 
   const filterColumns = (columns: Array<PickerColumn | PickerOption>, value: string) => {
     if (isColumnGroup(columns)) {

@@ -1,4 +1,3 @@
-import type { VroSlot } from '@vrojs/base'
 import type {
   PickerCancelEventParams,
   PickerChangeEventParams,
@@ -33,18 +32,6 @@ export const vroVanPickerProps = {
 }
 
 export type VroVanPickerProps = ExtractPropTypes<typeof vroVanPickerProps>
-
-export interface VroVanPickerSlots {
-  /**
-   * 自定义顶部内容。
-   */
-  default?: VroSlot
-
-  /**
-   * 自定义筛选区域。
-   */
-  filter?: VroSlot
-}
 
 export interface VroVanPickerEmits {
   /**
