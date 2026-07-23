@@ -1,2 +1,7 @@
+import 'vant/es/picker-cancel-event-params/style'
+import 'vant/es/picker-change-event-params/style'
+import 'vant/es/picker-confirm-event-params/style'
+import 'vant/es/picker-option/style'
 import 'vant/es/picker/style'
+import 'vant/es/popup-props/style'
 import 'vant/es/popup/style'
