@@ -17,6 +17,7 @@ const packageImportMap: Record<string, PackageName> = {
 
 const importRE = /import\s+(?:type\s+)?(?:[\s\S]*?)\s+from\s+['"]([^'"]+)['"]/g
 const namedImportRE = /\{([^}]+)\}/
+const typeOnlyImportRE = /^import\s+type\b/
 
 const kebabCase = (key: string) => {
   const result = key.replace(/([A-Z])/g, ' $1').trim()
@@ -42,12 +43,9 @@ const getNamedImports = (statement: string) => {
 
   return matched[1]
     .split(',')
-    .map((item) =>
-      item
-        .trim()
-        .split(/\s+as\s+/i)[0]
-        .trim(),
-    )
+    .map((item) => item.trim())
+    .filter((item) => !/^type\b/.test(item))
+    .map((item) => item.split(/\s+as\s+/i)[0].trim())
     .filter(Boolean)
 }
 
@@ -150,6 +148,11 @@ const collectStyleDeps = (packageName: PackageName, componentDir: string) => {
     Array.from(code.matchAll(importRE)).forEach((matched) => {
       const statement = matched[0]
       const source = matched[1]
+
+      if (typeOnlyImportRE.test(statement)) {
+        return
+      }
+
       const namedImports = getNamedImports(statement).filter(isComponentImport)
 
       if (source === 'element-plus') {
