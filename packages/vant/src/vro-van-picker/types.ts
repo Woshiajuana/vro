@@ -8,6 +8,8 @@ import type {
 import { pickerProps } from 'vant'
 import type { ExtractPropTypes, PropType } from 'vue'
 
+export const VRO_VAN_PICKER_NO_DATA_VALUE = 'VRO-VAN-ERR_NO_DATA'
+
 export interface VroVanPickerResult extends PickerConfirmEventParams {
   value: unknown
 }
