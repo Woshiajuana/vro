@@ -1,5 +1,6 @@
 /* 本文件自动生成 './scripts/index.ts' */
 
+export * from './locale'
 export * from './utils'
 export * from './vro-van-cell'
 export * from './vro-van-cell-group'
