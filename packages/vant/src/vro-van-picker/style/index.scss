@@ -1,9 +1,8 @@
 :root,
 :host {
-  --vro-van-picker-filter-padding: 8px 16px 12px;
+  --vro-van-picker-filter-font-size: 14px;
   --vro-van-picker-filter-height: 36px;
   --vro-van-picker-filter-background: var(--van-background-2);
-  --vro-van-picker-filter-border-color: var(--van-border-color);
   --vro-van-picker-filter-color: var(--van-text-color);
   --vro-van-picker-filter-placeholder-color: var(--van-text-color-3);
 }
@@ -11,17 +10,14 @@
 .vro-van-picker-filter {
   box-sizing: border-box;
   display: block;
-  width: calc(100% - 32px);
+  width: 100%;
   height: var(--vro-van-picker-filter-height);
-  padding: 0 12px;
-  margin: var(--vro-van-picker-filter-padding);
+  padding: 0 16px;
   color: var(--vro-van-picker-filter-color);
-  font-size: var(--van-font-size-md);
-  line-height: var(--vro-van-picker-filter-height);
-  background: var(--vro-van-picker-filter-background);
-  border: 1px solid var(--vro-van-picker-filter-border-color);
-  border-radius: var(--van-radius-sm);
+  font-size: var(--vro-van-picker-filter-font-size);
   outline: none;
+  border: none;
+  background-color: transparent;
 
   &::placeholder {
     color: var(--vro-van-picker-filter-placeholder-color);

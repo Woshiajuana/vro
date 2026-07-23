@@ -1,18 +1,20 @@
 <template>
   <van-popup
-    v-bind="popupAttrs"
+    round
+    position="bottom"
+    v-bind="computedProps.popupProps"
     class="vro-van-picker"
     :show="visible"
-    @click-overlay="hide('overlay')"
-    @click-close-icon="hide('close')"
+    @click-overlay="hide('cancel')"
+    @click-close-icon="hide('cancel')"
   >
     <van-picker
       v-bind="pickerAttrs"
-      ref="pickerRef"
+      ref="vanPickerRef"
       :columns="filteredColumns"
       @update:model-value="$emit('update:modelValue', $event)"
       @confirm="confirm"
-      @cancel="hide($event)"
+      @cancel="hide('cancel')"
       @change="$emit('change', $event)"
       @click-option="$emit('clickOption', $event)"
       @scroll-into="$emit('scrollInto', $event)"
@@ -21,7 +23,7 @@
     <input
       v-if="computedProps.filterable"
       v-model="keyword"
-      :placeholder="filterInputPlaceholder"
+      :placeholder="computedProps.filterPlaceholder || t('picker.filterPlaceholder')"
       class="vro-van-picker-filter"
       type="text"
     />
@@ -48,22 +50,16 @@
   const props = defineProps(vroVanPickerProps)
 
   const { t } = useLocale()
-  const pickerRef = useTemplateRef<PickerInstance>('pickerRef')
-  const keyword = ref('')
+  const vanPickerRef = useTemplateRef<PickerInstance>('vanPickerRef')
+
   const dynamicProps = ref<Partial<VroVanPickerProps>>()
+  const keyword = ref('')
 
   const computedProps = computed<VroVanPickerProps>(() =>
     Object.assign({}, props, dynamicProps.value),
   )
   const pickerAttrs = computed(() => pick(computedProps.value, typedKeys(pickerProps)))
-  const popupAttrs = computed(() => ({
-    round: true,
-    position: 'bottom' as const,
-    ...computedProps.value.popupProps,
-  }))
-  const filterInputPlaceholder = computed(
-    () => computedProps.value.filterPlaceholder || t('picker.filterPlaceholder'),
-  )
+
   const filteredColumns = computed(() => {
     const { columns } = computedProps.value
     const value = keyword.value.trim().toLowerCase()
@@ -134,8 +130,8 @@
     show,
     hide,
     confirm,
-    get picker() {
-      return pickerRef.value!
+    get vanPickerRef() {
+      return vanPickerRef.value!
     },
   })
 </script>

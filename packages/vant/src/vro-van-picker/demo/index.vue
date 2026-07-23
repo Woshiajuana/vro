@@ -26,7 +26,6 @@
       @click="openArea"
     />
   </demo-block>
-
 </template>
 
 <script setup lang="ts">
@@ -51,16 +50,6 @@
     { text: '成都', value: 'chengdu' },
     { text: '武汉', value: 'wuhan' },
   ]
-  const areaColumns = [
-    [
-      { text: '浙江', value: 'zhejiang' },
-      { text: '江苏', value: 'jiangsu' },
-    ],
-    [
-      { text: '杭州', value: 'hangzhou' },
-      { text: '南京', value: 'nanjing' },
-    ],
-  ]
 
   const openPicker = (
     options: Partial<VroVanPickerProps>,
@@ -69,7 +58,9 @@
     pickerRef.value
       ?.show<VroVanPickerResult>(options)
       .then(callback)
-      .catch(() => undefined)
+      .catch((err) => {
+        console.log('err => ', err)
+      })
   }
 
   const openCity = () => {
@@ -95,6 +86,7 @@
         filterable: true,
       },
       (result) => {
+        console.log('result => ', result)
         filterCityValue.value = result.selectedValues as string[]
         filterCityText.value = getSelectedText(result)
       },
@@ -105,7 +97,44 @@
     openPicker(
       {
         title: '选择地区',
-        columns: areaColumns,
+        columns: [
+          {
+            text: '浙江',
+            value: 'Zhejiang',
+            children: [
+              {
+                text: '杭州',
+                value: 'Hangzhou',
+                children: [
+                  { text: '西湖区', value: 'Xihu' },
+                  { text: '余杭区', value: 'Yuhang' },
+                ],
+              },
+              {
+                text: '温州',
+                value: 'Wenzhou',
+                children: [
+                  { text: '鹿城区', value: 'Lucheng' },
+                  { text: '瓯海区', value: 'Ouhai' },
+                ],
+              },
+            ],
+          },
+          {
+            text: '福建',
+            value: 'Fujian',
+            children: [
+              {
+                text: '福州',
+                value: 'Fuzhou',
+                children: [
+                  { text: '鼓楼区', value: 'Gulou' },
+                  { text: '台江区', value: 'Taijiang' },
+                ],
+              },
+            ],
+          },
+        ],
         modelValue: areaValue.value,
       },
       (result) => {
