@@ -1,0 +1,43 @@
+:root,
+:host {
+  --vro-van-trigger-cell-value-color: var(--van-text-color);
+  --vro-van-trigger-cell-placeholder-color: var(--van-text-color-3);
+  --vro-van-trigger-cell-disabled-color: var(--van-text-color-3);
+  --vro-van-trigger-cell-clear-color: var(--van-gray-5);
+}
+
+.vro-van-trigger-cell {
+  &.is-disabled {
+    cursor: not-allowed;
+
+    .vro-van-trigger-cell-value {
+      color: var(--vro-van-trigger-cell-disabled-color);
+    }
+  }
+
+  &.is-column {
+    .vro-van-trigger-cell-value {
+      text-align: left;
+    }
+  }
+}
+
+.vro-van-trigger-cell-value {
+  flex: 1;
+  min-width: 0;
+  padding: 4px 0;
+  color: var(--vro-van-trigger-cell-value-color);
+  text-align: right;
+
+  &.is-placeholder {
+    color: var(--vro-van-trigger-cell-placeholder-color);
+  }
+}
+
+.vro-van-trigger-cell-clear {
+  --vro-icon-size: 16px;
+  flex: none;
+  color: var(--vro-van-trigger-cell-clear-color);
+  line-height: 1;
+  cursor: pointer;
+}
