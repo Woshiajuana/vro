@@ -18,6 +18,17 @@
     />
   </demo-block>
 
+  <demo-block title="纵向布局">
+    <vro-van-trigger-cell
+      v-model="address"
+      direction="column"
+      label="详细地址"
+      placeholder="请选择详细地址"
+      clearable
+      @click="address = '浙江省杭州市西湖区'"
+    />
+  </demo-block>
+
   <demo-block title="格式化">
     <vro-van-trigger-cell
       v-model="amount"
@@ -68,6 +79,7 @@
 
   const city = ref('')
   const date = ref('2026-07-23')
+  const address = ref('')
   const amount = ref(100)
   const user = ref({ id: 1, name: '张三' })
   const disabledValue = ref('不可点击')

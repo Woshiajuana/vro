@@ -34,6 +34,7 @@
     />
     <vro-van-field v-model="address" direction="column" label="详细地址" placeholder="请输入地址" />
     <vro-van-field v-model="readonlyValue" label="只读字段" readonly arrow />
+    <vro-van-field v-model="disabledValue" disabled label="禁用字段" placeholder="禁用状态" />
   </demo-block>
 </template>
 
@@ -47,4 +48,5 @@
   const phone = ref('')
   const address = ref('')
   const readonlyValue = ref('查看详情')
+  const disabledValue = ref('不可编辑')
 </script>

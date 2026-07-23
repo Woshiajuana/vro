@@ -18,8 +18,8 @@
 
     <span
       class="vro-van-trigger-cell-value"
-      :class="{ 'is-placeholder': isEmpty }"
-      v-html="isEmpty ? placeholder : displayValue"
+      :class="{ 'is-placeholder': isEmptyValue }"
+      v-html="isEmptyValue ? placeholder : displayValue"
     ></span>
 
     <vro-van-icon
@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-  import { pick, typedKeys } from '@daysnap/utils'
+  import { isEmpty, pick, typedKeys } from '@daysnap/utils'
   import { computed } from 'vue'
 
   import { VroVanCell } from '../vro-van-cell'
@@ -50,11 +50,11 @@
   const props = defineProps(vroVanTriggerCellProps)
 
   const cellProps = computed(() => pick(props, typedKeys(vroVanTriggerCellCellProps)))
-  const isEmpty = computed(() => props.modelValue === '' || props.modelValue == null)
   const displayValue = computed(() => props.formatter(props.modelValue))
+  const isEmptyValue = computed(() => isEmpty(displayValue.value))
   const showClear = computed(() => {
     const { clearable, disabled, readonly } = props
-    return clearable && !disabled && !readonly && !isEmpty.value
+    return clearable && !disabled && !readonly && !isEmptyValue.value
   })
   const showArrow = computed(
     () => props.arrow && !props.disabled && !props.readonly && !showClear.value,

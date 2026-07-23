@@ -29,6 +29,17 @@
 />
 ```
 
+### 纵向布局
+
+```html
+<vro-van-trigger-cell
+  v-model="address"
+  direction="column"
+  label="详细地址"
+  placeholder="请选择详细地址"
+/>
+```
+
 ### 格式化
 
 ```html
