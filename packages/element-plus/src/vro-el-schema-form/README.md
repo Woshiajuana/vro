@@ -140,7 +140,7 @@ const schema = {
     </tr>
     <tr>
       <td>default</td>
-      <td>表单尾部内容，会渲染在 ElRow 内部</td>
+      <td>表单尾部内容，会渲染在 ElRow 内部，适合放提交按钮等操作内容</td>
     </tr>
     <tr>
       <td>schema 字段 slots 配置中的 key</td>
@@ -162,7 +162,7 @@ const schema = {
       <td>说明</td>
     </tr>
     <tr>
-      <td>form</td>
+      <td>elForm</td>
       <td>ElForm 实例</td>
     </tr>
     <tr>

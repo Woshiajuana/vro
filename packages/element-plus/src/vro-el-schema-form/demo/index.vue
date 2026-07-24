@@ -20,6 +20,21 @@
       :col-props="{ span: 12 }"
     />
   </demo-block>
+
+  <demo-block title="字段插槽">
+    <vro-el-schema-form
+      :schema="slotSchema"
+      :form-props="{ labelWidth: '90px' }"
+      :col-props="{ span: 12 }"
+    >
+      <template #websiteLabel="{ item }">
+        <span>{{ item.label }}</span>
+      </template>
+      <template #prepend>
+        <span>https://</span>
+      </template>
+    </vro-el-schema-form>
+  </demo-block>
 </template>
 
 <script setup lang="ts">
@@ -85,6 +100,20 @@
       value: '',
       is: 'ElInput',
       hidden: (_, __, metadata) => metadata.accountType.value !== 'company',
+    },
+  })
+
+  const slotSchema = ref<VroElSchemaFormSchema>({
+    website: {
+      label: '网址',
+      value: '',
+      is: 'ElInput',
+      itemSlots: {
+        websiteLabel: 'label',
+      },
+      slots: {
+        prepend: 'prepend',
+      },
     },
   })
 

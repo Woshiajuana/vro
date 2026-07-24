@@ -1,7 +1,7 @@
 <template>
   <el-form
     v-bind="elFormProps"
-    ref="refForm"
+    ref="formRef"
     class="vro-el-schema-form"
     :model="model"
     :rules="rules"
@@ -24,7 +24,7 @@
             v-model="item.value"
             v-bind="mapping?.[key]?.props"
             :is="mapping?.[key]?.is"
-            ref="refComponents"
+            ref="componentRefs"
             @change="handleChange(key, $event)"
             @input="handleInput(key, $event)"
           >
@@ -53,12 +53,18 @@
   import { useLocale } from '../locale'
   import { datePickerValueFormat } from '../utils'
   import { defineVroElSchemaFormFieldTrigger } from './defineVroElSchemaFormFieldTrigger'
-  import { vroElSchemaFormProps, type VroElSchemaFormSchema } from './types'
+  import {
+    type VroElSchemaFormEmits,
+    vroElSchemaFormProps,
+    type VroElSchemaFormSchema,
+    type VroElSchemaFormSlots,
+  } from './types'
   import { vroElSchemaFormFieldManager } from './vroElSchemaFormFieldManager'
 
   defineOptions({ name: 'VroElSchemaForm' })
 
-  const emit = defineEmits(['change-field', 'input-field'])
+  const emit = defineEmits<VroElSchemaFormEmits>()
+  defineSlots<VroElSchemaFormSlots>()
   const props = defineProps(vroElSchemaFormProps)
 
   const elFormProps = computed(() => {
@@ -110,19 +116,16 @@
   const mapping = computed(() => {
     return Object.entries(metadata.value).reduce<Record<string, any>>((res, [key, item]) => {
       // eslint-disable-next-line prefer-const
-      let { props = {}, is, options, labelKey, valueKey } = item
+      let { is, options, labelKey, valueKey } = item
+      let props = { ...item.props }
       if (isString(is)) {
         const data = vroElSchemaFormFieldManager.get(is)
         if (data) {
-          let loc: Record<string, any> = {}
-          if (isString(is)) {
-            loc = (locale.value.el['schemaForm'] as any)[is]
-          }
+          const loc = (locale.value.el['schemaForm'] as any)[is] ?? {}
 
           if (is === 'ElDatePicker') {
-            props.valueFormat = datePickerValueFormat[props?.type ?? 'date']
+            props.valueFormat = props.valueFormat ?? datePickerValueFormat[props.type ?? 'date']
           }
-          is = data.is
           props = Object.assign(
             {},
             data.props,
@@ -138,6 +141,7 @@
               props.endPlaceholder = '-'
             }
           }
+          is = data.is
         }
       }
       res[key] = { is, props }
@@ -156,16 +160,16 @@
   }
 
   // 校验
-  const refComponents = useTemplateRef<any[]>('refComponents')
-  const refForm = useTemplateRef('refForm')
+  const componentRefs = useTemplateRef<any[]>('componentRefs')
+  const formRef = useTemplateRef('formRef')
   const validate = async () => {
-    const instances = refComponents.value?.filter((item) => isFunction(item.validate)) ?? []
-    await Promise.all([refForm.value, ...instances].map((item) => item?.validate()))
+    const instances = componentRefs.value?.filter((item) => isFunction(item.validate)) ?? []
+    await Promise.all([formRef.value, ...instances].map((item) => item?.validate()))
   }
 
   // 获取值 这里返回异步函数 为以后可能会做校验做准备
   const extractValues = async () => {
-    const instances = refComponents.value?.filter((item) => isFunction(item.extractValues)) ?? []
+    const instances = componentRefs.value?.filter((item) => isFunction(item.extractValues)) ?? []
     const results = await Promise.all<Record<string, any>[]>(
       instances.map((item) => item.extractValues()),
     )
@@ -177,20 +181,20 @@
 
   // 触发执行子组件的 trigger 事件
   const trigger = defineVroElSchemaFormFieldTrigger(async (ctx) => {
-    const instances = refComponents.value?.filter((item) => isFunction(item.trigger)) ?? []
+    const instances = componentRefs.value?.filter((item) => isFunction(item.trigger)) ?? []
     await Promise.all(instances.map((item) => item.trigger(ctx)))
   })
 
   defineExpose({
     get elForm() {
-      return refForm.value!
+      return formRef.value!
     },
     validate,
-    resetFields: () => refForm.value?.resetFields(),
+    resetFields: () => formRef.value?.resetFields(),
     trigger,
     extractValues,
     validateField: async (key: string) => {
-      return refForm.value?.validateField(key)
+      return formRef.value?.validateField(key)
     },
   })
 </script>

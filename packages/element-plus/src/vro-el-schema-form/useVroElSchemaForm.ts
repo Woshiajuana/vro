@@ -31,8 +31,9 @@ export function useVroElSchemaForm<T extends Record<string, any> = Record<string
     } catch {
       throw ''
     }
-    const data = await refVroElSchemaForm.value.extractValues()
-    await task?.(data as T)
+    const data = (await refVroElSchemaForm.value.extractValues()) as T
+    await task?.(data)
+    return data
   }, rest)
 
   if (source) {

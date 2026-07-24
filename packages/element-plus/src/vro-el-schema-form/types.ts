@@ -1,4 +1,4 @@
-import type { Arrayable } from '@vrojs/base'
+import type { Arrayable, VroSlot } from '@vrojs/base'
 import {
   type ColProps,
   type FormItemProps,
@@ -136,6 +136,21 @@ export interface VroElSchemaFormSchemaField {
 export type VroElSchemaFormSchema = Record<string, VroElSchemaFormSchemaField>
 export type VroElSchemaFormFormProps = Partial<Omit<FormProps, 'model' | 'rules'>>
 
+export interface VroElSchemaFormFieldEvent {
+  key: string
+  value: any
+}
+
+export interface VroElSchemaFormSlotProps {
+  item: VroElSchemaFormSchemaField
+  [key: string]: any
+}
+
+export interface VroElSchemaFormEmits {
+  'change-field': [payload: VroElSchemaFormFieldEvent]
+  'input-field': [payload: VroElSchemaFormFieldEvent]
+}
+
 export const vroElSchemaFormProps = {
   /**
    * 透传给 ElForm 的属性，不包含 model 和 rules。
@@ -179,3 +194,15 @@ export const vroElSchemaFormProps = {
 }
 
 export type VroElSchemaFormProps = ExtractPropTypes<typeof vroElSchemaFormProps>
+
+export interface VroElSchemaFormSlots {
+  /**
+   * 表单尾部内容，会渲染在 ElRow 内部。
+   */
+  default?: VroSlot
+
+  /**
+   * schema 字段 slots 或 itemSlots 配置中的插槽。
+   */
+  [key: string]: ((props: VroElSchemaFormSlotProps) => any) | VroSlot | undefined
+}
