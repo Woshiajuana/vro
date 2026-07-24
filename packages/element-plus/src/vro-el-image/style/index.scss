@@ -1,1 +1,14 @@
-.vro-el-image { }
+:root,
+:host {
+  --vro-el-image-placeholder-background: #f2f3f4;
+}
+.vro-el-image {
+}
+.vro-el-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--vro-el-image-placeholder-background);
+}

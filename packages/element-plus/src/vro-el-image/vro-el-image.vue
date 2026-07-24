@@ -1,25 +1,27 @@
 <template>
-  <ElImage v-bind="props" class="vro-el-image">
-    <template v-for="name in slotNames" #[name]="slotProps">
-      <slot :name="name" v-bind="slotProps ?? {}" />
+  <el-image v-bind="props" class="vro-el-image">
+    <template #placeholder>
+      <slot name="placeholder">
+        <div class="vro-el-image-placeholder">
+          <span>加载中</span>
+        </div>
+      </slot>
     </template>
-  </ElImage>
+  </el-image>
 </template>
 
 <script setup lang="ts">
   import { isUndefined, omitBy } from '@daysnap/utils'
   import { ElImage } from 'element-plus'
-  import type { Slots } from 'vue'
-  import { computed, useSlots } from 'vue'
+  import { computed } from 'vue'
 
-  import { type VroElImageProps, vroElImageProps } from './types'
+  import { type VroElImageProps, vroElImageProps, type VroElImageSlots } from './types'
   import { getVroElImageOptions } from './utils'
 
   defineOptions({ name: 'VroElImage' })
+  defineSlots<VroElImageSlots>()
 
   const rawProps = defineProps(vroElImageProps)
-  const slots: Slots = useSlots()
-  const slotNames = computed(() => Object.keys(slots))
   const props = computed(() => {
     // eslint-disable-next-line prefer-const
     let { ratio, previewRatio, previewSrcList, normalizeSrc, baseUrl, src, ...rest } = {

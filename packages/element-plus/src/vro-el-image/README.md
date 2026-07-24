@@ -36,6 +36,38 @@
 </script>
 ```
 
+### 图片预览
+
+```html
+<vro-el-image
+  src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+  :preview-src-list="[
+    'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+  ]"
+  show-progress
+/>
+```
+
+### 自定义占位
+
+```html
+<vro-el-image src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg">
+  <template #placeholder>
+    <div>加载中</div>
+  </template>
+</vro-el-image>
+```
+
+### 加载失败
+
+```html
+<vro-el-image src="/not-found.png">
+  <template #error>
+    <div>加载失败</div>
+  </template>
+</vro-el-image>
+```
+
 ### 全局配置
 
 ```ts
@@ -78,10 +110,6 @@ setVroElImageOptions({
       <td>说明</td>
     </tr>
     <tr>
-      <td>default</td>
-      <td>自定义图片未加载时的占位内容，透传给 ElImage</td>
-    </tr>
-    <tr>
       <td>placeholder</td>
       <td>自定义占位内容，透传给 ElImage</td>
     </tr>
@@ -93,12 +121,24 @@ setVroElImageOptions({
       <td>viewer</td>
       <td>自定义图片预览内容，透传给 ElImage</td>
     </tr>
+    <tr>
+      <td>progress</td>
+      <td>自定义预览进度内容，透传给 ElImage</td>
+    </tr>
+    <tr>
+      <td>toolbar</td>
+      <td>自定义预览工具栏内容，透传给 ElImage</td>
+    </tr>
+    <tr>
+      <td>viewer-error</td>
+      <td>自定义预览加载失败内容，透传给 ElImage</td>
+    </tr>
   </tbody>
 </table>
 
 ### 实例方法
 
-暂无。
+支持 `ElImage` 暴露的实例方法。
 
 <script setup lang="ts">
   import { reserve } from '@daysnap/utils'
