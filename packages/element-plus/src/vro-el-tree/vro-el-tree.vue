@@ -1,6 +1,7 @@
 <template>
   <el-tree
-    v-bind="$attrs"
+    ref="treeRef"
+    v-bind="treeProps"
     class="vro-el-tree"
     :data="options"
     :default-checked-keys="checkedKeys"
@@ -9,22 +10,38 @@
     <template v-if="$slots.default" #default="scope">
       <slot v-bind="scope" />
     </template>
+
+    <template v-if="$slots.empty" #empty>
+      <slot name="empty" />
+    </template>
   </el-tree>
 </template>
 
 <script setup lang="ts">
-  import { isUndefined } from '@daysnap/utils'
-  import { ElTree } from 'element-plus'
-  import { computed } from 'vue'
+  import { isUndefined, pick, typedKeys } from '@daysnap/utils'
+  import type { TreeInstance } from 'element-plus'
+  import { ElTree, treeProps as elTreeProps } from 'element-plus'
+  import { computed, nextTick, useTemplateRef, watch } from 'vue'
 
-  import { type VroElTreeKey, type VroElTreeOption, vroElTreeProps } from './types'
+  import {
+    type VroElTreeCheckInfo,
+    type VroElTreeEmits,
+    type VroElTreeKey,
+    type VroElTreeOption,
+    vroElTreeProps,
+    type VroElTreeSlots,
+  } from './types'
 
   defineOptions({ name: 'VroElTree' })
 
-  const emit = defineEmits<{
-    (event: 'update:modelValue', value: VroElTreeKey[]): void
-  }>()
+  const emit = defineEmits<VroElTreeEmits>()
+  defineSlots<VroElTreeSlots>()
   const props = defineProps(vroElTreeProps)
+  const treeRef = useTemplateRef<TreeInstance>('treeRef')
+
+  const treeProps = computed(() => {
+    return pick(props, typedKeys(elTreeProps))
+  })
 
   const checkedKeys = computed(() => {
     const { modelValue, options, rootId } = props
@@ -51,8 +68,18 @@
     return childIds.filter(loop)
   })
 
-  const handleCheck = (_: any, data: any) => {
+  watch(
+    checkedKeys,
+    async (value) => {
+      await nextTick()
+      treeRef.value?.setCheckedKeys(value)
+    },
+    { immediate: true },
+  )
+
+  const handleCheck = (option: VroElTreeOption, data: VroElTreeCheckInfo) => {
     const { checkedKeys, halfCheckedKeys } = data
+    emit('check', option, data)
     emit('update:modelValue', [...halfCheckedKeys, ...checkedKeys])
   }
 

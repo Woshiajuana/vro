@@ -13,7 +13,6 @@
   <vro-el-tree
     v-model="value"
     show-checkbox
-    node-key="id"
     default-expand-all
     :options="options"
     :props="{ label: 'label' }"
@@ -38,6 +37,48 @@
 </script>
 ```
 
+### 自定义节点
+
+```html
+<template>
+  <vro-el-tree
+    v-model="value"
+    show-checkbox
+    default-expand-all
+    :options="options"
+    :props="{ label: 'label' }"
+  >
+    <template #default="{ node, data }">
+      <span>{{ node.label }} - {{ data.description }}</span>
+    </template>
+  </vro-el-tree>
+</template>
+```
+
+### 自定义根节点
+
+```html
+<template>
+  <vro-el-tree
+    v-model="value"
+    show-checkbox
+    root-id="root"
+    :options="options"
+    :props="{ label: 'label' }"
+  />
+</template>
+```
+
+### 空数据
+
+```html
+<template>
+  <vro-el-tree v-model="value" show-checkbox :options="[]">
+    <template #empty>暂无权限数据</template>
+  </vro-el-tree>
+</template>
+```
+
 ## API
 
 ### 属性 Props
@@ -59,7 +100,25 @@
 
 ### 插槽 Slots
 
-支持默认插槽，插槽参数同 `ElTree` 默认插槽。
+<table>
+  <tbody>
+    <tr>
+      <td>名称</td>
+      <td>参数</td>
+      <td>说明</td>
+    </tr>
+    <tr>
+      <td>default</td>
+      <td>{ node, data, store }</td>
+      <td>自定义节点内容</td>
+    </tr>
+    <tr>
+      <td>empty</td>
+      <td>-</td>
+      <td>自定义空数据内容</td>
+    </tr>
+  </tbody>
+</table>
 
 ### 事件 Events
 
@@ -74,6 +133,26 @@
       <td>update:modelValue</td>
       <td>value</td>
       <td>勾选节点变化时触发，返回半选和全选节点 id</td>
+    </tr>
+    <tr>
+      <td>check</td>
+      <td>data, info</td>
+      <td>节点勾选状态变化时触发，参数同 ElTree check 事件</td>
+    </tr>
+  </tbody>
+</table>
+
+### 样式变量
+
+<table>
+  <tbody>
+    <tr>
+      <td>名称</td>
+      <td>默认值</td>
+    </tr>
+    <tr>
+      <td>--vro-el-tree-user-select</td>
+      <td>none</td>
     </tr>
   </tbody>
 </table>
