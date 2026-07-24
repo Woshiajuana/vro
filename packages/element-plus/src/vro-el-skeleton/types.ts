@@ -1,5 +1,18 @@
-import type { VroLoadingType } from '@vrojs/base'
+import type { VroLoadingProps, VroSlot } from '@vrojs/base'
 import type { ExtractPropTypes, PropType } from 'vue'
+
+export interface VroElSkeletonErrorSlotProps {
+  error: unknown
+  refresh: () => void
+}
+
+export interface VroElSkeletonEmptySlotProps {
+  refresh: () => void
+}
+
+export interface VroElSkeletonEmits {
+  refresh: []
+}
 
 export const vroElSkeletonProps = {
   /**
@@ -8,28 +21,9 @@ export const vroElSkeletonProps = {
   loading: Boolean,
 
   /**
-   * 加载图标类型。
+   * 加载图标属性。
    */
-  loadingType: {
-    type: String as PropType<VroLoadingType>,
-    default: 'circular',
-  },
-
-  /**
-   * 加载图标尺寸，传入数字时单位为 px。
-   */
-  loadingSize: {
-    type: [String, Number] as PropType<string | number>,
-    default: 32,
-  },
-
-  /**
-   * 加载图标颜色。
-   */
-  loadingColor: {
-    type: String,
-    default: 'currentColor',
-  },
+  loadingProps: Object as PropType<Partial<VroLoadingProps>>,
 
   /**
    * 加载状态描述文案，未传时使用 locale 中的 skeleton.loadingDescription。
@@ -77,10 +71,29 @@ export const vroElSkeletonProps = {
   /**
    * 状态容器最小高度，传入数字时单位为 px。
    */
-  minHeight: {
-    type: [String, Number] as PropType<string | number>,
-    default: '240px',
-  },
+  minHeight: [String, Number] as PropType<string | number>,
 }
 
 export type VroElSkeletonProps = ExtractPropTypes<typeof vroElSkeletonProps>
+
+export interface VroElSkeletonSlots {
+  /**
+   * 正常内容。
+   */
+  default?: VroSlot
+
+  /**
+   * 自定义加载状态内容。
+   */
+  loading?: VroSlot
+
+  /**
+   * 自定义错误状态内容。
+   */
+  error?: (props: VroElSkeletonErrorSlotProps) => any
+
+  /**
+   * 自定义空状态内容。
+   */
+  empty?: (props: VroElSkeletonEmptySlotProps) => any
+}

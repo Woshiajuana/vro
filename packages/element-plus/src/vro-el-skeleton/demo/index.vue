@@ -11,14 +11,55 @@
       :loading="status === 'loading'"
       :empty="status === 'empty'"
       :error="status === 'error' ? error : undefined"
-      loading-type="spinner"
-      loading-color="#409eff"
+      :loading-props="{ type: 'spinner', color: '#409eff' }"
       @refresh="setStatus('loading')"
     >
       <div class="demo-content">
         <h4>内容加载完成</h4>
         <p>这里展示真实内容区域。</p>
       </div>
+    </vro-el-skeleton>
+  </demo-block>
+
+  <demo-block title="加载样式">
+    <vro-el-skeleton
+      loading
+      :loading-props="{ type: 'image', size: 40, color: 'var(--el-color-primary)' }"
+      loading-description="正在加载图片资源"
+      :min-height="160"
+    />
+  </demo-block>
+
+  <demo-block title="空状态">
+    <vro-el-skeleton
+      empty
+      empty-description="暂无搜索结果"
+      empty-btn-text="重新加载"
+      :min-height="160"
+      @refresh="setStatus('loading')"
+    />
+    <vro-el-skeleton empty empty-description="暂无数据" :show-empty-btn="false" :min-height="120" />
+  </demo-block>
+
+  <demo-block title="错误状态">
+    <vro-el-skeleton
+      :error="error"
+      error-title="请求异常"
+      error-btn-text="重新请求"
+      :min-height="160"
+      @refresh="setStatus('loading')"
+    />
+  </demo-block>
+
+  <demo-block title="自定义状态内容">
+    <vro-el-skeleton :error="error" :min-height="160">
+      <template #error="{ refresh }">
+        <div class="demo-state">
+          <h4>加载失败</h4>
+          <p>网络开了个小差，请稍后重试。</p>
+          <el-button type="primary" size="small" @click="refresh">重试</el-button>
+        </div>
+      </template>
     </vro-el-skeleton>
   </demo-block>
 </template>
@@ -57,6 +98,22 @@
 
     p {
       margin: 0;
+      font-size: 14px;
+    }
+  }
+
+  .demo-state {
+    text-align: center;
+
+    h4 {
+      margin: 0 0 8px;
+      color: var(--el-text-color-primary);
+      font-size: 16px;
+    }
+
+    p {
+      margin: 0 0 12px;
+      color: var(--el-text-color-secondary);
       font-size: 14px;
     }
   }

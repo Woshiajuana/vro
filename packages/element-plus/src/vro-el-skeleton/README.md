@@ -31,7 +31,45 @@
 ### 加载样式
 
 ```html
-<vro-el-skeleton loading loading-type="spinner" :loading-size="40" loading-color="#409eff" />
+<vro-el-skeleton
+  loading
+  :loading-props="{ type: 'image', size: 40, color: 'var(--el-color-primary)' }"
+  loading-description="正在加载图片资源"
+/>
+```
+
+### 空状态
+
+```html
+<vro-el-skeleton
+  empty
+  empty-description="暂无搜索结果"
+  empty-btn-text="重新加载"
+  @refresh="refresh"
+/>
+```
+
+### 隐藏空状态按钮
+
+```html
+<vro-el-skeleton empty :show-empty-btn="false" />
+```
+
+### 错误状态
+
+```html
+<vro-el-skeleton
+  :error="error"
+  error-title="请求异常"
+  error-btn-text="重新请求"
+  @refresh="refresh"
+/>
+```
+
+### 最小高度
+
+```html
+<vro-el-skeleton loading :min-height="160" />
 ```
 
 ### 国际化文案
@@ -117,6 +155,41 @@ const locale = {
       <td>refresh</td>
       <td>-</td>
       <td>点击默认错误或空状态按钮时触发</td>
+    </tr>
+  </tbody>
+</table>
+
+### CSS 变量
+
+<table>
+  <tbody>
+    <tr>
+      <td>名称</td>
+      <td>默认值</td>
+    </tr>
+    <tr>
+      <td>--vro-el-skeleton-min-height</td>
+      <td>240px</td>
+    </tr>
+    <tr>
+      <td>--vro-el-skeleton-color</td>
+      <td>var(--el-text-color-secondary)</td>
+    </tr>
+    <tr>
+      <td>--vro-el-skeleton-description-margin-top</td>
+      <td>16px</td>
+    </tr>
+    <tr>
+      <td>--vro-el-skeleton-description-color</td>
+      <td>var(--el-text-color-secondary)</td>
+    </tr>
+    <tr>
+      <td>--vro-el-skeleton-description-font-size</td>
+      <td>var(--el-font-size-base)</td>
+    </tr>
+    <tr>
+      <td>--vro-el-skeleton-description-line-height</td>
+      <td>1.5</td>
     </tr>
   </tbody>
 </table>
