@@ -1,18 +1,34 @@
 :root,
 :host {
   --vro-el-image-placeholder-background: var(--el-fill-color-light);
-  --vro-el-image-loading-color: #999;
-  --vro-el-image-loading-size: max(var(--vro-loading-size));
+  --vro-el-image-loading-color: var(--el-text-color-placeholder);
+  --vro-el-image-loading-size: 16px;
+  --vro-el-image-error-background: var(--el-fill-color-light);
+  --vro-el-image-error-color: var(--el-text-color-placeholder);
+  --vro-el-image-error-icon-size: 24px;
 }
-.vro-el-image {
-  --vro-loading-color: var(--vro-el-image-loading-color);
-  --vro-loading-size: var(--vro-el-image-loading-size);
-}
-.vro-el-image-placeholder {
-  width: 100%;
-  height: 100%;
+
+.vro-el-image-placeholder,
+.vro-el-image-error {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.vro-el-image-placeholder {
+  --vro-loading-color: var(--vro-el-image-loading-color);
+  --vro-loading-size: var(--vro-el-image-loading-size);
   background-color: var(--vro-el-image-placeholder-background);
+}
+
+.vro-el-image-error {
+  color: var(--vro-el-image-error-color);
+  background-color: var(--vro-el-image-error-background);
+}
+
+.vro-el-image-error-icon {
+  font-size: var(--vro-el-image-error-icon-size);
 }

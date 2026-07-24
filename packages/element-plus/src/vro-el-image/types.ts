@@ -52,24 +52,4 @@ export interface VroElImageSlots {
    * 自定义图片加载失败内容。
    */
   error?: VroSlot
-
-  /**
-   * 自定义图片预览内容。
-   */
-  viewer?: VroSlot
-
-  /**
-   * 自定义预览进度内容。
-   */
-  progress?: VroSlot
-
-  /**
-   * 自定义预览工具栏内容。
-   */
-  toolbar?: VroSlot
-
-  /**
-   * 自定义预览加载失败内容。
-   */
-  'viewer-error'?: VroSlot
 }

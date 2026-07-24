@@ -45,14 +45,17 @@
       scroll-container=".demo-image-placeholder-root"
     >
     </vro-el-image>
+    <vro-el-image
+      class="demo-image-small"
+      :src="imageUrl"
+      fit="cover"
+      lazy
+      scroll-container=".demo-image-placeholder-root"
+    />
   </demo-block>
 
   <demo-block title="加载失败">
-    <vro-el-image class="demo-image" src="/not-found.png" fit="cover">
-      <template #error>
-        <div class="demo-image-error">加载失败</div>
-      </template>
-    </vro-el-image>
+    <vro-el-image class="demo-image" src="/not-found.png" fit="cover"> </vro-el-image>
   </demo-block>
 </template>
 
@@ -71,6 +74,13 @@
   .demo-image {
     width: 180px;
     height: 180px;
+    --vro-el-image-placeholder-background: #f2f2f2;
+  }
+
+  .demo-image-small {
+    width: 12px;
+    height: 12px;
+    margin-left: 12px;
   }
 
   .demo-image-placeholder-root {

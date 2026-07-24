@@ -136,6 +136,41 @@ setVroElImageOptions({
   </tbody>
 </table>
 
+### CSS 变量
+
+<table>
+  <tbody>
+    <tr>
+      <td>名称</td>
+      <td>默认值</td>
+    </tr>
+    <tr>
+      <td>--vro-el-image-placeholder-background</td>
+      <td>var(--el-fill-color-light)</td>
+    </tr>
+    <tr>
+      <td>--vro-el-image-loading-color</td>
+      <td>#999</td>
+    </tr>
+    <tr>
+      <td>--vro-el-image-loading-size</td>
+      <td>15px</td>
+    </tr>
+    <tr>
+      <td>--vro-el-image-error-background</td>
+      <td>var(--el-fill-color-light)</td>
+    </tr>
+    <tr>
+      <td>--vro-el-image-error-color</td>
+      <td>var(--el-text-color-placeholder)</td>
+    </tr>
+    <tr>
+      <td>--vro-el-image-error-icon-size</td>
+      <td>24px</td>
+    </tr>
+  </tbody>
+</table>
+
 ### 实例方法
 
 支持 `ElImage` 暴露的实例方法。
