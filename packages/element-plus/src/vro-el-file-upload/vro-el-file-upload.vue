@@ -1,21 +1,30 @@
 <template>
   <div class="vro-el-file-upload">
     <el-button
-      v-if="computeValue.length < max && !disabled"
+      v-if="computeValue.length < dynamicProps.max && !dynamicProps.disabled"
       class="vro-el-file-upload-btn"
       :loading="loading"
-      :disabled="disabled"
+      :disabled="dynamicProps.disabled"
       type="primary"
-      icon="upload"
+      :icon="Upload"
     >
       {{ t('fileUpload.btnText') }}
-      <input type="file" :accept="accept" :multiple="max > 1" @change="handleUpload" />
+      <input
+        type="file"
+        :accept="dynamicProps.accept"
+        :multiple="dynamicProps.max > 1"
+        @change="handleUpload"
+      />
     </el-button>
 
     <ul class="vro-el-file-upload-content">
-      <li class="vro-el-file-upload-item" v-for="(item, index) in computeValue" :key="index">
+      <li class="vro-el-file-upload-item" v-for="(item, index) in computeValue" :key="item">
         <a :href="item" target="_blank">{{ item }}</a>
-        <el-icon v-if="!disabled" @click="handleDelete(index)">
+        <el-icon
+          v-if="!dynamicProps.disabled"
+          class="vro-el-file-upload-clear"
+          @click="handleDelete(index)"
+        >
           <circle-close-filled />
         </el-icon>
       </li>
@@ -25,41 +34,44 @@
 
 <script setup lang="ts">
   import { isArray, isUndefined, omitBy } from '@daysnap/utils'
-  import { CircleCloseFilled } from '@element-plus/icons-vue'
+  import { CircleCloseFilled, Upload } from '@element-plus/icons-vue'
   import { useAsyncTask } from '@vrojs/use'
   import { ElButton, ElIcon } from 'element-plus'
   import { computed } from 'vue'
 
   import { useLocale } from '../locale'
-  import { type VroElFileUploadProps, vroElFileUploadProps } from './types'
+  import {
+    type VroElFileUploadEmits,
+    type VroElFileUploadModelValue,
+    type VroElFileUploadProps,
+    vroElFileUploadProps,
+  } from './types'
   import { getVroElFileUploadOptions } from './utils'
 
   defineOptions({ name: 'VroElFileUpload' })
 
-  const emit = defineEmits<{
-    (event: 'update:modelValue', value: string | string[]): void
-  }>()
+  const emit = defineEmits<VroElFileUploadEmits>()
 
-  const rawProps = defineProps(vroElFileUploadProps)
+  const props = defineProps(vroElFileUploadProps)
 
   const { t } = useLocale()
 
-  const props = computed(() => {
+  const dynamicProps = computed(() => {
     return {
       ...getVroElFileUploadOptions(),
-      ...omitBy(rawProps, isUndefined),
+      ...omitBy(props, isUndefined),
     } as VroElFileUploadProps
   })
 
   const computeValue = computed(() => {
-    const { modelValue } = props.value
+    const { modelValue } = dynamicProps.value
     return isArray(modelValue) ? modelValue : modelValue ? [modelValue] : []
   })
 
   const handleDelete = (index: number) => {
-    let value: string | string[] = ''
-    if (isArray(props.value.modelValue)) {
-      value = [...props.value.modelValue]
+    let value: VroElFileUploadModelValue = ''
+    if (isArray(dynamicProps.value.modelValue)) {
+      value = [...dynamicProps.value.modelValue]
       value.splice(index, 1)
     }
     emit('update:modelValue', value)
@@ -74,7 +86,7 @@
         return
       }
 
-      const { modelValue, max, upload, params } = props.value
+      const { modelValue, max, upload, params } = dynamicProps.value
 
       if (!upload) {
         throw new Error('not set upload')
@@ -82,7 +94,7 @@
 
       const res = await upload(files.slice(0, max - computeValue.value.length), { params })
 
-      let value: string | string[] = res[0]
+      let value: VroElFileUploadModelValue = res[0]
       if (isArray(modelValue)) {
         value = [...modelValue, ...res]
       }

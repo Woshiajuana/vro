@@ -30,6 +30,28 @@
 <vro-el-file-upload v-model="value" :max="3" :upload="upload" />
 ```
 
+### 文件类型
+
+```html
+<vro-el-file-upload v-model="value" accept=".pdf,.doc,.docx" :upload="upload" />
+```
+
+### 自定义上传参数
+
+```html
+<vro-el-file-upload
+  v-model="value"
+  :params="{ domain: 'https://cdn.example.com', folder: 'docs' }"
+  :upload="upload"
+/>
+```
+
+### 禁用状态
+
+```html
+<vro-el-file-upload v-model="value" disabled :upload="upload" />
+```
+
 ### 全局上传配置
 
 ```ts
@@ -78,6 +100,45 @@ setVroElFileUploadOptions({
       <td>update:modelValue</td>
       <td>value: string | string[]</td>
       <td>上传或删除后触发</td>
+    </tr>
+  </tbody>
+</table>
+
+### CSS 变量
+
+<table>
+  <tbody>
+    <tr>
+      <td>名称</td>
+      <td>默认值</td>
+    </tr>
+    <tr>
+      <td>--vro-el-file-upload-gap</td>
+      <td>8px</td>
+    </tr>
+    <tr>
+      <td>--vro-el-file-upload-item-font-size</td>
+      <td>14px</td>
+    </tr>
+    <tr>
+      <td>--vro-el-file-upload-item-line-height</td>
+      <td>1.5</td>
+    </tr>
+    <tr>
+      <td>--vro-el-file-upload-link-color</td>
+      <td>var(--el-color-primary)</td>
+    </tr>
+    <tr>
+      <td>--vro-el-file-upload-clear-gap</td>
+      <td>10px</td>
+    </tr>
+    <tr>
+      <td>--vro-el-file-upload-clear-color</td>
+      <td>var(--el-color-danger)</td>
+    </tr>
+    <tr>
+      <td>--vro-el-file-upload-clear-background</td>
+      <td>var(--el-fill-color-light)</td>
     </tr>
   </tbody>
 </table>

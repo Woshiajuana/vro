@@ -2,7 +2,7 @@
   <div class="vro-el-image-upload">
     <vue-draggable
       class="vro-el-image-upload-content"
-      :disabled="props.disabled || props.max <= 1"
+      :disabled="dynamicProps.disabled || dynamicProps.max <= 1"
       :animation="150"
       :model-value="computeValue"
       filter=".vro-el-image-upload-btn"
@@ -14,14 +14,14 @@
         :key="getItemKey(item, index)"
       >
         <vro-el-image
-          v-bind="props.imageProps"
+          v-bind="dynamicProps.imageProps"
           class="vro-el-image-upload-image"
           :src="previewValue[index]"
           :preview-src-list="previewValue"
           :initial-index="index"
         />
         <el-icon
-          v-if="!props.disabled"
+          v-if="!dynamicProps.disabled"
           class="vro-el-image-upload-clear"
           @click="handleDelete(index)"
         >
@@ -29,15 +29,20 @@
         </el-icon>
       </div>
       <div
-        v-if="computeValue.length < props.max && !props.disabled"
+        v-if="computeValue.length < dynamicProps.max && !dynamicProps.disabled"
         v-loading="loading"
         class="vro-el-image-upload-item vro-el-image-upload-btn"
       >
         <el-icon class="vro-el-image-upload-add"><plus /></el-icon>
-        <input type="file" accept="image/*" :multiple="props.max > 1" @change="handleUpload" />
+        <input
+          type="file"
+          accept="image/*"
+          :multiple="dynamicProps.max > 1"
+          @change="handleUpload"
+        />
       </div>
     </vue-draggable>
-    <el-checkbox v-if="!props.disabled && props.compressible" v-model="compress">
+    <el-checkbox v-if="!dynamicProps.disabled && dynamicProps.compressible" v-model="compress">
       {{ t('imageUpload.compressText') }}
     </el-checkbox>
   </div>
@@ -67,20 +72,20 @@
   defineOptions({ name: 'VroElImageUpload' })
 
   const emit = defineEmits<VroElImageUploadEmits>()
-  const rawProps = defineProps(vroElImageUploadProps)
+  const props = defineProps(vroElImageUploadProps)
   const { t } = useLocale()
   const previewUrlMap = new Map<File, string>()
 
   const defaultUpload: VroElImageUploadCallback = async (files) => files
 
-  const props = computed(() => {
+  const dynamicProps = computed(() => {
     const {
       compressible = false,
       upload = defaultUpload,
       ...rest
     } = {
       ...getVroElImageUploadOptions(),
-      ...omitBy(rawProps, isUndefined),
+      ...omitBy(props, isUndefined),
     } as VroElImageUploadProps
 
     return {
@@ -92,10 +97,10 @@
   })
 
   const vLoading = ElLoading.directive
-  const compress = ref(props.value.compress)
+  const compress = ref(dynamicProps.value.compress)
 
   const computeValue = computed(() => {
-    const { modelValue } = props.value
+    const { modelValue } = dynamicProps.value
     return isArray(modelValue) ? modelValue : modelValue ? [modelValue] : []
   })
 
@@ -126,15 +131,15 @@
   }
 
   const handleUpdate = (value: VroElImageUploadItem[]) => {
-    if (isArray(props.value.modelValue)) {
+    if (isArray(dynamicProps.value.modelValue)) {
       emit('update:modelValue', value)
     }
   }
 
   const handleDelete = (index: number) => {
     let value: VroElImageUploadModelValue = ''
-    if (isArray(props.value.modelValue)) {
-      value = [...props.value.modelValue]
+    if (isArray(dynamicProps.value.modelValue)) {
+      value = [...dynamicProps.value.modelValue]
       value.splice(index, 1)
     }
     emit('update:modelValue', value)
@@ -150,7 +155,7 @@
         return
       }
 
-      const { max, upload = defaultUpload, params } = props.value
+      const { max, upload = defaultUpload, params } = dynamicProps.value
 
       const res = await upload(files.slice(0, max - computeValue.value.length), {
         compress: compress.value,
@@ -158,8 +163,8 @@
       })
 
       let value: VroElImageUploadModelValue = isFileList(res) ? res : res[0]
-      if (isArray(props.value.modelValue)) {
-        value = [...props.value.modelValue, ...res]
+      if (isArray(dynamicProps.value.modelValue)) {
+        value = [...dynamicProps.value.modelValue, ...res]
       }
       emit('update:modelValue', value)
     },

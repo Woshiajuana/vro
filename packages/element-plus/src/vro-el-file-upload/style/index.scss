@@ -1,30 +1,55 @@
+:root,
+:host {
+  --vro-el-file-upload-gap: 8px;
+  --vro-el-file-upload-item-font-size: 14px;
+  --vro-el-file-upload-item-line-height: 1.5;
+  --vro-el-file-upload-link-color: var(--el-color-primary);
+  --vro-el-file-upload-clear-gap: 10px;
+  --vro-el-file-upload-clear-color: var(--el-color-danger);
+  --vro-el-file-upload-clear-background: var(--el-fill-color-light);
+}
+
 .vro-el-file-upload-btn {
   position: relative;
+
   input {
+    cursor: pointer;
     position: absolute;
-    width: 100%;
-    height: 100%;
     top: 0;
     left: 0;
-    cursor: pointer;
+    width: 100%;
+    height: 100%;
     opacity: 0;
   }
 }
+
+.vro-el-file-upload-content {
+  padding: 0;
+  margin: var(--vro-el-file-upload-gap) 0 0;
+  list-style: none;
+}
+
 .vro-el-file-upload-item {
   position: relative;
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  margin-top: 4px;
+  margin-top: var(--vro-el-file-upload-gap);
+  font-size: var(--vro-el-file-upload-item-font-size);
+  line-height: var(--vro-el-file-upload-item-line-height);
+
   a {
+    min-width: 0;
+    margin-right: var(--vro-el-file-upload-clear-gap);
+    color: var(--vro-el-file-upload-link-color);
     text-decoration: underline;
-    color: #007bee;
-    margin-right: 10px;
+    word-break: break-all;
   }
-  i {
-    cursor: pointer;
-    margin-right: 10px;
-    color: #ee0000;
-    background-color: #f2f2f2;
-  }
+}
+
+.vro-el-file-upload-clear {
+  flex: none;
+  color: var(--vro-el-file-upload-clear-color);
+  background-color: var(--vro-el-file-upload-clear-background);
+  cursor: pointer;
 }

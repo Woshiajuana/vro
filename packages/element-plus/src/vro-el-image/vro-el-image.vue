@@ -3,14 +3,14 @@
     <template #placeholder>
       <slot name="placeholder">
         <div class="vro-el-image-placeholder">
-          <vro-loading type="image" v-bind="loadingProps" />
+          <vro-loading type="image" v-bind="dynamicProps.loadingProps" />
         </div>
       </slot>
     </template>
     <template #error>
       <slot name="error">
         <div class="vro-el-image-error">
-          <vro-el-icon v-bind="iconProps" class="vro-el-image-error-icon">
+          <vro-el-icon v-bind="dynamicProps.iconProps" class="vro-el-image-error-icon">
             <svg
               t="1784873125909"
               class="icon"
@@ -47,14 +47,15 @@
   defineSlots<VroElImageSlots>()
 
   const props = defineProps(vroElImageProps)
-  const elImageProps = computed(() => {
-    const dynamicProps: VroElImageProps = {
+  const dynamicProps = computed(() => {
+    return {
       ...getVroElImageOptions(),
       ...omitBy(props, isUndefined),
     } as VroElImageProps
-
-    const { ratio, previewRatio, normalizeSrc, baseUrl } = dynamicProps
-    let { src, previewSrcList } = dynamicProps
+  })
+  const elImageProps = computed(() => {
+    const { ratio, previewRatio, normalizeSrc, baseUrl } = dynamicProps.value
+    let { src, previewSrcList } = dynamicProps.value
     if (normalizeSrc) {
       src = normalizeSrc({ src, ratio, baseUrl })
 
@@ -65,6 +66,6 @@
       }
     }
 
-    return { ...pick(dynamicProps, typedKeys(imageProps)), src, previewSrcList }
+    return { ...pick(dynamicProps.value, typedKeys(imageProps)), src, previewSrcList }
   })
 </script>

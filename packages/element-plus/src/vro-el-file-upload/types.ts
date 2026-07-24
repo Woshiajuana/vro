@@ -1,12 +1,20 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 
+export type VroElFileUploadModelValue = string | string[]
+
 export interface VroElFileUploadCallback<T = any> {
   (
+    /** 当前待上传的文件列表。 */
     files: File[],
     options: {
+      /** 上传时透传的自定义参数。 */
       params: T
     },
   ): Promise<string[]>
+}
+
+export interface VroElFileUploadEmits {
+  'update:modelValue': [value: VroElFileUploadModelValue]
 }
 
 export const vroElFileUploadProps = {
@@ -14,7 +22,7 @@ export const vroElFileUploadProps = {
    * 绑定值。单文件时可传字符串，多文件时传字符串数组。
    */
   modelValue: {
-    type: [String, Array] as PropType<string | string[]>,
+    type: [String, Array] as PropType<VroElFileUploadModelValue>,
     default: '',
   },
 
