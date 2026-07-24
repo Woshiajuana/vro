@@ -3,46 +3,65 @@
     <el-tag
       v-for="(item, index) in modelValue"
       :key="`${item}-${index}`"
-      class="vro-el-tag"
       size="large"
-      :closable="!disabled"
-      :disable-transitions="false"
+      disable-transitions
+      v-bind="tagProps"
+      class="vro-el-tags-tag"
+      :closable="!disabled && tagProps?.closable !== false"
       @close="handleClose(index)"
     >
-      {{ item }}
+      <slot name="tag" :item="item" :index="index">
+        {{ item }}
+      </slot>
     </el-tag>
 
     <el-input
       v-if="inputVisible"
       ref="inputRef"
+      v-bind="inputProps"
       v-model="inputValue"
-      class="vro-el-tag-input"
+      class="vro-el-tags-input"
       @keyup.enter="handleInputConfirm"
       @blur="handleInputConfirm"
     />
-    <el-button v-else-if="!disabled" class="vro-el-tag-btn" :icon="Plus" @click="showInput">
-      {{ t('tags.addText') }}
+    <el-button
+      v-else-if="canAdd"
+      :icon="Plus"
+      v-bind="buttonProps"
+      class="vro-el-tags-button"
+      @click="showInput"
+    >
+      <slot name="add">
+        {{ t('tags.addText') }}
+      </slot>
     </el-button>
   </div>
 </template>
 
 <script setup lang="ts">
   import { Plus } from '@element-plus/icons-vue'
+  import type { InputInstance } from 'element-plus'
   import { ElButton, ElInput, ElTag } from 'element-plus'
-  import { nextTick, ref } from 'vue'
+  import { computed, nextTick, ref, useTemplateRef } from 'vue'
 
   import { useLocale } from '../locale'
-  import { vroElTagsProps } from './types'
+  import { type VroElTagsEmits, vroElTagsProps, type VroElTagsSlots } from './types'
 
   defineOptions({ name: 'VroElTags' })
 
-  const emit = defineEmits(['update:modelValue'])
+  const emit = defineEmits<VroElTagsEmits>()
+  defineSlots<VroElTagsSlots>()
+
   const props = defineProps(vroElTagsProps)
   const { t } = useLocale()
 
   const inputValue = ref('')
   const inputVisible = ref(false)
-  const inputRef = ref<InstanceType<typeof ElInput>>()
+  const inputRef = useTemplateRef<InputInstance>('inputRef')
+
+  const canAdd = computed(() => {
+    return !props.disabled && (props.max === undefined || props.modelValue.length < props.max)
+  })
 
   const handleClose = (index: number) => {
     const value = props.modelValue.filter((_, valueIndex) => valueIndex !== index)
@@ -50,6 +69,10 @@
   }
 
   const showInput = () => {
+    if (!canAdd.value) {
+      return
+    }
+
     inputVisible.value = true
     nextTick(() => {
       inputRef.value?.input?.focus()
@@ -57,12 +80,11 @@
   }
 
   const handleInputConfirm = () => {
-    const value = [...props.modelValue]
     const tag = inputValue.value.trim()
-    if (tag) {
-      value.push(tag)
+    if (tag && canAdd.value) {
+      emit('update:modelValue', [...props.modelValue, tag])
     }
-    emit('update:modelValue', value)
+
     inputVisible.value = false
     inputValue.value = ''
   }

@@ -1,1 +1,21 @@
-.vro-el-tags { }
+:root,
+:host {
+  --vro-el-tags-gap: 8px;
+  --vro-el-tags-input-width: 120px;
+}
+
+.vro-el-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--vro-el-tags-gap);
+}
+
+.vro-el-tags-tag,
+.vro-el-tags-button {
+  flex: none;
+}
+
+.vro-el-tags-input {
+  width: var(--vro-el-tags-input-width);
+}
