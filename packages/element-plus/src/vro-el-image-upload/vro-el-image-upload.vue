@@ -37,6 +37,7 @@
         <input
           type="file"
           accept="image/*"
+          :disabled="loading"
           :multiple="dynamicProps.max > 1"
           @change="handleUpload"
         />
@@ -53,7 +54,7 @@
   import { CircleCloseFilled, Plus } from '@element-plus/icons-vue'
   import { useAsyncTask } from '@vrojs/use'
   import { ElCheckbox, ElIcon, ElLoading } from 'element-plus'
-  import { computed, onBeforeUnmount, ref } from 'vue'
+  import { computed, onBeforeUnmount, ref, watch } from 'vue'
   import { VueDraggable } from 'vue-draggable-plus'
 
   import { useLocale } from '../locale'
@@ -121,9 +122,21 @@
 
   const getItemKey = (item: VroElImageUploadItem, index: number) => {
     if (typeof item === 'string') {
-      return item
+      return `${item}-${index}`
     }
     return `${item.name}-${item.size}-${item.lastModified}-${index}`
+  }
+
+  const revokePreviewUrl = (item: VroElImageUploadItem) => {
+    if (typeof item === 'string') {
+      return
+    }
+
+    const url = previewUrlMap.get(item)
+    if (url) {
+      URL.revokeObjectURL(url)
+      previewUrlMap.delete(item)
+    }
   }
 
   const isFileList = (value: VroElImageUploadUploadResult): value is File[] => {
@@ -138,6 +151,11 @@
 
   const handleDelete = (index: number) => {
     let value: VroElImageUploadModelValue = ''
+    const item = computeValue.value[index]
+    if (item) {
+      revokePreviewUrl(item)
+    }
+
     if (isArray(dynamicProps.value.modelValue)) {
       value = [...dynamicProps.value.modelValue]
       value.splice(index, 1)
@@ -161,6 +179,9 @@
         compress: compress.value,
         params,
       })
+      if (!res.length) {
+        return
+      }
 
       let value: VroElImageUploadModelValue = isFileList(res) ? res : res[0]
       if (isArray(dynamicProps.value.modelValue)) {
@@ -170,6 +191,13 @@
     },
     {
       throwError: true,
+    },
+  )
+
+  watch(
+    () => dynamicProps.value.compress,
+    (value) => {
+      compress.value = value
     },
   )
 

@@ -12,13 +12,18 @@
       <input
         type="file"
         :accept="dynamicProps.accept"
+        :disabled="loading"
         :multiple="dynamicProps.max > 1"
         @change="handleUpload"
       />
     </el-button>
 
     <ul class="vro-el-file-upload-content">
-      <li class="vro-el-file-upload-item" v-for="(item, index) in computeValue" :key="item">
+      <li
+        class="vro-el-file-upload-item"
+        v-for="(item, index) in computeValue"
+        :key="`${item}-${index}`"
+      >
         <a :href="item" target="_blank">{{ item }}</a>
         <el-icon
           v-if="!dynamicProps.disabled"
@@ -93,6 +98,9 @@
       }
 
       const res = await upload(files.slice(0, max - computeValue.value.length), { params })
+      if (!res.length) {
+        return
+      }
 
       let value: VroElFileUploadModelValue = res[0]
       if (isArray(modelValue)) {
