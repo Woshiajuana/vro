@@ -93,22 +93,21 @@
   i {
     background: currentColor;
     opacity: 0.16;
-    animation: vro-loading-image var(--duration) linear infinite;
 
     &:nth-child(1) {
-      animation-delay: 0s;
+      animation: vro-loading-image-1 var(--duration) linear infinite;
     }
 
     &:nth-child(2) {
-      animation-delay: 0.2s;
+      animation: vro-loading-image-2 var(--duration) linear infinite;
     }
 
     &:nth-child(3) {
-      animation-delay: 0.6s;
+      animation: vro-loading-image-4 var(--duration) linear infinite;
     }
 
     &:nth-child(4) {
-      animation-delay: 0.4s;
+      animation: vro-loading-image-3 var(--duration) linear infinite;
     }
   }
 }
@@ -156,18 +155,61 @@
   }
 }
 
-@keyframes vro-loading-image {
+@keyframes vro-loading-image-1 {
+  0%,
+  12.5%,
+  100% {
+    opacity: 0.86;
+  }
+
+  25%,
+  87.5% {
+    opacity: 0.16;
+  }
+}
+
+@keyframes vro-loading-image-2 {
   0%,
   100% {
     opacity: 0.16;
   }
 
-  8%,
-  22% {
+  12.5%,
+  37.5% {
     opacity: 0.86;
   }
 
-  38% {
-    opacity: 0.32;
+  50% {
+    opacity: 0.16;
+  }
+}
+
+@keyframes vro-loading-image-3 {
+  0%,
+  25%,
+  100% {
+    opacity: 0.16;
+  }
+
+  37.5%,
+  62.5% {
+    opacity: 0.86;
+  }
+
+  75% {
+    opacity: 0.16;
+  }
+}
+
+@keyframes vro-loading-image-4 {
+  0%,
+  50%,
+  100% {
+    opacity: 0.16;
+  }
+
+  62.5%,
+  87.5% {
+    opacity: 0.86;
   }
 }

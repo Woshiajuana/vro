@@ -3,7 +3,7 @@
     <template #placeholder>
       <slot name="placeholder">
         <div class="vro-el-image-placeholder">
-          <span>加载中</span>
+          <vro-loading type="image" />
         </div>
       </slot>
     </template>
@@ -12,6 +12,7 @@
 
 <script setup lang="ts">
   import { isUndefined, omitBy } from '@daysnap/utils'
+  import { VroLoading } from '@vrojs/base'
   import { ElImage } from 'element-plus'
   import { computed } from 'vue'
 

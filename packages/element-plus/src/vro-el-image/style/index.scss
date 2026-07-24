@@ -1,8 +1,12 @@
 :root,
 :host {
-  --vro-el-image-placeholder-background: #f2f3f4;
+  --vro-el-image-placeholder-background: var(--el-fill-color-light);
+  --vro-el-image-loading-color: #999;
+  --vro-el-image-loading-size: max(var(--vro-loading-size));
 }
 .vro-el-image {
+  --vro-loading-color: var(--vro-el-image-loading-color);
+  --vro-loading-size: var(--vro-el-image-loading-size);
 }
 .vro-el-image-placeholder {
   width: 100%;

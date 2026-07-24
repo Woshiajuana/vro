@@ -1,5 +1,4 @@
 import '../../vro-el-schema-filter/style/deps'
-import '../../vro-el-schema-form/style/deps'
 import '../../vro-el-table-column-group/style/deps'
 import 'element-plus/es/components/button/style/css'
 import 'element-plus/es/components/pagination/style/css'
