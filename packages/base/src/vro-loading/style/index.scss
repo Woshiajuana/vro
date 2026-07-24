@@ -1,19 +1,26 @@
-.vro-loading {
-  --vro-loading-size: 32px;
+:root,
+:host {
+  --vro-loading-size: 24px;
   --vro-loading-color: currentColor;
+  --vro-loading-circular-duration: 1.6s;
+  --vro-loading-spinner-duration: 1.2s;
+  --vro-loading-dots-duration: 1s;
+  --vro-loading-image-duration: 1.2s;
+}
 
+.vro-loading {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--vro-loading-color);
+  color: var(--color);
   line-height: 1;
   vertical-align: middle;
 }
 
-.vro-loading__circular {
-  width: var(--vro-loading-size);
-  height: var(--vro-loading-size);
-  animation: vro-loading-rotate 1.6s linear infinite;
+.vro-loading-circular {
+  width: var(--size);
+  height: var(--size);
+  animation: vro-loading-rotate var(--duration) linear infinite;
 
   circle {
     stroke: currentColor;
@@ -21,15 +28,15 @@
     stroke-linecap: round;
     stroke-dasharray: 90, 150;
     stroke-dashoffset: 0;
-    animation: vro-loading-circular 1.6s ease-in-out infinite;
+    animation: vro-loading-circular var(--duration) ease-in-out infinite;
   }
 }
 
-.vro-loading__spinner {
+.vro-loading-spinner {
   position: relative;
-  width: var(--vro-loading-size);
-  height: var(--vro-loading-size);
-  animation: vro-loading-fade 1.2s linear infinite;
+  width: var(--size);
+  height: var(--size);
+  animation: vro-loading-fade var(--duration) linear infinite;
 
   i {
     position: absolute;
@@ -39,7 +46,7 @@
     height: 28%;
     background: currentColor;
     border-radius: 999px;
-    transform-origin: center calc(var(--vro-loading-size) / 2);
+    transform-origin: center calc(var(--size) / 2);
 
     @for $i from 1 through 12 {
       &:nth-child(#{$i}) {
@@ -50,20 +57,20 @@
   }
 }
 
-.vro-loading__dots {
+.vro-loading-dots {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: calc(var(--vro-loading-size) * 0.12);
-  width: var(--vro-loading-size);
-  height: var(--vro-loading-size);
+  gap: calc(var(--size) * 0.12);
+  width: var(--size);
+  height: var(--size);
 
   i {
-    width: calc(var(--vro-loading-size) * 0.18);
-    height: calc(var(--vro-loading-size) * 0.18);
+    width: calc(var(--size) * 0.18);
+    height: calc(var(--size) * 0.18);
     background: currentColor;
     border-radius: 50%;
-    animation: vro-loading-dot 1s ease-in-out infinite;
+    animation: vro-loading-dot var(--duration) ease-in-out infinite;
 
     &:nth-child(2) {
       animation-delay: 0.15s;
@@ -71,6 +78,37 @@
 
     &:nth-child(3) {
       animation-delay: 0.3s;
+    }
+  }
+}
+
+.vro-loading-image {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: max(1px, calc(var(--size) * 0.14));
+  width: var(--size);
+  height: var(--size);
+
+  i {
+    background: currentColor;
+    opacity: 0.16;
+    animation: vro-loading-image var(--duration) linear infinite;
+
+    &:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    &:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+
+    &:nth-child(4) {
+      animation-delay: 0.4s;
     }
   }
 }
@@ -115,5 +153,21 @@
   40% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes vro-loading-image {
+  0%,
+  100% {
+    opacity: 0.16;
+  }
+
+  8%,
+  22% {
+    opacity: 0.86;
+  }
+
+  38% {
+    opacity: 0.32;
   }
 }

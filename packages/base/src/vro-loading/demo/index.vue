@@ -18,6 +18,9 @@
       <li>
         <vro-loading type="dots" />
       </li>
+      <li>
+        <vro-loading type="image" :size="15" color="#999" />
+      </li>
     </ul>
   </demo-block>
 
@@ -28,6 +31,9 @@
       </li>
       <li>
         <vro-loading type="dots" color="#67c23a" :size="36" />
+      </li>
+      <li>
+        <vro-loading type="image" color="#909399" :size="30" duration="800ms" />
       </li>
     </ul>
   </demo-block>
