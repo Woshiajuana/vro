@@ -1,16 +1,16 @@
 <template>
-  <el-image v-bind="props" class="vro-el-image">
+  <el-image v-bind="elImageProps" class="vro-el-image">
     <template #placeholder>
       <slot name="placeholder">
         <div class="vro-el-image-placeholder">
-          <vro-loading type="image" />
+          <vro-loading type="image" v-bind="loadingProps" />
         </div>
       </slot>
     </template>
     <template #error>
       <slot name="error">
         <div class="vro-el-image-error">
-          <vro-el-icon class="vro-el-image-error-icon">
+          <vro-el-icon v-bind="iconProps" class="vro-el-image-error-icon">
             <svg
               t="1784873125909"
               class="icon"
@@ -34,9 +34,9 @@
 </template>
 
 <script setup lang="ts">
-  import { isUndefined, omitBy } from '@daysnap/utils'
+  import { isUndefined, omitBy, pick, typedKeys } from '@daysnap/utils'
   import { VroLoading } from '@vrojs/base'
-  import { ElImage } from 'element-plus'
+  import { ElImage, imageProps } from 'element-plus'
   import { computed } from 'vue'
 
   import { VroElIcon } from '../vro-el-icon'
@@ -46,14 +46,15 @@
   defineOptions({ name: 'VroElImage' })
   defineSlots<VroElImageSlots>()
 
-  const rawProps = defineProps(vroElImageProps)
-  const props = computed(() => {
-    // eslint-disable-next-line prefer-const
-    let { ratio, previewRatio, previewSrcList, normalizeSrc, baseUrl, src, ...rest } = {
+  const props = defineProps(vroElImageProps)
+  const elImageProps = computed(() => {
+    const dynamicProps: VroElImageProps = {
       ...getVroElImageOptions(),
-      ...omitBy(rawProps, isUndefined),
+      ...omitBy(props, isUndefined),
     } as VroElImageProps
 
+    const { ratio, previewRatio, normalizeSrc, baseUrl } = dynamicProps
+    let { src, previewSrcList } = dynamicProps
     if (normalizeSrc) {
       src = normalizeSrc({ src, ratio, baseUrl })
 
@@ -64,6 +65,6 @@
       }
     }
 
-    return { ...rest, src, previewSrcList }
+    return { ...pick(dynamicProps, typedKeys(imageProps)), src, previewSrcList }
   })
 </script>

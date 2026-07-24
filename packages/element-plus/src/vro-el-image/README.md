@@ -58,10 +58,25 @@
 </vro-el-image>
 ```
 
+### 占位配置
+
+```html
+<vro-el-image
+  src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+  :loading-props="{ size: 28, color: 'var(--el-color-primary)', duration: 900 }"
+/>
+```
+
 ### 加载失败
 
 ```html
 <vro-el-image src="/not-found.png" />
+```
+
+### 失败图标配置
+
+```html
+<vro-el-image src="/not-found.png" :icon-props="{ size: 32, color: 'var(--el-color-danger)' }" />
 ```
 
 ### 自定义加载失败
@@ -81,6 +96,13 @@ import { setVroElImageOptions } from '@vrojs/element-plus'
 
 setVroElImageOptions({
   baseUrl: 'https://cdn.example.com',
+  loadingProps: {
+    type: 'image',
+    size: 20,
+  },
+  iconProps: {
+    size: 28,
+  },
   normalizeSrc: ({ src, ratio, baseUrl }) => {
     const url = src.startsWith('http') ? src : `${baseUrl}${src}`
     return ratio ? `${url}?ratio=${ratio}` : url

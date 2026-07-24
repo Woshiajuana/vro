@@ -54,8 +54,26 @@
     />
   </demo-block>
 
+  <demo-block title="占位配置">
+    <div class="demo-image-placeholder-root"></div>
+    <vro-el-image
+      class="demo-image"
+      :src="imageUrl"
+      fit="cover"
+      lazy
+      scroll-container=".demo-image-placeholder-root"
+      :loading-props="{ size: 28, color: 'var(--el-color-primary)', duration: 900 }"
+    />
+  </demo-block>
+
   <demo-block title="加载失败">
     <vro-el-image class="demo-image" src="/not-found.png" fit="cover" />
+    <vro-el-image
+      class="demo-image"
+      src="/not-found.png"
+      fit="cover"
+      :icon-props="{ size: 32, color: 'var(--el-color-danger)' }"
+    />
     <vro-el-image class="demo-image" src="/not-found.png" fit="cover">
       <template #error>
         <div class="demo-image-error">加载失败</div>

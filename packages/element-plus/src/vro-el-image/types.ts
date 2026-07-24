@@ -1,6 +1,8 @@
-import type { VroSlot } from '@vrojs/base'
+import type { VroLoadingProps, VroSlot } from '@vrojs/base'
 import { imageProps } from 'element-plus'
 import type { ExtractPropTypes, PropType } from 'vue'
+
+import type { VroElIconProps } from '../vro-el-icon'
 
 export type VroElImageNormalizeSrc = (options: {
   src: string
@@ -38,6 +40,16 @@ export const vroElImageProps = {
    * 图片地址转换方法。
    */
   normalizeSrc: Function as PropType<VroElImageNormalizeSrc>,
+
+  /**
+   * 默认加载占位图标属性。
+   */
+  loadingProps: Object as PropType<Partial<VroLoadingProps>>,
+
+  /**
+   * 默认加载失败图标属性。
+   */
+  iconProps: Object as PropType<Partial<VroElIconProps>>,
 }
 
 export type VroElImageProps = ExtractPropTypes<typeof vroElImageProps>
