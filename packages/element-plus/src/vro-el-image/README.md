@@ -61,6 +61,12 @@
 ### 加载失败
 
 ```html
+<vro-el-image src="/not-found.png" />
+```
+
+### 自定义加载失败
+
+```html
 <vro-el-image src="/not-found.png">
   <template #error>
     <div>加载失败</div>
@@ -117,22 +123,6 @@ setVroElImageOptions({
       <td>error</td>
       <td>自定义加载失败内容，透传给 ElImage</td>
     </tr>
-    <tr>
-      <td>viewer</td>
-      <td>自定义图片预览内容，透传给 ElImage</td>
-    </tr>
-    <tr>
-      <td>progress</td>
-      <td>自定义预览进度内容，透传给 ElImage</td>
-    </tr>
-    <tr>
-      <td>toolbar</td>
-      <td>自定义预览工具栏内容，透传给 ElImage</td>
-    </tr>
-    <tr>
-      <td>viewer-error</td>
-      <td>自定义预览加载失败内容，透传给 ElImage</td>
-    </tr>
   </tbody>
 </table>
 
@@ -150,11 +140,11 @@ setVroElImageOptions({
     </tr>
     <tr>
       <td>--vro-el-image-loading-color</td>
-      <td>#999</td>
+      <td>var(--el-text-color-placeholder)</td>
     </tr>
     <tr>
       <td>--vro-el-image-loading-size</td>
-      <td>15px</td>
+      <td>16px</td>
     </tr>
     <tr>
       <td>--vro-el-image-error-background</td>

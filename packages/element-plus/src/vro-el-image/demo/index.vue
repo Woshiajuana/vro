@@ -55,7 +55,12 @@
   </demo-block>
 
   <demo-block title="加载失败">
-    <vro-el-image class="demo-image" src="/not-found.png" fit="cover"> </vro-el-image>
+    <vro-el-image class="demo-image" src="/not-found.png" fit="cover" />
+    <vro-el-image class="demo-image" src="/not-found.png" fit="cover">
+      <template #error>
+        <div class="demo-image-error">加载失败</div>
+      </template>
+    </vro-el-image>
   </demo-block>
 </template>
 

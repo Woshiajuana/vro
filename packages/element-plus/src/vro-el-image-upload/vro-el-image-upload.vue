@@ -13,7 +13,7 @@
         v-for="(item, index) in computeValue"
         :key="getItemKey(item, index)"
       >
-        <VroElImage
+        <vro-el-image
           v-bind="props.imageProps"
           class="vro-el-image-upload-image"
           :src="previewValue[index]"
@@ -55,6 +55,7 @@
   import { VroElImage } from '../vro-el-image'
   import {
     type VroElImageUploadCallback,
+    type VroElImageUploadEmits,
     type VroElImageUploadItem,
     type VroElImageUploadModelValue,
     type VroElImageUploadProps,
@@ -65,9 +66,7 @@
 
   defineOptions({ name: 'VroElImageUpload' })
 
-  const emit = defineEmits<{
-    'update:modelValue': [value: VroElImageUploadModelValue]
-  }>()
+  const emit = defineEmits<VroElImageUploadEmits>()
   const rawProps = defineProps(vroElImageUploadProps)
   const { t } = useLocale()
   const previewUrlMap = new Map<File, string>()
