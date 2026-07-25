@@ -2,7 +2,7 @@ import type { VroSlot } from '@vrojs/base'
 import type { ColProps } from 'element-plus'
 import type { ExtractPropTypes, PropType } from 'vue'
 
-import { vroElSchemaFormProps } from '../vro-el-schema-form'
+import { vroElSchemaFormProps, type VroElSchemaFormSlotProps } from '../vro-el-schema-form'
 
 export type VroElSchemaFilterQueryValue = Record<string, any>
 
@@ -43,4 +43,9 @@ export interface VroElSchemaFilterSlots {
    * 搜索、重置按钮后的自定义内容。
    */
   default?: VroSlot
+
+  /**
+   * 转发给内部 VroElSchemaForm 的字段插槽。
+   */
+  [key: string]: ((props: VroElSchemaFormSlotProps) => any) | VroSlot | undefined
 }

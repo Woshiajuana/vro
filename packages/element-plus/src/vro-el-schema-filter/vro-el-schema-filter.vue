@@ -6,6 +6,10 @@
     @submit.prevent
     @keyup.enter="handleQuery"
   >
+    <template v-for="name in forwardedSlotNames" #[name]="slotProps" :key="name">
+      <slot :name="name" v-bind="slotProps ?? {}" />
+    </template>
+
     <el-col v-bind="colProps">
       <el-form-item v-bind="formItemProps">
         <el-button type="primary" :icon="Search" :loading="loading" @click="handleQuery">
@@ -49,9 +53,13 @@
   defineOptions({ name: 'VroElSchemaFilter' })
 
   const emit = defineEmits<VroElSchemaFilterEmits>()
-  defineSlots<VroElSchemaFilterSlots>()
+  const slots = defineSlots<VroElSchemaFilterSlots>()
   const props = defineProps(vroElSchemaFilterProps)
   const { t } = useLocale()
+
+  const forwardedSlotNames = computed<string[]>(() => {
+    return Object.keys(slots).filter((name) => name !== 'default')
+  })
 
   const schemaFormProps = computed(() => {
     const value = pick(props, typedKeys(vroElSchemaFormProps))
@@ -67,10 +75,16 @@
   const schemaFormRef = useTemplateRef<VroElSchemaFormInstance>('schemaFormRef')
 
   const handleQuery = async () => {
+    if (props.loading) {
+      return
+    }
     const data = (await schemaFormRef.value?.extractValues()) ?? {}
     emit('query', filterEmptyValue(data, true))
   }
-  const handleReset = () => {
+  const handleReset = async () => {
+    if (props.loading) {
+      return
+    }
     Object.values(props.schema).forEach((filed) => {
       // eslint-disable-next-line prefer-const
       let { value, resetValue } = filed
@@ -87,6 +101,6 @@
     })
     schemaFormRef.value?.resetFields()
     emit('reset')
-    handleQuery()
+    await handleQuery()
   }
 </script>

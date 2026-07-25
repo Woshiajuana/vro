@@ -92,6 +92,35 @@ const schema = {
 </vro-el-schema-filter>
 ```
 
+### 字段插槽
+
+除默认插槽外，其它具名插槽会转发给内部 `VroElSchemaForm`，可配合 schema 字段的 `slots` 和 `itemSlots` 使用。
+
+```html
+<vro-el-schema-filter :schema="schema">
+  <template #prepend>
+    <span>https://</span>
+  </template>
+</vro-el-schema-filter>
+```
+
+```ts
+const schema = {
+  website: {
+    label: '网址',
+    value: '',
+    is: 'ElInput',
+    slots: {
+      prepend: 'prepend',
+    },
+  },
+}
+```
+
+### 标签宽度
+
+`labelWidth` 会合并到内部 `formProps`，如果同时传入 `formProps.labelWidth`，以 `formProps.labelWidth` 为准。
+
 ## API
 
 ### 属性 Props
@@ -122,6 +151,14 @@ const schema = {
     <tr>
       <td>default</td>
       <td>搜索、重置按钮后的自定义内容</td>
+    </tr>
+    <tr>
+      <td>schema 字段 slots 配置中的 key</td>
+      <td>转发给内部 VroElSchemaForm 的字段组件插槽</td>
+    </tr>
+    <tr>
+      <td>schema 字段 itemSlots 配置中的 key</td>
+      <td>转发给内部 VroElSchemaForm 的 ElFormItem 插槽</td>
     </tr>
   </tbody>
 </table>
