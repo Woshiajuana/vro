@@ -1,7 +1,7 @@
 <template>
   <vro-el-schema-form
-    v-bind="props"
-    ref="refVroElSchemaForm"
+    v-bind="schemaFormProps"
+    ref="schemaFormRef"
     class="vro-el-schema-filter"
     @submit.prevent
     @keyup.enter="handleQuery"
@@ -21,25 +21,53 @@
 </template>
 
 <script setup lang="ts">
-  import { filterEmptyValue, isArray, isFunction, isObject, isUndefined } from '@daysnap/utils'
+  import {
+    filterEmptyValue,
+    isArray,
+    isFunction,
+    isObject,
+    isUndefined,
+    pick,
+    typedKeys,
+  } from '@daysnap/utils'
   import { RefreshRight, Search } from '@element-plus/icons-vue'
   import { ElButton, ElCol, ElFormItem } from 'element-plus'
-  import { useTemplateRef } from 'vue'
+  import { computed, useTemplateRef } from 'vue'
 
   import { useLocale } from '../locale'
-  import { VroElSchemaForm } from '../vro-el-schema-form'
-  import { vroElSchemaFilterProps } from './types'
+  import {
+    VroElSchemaForm,
+    type VroElSchemaFormInstance,
+    vroElSchemaFormProps,
+  } from '../vro-el-schema-form'
+  import {
+    type VroElSchemaFilterEmits,
+    vroElSchemaFilterProps,
+    type VroElSchemaFilterSlots,
+  } from './types'
 
   defineOptions({ name: 'VroElSchemaFilter' })
 
-  const emit = defineEmits(['query', 'reset'])
+  const emit = defineEmits<VroElSchemaFilterEmits>()
+  defineSlots<VroElSchemaFilterSlots>()
   const props = defineProps(vroElSchemaFilterProps)
   const { t } = useLocale()
 
-  const refVroElSchemaForm = useTemplateRef('refVroElSchemaForm')
+  const schemaFormProps = computed(() => {
+    const value = pick(props, typedKeys(vroElSchemaFormProps))
+    return {
+      ...value,
+      formProps: {
+        labelWidth: props.labelWidth,
+        ...value.formProps,
+      },
+    }
+  })
+
+  const schemaFormRef = useTemplateRef<VroElSchemaFormInstance>('schemaFormRef')
 
   const handleQuery = async () => {
-    const data = (await refVroElSchemaForm.value?.extractValues()) ?? {}
+    const data = (await schemaFormRef.value?.extractValues()) ?? {}
     emit('query', filterEmptyValue(data, true))
   }
   const handleReset = () => {
@@ -57,7 +85,7 @@
       }
       filed.value = value
     })
-    refVroElSchemaForm.value?.resetFields()
+    schemaFormRef.value?.resetFields()
     emit('reset')
     handleQuery()
   }

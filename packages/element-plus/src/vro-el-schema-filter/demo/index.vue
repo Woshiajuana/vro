@@ -3,19 +3,24 @@
     <vro-el-schema-filter
       :schema="schema"
       :form-props="{ labelWidth: '90px' }"
+      :loading="loading"
       @query="handleQuery"
       @reset="handleReset"
-    />
+    >
+      <el-button @click="handleExport">导出</el-button>
+    </vro-el-schema-filter>
     <div class="demo-value">查询参数：{{ query }}</div>
   </demo-block>
 </template>
 
 <script setup lang="ts">
+  import { ElMessage } from 'element-plus'
   import { ref } from 'vue'
 
   import type { VroElSchemaFormSchema } from '../../vro-el-schema-form'
 
   const query = ref<Record<string, any>>({})
+  const loading = ref(false)
 
   const schema = ref<VroElSchemaFormSchema>({
     keyword: {
@@ -29,7 +34,7 @@
     status: {
       label: '状态',
       value: '',
-      defaultValue: '',
+      resetValue: '',
       is: 'VroElSelect',
       options: [
         { label: '启用', value: 'enabled' },
@@ -55,6 +60,10 @@
 
   const handleReset = () => {
     query.value = {}
+  }
+
+  const handleExport = () => {
+    ElMessage.success('导出成功')
   }
 </script>
 

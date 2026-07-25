@@ -1,9 +1,17 @@
+:root,
+:host {
+  --vro-el-schema-filter-padding: 0 16px 16px;
+  --vro-el-schema-filter-background: var(--el-bg-color);
+  --vro-el-schema-filter-col-margin-top: 16px;
+}
+
 .vro-el-schema-filter {
   display: block;
   box-sizing: border-box;
   overflow: hidden;
-  padding: 0 16px 16px;
-  background-color: var(--el-bg-color);
+  padding: var(--vro-el-schema-filter-padding);
+  background-color: var(--vro-el-schema-filter-background);
+
   .el-form-item__label {
     display: flex;
     align-items: center;
@@ -14,7 +22,8 @@
   .el-form-item {
     margin-bottom: 0;
   }
+
   .el-col {
-    margin-top: 16px;
+    margin-top: var(--vro-el-schema-filter-col-margin-top);
   }
 }

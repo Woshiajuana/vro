@@ -13,14 +13,19 @@
   <vro-el-schema-filter
     :schema="schema"
     :form-props="{ labelWidth: '90px' }"
+    :loading="loading"
     @query="handleQuery"
     @reset="handleReset"
-  />
+  >
+    <el-button @click="handleExport">导出</el-button>
+  </vro-el-schema-filter>
 </template>
 
 <script setup lang="ts">
   import { ref } from 'vue'
   import type { VroElSchemaFormSchema } from '@vrojs/element-plus'
+
+  const loading = ref(false)
 
   const schema = ref<VroElSchemaFormSchema>({
     keyword: {
@@ -34,7 +39,7 @@
     status: {
       label: '状态',
       value: '',
-      defaultValue: '',
+      resetValue: '',
       is: 'VroElSelect',
       options: [
         { label: '启用', value: 'enabled' },
@@ -50,19 +55,23 @@
   const handleReset = () => {
     console.log('reset')
   }
+
+  const handleExport = () => {
+    console.log('export')
+  }
 </script>
 ```
 
 ### 重置默认值
 
-字段存在 `defaultValue` 时，点击重置会恢复为 `defaultValue`；否则会根据当前值类型重置为空字符串、空数组或空对象。
+字段存在 `resetValue` 时，点击重置会恢复为 `resetValue`；否则会根据当前值类型重置为空字符串、空数组或空对象。
 
 ```ts
 const schema = {
   type: {
     label: '类型',
     value: 'all',
-    defaultValue: 'all',
+    resetValue: 'all',
     is: 'VroElRadioGroup',
     options: [
       { label: '全部', value: 'all' },
@@ -135,6 +144,29 @@ const schema = {
       <td>reset</td>
       <td>-</td>
       <td>点击重置时触发</td>
+    </tr>
+  </tbody>
+</table>
+
+### 样式变量
+
+<table>
+  <tbody>
+    <tr>
+      <td>名称</td>
+      <td>默认值</td>
+    </tr>
+    <tr>
+      <td>--vro-el-schema-filter-padding</td>
+      <td>0 16px 16px</td>
+    </tr>
+    <tr>
+      <td>--vro-el-schema-filter-background</td>
+      <td>var(--el-bg-color)</td>
+    </tr>
+    <tr>
+      <td>--vro-el-schema-filter-col-margin-top</td>
+      <td>16px</td>
     </tr>
   </tbody>
 </table>
