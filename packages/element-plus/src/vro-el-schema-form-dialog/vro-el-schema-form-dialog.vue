@@ -9,16 +9,20 @@
     :close-on-click-modal="false"
     :style="computedProps.style"
     @close="hide()"
-    @closed="$emit('closed')"
+    @closed="emit('closed')"
     @opened="resetScrollTop"
   >
     <vro-el-schema-form
       v-bind="schemaFormProps"
-      ref="refVroElSchemaForm"
-      @change-field="$emit('change-field', $event)"
-      @input-field="$emit('input-field', $event)"
+      ref="schemaFormRef"
+      @change-field="emit('change-field', $event)"
+      @input-field="emit('input-field', $event)"
       @submit.prevent="handleSubmit()"
     >
+      <template v-for="name in forwardedSlotNames" #[name]="slotProps" :key="name">
+        <slot :name="name" v-bind="slotProps ?? {}" />
+      </template>
+
       <slot></slot>
     </vro-el-schema-form>
 
@@ -41,28 +45,41 @@
 </template>
 
 <script setup lang="ts">
-  import { pick } from '@daysnap/utils'
+  import { pick, typedKeys } from '@daysnap/utils'
   import { useAsyncTask, useVisible } from '@vrojs/use'
+  import type { DialogInstance } from 'element-plus'
   import { ElButton, ElDialog } from 'element-plus'
   import { computed, provide, ref, useTemplateRef } from 'vue'
 
   import { useLocale } from '../locale'
-  import { VroElSchemaForm, vroElSchemaFormProps } from '../vro-el-schema-form'
+  import {
+    VroElSchemaForm,
+    type VroElSchemaFormInstance,
+    vroElSchemaFormProps,
+  } from '../vro-el-schema-form'
   import { vroElSchemaFormDialogInjectionKey } from './injection'
-  import { type VroElSchemaFormDialogProps, vroElSchemaFormDialogProps } from './types'
+  import {
+    type VroElSchemaFormDialogEmits,
+    type VroElSchemaFormDialogProps,
+    vroElSchemaFormDialogProps,
+    type VroElSchemaFormDialogSlots,
+  } from './types'
 
   defineOptions({ name: 'VroElSchemaFormDialog' })
 
-  const emit = defineEmits(['change-field', 'input-field', 'cancel', 'confirm', 'closed'])
-
+  const emit = defineEmits<VroElSchemaFormDialogEmits>()
+  const slots = defineSlots<VroElSchemaFormDialogSlots>()
   const props = defineProps(vroElSchemaFormDialogProps)
   const { t } = useLocale()
   const dynamicProps = ref<Partial<VroElSchemaFormDialogProps>>()
+  const forwardedSlotNames = computed<string[]>(() => {
+    return Object.keys(slots).filter((name) => name !== 'default')
+  })
   const computedProps = computed<VroElSchemaFormDialogProps>(() =>
     Object.assign({}, props, dynamicProps.value),
   )
   const schemaFormProps = computed(() => {
-    const value = pick(computedProps.value, Object.keys(vroElSchemaFormProps) as any)
+    const value = pick(computedProps.value, typedKeys(vroElSchemaFormProps))
     return {
       ...value,
       formProps: {
@@ -81,25 +98,25 @@
     confirmCallback: (data) => emit('confirm', data),
   })
 
-  const dialogRef = useTemplateRef('dialogRef')
+  const dialogRef = useTemplateRef<DialogInstance>('dialogRef')
   const resetScrollTop = () => {
     const body = dialogRef.value?.$el?.querySelector('.el-dialog__body') as HTMLElement | null
     body?.scrollTo({ top: 0 })
   }
 
-  const refVroElSchemaForm = useTemplateRef('refVroElSchemaForm')
+  const schemaFormRef = useTemplateRef<VroElSchemaFormInstance>('schemaFormRef')
   const { loading, trigger: handleSubmit } = useAsyncTask(
     async () => {
-      if (!refVroElSchemaForm.value) {
-        throw new Error('not fond VroElSchemaForm')
+      if (!schemaFormRef.value) {
+        throw new Error('not found VroElSchemaForm')
       }
-      await refVroElSchemaForm.value.validate().catch(() => {
+      await schemaFormRef.value.validate().catch(() => {
         throw 'cancel'
       })
 
       // 执行方法
       let isBlock = false
-      await refVroElSchemaForm.value.trigger({
+      await schemaFormRef.value.trigger({
         confirm,
         hide,
         block: () => {
@@ -110,7 +127,7 @@
 
       if (visible.value && !isBlock) {
         // 获取数据
-        const data = await refVroElSchemaForm.value.extractValues()
+        const data = await schemaFormRef.value.extractValues()
         const result = (await computedProps.value.request?.(data, props.schema!)) ?? data
 
         confirm(result)
@@ -131,7 +148,7 @@
       return dialogRef.value!
     },
     get vroElSchemaForm() {
-      return refVroElSchemaForm.value!
+      return schemaFormRef.value!
     },
     show,
     hide,

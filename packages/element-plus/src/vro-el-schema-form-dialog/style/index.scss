@@ -1,4 +1,9 @@
+:root,
+:host {
+  --vro-el-schema-form-dialog-width: 520px;
+}
+
 .vro-el-schema-form-dialog {
-  --el-dialog-width: 520px;
+  --el-dialog-width: var(--vro-el-schema-form-dialog-width);
   width: var(--el-dialog-width);
 }

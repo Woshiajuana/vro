@@ -8,8 +8,29 @@
       title="编辑用户"
       :schema="schema"
       :request="handleRequest"
+      label-width="90px"
+      label-position="right"
+      confirm-button-text="保存"
+      cancel-button-text="关闭"
+      @cancel="handleCancel"
       @confirm="handleConfirm"
     />
+  </demo-block>
+
+  <demo-block title="字段插槽">
+    <el-button @click="openSlotDialog">打开自定义表单</el-button>
+
+    <vro-el-schema-form-dialog
+      ref="slotDialogRef"
+      title="编辑站点"
+      :schema="slotSchema"
+      :show-cancel-button="false"
+      @confirm="handleConfirm"
+    >
+      <template #prepend>
+        <span>https://</span>
+      </template>
+    </vro-el-schema-form-dialog>
   </demo-block>
 
   <demo-block title="函数调用">
@@ -30,10 +51,26 @@
 
   const result = ref<Record<string, any>>({})
   const dialogRef = ref<VroElSchemaFormDialogInstance>()
+  const slotDialogRef = ref<VroElSchemaFormDialogInstance>()
   const schema = ref(createSchema())
+  const slotSchema = ref<VroElSchemaFormSchema>({
+    website: {
+      label: '网址',
+      value: '',
+      is: 'ElInput',
+      slots: {
+        prepend: 'prepend',
+      },
+      rules: [{ required: true, message: '请填写网址', trigger: 'blur' }],
+    },
+  })
 
   const openDialog = () => {
     dialogRef.value?.show()
+  }
+
+  const openSlotDialog = () => {
+    slotDialogRef.value?.show()
   }
 
   const handleRequest: VroElSchemaFormDialogProps['request'] = async (data) => {
@@ -44,6 +81,10 @@
   const handleConfirm = (data: Record<string, any>) => {
     result.value = data
     ElMessage.success('提交成功')
+  }
+
+  const handleCancel = () => {
+    ElMessage.info('已关闭')
   }
 
   const openFunctionDialog = async () => {

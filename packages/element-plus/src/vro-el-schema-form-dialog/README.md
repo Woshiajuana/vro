@@ -16,6 +16,10 @@
     title="编辑用户"
     :schema="schema"
     :request="handleRequest"
+    label-width="90px"
+    label-position="right"
+    confirm-button-text="保存"
+    cancel-button-text="关闭"
     @confirm="handleConfirm"
   />
 </template>
@@ -72,6 +76,47 @@ const data = await showVroElSchemaFormDialog({
 />
 ```
 
+### 隐藏按钮
+
+```html
+<vro-el-schema-form-dialog
+  ref="dialogRef"
+  title="编辑用户"
+  :schema="schema"
+  :show-cancel-button="false"
+  :show-confirm-button="false"
+/>
+```
+
+### 字段插槽
+
+具名插槽会转发给内部 `VroElSchemaForm`，可配合 schema 字段的 `slots` 和 `itemSlots` 使用。
+
+```html
+<vro-el-schema-form-dialog ref="dialogRef" title="编辑站点" :schema="schema">
+  <template #prepend>
+    <span>https://</span>
+  </template>
+</vro-el-schema-form-dialog>
+```
+
+```ts
+const schema = {
+  website: {
+    label: '网址',
+    value: '',
+    is: 'ElInput',
+    slots: {
+      prepend: 'prepend',
+    },
+  },
+}
+```
+
+### 标签宽度
+
+`labelWidth` 和 `labelPosition` 会合并到内部 `formProps`，如果同时传入 `formProps.labelWidth` 或 `formProps.labelPosition`，以 `formProps` 中的值为准。
+
 ## API
 
 ### 属性 Props
@@ -103,6 +148,14 @@ const data = await showVroElSchemaFormDialog({
       <td>default</td>
       <td>透传给内部 VroElSchemaForm 的默认插槽</td>
     </tr>
+    <tr>
+      <td>schema 字段 slots 配置中的 key</td>
+      <td>转发给内部 VroElSchemaForm 的字段组件插槽</td>
+    </tr>
+    <tr>
+      <td>schema 字段 itemSlots 配置中的 key</td>
+      <td>转发给内部 VroElSchemaForm 的 ElFormItem 插槽</td>
+    </tr>
   </tbody>
 </table>
 
@@ -115,7 +168,11 @@ const data = await showVroElSchemaFormDialog({
       <td>说明</td>
     </tr>
     <tr>
-      <td>schemaFormInstance</td>
+      <td>elDialog</td>
+      <td>内部 ElDialog 实例</td>
+    </tr>
+    <tr>
+      <td>vroElSchemaForm</td>
       <td>内部 VroElSchemaForm 实例</td>
     </tr>
     <tr>
@@ -162,6 +219,21 @@ const data = await showVroElSchemaFormDialog({
       <td>input-field</td>
       <td>{ key, value }</td>
       <td>内部表单字段 input 时触发</td>
+    </tr>
+  </tbody>
+</table>
+
+### 样式变量
+
+<table>
+  <tbody>
+    <tr>
+      <td>名称</td>
+      <td>默认值</td>
+    </tr>
+    <tr>
+      <td>--vro-el-schema-form-dialog-width</td>
+      <td>520px</td>
     </tr>
   </tbody>
 </table>

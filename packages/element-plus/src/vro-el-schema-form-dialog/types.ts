@@ -1,9 +1,23 @@
+import type { VroSlot } from '@vrojs/base'
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
 
-import { vroElSchemaFormProps, type VroElSchemaFormSchema } from '../vro-el-schema-form'
+import {
+  type VroElSchemaFormFieldEvent,
+  vroElSchemaFormProps,
+  type VroElSchemaFormSchema,
+  type VroElSchemaFormSlotProps,
+} from '../vro-el-schema-form'
 
 export interface VroElSchemaFormDialogRequest {
   (data: any, schema: VroElSchemaFormSchema): Promise<any>
+}
+
+export interface VroElSchemaFormDialogEmits {
+  'change-field': [payload: VroElSchemaFormFieldEvent]
+  'input-field': [payload: VroElSchemaFormFieldEvent]
+  cancel: [reason?: any]
+  confirm: [data: any]
+  closed: []
 }
 
 export const vroElSchemaFormDialogProps = {
@@ -71,3 +85,15 @@ export const vroElSchemaFormDialogProps = {
 }
 
 export type VroElSchemaFormDialogProps = ExtractPropTypes<typeof vroElSchemaFormDialogProps>
+
+export interface VroElSchemaFormDialogSlots {
+  /**
+   * 透传给内部 VroElSchemaForm 的默认插槽。
+   */
+  default?: VroSlot
+
+  /**
+   * 转发给内部 VroElSchemaForm 的字段插槽。
+   */
+  [key: string]: ((props: VroElSchemaFormSlotProps) => any) | VroSlot | undefined
+}
