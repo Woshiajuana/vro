@@ -17,7 +17,7 @@
 
   const result = ref<Record<string, any>>({})
 
-  const [_, openHookDialog] = useVroElSchemaFormDialog(createSchema, async (schema, instance) => {
+  const [, openHookDialog] = useVroElSchemaFormDialog(createSchema, async (schema, instance) => {
     const data = await instance.show<Record<string, any>>({
       title: '编辑用户',
       schema,
