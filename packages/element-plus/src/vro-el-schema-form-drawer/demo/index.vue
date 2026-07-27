@@ -79,6 +79,46 @@
         ],
         rules: [{ required: true }],
       },
+      role1: {
+        label: '角色',
+        value: '',
+        is: 'VroElSelect',
+        options: [
+          { label: '管理员', value: 'admin' },
+          { label: '运营', value: 'operator' },
+        ],
+        rules: [{ required: true }],
+      },
+      role2: {
+        label: '角色',
+        value: '',
+        is: 'VroElSelect',
+        options: [
+          { label: '管理员', value: 'admin' },
+          { label: '运营', value: 'operator' },
+        ],
+        rules: [{ required: true }],
+      },
+      role3: {
+        label: '角色',
+        value: '',
+        is: 'VroElSelect',
+        options: [
+          { label: '管理员', value: 'admin' },
+          { label: '运营', value: 'operator' },
+        ],
+        rules: [{ required: true }],
+      },
+      role4: {
+        label: '角色',
+        value: '',
+        is: 'VroElSelect',
+        options: [
+          { label: '管理员', value: 'admin' },
+          { label: '运营', value: 'operator' },
+        ],
+        rules: [{ required: true }],
+      },
     }
   }
 </script>

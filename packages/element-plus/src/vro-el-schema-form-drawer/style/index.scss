@@ -1,14 +1,23 @@
 :root,
 :host {
-  --vro-el-schema-form-drawer-size: 420px;
+  --vro-el-schema-form-drawer-padding: 16px;
+  --vro-el-schema-form-drawer-border-color: var(--el-border-color);
+  --vro-el-schema-form-drawer-size: 520px;
 }
 
 .vro-el-schema-form-drawer {
-  --el-drawer-padding-primary: 16px;
-
+  .el-drawer__header {
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--vro-el-schema-form-drawer-border-color);
+    padding: var(--vro-el-schema-form-drawer-padding);
+  }
   .el-drawer__body {
     min-width: 0;
     overflow-y: auto;
+  }
+  .el-drawer__footer {
+    padding: var(--vro-el-schema-form-drawer-padding);
+    border-top: 1px solid var(--vro-el-schema-form-drawer-border-color);
   }
 }
 
