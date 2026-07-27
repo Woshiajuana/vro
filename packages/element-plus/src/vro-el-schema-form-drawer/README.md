@@ -23,6 +23,22 @@ const data = await showVroElSchemaFormDrawer({
 })
 ```
 
+### 自定义样式变量
+
+```vue
+<template>
+  <vro-el-schema-form-drawer
+    title="编辑用户"
+    :schema="schema"
+    :style="{
+      '--vro-el-schema-form-drawer-padding': '20px',
+      '--vro-el-schema-form-drawer-border-color': 'var(--el-border-color-light)',
+      '--vro-el-schema-form-drawer-size': 'min(520px, 90vw)',
+    }"
+  />
+</template>
+```
+
 ## API
 
 ### 属性 Props
@@ -84,6 +100,33 @@ const data = await showVroElSchemaFormDrawer({
     <tr>
       <td>vroElSchemaForm</td>
       <td>内部 VroElSchemaForm 实例</td>
+    </tr>
+  </tbody>
+</table>
+
+### 样式变量
+
+<table>
+  <tbody>
+    <tr>
+      <td>名称</td>
+      <td>默认值</td>
+      <td>说明</td>
+    </tr>
+    <tr>
+      <td>--vro-el-schema-form-drawer-padding</td>
+      <td>20px</td>
+      <td>抽屉头部和底部区域内边距</td>
+    </tr>
+    <tr>
+      <td>--vro-el-schema-form-drawer-border-color</td>
+      <td>var(--el-border-color)</td>
+      <td>抽屉头部和底部分割线颜色</td>
+    </tr>
+    <tr>
+      <td>--vro-el-schema-form-drawer-size</td>
+      <td>520px</td>
+      <td>抽屉默认尺寸，会作为 size 属性默认值使用</td>
     </tr>
   </tbody>
 </table>
