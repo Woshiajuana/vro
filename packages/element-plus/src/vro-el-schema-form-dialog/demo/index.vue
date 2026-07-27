@@ -1,36 +1,7 @@
 <template>
-  <demo-block title="基础用法">
-    <el-button type="primary" @click="openDialog">打开弹窗</el-button>
+  <demo-block title="useVroElSchemaFormDialog">
+    <el-button type="primary" @click="openHookDialog">打开弹窗</el-button>
     <div class="demo-value">提交结果：{{ result }}</div>
-
-    <vro-el-schema-form-dialog
-      ref="dialogRef"
-      title="编辑用户"
-      :schema="schema"
-      :request="handleRequest"
-      label-width="90px"
-      label-position="right"
-      confirm-button-text="保存"
-      cancel-button-text="关闭"
-      @cancel="handleCancel"
-      @confirm="handleConfirm"
-    />
-  </demo-block>
-
-  <demo-block title="字段插槽">
-    <el-button @click="openSlotDialog">打开自定义表单</el-button>
-
-    <vro-el-schema-form-dialog
-      ref="slotDialogRef"
-      title="编辑站点"
-      :schema="slotSchema"
-      :show-cancel-button="false"
-      @confirm="handleConfirm"
-    >
-      <template #prepend>
-        <span>https://</span>
-      </template>
-    </vro-el-schema-form-dialog>
   </demo-block>
 
   <demo-block title="函数调用">
@@ -43,59 +14,43 @@
   import { ref } from 'vue'
 
   import type { VroElSchemaFormSchema } from '../../vro-el-schema-form'
-  import {
-    showVroElSchemaFormDialog,
-    type VroElSchemaFormDialogInstance,
-    type VroElSchemaFormDialogProps,
-  } from '..'
+  import { showVroElSchemaFormDialog, useVroElSchemaFormDialog } from '..'
 
   const result = ref<Record<string, any>>({})
-  const dialogRef = ref<VroElSchemaFormDialogInstance>()
-  const slotDialogRef = ref<VroElSchemaFormDialogInstance>()
-  const schema = ref(createSchema())
-  const slotSchema = ref<VroElSchemaFormSchema>({
-    website: {
-      label: '网址',
-      value: '',
-      is: 'ElInput',
-      slots: {
-        prepend: 'prepend',
-      },
-      rules: [{ required: true, message: '请填写网址', trigger: 'blur' }],
-    },
-  })
 
-  const openDialog = () => {
-    dialogRef.value?.show()
-  }
-
-  const openSlotDialog = () => {
-    slotDialogRef.value?.show()
-  }
-
-  const handleRequest: VroElSchemaFormDialogProps['request'] = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 600))
-    return data
-  }
-
-  const handleConfirm = (data: Record<string, any>) => {
-    result.value = data
-    ElMessage.success('提交成功')
-  }
-
-  const handleCancel = () => {
-    ElMessage.info('已关闭')
-  }
-
-  const openFunctionDialog = async () => {
-    const data = await showVroElSchemaFormDialog({
-      title: '新建用户',
-      schema: createSchema(),
+  const [_, openHookDialog] = useVroElSchemaFormDialog(createSchema, async (schema, instance) => {
+    const data = await instance.show<Record<string, any>>({
+      title: '编辑用户',
+      schema,
       request: handleRequest,
+      // labelWidth: '90px',
+      // labelPosition: 'top',
+      confirmButtonText: '保存',
+      cancelButtonText: '关闭',
     })
 
     result.value = data
     ElMessage.success('提交成功')
+  })
+
+  const openFunctionDialog = async () => {
+    const data = await showVroElSchemaFormDialog<Record<string, any>>({
+      title: '新建用户',
+      schema: createSchema(),
+      request: handleRequest,
+      labelWidth: '90px',
+      labelPosition: 'right',
+      confirmButtonText: '创建',
+      cancelButtonText: '取消',
+    })
+
+    result.value = data
+    ElMessage.success('提交成功')
+  }
+
+  const handleRequest = async (data: any) => {
+    await new Promise((resolve) => setTimeout(resolve, 600))
+    return data
   }
 
   function createSchema(): VroElSchemaFormSchema {

@@ -1,3 +1,5 @@
+import './style/index'
+
 import { showComponent } from '@vrojs/base'
 import { type AppContext, markRaw } from 'vue'
 

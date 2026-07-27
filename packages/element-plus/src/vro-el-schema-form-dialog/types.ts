@@ -3,6 +3,7 @@ import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
 
 import {
   type VroElSchemaFormFieldEvent,
+  type VroElSchemaFormFormProps,
   vroElSchemaFormProps,
   type VroElSchemaFormSchema,
   type VroElSchemaFormSlotProps,
@@ -42,19 +43,13 @@ export const vroElSchemaFormDialogProps = {
   request: Function as PropType<VroElSchemaFormDialogRequest>,
 
   /**
-   * 表单标签位置。
+   * 透传给 ElForm 的属性，不包含 model 和 rules。
    */
-  labelPosition: {
-    type: String as PropType<'left' | 'right' | 'top'>,
-    default: 'top',
-  },
-
-  /**
-   * 表单标签宽度。
-   */
-  labelWidth: {
-    type: String,
-    default: '120px',
+  formProps: {
+    type: Object as PropType<VroElSchemaFormFormProps>,
+    default: () => ({
+      labelPosition: 'top',
+    }),
   },
 
   /**

@@ -100,7 +100,9 @@
 
   const dialogRef = useTemplateRef<DialogInstance>('dialogRef')
   const resetScrollTop = () => {
-    const body = dialogRef.value?.$el?.querySelector('.el-dialog__body') as HTMLElement | null
+    const el = dialogRef.value?.$el
+    const root = el instanceof Element ? el : document.querySelector('.vro-el-schema-form-dialog')
+    const body = root?.querySelector('.el-dialog__body') as HTMLElement | null
     body?.scrollTo({ top: 0 })
   }
 
