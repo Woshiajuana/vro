@@ -53,7 +53,7 @@
 
   import type { VroElTreeKey } from '../types'
 
-  const value = ref(['system'])
+  const value = ref(['-1'])
   const customValue = ref(['user'])
   const rootValue = ref(['setting'])
   const emptyValue = ref<VroElTreeKey[]>([])

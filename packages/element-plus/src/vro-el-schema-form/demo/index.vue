@@ -161,9 +161,19 @@
         value: ['1'],
         is: 'VroElTree',
         props: {
+          showCheckbox: true,
+          props: { label: 'label' },
           data: [
-            { label: '选项一', value: '1' },
-            { label: '选项二', value: '2' },
+            {
+              id: 'system',
+              parentId: '-1',
+              label: '系统管理',
+            },
+            {
+              id: 'content',
+              parentId: '-1',
+              label: '内容管理',
+            },
           ],
         },
       },

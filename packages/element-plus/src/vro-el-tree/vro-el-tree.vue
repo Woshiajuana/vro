@@ -3,7 +3,7 @@
     ref="treeRef"
     v-bind="treeProps"
     class="vro-el-tree"
-    :data="options"
+    :data="treeData"
     :default-checked-keys="checkedKeys"
     @check="handleCheck"
   >
@@ -43,9 +43,13 @@
     return pick(props, typedKeys(elTreeProps))
   })
 
+  const treeData = computed(() => {
+    return props.options ? props.options : (props.data as VroElTreeOption[])
+  })
+
   const checkedKeys = computed(() => {
-    const { modelValue, options, rootId } = props
-    const { childIds, mapping } = parseNodeIds(options)
+    const { modelValue, rootId } = props
+    const { childIds, mapping } = parseNodeIds(treeData.value)
     const modelValueMap = modelValue.reduce(
       (acc, id) => {
         acc[id] = true
