@@ -11,7 +11,7 @@
 ```html
 <template>
   <vro-el-schema-form
-    ref="refVroElSchemaForm"
+    ref="schemaFormRef"
     :schema="schema"
     :form-props="{ labelWidth: '90px' }"
     :col-props="{ span: 12 }"
@@ -23,7 +23,7 @@
   import { ref } from 'vue'
   import { useVroElSchemaForm, type VroElSchemaFormInstance } from '@vrojs/element-plus'
 
-  const refVroElSchemaForm = ref<VroElSchemaFormInstance>()
+  const schemaFormRef = ref<VroElSchemaFormInstance>()
   const { schema, loading, trigger } = useVroElSchemaForm(
     {
       username: {
@@ -46,7 +46,7 @@
       console.log(data)
     },
     {
-      instanceRef: refVroElSchemaForm,
+      instanceRef: schemaFormRef,
     },
   )
 </script>

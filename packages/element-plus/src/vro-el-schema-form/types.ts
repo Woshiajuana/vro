@@ -45,13 +45,13 @@ export interface VroElSchemaFormFieldPropsMap {
 }
 
 export type VroElSchemaFormFieldType = keyof VroElSchemaFormFieldPropsMap
-export type VroElSchemaFormCustomFieldType = Raw<object>
+export type VroElSchemaFormRawComponent = Raw<object>
 
 export interface VroElSchemaFormSchemaFieldBase<TProps = Record<string, any>> {
   /**
    * 字段渲染组件，支持内置注册名、外部注册名或组件对象。
    */
-  is?: VroElSchemaFormFieldType | VroElSchemaFormCustomFieldType
+  is?: VroElSchemaFormFieldType | VroElSchemaFormRawComponent
 
   /**
    * 表单项标签文本。
@@ -116,7 +116,7 @@ export interface VroElSchemaFormSchemaFieldBase<TProps = Record<string, any>> {
   /**
    * 从字段值转换提交值。
    */
-  get?: (value: any, filed: VroElSchemaFormSchemaField, metadata: VroElSchemaFormSchema) => any
+  get?: (value: any, field: VroElSchemaFormSchemaField, metadata: VroElSchemaFormSchema) => any
 
   /**
    * 将外部数据写入字段。
@@ -128,7 +128,7 @@ export interface VroElSchemaFormSchemaFieldBase<TProps = Record<string, any>> {
    */
   hidden?:
     | boolean
-    | ((value: any, filed: VroElSchemaFormSchemaField, metadata: VroElSchemaFormSchema) => boolean)
+    | ((value: any, field: VroElSchemaFormSchemaField, metadata: VroElSchemaFormSchema) => boolean)
 
   /**
    * 字段校验规则，透传给 ElForm rules。
@@ -154,7 +154,7 @@ export interface VroElSchemaFormSchemaFieldBase<TProps = Record<string, any>> {
   [key: string]: any
 }
 
-export type VroElSchemaFormRegisteredSchemaField = {
+export type VroElSchemaFormMappedSchemaField = {
   [K in VroElSchemaFormFieldType]: VroElSchemaFormSchemaFieldBase<
     VroElSchemaFormFieldPropsMap[K]
   > & {
@@ -163,11 +163,11 @@ export type VroElSchemaFormRegisteredSchemaField = {
 }[VroElSchemaFormFieldType]
 
 export type VroElSchemaFormCustomSchemaField = VroElSchemaFormSchemaFieldBase & {
-  is?: VroElSchemaFormCustomFieldType
+  is?: VroElSchemaFormRawComponent
 }
 
 export type VroElSchemaFormSchemaField =
-  | VroElSchemaFormRegisteredSchemaField
+  | VroElSchemaFormMappedSchemaField
   | VroElSchemaFormCustomSchemaField
 
 export type VroElSchemaFormSchema = Record<string, VroElSchemaFormSchemaField>

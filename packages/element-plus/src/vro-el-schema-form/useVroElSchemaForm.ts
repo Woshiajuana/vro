@@ -20,18 +20,18 @@ export function useVroElSchemaForm<T extends Record<string, any> = Record<string
   const { instanceRef, source, ...rest } = options
   const schema = reactive(isFunction(rawSchema) ? rawSchema() : rawSchema)
 
-  const refVroElSchemaForm = instanceRef ?? ref<VroElSchemaFormInstance>()
+  const schemaFormRef = instanceRef ?? ref<VroElSchemaFormInstance>()
 
   const { loading, trigger, error, data } = useAsyncTask(async () => {
-    if (!refVroElSchemaForm.value) {
+    if (!schemaFormRef.value) {
       return
     }
     try {
-      await refVroElSchemaForm.value.validate()
+      await schemaFormRef.value.validate()
     } catch {
       throw ''
     }
-    const data = (await refVroElSchemaForm.value.extractValues()) as T
+    const data = (await schemaFormRef.value.extractValues()) as T
     await task?.(data)
     return data
   }, rest)
@@ -44,7 +44,7 @@ export function useVroElSchemaForm<T extends Record<string, any> = Record<string
     data,
     error,
     schema,
-    refVroElSchemaForm,
+    schemaFormRef,
     loading,
     trigger,
   }

@@ -1,7 +1,7 @@
 <template>
   <demo-block title="基础用法">
     <vro-el-schema-form
-      ref="refVroElSchemaForm"
+      ref="schemaFormRef"
       :schema="schema"
       :form-props="{ labelWidth: '90px' }"
       :col-props="{ span: 12 }"
@@ -44,7 +44,7 @@
   import { useVroElSchemaForm, type VroElSchemaFormInstance, type VroElSchemaFormSchema } from '..'
 
   const values = ref<Record<string, any>>({})
-  const refVroElSchemaForm = ref<VroElSchemaFormInstance>()
+  const schemaFormRef = ref<VroElSchemaFormInstance>()
 
   const { schema, loading, trigger } = useVroElSchemaForm(
     {
@@ -70,7 +70,7 @@
       ElMessage.success('提交成功')
     },
     {
-      instanceRef: refVroElSchemaForm,
+      instanceRef: schemaFormRef,
     },
   )
 
@@ -118,7 +118,7 @@
   })
 
   const handleExtract = async () => {
-    values.value = (await refVroElSchemaForm.value?.extractValues()) ?? {}
+    values.value = (await schemaFormRef.value?.extractValues()) ?? {}
   }
 </script>
 
