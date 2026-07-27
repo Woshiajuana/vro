@@ -41,5 +41,9 @@ export default {
       cancelText: 'Cancel',
       confirmText: 'Confirm',
     },
+    schemaFormDrawer: {
+      cancelText: 'Cancel',
+      confirmText: 'Confirm',
+    },
   },
 }

@@ -51,6 +51,7 @@ declare global {
   const shallowReadonly: typeof import('vue').shallowReadonly
   const shallowRef: typeof import('vue').shallowRef
   const showVroElSchemaFormDialog: typeof import('@vrojs/element-plus').showVroElSchemaFormDialog
+  const showVroElSchemaFormDrawer: typeof import('@vrojs/element-plus').showVroElSchemaFormDrawer
   const toRaw: typeof import('vue').toRaw
   const toRef: typeof import('vue').toRef
   const toRefs: typeof import('vue').toRefs
@@ -68,6 +69,7 @@ declare global {
   const useSlots: typeof import('vue').useSlots
   const useTemplateRef: typeof import('vue').useTemplateRef
   const useVroElSchemaFormDialog: typeof import('@vrojs/element-plus').useVroElSchemaFormDialog
+  const useVroElSchemaFormDrawer: typeof import('@vrojs/element-plus').useVroElSchemaFormDrawer
   const watch: typeof import('vue').watch
   const watchEffect: typeof import('vue').watchEffect
   const watchPostEffect: typeof import('vue').watchPostEffect

@@ -55,6 +55,7 @@ function getAPIMap() {
   const configs = {
     '@vrojs/element-plus': {
       VroElSchemaFormDialog: ['showVroElSchemaFormDialog', 'useVroElSchemaFormDialog'],
+      VroElSchemaFormDrawer: ['showVroElSchemaFormDrawer', 'useVroElSchemaFormDrawer'],
       VroElSchemaDesc: ['createVroElSchemaDescDialog'],
     },
   }
