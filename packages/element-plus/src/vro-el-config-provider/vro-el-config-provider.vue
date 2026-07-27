@@ -3,17 +3,18 @@
 </template>
 
 <script setup lang="ts">
-  import { merge } from '@daysnap/utils'
-  import { computed, provide } from 'vue'
+  import { computed } from 'vue'
 
-  import { localeContextKey, zhCN } from '../locale'
+  import { provideVroElConfig } from './config'
   import { vroElConfigProviderProps } from './types'
 
   defineOptions({ name: 'VroElConfigProvider' })
 
   const props = defineProps(vroElConfigProviderProps)
 
-  const locale = computed(() => merge({}, zhCN, props.locale))
+  const config = computed(() => ({
+    locale: props.locale,
+  }))
 
-  provide(localeContextKey, locale)
+  provideVroElConfig(config, props)
 </script>

@@ -75,17 +75,12 @@
   const forwardedSlotNames = computed<string[]>(() => {
     return Object.keys(slots).filter((name) => name !== 'default')
   })
-  const computedProps = computed<VroElSchemaFormDialogProps>(() =>
-    Object.assign({}, props, dynamicProps.value),
-  )
+  const computedProps = computed<VroElSchemaFormDialogProps>(() => {
+    console.log('computedProps => ', Object.assign({}, props, dynamicProps.value))
+    return Object.assign({}, props, dynamicProps.value)
+  })
   const schemaFormProps = computed(() => {
-    const value = pick(computedProps.value, typedKeys(vroElSchemaFormProps))
-    return {
-      ...value,
-      formProps: {
-        ...value.formProps,
-      },
-    }
+    return pick(computedProps.value, typedKeys(vroElSchemaFormProps))
   })
 
   const { show, hide, confirm, visible } = useVisible<Partial<VroElSchemaFormDialogProps>, any>({

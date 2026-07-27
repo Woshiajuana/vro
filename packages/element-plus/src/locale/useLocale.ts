@@ -1,14 +1,13 @@
-import { computed, inject, type InjectionKey, type Ref } from 'vue'
+import { computed } from 'vue'
 
+import { useVroElConfig } from '../vro-el-config-provider/config'
 import zhCN from './lang/zh-cn'
-import type { Locale, TranslatePair } from './types'
-
-export const localeContextKey: InjectionKey<Ref<Locale | undefined>> = Symbol('localeContextKey')
+import type { TranslatePair } from './types'
 
 export function useLocale() {
-  const injectedLocale = inject(localeContextKey, undefined)
+  const config = useVroElConfig()
 
-  const locale = computed(() => injectedLocale?.value ?? zhCN)
+  const locale = computed(() => config.value.locale ?? zhCN)
 
   const t = (path: string, option?: Record<string, string | number>) => {
     const value = get(locale.value.el, path)

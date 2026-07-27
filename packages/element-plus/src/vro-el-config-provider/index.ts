@@ -2,6 +2,7 @@ import { withInstall } from '@vrojs/base'
 
 import Component from './vro-el-config-provider.vue'
 
+export * from './config'
 export * from './types'
 
 export const VroElConfigProvider = withInstall<typeof Component>(Component)

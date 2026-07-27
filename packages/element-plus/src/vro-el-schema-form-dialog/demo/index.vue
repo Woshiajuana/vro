@@ -50,7 +50,7 @@
         label: '用户名',
         value: '',
         is: 'ElInput',
-        rules: [{ required: true, message: '请填写用户名', trigger: 'blur' }],
+        rules: [{ required: true }],
       },
       role: {
         label: '角色',
@@ -60,7 +60,7 @@
           { label: '管理员', value: 'admin' },
           { label: '运营', value: 'operator' },
         ],
-        rules: [{ required: true, message: '请选择角色', trigger: 'change' }],
+        rules: [{ required: true }],
       },
     }
   }

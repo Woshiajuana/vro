@@ -31,9 +31,7 @@
         label: 'ElInput',
         value: '',
         is: 'ElInput',
-        props: {
-          placeholder: '请输入',
-        },
+        rules: [{ required: true }],
       },
       elSelect: {
         label: 'ElSelect',
