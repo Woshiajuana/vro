@@ -1,3 +1,4 @@
 export type * from './Arrayable'
 export type * from './DeepPartial'
+export type * from './ExtractComponentProps'
 export type * from './VroSlots'

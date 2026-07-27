@@ -117,7 +117,7 @@
     return Object.entries(metadata.value).reduce<Record<string, any>>((res, [key, item]) => {
       // eslint-disable-next-line prefer-const
       let { is, options, labelKey, valueKey } = item
-      let props = { ...item.props }
+      let props = { ...item.props } as Record<string, any>
       if (isString(is)) {
         const data = vroElSchemaFormFieldManager.get(is)
         if (data) {

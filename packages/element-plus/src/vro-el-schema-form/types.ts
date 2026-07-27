@@ -1,36 +1,57 @@
-import type { Arrayable, VroSlot } from '@vrojs/base'
+import type { Arrayable, ExtractComponentProps, VroSlot } from '@vrojs/base'
 import {
+  type CascaderComponentProps,
+  type CheckboxGroupProps,
   type ColProps,
+  type DatePickerProps,
+  type DividerProps,
+  type ElTreeSelect,
   type FormItemProps,
   type FormItemRule,
   type FormProps,
+  type InputNumberProps,
+  type InputProps,
+  type RadioGroupProps,
   type RowProps,
+  type SelectProps,
 } from 'element-plus'
 import { type ExtractPropTypes, type PropType, type Raw } from 'vue'
 
-export interface VroElSchemaFormSchemaField {
+import type { VroElCheckboxGroupProps } from '../vro-el-checkbox-group'
+import type { VroElFileUploadProps } from '../vro-el-file-upload'
+import type { VroElImageUploadProps } from '../vro-el-image-upload'
+import type { VroElRadioGroupProps } from '../vro-el-radio-group'
+import type { VroElSelectProps } from '../vro-el-select'
+import type { VroElTagsProps } from '../vro-el-tags'
+import type { VroElTreeProps } from '../vro-el-tree'
+
+export interface VroElSchemaFormFieldPropsMap {
+  ElInput: Partial<InputProps>
+  ElSelect: Partial<SelectProps>
+  ElRadioGroup: Partial<RadioGroupProps>
+  ElCheckboxGroup: Partial<CheckboxGroupProps>
+  ElDatePicker: Partial<DatePickerProps>
+  ElInputNumber: Partial<InputNumberProps>
+  ElTreeSelect: Partial<ExtractComponentProps<typeof ElTreeSelect>>
+  ElCascader: Partial<CascaderComponentProps>
+  ElDivider: Partial<DividerProps>
+  VroElSelect: Partial<VroElSelectProps>
+  VroElCheckboxGroup: Partial<VroElCheckboxGroupProps>
+  VroElRadioGroup: Partial<VroElRadioGroupProps>
+  VroElImageUpload: Partial<VroElImageUploadProps>
+  VroElFileUpload: Partial<VroElFileUploadProps>
+  VroElTags: Partial<VroElTagsProps>
+  VroElTree: Partial<VroElTreeProps>
+}
+
+export type VroElSchemaFormFieldType = keyof VroElSchemaFormFieldPropsMap
+export type VroElSchemaFormCustomFieldType = Raw<object>
+
+export interface VroElSchemaFormSchemaFieldBase<TProps = Record<string, any>> {
   /**
    * 字段渲染组件，支持内置注册名、外部注册名或组件对象。
    */
-  is?:
-    | 'ElInput'
-    | 'ElSelect'
-    | 'ElRadioGroup'
-    | 'ElCheckboxGroup'
-    | 'ElDatePicker'
-    | 'ElInputNumber'
-    | 'ElTreeSelect'
-    | 'ElCascader'
-    | 'ElDivider'
-    | 'VroElSelect'
-    | 'VroElCheckboxGroup'
-    | 'VroElRadioGroup'
-    | 'VroElImageUpload'
-    | 'VroElFileUpload'
-    | 'VroElTags'
-    | 'VroElTree'
-    | Raw<object>
-    | (string & {})
+  is?: VroElSchemaFormFieldType | VroElSchemaFormCustomFieldType
 
   /**
    * 表单项标签文本。
@@ -55,7 +76,7 @@ export interface VroElSchemaFormSchemaField {
   /**
    * 透传给字段组件的属性。
    */
-  props?: Record<string, any>
+  props?: TProps
 
   /**
    * 字段选项列表，常用于选择器、单选、多选等组件。
@@ -132,6 +153,22 @@ export interface VroElSchemaFormSchemaField {
 
   [key: string]: any
 }
+
+export type VroElSchemaFormRegisteredSchemaField = {
+  [K in VroElSchemaFormFieldType]: VroElSchemaFormSchemaFieldBase<
+    VroElSchemaFormFieldPropsMap[K]
+  > & {
+    is: K
+  }
+}[VroElSchemaFormFieldType]
+
+export type VroElSchemaFormCustomSchemaField = VroElSchemaFormSchemaFieldBase & {
+  is?: VroElSchemaFormCustomFieldType
+}
+
+export type VroElSchemaFormSchemaField =
+  | VroElSchemaFormRegisteredSchemaField
+  | VroElSchemaFormCustomSchemaField
 
 export type VroElSchemaFormSchema = Record<string, VroElSchemaFormSchemaField>
 export type VroElSchemaFormFormProps = Partial<Omit<FormProps, 'model' | 'rules'>>

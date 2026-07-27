@@ -111,6 +111,63 @@ const schema = {
 }
 ```
 
+### 扩展组件
+
+`is` 使用自定义字符串组件时，需要同时完成类型扩展和运行时注册。类型扩展用于让 `props` 获得提示，运行时注册用于让 schema form 找到实际渲染组件。
+
+```ts
+import { vroElSchemaFormFieldManager } from '@vrojs/element-plus'
+
+import DemoField from './DemoField.vue'
+
+interface DemoFieldProps {
+  disabled?: boolean
+  placeholder?: string
+  foo?: string
+  count?: number
+}
+
+declare module '@vrojs/element-plus' {
+  interface VroElSchemaFormFieldPropsMap {
+    DemoField: DemoFieldProps
+  }
+}
+
+vroElSchemaFormFieldManager.add('DemoField', DemoField)
+
+const schema = {
+  demo: {
+    label: '扩展组件',
+    value: '',
+    is: 'DemoField',
+    props: {
+      foo: 'foo',
+      count: 1,
+      placeholder: '请输入',
+    },
+  },
+}
+```
+
+如果直接传组件对象，建议使用 `markRaw`，避免 Vue 对组件对象做不必要的响应式代理。
+
+```ts
+import { markRaw } from 'vue'
+
+import DemoField from './DemoField.vue'
+
+const schema = {
+  demo: {
+    label: '扩展组件',
+    value: '',
+    is: markRaw(DemoField),
+    props: {
+      foo: 'foo',
+    },
+  },
+}
+```
+
 ## API
 
 ### 属性 Props
