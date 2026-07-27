@@ -14,7 +14,6 @@
   import { ref } from 'vue'
 
   import type { VroElSchemaFormSchema } from '../../vro-el-schema-form'
-  import { showVroElSchemaFormDialog, useVroElSchemaFormDialog } from '..'
 
   const result = ref<Record<string, any>>({})
 
@@ -23,8 +22,10 @@
       title: '编辑用户',
       schema,
       request: handleRequest,
-      // labelWidth: '90px',
-      // labelPosition: 'top',
+      formProps: {
+        labelWidth: '90px',
+        labelPosition: 'top',
+      },
       confirmButtonText: '保存',
       cancelButtonText: '关闭',
     })
@@ -38,8 +39,10 @@
       title: '新建用户',
       schema: createSchema(),
       request: handleRequest,
-      labelWidth: '90px',
-      labelPosition: 'right',
+      formProps: {
+        labelWidth: '90px',
+        labelPosition: 'right',
+      },
       confirmButtonText: '创建',
       cancelButtonText: '取消',
     })

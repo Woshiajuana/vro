@@ -83,8 +83,6 @@
     return {
       ...value,
       formProps: {
-        labelPosition: computedProps.value.labelPosition,
-        labelWidth: computedProps.value.labelWidth,
         ...value.formProps,
       },
     }
@@ -101,7 +99,7 @@
   const dialogRef = useTemplateRef<DialogInstance>('dialogRef')
   const resetScrollTop = () => {
     const el = dialogRef.value?.$el
-    const root = el instanceof Element ? el : document.querySelector('.vro-el-schema-form-dialog')
+    const root = el instanceof Element ? el : undefined
     const body = root?.querySelector('.el-dialog__body') as HTMLElement | null
     body?.scrollTo({ top: 0 })
   }
@@ -123,14 +121,14 @@
         hide,
         block: () => {
           isBlock = true
-          setTimeout(() => (isBlock = true))
         },
       })
 
       if (visible.value && !isBlock) {
         // 获取数据
         const data = await schemaFormRef.value.extractValues()
-        const result = (await computedProps.value.request?.(data, props.schema!)) ?? data
+        const result =
+          (await computedProps.value.request?.(data, computedProps.value.schema)) ?? data
 
         confirm(result)
       }

@@ -16,8 +16,7 @@
     title="编辑用户"
     :schema="schema"
     :request="handleRequest"
-    label-width="90px"
-    label-position="right"
+    :form-props="{ labelWidth: '90px', labelPosition: 'right' }"
     confirm-button-text="保存"
     cancel-button-text="关闭"
     @confirm="handleConfirm"
@@ -115,7 +114,16 @@ const schema = {
 
 ### 标签宽度
 
-`labelWidth` 和 `labelPosition` 会合并到内部 `formProps`，如果同时传入 `formProps.labelWidth` 或 `formProps.labelPosition`，以 `formProps` 中的值为准。
+通过 `formProps` 配置内部 `ElForm`，例如 `formProps.labelWidth`、`formProps.labelPosition`。
+
+```html
+<vro-el-schema-form-dialog
+  ref="dialogRef"
+  title="编辑用户"
+  :schema="schema"
+  :form-props="{ labelWidth: '90px', labelPosition: 'right' }"
+/>
+```
 
 ## API
 

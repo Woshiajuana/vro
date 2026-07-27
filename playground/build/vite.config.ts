@@ -4,6 +4,7 @@ import { fileURLToPath, URL } from 'node:url'
 import { VantResolver } from '@vant/auto-import-resolver'
 import Vue from '@vitejs/plugin-vue'
 import { VroResolver } from '@vrojs/resolver'
+import AutoImport from 'unplugin-auto-import/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
@@ -49,6 +50,11 @@ export default defineConfig({
     Markdown(),
     Vue({
       include: [/\.vue$/, /\.md$/],
+    }),
+    AutoImport({
+      imports: ['vue', 'vue-router'],
+      dts: 'typings/auto-imports.d.ts',
+      resolvers: [VroResolver({ module: 'src' }), VantResolver(), ElementPlusResolver()],
     }),
     Components({
       dts: 'typings/components.d.ts',
