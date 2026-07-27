@@ -22,12 +22,6 @@
       title: '编辑用户',
       schema,
       request: handleRequest,
-      formProps: {
-        labelWidth: '90px',
-        labelPosition: 'top',
-      },
-      confirmButtonText: '保存',
-      cancelButtonText: '关闭',
     })
 
     result.value = data
@@ -39,12 +33,6 @@
       title: '新建用户',
       schema: createSchema(),
       request: handleRequest,
-      formProps: {
-        labelWidth: '90px',
-        labelPosition: 'right',
-      },
-      confirmButtonText: '创建',
-      cancelButtonText: '取消',
     })
 
     result.value = data

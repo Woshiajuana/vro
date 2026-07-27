@@ -1,17 +1,22 @@
 <template>
-  <ElConfigProvider :locale="zhCn">
-    <DemoNav />
-    <RouterView v-slot="{ Component }">
-      <DemoSection>
-        <KeepAlive>
-          <component :is="Component" />
-        </KeepAlive>
-      </DemoSection>
-    </RouterView>
+  <ElConfigProvider :locale="en">
+    <VroElConfigProvider :locale="vroEn">
+      <DemoNav />
+      <RouterView v-slot="{ Component }">
+        <DemoSection>
+          <KeepAlive>
+            <component :is="Component" />
+          </KeepAlive>
+        </DemoSection>
+      </RouterView>
+    </VroElConfigProvider>
   </ElConfigProvider>
 </template>
 
 <script setup lang="ts">
+  import vroEn from '@vrojs/element-plus/dist/locale/lang/en'
+  import vroZhCn from '@vrojs/element-plus/dist/locale/lang/zh-cn'
+  import en from 'element-plus/es/locale/lang/en'
   import zhCn from 'element-plus/es/locale/lang/zh-cn'
   import { watch } from 'vue'
 
