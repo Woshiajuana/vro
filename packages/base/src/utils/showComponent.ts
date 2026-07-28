@@ -65,9 +65,12 @@ function createDestroyProps(
   return (destroyHandlers || []).reduce<Record<string, (...args: any[]) => void>>((res, key) => {
     const original = props[key]
 
-    res[key] = (...args: any[]) => {
-      original?.(...args)
-      destroy()
+    res[key] = async (...args: any[]) => {
+      try {
+        await original?.(...args)
+      } finally {
+        destroy()
+      }
     }
 
     return res

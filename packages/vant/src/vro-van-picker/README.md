@@ -60,6 +60,31 @@ const openArea = () => {
 }
 ```
 
+### 函数式调用
+
+```html
+<vro-van-trigger-cell
+  v-model="functionCityText"
+  label="目的地"
+  placeholder="请选择目的地"
+  @click="openFunctionCity"
+/>
+```
+
+```ts
+const openFunctionCity = () => {
+  showVroVanPicker({
+    title: '选择目的地',
+    columns: cityColumns,
+    modelValue: functionCityValue.value,
+    filterable: true,
+  }).then((result) => {
+    functionCityValue.value = result.selectedValues as string[]
+    functionCityText.value = result.selectedOptions.map((option) => option?.text).join(' / ')
+  })
+}
+```
+
 ## API
 
 ### 属性 Props
@@ -119,6 +144,11 @@ const openArea = () => {
       <td>scroll-into</td>
       <td>option: PickerOption</td>
       <td>选项滚动到可视区域时触发</td>
+    </tr>
+    <tr>
+      <td>closed</td>
+      <td>-</td>
+      <td>弹层关闭动画结束时触发</td>
     </tr>
   </tbody>
 </table>

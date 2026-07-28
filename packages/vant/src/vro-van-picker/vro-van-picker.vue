@@ -7,6 +7,7 @@
     :show="visible"
     @click-overlay="hide('cancel')"
     @click-close-icon="hide('cancel')"
+    @closed="$emit('closed')"
   >
     <van-picker
       v-bind="pickerAttrs"

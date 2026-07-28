@@ -58,6 +58,9 @@ function getAPIMap() {
       VroElSchemaFormDrawer: ['showVroElSchemaFormDrawer', 'useVroElSchemaFormDrawer'],
       VroElSchemaDesc: ['createVroElSchemaDescDialog'],
     },
+    '@vrojs/vant': {
+      VroVanPicker: ['showVroVanPicker'],
+    },
   }
 
   Object.entries(configs).forEach(([packageName, api]) => {

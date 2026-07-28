@@ -26,22 +26,33 @@
       @click="openArea"
     />
   </demo-block>
+
+  <demo-block title="函数式调用">
+    <vro-van-trigger-cell
+      v-model="functionCityText"
+      label="目的地"
+      placeholder="请选择目的地"
+      @click="openFunctionCity"
+    />
+  </demo-block>
 </template>
 
 <script setup lang="ts">
   import { ref, useTemplateRef } from 'vue'
 
-  import type { VroVanPickerInstance, VroVanPickerProps, VroVanPickerResult } from '..'
+  import { type VroVanPickerInstance, type VroVanPickerProps, type VroVanPickerResult } from '..'
 
   const pickerRef = useTemplateRef<VroVanPickerInstance>('pickerRef')
 
   const cityValue = ref(['hangzhou'])
   const filterCityValue = ref<string[]>([])
   const areaValue = ref(['zhejiang', 'hangzhou'])
+  const functionCityValue = ref<string[]>([])
 
   const cityText = ref('杭州')
   const filterCityText = ref('')
   const areaText = ref('浙江 / 杭州')
+  const functionCityText = ref('')
 
   const cityColumns = [
     { text: '杭州', value: 'hangzhou' },
@@ -142,6 +153,22 @@
         areaText.value = getSelectedText(result)
       },
     )
+  }
+
+  const openFunctionCity = () => {
+    showVroVanPicker({
+      title: '选择目的地',
+      columns: cityColumns,
+      modelValue: functionCityValue.value,
+      filterable: true,
+    })
+      .then((result) => {
+        functionCityValue.value = result.selectedValues as string[]
+        functionCityText.value = getSelectedText(result)
+      })
+      .catch((err) => {
+        console.log('err => ', err)
+      })
   }
 
   const getSelectedText = (result: VroVanPickerResult) => {

@@ -65,4 +65,9 @@ export interface VroVanPickerEmits {
    * 选项滚动到可视区域时触发。
    */
   scrollInto: [option: PickerOption]
+
+  /**
+   * 弹层关闭动画结束时触发。
+   */
+  closed: []
 }
