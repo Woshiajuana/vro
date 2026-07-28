@@ -2,11 +2,15 @@ import '@vant/touch-emulator'
 
 import { createApp } from 'vue'
 
+import { errorHandler } from '@/utils'
+
 import App from './App.vue'
 import DemoBlock from './components/DemoBlock.vue'
 import { router } from './router'
 
 const app = createApp(App)
+
+app.config.errorHandler = errorHandler
 
 app.use(router)
 app.component('DemoBlock', DemoBlock)
