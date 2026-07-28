@@ -15,6 +15,9 @@ export function showVroElSchemaFormDialog<T = any>(
       ...props,
       is: markRaw(VroElSchemaFormDialog),
     },
-    appContext,
+    {
+      appContext,
+      destroyHandlers: ['onClosed'],
+    },
   )
 }
