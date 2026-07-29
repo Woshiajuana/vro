@@ -17,8 +17,10 @@
         </el-button>
 
         <template
-          v-for="visibleMoreActions in [getVisibleActions(moreActions, scope.row, scope.$index)]"
-          :key="scope.$index"
+          v-for="(visibleMoreActions, visibleMoreActionsIndex) in [
+            getVisibleActions(moreActions, scope.row, scope.$index),
+          ]"
+          :key="visibleMoreActionsIndex"
         >
           <el-dropdown v-if="visibleMoreActions.length" :trigger="moreTrigger">
             <el-button type="primary" link>
