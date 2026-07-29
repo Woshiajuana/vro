@@ -4,6 +4,10 @@ export default {
     table: {
       refresh: '刷新',
     },
+    tableActionsColumn: {
+      label: '操作',
+      moreText: '更多',
+    },
     skeleton: {
       loadingDescription: '正在加载数据...',
       emptyDescription: '暂无数据',

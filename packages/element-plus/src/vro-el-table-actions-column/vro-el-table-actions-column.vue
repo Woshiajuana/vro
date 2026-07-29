@@ -1,44 +1,55 @@
 <template>
-  <ElTableColumn v-bind="restProps" class="vro-el-table-actions-column">
+  <el-table-column v-bind="tableColumnProps" class="vro-el-table-actions-column">
     <template #default="scope">
-      <slot :row="scope.row">
-        <ElButton
-          v-for="(item, index) in filterHiddenActions(actions, scope.row, scope.$index)"
-          :key="index"
+      <slot v-bind="scope">
+        <el-button
+          v-for="(item, index) in getVisibleActions(actions, scope.row, scope.$index)"
+          :key="`${index}-${item.label}`"
           link
           :type="item.type || 'primary'"
           :icon="item.icon"
-          @click="item.onAction?.(scope.row, scope.$index)"
+          :disabled="item.disabled"
+          :loading="item.loading"
+          @click.stop="item.onAction?.(scope.row, scope.$index)"
         >
-          {{ item.label }}
-        </ElButton>
+          <slot name="action" v-bind="{ ...scope, action: item }">
+            {{ item.label }}
+          </slot>
+        </el-button>
 
-        <ElDropdown
-          v-if="filterHiddenActions(moreActions, scope.row, scope.$index).length"
+        <el-dropdown
+          v-if="getVisibleActions(moreActions, scope.row, scope.$index).length"
           :trigger="moreTrigger"
         >
-          <ElButton type="primary" link>更多</ElButton>
+          <el-button type="primary" link>
+            {{ moreActionText }}
+          </el-button>
           <template #dropdown>
-            <ElDropdownMenu>
-              <ElDropdownItem
-                v-for="(item, index) in filterHiddenActions(moreActions, scope.row, scope.$index)"
-                :key="index"
+            <el-dropdown-menu>
+              <el-dropdown-item
+                v-for="(item, index) in getVisibleActions(moreActions, scope.row, scope.$index)"
+                :key="`${index}-${item.label}`"
+                :disabled="item.disabled"
               >
-                <ElButton
+                <el-button
                   link
                   :type="item.type || 'primary'"
                   :icon="item.icon"
+                  :disabled="item.disabled"
+                  :loading="item.loading"
                   @click="item.onAction?.(scope.row, scope.$index)"
                 >
-                  {{ item.label }}
-                </ElButton>
-              </ElDropdownItem>
-            </ElDropdownMenu>
+                  <slot name="more-action" v-bind="{ ...scope, action: item }">
+                    {{ item.label }}
+                  </slot>
+                </el-button>
+              </el-dropdown-item>
+            </el-dropdown-menu>
           </template>
-        </ElDropdown>
+        </el-dropdown>
       </slot>
     </template>
-  </ElTableColumn>
+  </el-table-column>
 </template>
 
 <script setup lang="ts">
@@ -46,28 +57,35 @@
   import { ElButton, ElDropdown, ElDropdownItem, ElDropdownMenu, ElTableColumn } from 'element-plus'
   import { computed } from 'vue'
 
+  import { useLocale } from '../locale'
   import { elTableColumnProps } from '../utils'
-  import { type VroElTableActionsColumnAction, vroElTableActionsColumnProps } from './types'
+  import {
+    type VroElTableActionsColumnAction,
+    vroElTableActionsColumnProps,
+    type VroElTableActionsColumnSlots,
+  } from './types'
 
   defineOptions({ name: 'VroElTableActionsColumn' })
 
   const props = defineProps(vroElTableActionsColumnProps)
+  defineSlots<VroElTableActionsColumnSlots>()
 
-  const restProps = computed(() => {
+  const { t } = useLocale()
+
+  const tableColumnProps = computed(() => {
     const res = pick(props, typedKeys(elTableColumnProps))
     return {
       ...res,
+      label: props.label ?? t('tableActionsColumn.label'),
       className: [`vro-el-table-actions-column-cell`, res.className].filter(Boolean).join(' '),
     }
   })
 
-  const filterHiddenActions = (
-    actions: VroElTableActionsColumnAction[],
-    item: any,
-    index: number,
-  ) => {
+  const moreActionText = computed(() => props.moreText ?? t('tableActionsColumn.moreText'))
+
+  const getVisibleActions = (actions: VroElTableActionsColumnAction[], row: any, index: number) => {
     return actions.filter((action) => {
-      return action.hidden?.(item, index) ?? true
+      return !action.hidden?.(row, index)
     })
   }
 </script>

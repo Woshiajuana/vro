@@ -36,6 +36,7 @@ declare module 'vue' {
     VroElSelect: typeof import('@vrojs/element-plus')['VroElSelect']
     VroElSkeleton: typeof import('@vrojs/element-plus')['VroElSkeleton']
     VroElTable: typeof import('@vrojs/element-plus')['VroElTable']
+    VroElTableActionsColumn: typeof import('@vrojs/element-plus')['VroElTableActionsColumn']
     VroElTableColumn: typeof import('@vrojs/element-plus')['VroElTableColumn']
     VroElTableColumnGroup: typeof import('@vrojs/element-plus')['VroElTableColumnGroup']
     VroElTags: typeof import('@vrojs/element-plus')['VroElTags']

@@ -4,6 +4,10 @@ export default {
     table: {
       refresh: 'Refresh',
     },
+    tableActionsColumn: {
+      label: 'Actions',
+      moreText: 'More',
+    },
     skeleton: {
       loadingDescription: 'Loading data...',
       emptyDescription: 'No data',
