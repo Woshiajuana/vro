@@ -15,12 +15,11 @@
 </template>
 
 <script setup lang="ts">
+  import { sleep } from '@daysnap/utils'
   import { ElButton, ElTag } from 'element-plus'
   import { h, ref } from 'vue'
 
-  import type { VroElSchemaFormSchema } from '../../vro-el-schema-form'
-  import type { VroElTableColumnGroupColumn } from '../../vro-el-table-column-group'
-  import { useVroElTable } from '..'
+  import { useVroElTable } from '../useVroElTable'
 
   interface User {
     name: string
@@ -36,51 +35,48 @@
 
   const selectionCount = ref(0)
 
-  const schema: VroElSchemaFormSchema = {
-    keyword: {
-      label: '关键词',
-      value: '',
-      is: 'ElInput',
-      props: {
-        placeholder: '请输入姓名',
+  const { attrs, trigger } = useVroElTable(
+    {
+      keyword: {
+        label: '关键词',
+        value: '',
+        is: 'ElInput',
+        props: {
+          placeholder: '请输入姓名',
+        },
+      },
+      status: {
+        label: '状态',
+        value: '',
+        is: 'VroElSelect',
+        options: [
+          { label: '全部', value: '' },
+          { label: '启用', value: 'enabled' },
+          { label: '停用', value: 'disabled' },
+        ],
       },
     },
-    status: {
-      label: '状态',
-      value: '',
-      is: 'VroElSelect',
-      options: [
-        { label: '全部', value: '' },
-        { label: '启用', value: 'enabled' },
-        { label: '停用', value: 'disabled' },
-      ],
-    },
-  }
-
-  const columns: VroElTableColumnGroupColumn<User>[] = [
-    { type: 'selection', width: 48 },
-    { label: '姓名', prop: 'name', minWidth: 120 },
-    {
-      label: '状态',
-      prop: 'status',
-      width: 120,
-      renderContent: ({ row }) =>
-        h(ElTag, { type: row.status === 'enabled' ? 'success' : 'info' }, () =>
-          row.status === 'enabled' ? '启用' : '停用',
-        ),
-    },
-    {
-      label: '金额',
-      prop: 'amount',
-      align: 'right',
-      formatter: (row) => `¥${row.amount.toLocaleString()}`,
-    },
-  ]
-
-  const { attrs, trigger } = useVroElTable(
-    schema,
-    columns,
+    [
+      { type: 'selection', width: 48 },
+      { label: '姓名', prop: 'name', minWidth: 120 },
+      {
+        label: '状态',
+        prop: 'status',
+        width: 120,
+        renderContent: ({ row }) =>
+          h(ElTag, { type: row.status === 'enabled' ? 'success' : 'info' }, () =>
+            row.status === 'enabled' ? '启用' : '停用',
+          ),
+      },
+      {
+        label: '金额',
+        prop: 'amount',
+        align: 'right',
+        formatter: (row) => `¥${row.amount.toLocaleString()}`,
+      },
+    ],
     async ([currentPage, pageSize], query) => {
+      await sleep(400)
       const list = source.filter((item) => {
         const keywordMatched = !query.keyword || item.name.includes(query.keyword)
         const statusMatched = !query.status || item.status === query.status
