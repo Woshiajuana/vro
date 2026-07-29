@@ -117,13 +117,18 @@ const actions = [
       <td>说明</td>
     </tr>
     <tr>
+      <td>key</td>
+      <td>string | number</td>
+      <td>操作唯一标识，用于优化列表渲染</td>
+    </tr>
+    <tr>
       <td>label</td>
       <td>string</td>
       <td>操作文本</td>
     </tr>
     <tr>
       <td>icon</td>
-      <td>string</td>
+      <td>string | Component</td>
       <td>操作图标</td>
     </tr>
     <tr>

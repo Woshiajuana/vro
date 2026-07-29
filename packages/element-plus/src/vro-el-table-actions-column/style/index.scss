@@ -4,8 +4,6 @@
   --vro-el-table-actions-column-column-gap: 12px;
 }
 
-.vro-el-table-actions-column { }
-
 .vro-el-table-actions-column-cell {
   .cell {
     display: flex;
@@ -15,5 +13,27 @@
     > .el-button + .el-button {
       margin-left: 0;
     }
+  }
+}
+
+.vro-el-table-actions-column-dropdown-action {
+  &.is-primary {
+    color: var(--el-color-primary);
+  }
+
+  &.is-success {
+    color: var(--el-color-success);
+  }
+
+  &.is-warning {
+    color: var(--el-color-warning);
+  }
+
+  &.is-danger {
+    color: var(--el-color-danger);
+  }
+
+  &.is-info {
+    color: var(--el-color-info);
   }
 }

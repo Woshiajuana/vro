@@ -1,9 +1,14 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { Component, ExtractPropTypes, PropType } from 'vue'
 
 import { elTableColumnProps } from '../utils'
 import type { VroElTableColumnScope } from '../vro-el-table-column/types'
 
 export interface VroElTableActionsColumnAction<T = any> {
+  /**
+   * 操作唯一标识，用于优化列表渲染。
+   */
+  key?: string | number
+
   /**
    * 操作文本。
    */
@@ -12,7 +17,7 @@ export interface VroElTableActionsColumnAction<T = any> {
   /**
    * 操作图标。
    */
-  icon?: string
+  icon?: string | Component
 
   /**
    * 按钮类型。
