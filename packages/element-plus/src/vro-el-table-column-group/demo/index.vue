@@ -26,12 +26,12 @@
 
   const showRemark = ref(true)
 
-  const statusMap: any = {
+  const statusMap = {
     enabled: '启用',
     disabled: '停用',
   }
 
-  const columns = useVroElTableColumnGroup([
+  const columns = useVroElTableColumnGroup<Row>([
     { type: 'index', label: '序号', width: 72 },
     { label: '姓名', prop: 'name', minWidth: 120 },
     { label: '状态', prop: 'status', width: 120, map: statusMap },
@@ -64,7 +64,7 @@
     {
       is: 'VroElTableActionsColumn',
       width: 180,
-      actions: (row: Row) => [
+      actions: (row) => [
         {
           label: '编辑',
           disabled: row.status === 'disabled',
@@ -84,7 +84,7 @@
         {
           label: '删除',
           type: 'danger',
-          onAction: (row: Row) => {
+          onAction: (row) => {
             console.log('delete => ', row)
           },
         },

@@ -2,7 +2,7 @@
 
 ### 介绍
 
-用于根据 `columns` 配置批量渲染表格列。默认使用 `VroElTableColumn`，也可以通过 `is` 指定组件名、组件对象，或使用 `vroElTableColumnGroupColumnManager` 注册的列模板。
+用于根据 `columns` 配置批量渲染表格列。默认使用 `VroElTableColumn`，也可以通过 `is` 指定内置组件名或组件对象。`is` 为内置组件名时，会提示对应组件的属性。
 
 ## 代码演示
 
@@ -53,16 +53,25 @@ const columns = [
 
 ### 注册列模板
 
-通过 `vroElTableColumnGroupColumnManager` 可以注册常用列，`columns` 中传入注册 key 即可复用。
+通过 `vroElTableColumnGroupColumnManager` 可以注册常用列，`columns` 中传入注册 key 即可复用。如需让注册 key 获得属性提示，可以扩展 `VroElTableColumnGroupColumnPropsMap`。
 
 ```ts
 import { ElTableColumn } from 'element-plus'
-import { vroElTableColumnGroupColumnManager } from '@vrojs/element-plus'
+import {
+  type VroElTableColumnProps,
+  vroElTableColumnGroupColumnManager,
+} from '@vrojs/element-plus'
 
 vroElTableColumnGroupColumnManager.add('selection', ElTableColumn, {
   type: 'selection',
   width: 48,
 })
+
+declare module '@vrojs/element-plus' {
+  interface VroElTableColumnGroupColumnPropsMap<T extends Record<string, any> = any> {
+    selection: Partial<VroElTableColumnProps>
+  }
+}
 
 const columns = [{ is: 'selection' }, { label: '姓名', prop: 'name' }]
 ```
@@ -74,7 +83,7 @@ const columns = [{ is: 'selection' }, { label: '姓名', prop: 'name' }]
 ```ts
 import { useVroElTableColumnGroup } from '@vrojs/element-plus'
 
-const columns = useVroElTableColumnGroup([
+const columns = useVroElTableColumnGroup<Row>([
   { label: '姓名', prop: 'name' },
 ])
 ```
@@ -117,7 +126,7 @@ const columns = useVroElTableColumnGroup(() => [
 
 ### Column
 
-`Column` 支持 `VroElTableColumn` 和 `VroElTableActionsColumn` 的属性，并额外支持以下属性。
+`Column` 默认支持 `VroElTableColumn` 的属性；当 `is` 为 `VroElTableActionsColumn` 时，支持 `VroElTableActionsColumn` 的属性。额外支持以下属性。
 
 <table>
   <tbody>
@@ -128,7 +137,7 @@ const columns = useVroElTableColumnGroup(() => [
     </tr>
     <tr>
       <td>is</td>
-      <td>string | Component</td>
+      <td>VroElTableColumn | VroElTableActionsColumn | Component</td>
       <td>列组件，不传时默认使用 VroElTableColumn</td>
     </tr>
     <tr>
@@ -138,7 +147,7 @@ const columns = useVroElTableColumnGroup(() => [
     </tr>
     <tr>
       <td>hidden</td>
-      <td>boolean | (column, index) => boolean</td>
+      <td>boolean | () => boolean</td>
       <td>是否隐藏当前列</td>
     </tr>
   </tbody>
