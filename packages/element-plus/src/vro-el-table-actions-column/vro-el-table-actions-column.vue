@@ -55,7 +55,7 @@
 </template>
 
 <script setup lang="ts">
-  import { pick, typedKeys } from '@daysnap/utils'
+  import { isFunction, pick, typedKeys } from '@daysnap/utils'
   import { ElButton, ElDropdown, ElDropdownItem, ElDropdownMenu, ElTableColumn } from 'element-plus'
   import { computed } from 'vue'
 
@@ -89,7 +89,7 @@
     const actionList = typeof actions === 'function' ? actions(row, index) : actions
 
     return actionList.filter((action) => {
-      return !action.hidden?.(row, index)
+      return !(isFunction(action.hidden) ? action.hidden(row, index) : action.hidden)
     })
   }
 </script>

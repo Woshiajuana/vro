@@ -100,6 +100,10 @@
 
   const stateActions: VroElTableActionsColumnAction<Row>[] = [
     {
+      label: '隐藏',
+      hidden: true,
+    },
+    {
       label: '编辑',
       disabled: true,
     },

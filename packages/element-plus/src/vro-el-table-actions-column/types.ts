@@ -27,7 +27,7 @@ export interface VroElTableActionsColumnAction<T = any> {
   /**
    * 是否隐藏，返回 true 时隐藏当前操作。
    */
-  hidden?: (row: T, index: number) => boolean
+  hidden?: boolean | ((row: T, index: number) => boolean)
 
   /**
    * 点击操作时触发。

@@ -65,6 +65,10 @@ const actions = [
     label: '启用',
     hidden: (row) => row.status === 'enabled',
   },
+  {
+    label: '隐藏',
+    hidden: true,
+  },
 ]
 ```
 
@@ -134,7 +138,7 @@ const actions = [
     </tr>
     <tr>
       <td>hidden</td>
-      <td>(row, index) => boolean</td>
+      <td>boolean | (row, index) => boolean</td>
       <td>是否隐藏，返回 true 时隐藏当前操作</td>
     </tr>
     <tr>
