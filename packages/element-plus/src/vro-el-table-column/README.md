@@ -80,7 +80,7 @@
     </tr>
     <tr>
       <td>expand</td>
-      <td>自定义展开列内容，参数为 { expanded, expandable }</td>
+      <td>自定义展开图标，参数为 { expanded, expandable }</td>
     </tr>
     <tr>
       <td>filter-icon</td>

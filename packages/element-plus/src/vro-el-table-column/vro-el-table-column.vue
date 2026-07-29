@@ -1,6 +1,6 @@
 <template>
   <el-table-column v-bind="tableColumnProps" class="vro-el-table-column">
-    <template #default="scope">
+    <template v-if="shouldRenderDefaultSlot" #default="scope">
       <cell-content :scope="scope" />
     </template>
 
@@ -38,24 +38,20 @@
   const slots = defineSlots<VroElTableColumnSlots>()
 
   const tableColumnProps = computed(() => pick(props, typedKeys(elTableColumnProps)))
+  const shouldRenderDefaultSlot = computed(() => props.type !== 'expand' || !!slots.default)
 
   const CellContent = ({ scope }: { scope: VroElTableColumnScope }) => {
     if (slots.default) {
       return slots.default(scope)
     }
 
+    if (props.renderDefault) {
+      return props.renderDefault(scope)
+    }
+
     return h('div', { class: 'vro-el-table-column-content' }, [
       slots.prefix?.(scope) ?? renderIcon(props.prefixIcon),
-      h(
-        'span',
-        {
-          class: ['vro-el-table-column-text', { 'is-line-clamp': !!props.lineClamp }],
-          style: props.lineClamp
-            ? { '--vro-el-table-column-line-clamp': props.lineClamp }
-            : undefined,
-        },
-        renderCellValue(scope),
-      ),
+      renderContent(scope),
       slots.suffix?.(scope) ?? renderIcon(props.suffixIcon),
     ])
   }
@@ -68,13 +64,26 @@
     return h(VroElIcon, typeof icon === 'string' ? { name: icon } : icon)
   }
 
-  const renderCellValue = (scope: VroElTableColumnScope) => {
-    if (props.renderDefault) {
-      return props.renderDefault(scope)
+  const renderContent = (scope: VroElTableColumnScope) => {
+    if (props.renderContent) {
+      return props.renderContent(scope)
     }
 
-    const content = props.renderContent?.(scope) ?? formatCellValue(scope)
-    return isEmptyCellValue(content) ? props.placeholder : content
+    return h(
+      'span',
+      {
+        class: ['vro-el-table-column-text', { 'is-line-clamp': !!props.lineClamp }],
+        style: props.lineClamp
+          ? { '--vro-el-table-column-line-clamp': props.lineClamp }
+          : undefined,
+      },
+      renderCellValue(scope),
+    )
+  }
+
+  const renderCellValue = (scope: VroElTableColumnScope) => {
+    const value = formatCellValue(scope)
+    return isEmptyCellValue(value) ? props.placeholder : value
   }
 
   const formatCellValue = (scope: VroElTableColumnScope) => {

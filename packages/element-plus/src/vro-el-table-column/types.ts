@@ -241,12 +241,12 @@ export const vroElTableColumnProps = {
   map: Object as PropType<Record<string, any>>,
 
   /**
-   * 自定义默认内容渲染函数，优先级高于 renderContent、formatter、map。
+   * 自定义整格内容渲染函数，优先级高于 renderContent、formatter、map。
    */
   renderDefault: Function as PropType<VroElTableColumnRender>,
 
   /**
-   * 自定义单元格内容渲染函数。
+   * 自定义中间主体内容渲染函数。
    */
   renderContent: Function as PropType<VroElTableColumnRender>,
 
@@ -275,7 +275,7 @@ export interface VroElTableColumnSlots<T extends Record<string, any> = any> {
   header?: (props: VroElTableColumnHeaderScope<T>) => any
 
   /**
-   * 自定义展开列内容。
+   * 自定义展开图标。
    */
   expand?: (props: VroElTableColumnExpandScope) => any
 
