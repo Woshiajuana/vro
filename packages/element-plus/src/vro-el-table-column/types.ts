@@ -1,5 +1,7 @@
 import type { TableColumnCtx } from 'element-plus'
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, PropType, VNode } from 'vue'
+
+import type { VroElIconProps } from '../vro-el-icon'
 
 export type VroElTableColumnFormatter = TableColumnCtx<any>['formatter']
 
@@ -71,18 +73,24 @@ export const elTableColumnProps = {
 export const vroElTableColumnProps = {
   ...elTableColumnProps,
 
+  // 空值的时候，占位
   placeholder: {
     type: String,
     default: '-',
   },
 
+  // 单位
   unit: String,
 
-  map: [Object, Array] as PropType<Record<string, any> | any[]>,
-  mapValueKey: {
-    type: [String, Number],
-    default: 'label',
-  },
+  // 格式化转换
+  map: Object as PropType<Record<string, any>>,
+
+  // 如果这里设置了值，则直接渲染这个
+  renderDefault: Function as PropType<() => VNode | VNode[]>,
+
+  renderContent: Function as PropType<() => VNode | VNode[]>,
+  prefixIcon: Object as PropType<Partial<VroElIconProps>>,
+  suffixIcon: Object as PropType<Partial<VroElIconProps>>,
 }
 
 export type VroElTableColumnProps = ExtractPropTypes<typeof vroElTableColumnProps>
