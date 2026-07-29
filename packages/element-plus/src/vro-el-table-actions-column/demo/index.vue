@@ -28,6 +28,14 @@
     </el-table>
   </demo-block>
 
+  <demo-block title="按行动态操作">
+    <el-table :data="tableData" border>
+      <el-table-column label="姓名" prop="name" />
+      <el-table-column label="状态" prop="status" />
+      <vro-el-table-actions-column :actions="dynamicActions" width="180" />
+    </el-table>
+  </demo-block>
+
   <demo-block title="自定义内容">
     <el-table :data="tableData" border>
       <el-table-column label="姓名" prop="name" />
@@ -61,7 +69,6 @@
   const baseActions: VroElTableActionsColumnAction<Row>[] = [
     {
       label: '编辑',
-      loading: true,
       onAction: (row) => {
         console.log('edit => ', row)
       },
@@ -106,4 +113,20 @@
       hidden: (row) => row.status === '停用',
     },
   ]
+
+  const dynamicActions = (row: Row): VroElTableActionsColumnAction<Row>[] => {
+    return [
+      {
+        label: '编辑',
+        disabled: row.status === '停用',
+      },
+      {
+        label: row.status === '启用' ? '停用' : '启用',
+        type: row.status === '启用' ? 'warning' : 'success',
+        onAction: () => {
+          console.log('toggle => ', row)
+        },
+      },
+    ]
+  }
 </script>

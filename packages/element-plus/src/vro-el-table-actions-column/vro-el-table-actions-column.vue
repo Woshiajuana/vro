@@ -9,7 +9,6 @@
           :type="item.type || 'primary'"
           :icon="item.icon"
           :disabled="item.disabled"
-          :loading="item.loading"
           @click.stop="item.onAction?.(scope.row, scope.$index)"
         >
           <slot name="action" v-bind="{ ...scope, action: item }">
@@ -17,36 +16,37 @@
           </slot>
         </el-button>
 
-        <el-dropdown
-          v-if="getVisibleActions(moreActions, scope.row, scope.$index).length"
-          :trigger="moreTrigger"
+        <template
+          v-for="visibleMoreActions in [getVisibleActions(moreActions, scope.row, scope.$index)]"
+          :key="scope.$index"
         >
-          <el-button type="primary" link>
-            {{ moreActionText }}
-          </el-button>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item
-                v-for="(item, index) in getVisibleActions(moreActions, scope.row, scope.$index)"
-                :key="`${index}-${item.label}`"
-                :disabled="item.disabled"
-              >
-                <el-button
-                  link
-                  :type="item.type || 'primary'"
-                  :icon="item.icon"
+          <el-dropdown v-if="visibleMoreActions.length" :trigger="moreTrigger">
+            <el-button type="primary" link>
+              {{ moreActionText }}
+            </el-button>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item
+                  v-for="(item, index) in visibleMoreActions"
+                  :key="`${index}-${item.label}`"
                   :disabled="item.disabled"
-                  :loading="item.loading"
-                  @click="item.onAction?.(scope.row, scope.$index)"
                 >
-                  <slot name="more-action" v-bind="{ ...scope, action: item }">
-                    {{ item.label }}
-                  </slot>
-                </el-button>
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
+                  <el-button
+                    link
+                    :type="item.type || 'primary'"
+                    :icon="item.icon"
+                    :disabled="item.disabled"
+                    @click="item.onAction?.(scope.row, scope.$index)"
+                  >
+                    <slot name="more-action" v-bind="{ ...scope, action: item }">
+                      {{ item.label }}
+                    </slot>
+                  </el-button>
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+        </template>
       </slot>
     </template>
   </el-table-column>
@@ -60,7 +60,7 @@
   import { useLocale } from '../locale'
   import { elTableColumnProps } from '../utils'
   import {
-    type VroElTableActionsColumnAction,
+    type VroElTableActionsColumnActions,
     vroElTableActionsColumnProps,
     type VroElTableActionsColumnSlots,
   } from './types'
@@ -83,8 +83,14 @@
 
   const moreActionText = computed(() => props.moreText ?? t('tableActionsColumn.moreText'))
 
-  const getVisibleActions = (actions: VroElTableActionsColumnAction[], row: any, index: number) => {
-    return actions.filter((action) => {
+  const getVisibleActions = (
+    actions: VroElTableActionsColumnActions,
+    row: any,
+    index: number,
+  ) => {
+    const actionList = typeof actions === 'function' ? actions(row, index) : actions
+
+    return actionList.filter((action) => {
       return !action.hidden?.(row, index)
     })
   }

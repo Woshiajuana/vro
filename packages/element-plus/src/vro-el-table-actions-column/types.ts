@@ -25,11 +25,6 @@ export interface VroElTableActionsColumnAction<T = any> {
   disabled?: boolean
 
   /**
-   * 是否显示加载状态。
-   */
-  loading?: boolean
-
-  /**
    * 是否隐藏，返回 true 时隐藏当前操作。
    */
   hidden?: (row: T, index: number) => boolean
@@ -39,6 +34,10 @@ export interface VroElTableActionsColumnAction<T = any> {
    */
   onAction?: (row: T, index: number) => any
 }
+
+export type VroElTableActionsColumnActions<T = any> =
+  | VroElTableActionsColumnAction<T>[]
+  | ((row: T, index: number) => VroElTableActionsColumnAction<T>[])
 
 export const vroElTableActionsColumnProps = {
   ...elTableColumnProps,
@@ -52,7 +51,7 @@ export const vroElTableActionsColumnProps = {
    * 直接展示的操作项。
    */
   actions: {
-    type: Array as PropType<VroElTableActionsColumnAction[]>,
+    type: [Array, Function] as PropType<VroElTableActionsColumnActions>,
     default: () => [],
   },
 
@@ -73,7 +72,7 @@ export const vroElTableActionsColumnProps = {
    * 收纳到更多下拉菜单中的操作项。
    */
   moreActions: {
-    type: Array as PropType<VroElTableActionsColumnAction[]>,
+    type: [Array, Function] as PropType<VroElTableActionsColumnActions>,
     default: () => [],
   },
 }

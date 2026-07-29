@@ -1,6 +1,9 @@
 import type { Component, ExtractPropTypes, PropType, Raw } from 'vue'
 
-export type VroElTableColumnGroupColumnComponent = string | Raw<Component>
+export type VroElTableColumnGroupColumnComponent =
+  | 'VroElTableColumn'
+  | 'VroElTableActionsColumn'
+  | Raw<Component>
 
 export interface VroElCustomTableColumn {
   /**
@@ -22,11 +25,6 @@ export interface VroElCustomTableColumn {
    * 是否隐藏当前列。
    */
   hidden?: boolean | (() => boolean)
-
-  /**
-   * 其他属性会直接透传给列组件。
-   */
-  [key: string]: any
 }
 
 export type VroElTableColumnGroupColumn = VroElCustomTableColumn

@@ -37,6 +37,22 @@ const actions = [
 />
 ```
 
+### 按行动态操作
+
+```ts
+const actions = (row) => [
+  {
+    label: '编辑',
+    disabled: row.status === 'disabled',
+  },
+  {
+    label: row.status === 'enabled' ? '停用' : '启用',
+    type: row.status === 'enabled' ? 'warning' : 'success',
+    onAction: handleToggle,
+  },
+]
+```
+
 ### 禁用与隐藏
 
 ```ts
@@ -115,11 +131,6 @@ const actions = [
       <td>disabled</td>
       <td>boolean</td>
       <td>是否禁用</td>
-    </tr>
-    <tr>
-      <td>loading</td>
-      <td>boolean</td>
-      <td>是否显示加载状态</td>
     </tr>
     <tr>
       <td>hidden</td>
