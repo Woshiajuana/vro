@@ -21,7 +21,7 @@
 <script setup lang="ts">
   import { pick, typedKeys } from '@daysnap/utils'
   import { ElTableColumn } from 'element-plus'
-  import { getProp } from 'element-plus/es/utils'
+  import { getProp } from 'element-plus/es/utils/objects'
   import { computed, h } from 'vue'
 
   import { elTableColumnProps } from '../utils'

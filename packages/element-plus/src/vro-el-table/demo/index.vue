@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ElButton, ElTableColumn, ElTag } from 'element-plus'
+  import { ElButton, ElTag } from 'element-plus'
   import { h, ref } from 'vue'
 
   import type { VroElSchemaFormSchema } from '../../vro-el-schema-form'
@@ -57,25 +57,23 @@
     },
   }
 
-  const columns: VroElTableColumnGroupColumn[] = [
-    { is: ElTableColumn, type: 'selection', width: 48 },
-    { is: ElTableColumn, label: '姓名', prop: 'name' },
+  const columns: VroElTableColumnGroupColumn<User>[] = [
+    { type: 'selection', width: 48 },
+    { label: '姓名', prop: 'name', minWidth: 120 },
     {
-      is: ElTableColumn,
       label: '状态',
       prop: 'status',
       width: 120,
-      formatter: (row: User) =>
+      renderContent: ({ row }) =>
         h(ElTag, { type: row.status === 'enabled' ? 'success' : 'info' }, () =>
           row.status === 'enabled' ? '启用' : '停用',
         ),
     },
     {
-      is: ElTableColumn,
       label: '金额',
       prop: 'amount',
       align: 'right',
-      formatter: (row: User) => `¥${row.amount.toLocaleString()}`,
+      formatter: (row) => `¥${row.amount.toLocaleString()}`,
     },
   ]
 
