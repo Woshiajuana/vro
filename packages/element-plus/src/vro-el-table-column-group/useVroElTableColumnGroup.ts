@@ -3,6 +3,8 @@ import { reactive } from 'vue'
 
 import type { VroElTableColumnGroupColumns } from './types'
 
-export function useVroElTableColumnGroup(rawColumns: VroElTableColumnGroupColumns) {
+export function useVroElTableColumnGroup(
+  rawColumns: VroElTableColumnGroupColumns | (() => VroElTableColumnGroupColumns),
+) {
   return reactive(isFunction(rawColumns) ? rawColumns() : rawColumns)
 }

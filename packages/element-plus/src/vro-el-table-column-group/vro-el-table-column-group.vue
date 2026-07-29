@@ -20,13 +20,11 @@
   const props = defineProps(vroElTableColumnGroupProps)
 
   const metadata = computed(() => {
-    const columns = isFunction(props.columns) ? props.columns() : props.columns
-
-    return columns.flatMap((item, index) => {
+    return props.columns.flatMap((item) => {
       // eslint-disable-next-line prefer-const
       let { props: columnProps, is = VroElTableColumn, hidden, ...rest } = item
 
-      if (isFunction(hidden) ? hidden(item, index) : hidden) {
+      if (isFunction(hidden) ? hidden() : hidden) {
         return []
       }
 

@@ -5,11 +5,6 @@ import type { VroElTableColumnProps } from '../vro-el-table-column'
 
 export type VroElTableColumnGroupColumnComponent = string | Raw<Component>
 
-export type VroElTableColumnGroupHidden = (
-  column: VroElTableColumnGroupColumn,
-  index: number,
-) => boolean
-
 export interface VroElTableColumnGroupBaseColumn {
   /**
    * 列组件。可以传入组件对象、已注册组件名，或通过 vroElTableColumnGroupColumnManager 注册的 key。
@@ -31,22 +26,20 @@ export interface VroElTableColumnGroupBaseColumn {
   /**
    * 是否隐藏当前列，函数返回 true 时隐藏当前列。
    */
-  hidden?: boolean | VroElTableColumnGroupHidden
+  hidden?: boolean | (() => boolean)
 }
 
 export type VroElTableColumnGroupColumn = VroElTableColumnGroupBaseColumn &
   Partial<VroElTableColumnProps & VroElTableActionsColumnProps>
 
-export type VroElTableColumnGroupColumns =
-  | VroElTableColumnGroupColumn[]
-  | (() => VroElTableColumnGroupColumn[])
+export type VroElTableColumnGroupColumns = VroElTableColumnGroupColumn[]
 
 export const vroElTableColumnGroupProps = {
   /**
    * 表格列配置。
    */
   columns: {
-    type: [Array, Function] as PropType<VroElTableColumnGroupColumns>,
+    type: Array as PropType<VroElTableColumnGroupColumns>,
     default: () => [],
   },
 }

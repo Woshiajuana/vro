@@ -7,7 +7,7 @@ export const elTableColumnProps = {
    * 列类型。
    */
   type: {
-    type: String,
+    type: String as PropType<'default' | 'selection' | 'index' | 'expand'>,
     default: 'default',
   },
 

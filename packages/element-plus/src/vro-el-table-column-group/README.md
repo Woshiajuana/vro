@@ -51,23 +51,6 @@ const columns = [
 ]
 ```
 
-### 函数式列配置
-
-```ts
-const columns = () => [
-  { label: '姓名', prop: 'name' },
-  {
-    is: 'VroElTableActionsColumn',
-    actions: (row) => [
-      {
-        label: row.status === 'enabled' ? '停用' : '启用',
-        onAction: handleToggle,
-      },
-    ],
-  },
-]
-```
-
 ### 注册列模板
 
 通过 `vroElTableColumnGroupColumnManager` 可以注册常用列，`columns` 中传入注册 key 即可复用。
@@ -93,6 +76,23 @@ import { useVroElTableColumnGroup } from '@vrojs/element-plus'
 
 const columns = useVroElTableColumnGroup([
   { label: '姓名', prop: 'name' },
+])
+```
+
+也可以传入函数式列配置：
+
+```ts
+const columns = useVroElTableColumnGroup(() => [
+  { label: '姓名', prop: 'name' },
+  {
+    is: 'VroElTableActionsColumn',
+    actions: (row) => [
+      {
+        label: row.status === 'enabled' ? '停用' : '启用',
+        onAction: handleToggle,
+      },
+    ],
+  },
 ])
 ```
 
