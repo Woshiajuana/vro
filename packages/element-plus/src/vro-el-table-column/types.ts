@@ -55,7 +55,7 @@ export const vroElTableColumnProps = {
   /**
    * 枚举值映射表。
    */
-  map: Object as PropType<Record<string, any>>,
+  map: Object as PropType<Record<PropertyKey, any>>,
 
   /**
    * 自定义整格内容渲染函数，优先级高于 renderContent、formatter、map。

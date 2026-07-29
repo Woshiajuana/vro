@@ -21,6 +21,7 @@
 <script setup lang="ts">
   import { pick, typedKeys } from '@daysnap/utils'
   import { ElTableColumn } from 'element-plus'
+  import { getProp } from 'element-plus/es/utils'
   import { computed, h } from 'vue'
 
   import { elTableColumnProps } from '../utils'
@@ -37,8 +38,11 @@
   const props = defineProps(vroElTableColumnProps)
   const slots = defineSlots<VroElTableColumnSlots>()
 
+  const specialColumnTypes = ['selection', 'index', 'expand']
   const tableColumnProps = computed(() => pick(props, typedKeys(elTableColumnProps)))
-  const shouldRenderDefaultSlot = computed(() => props.type !== 'expand' || !!slots.default)
+  const shouldRenderDefaultSlot = computed(() => {
+    return !specialColumnTypes.includes(props.type) || !!slots.default || !!props.renderDefault
+  })
 
   const CellContent = ({ scope }: { scope: VroElTableColumnScope }) => {
     if (slots.default) {
@@ -89,7 +93,7 @@
   const formatCellValue = (scope: VroElTableColumnScope) => {
     const { row, column, $index } = scope
     const prop = props.prop || props.property
-    const rawValue = prop ? getValueByPath(row, prop) : undefined
+    const rawValue = prop ? getProp(row, prop).value : undefined
     const formattedValue = props.formatter
       ? props.formatter(row, column, rawValue, $index)
       : getMappedValue(rawValue)
@@ -105,12 +109,8 @@
     }
 
     return Object.prototype.hasOwnProperty.call(props.map, value as PropertyKey)
-      ? props.map[value as string]
+      ? props.map[value as PropertyKey]
       : value
-  }
-
-  const getValueByPath = (data: any, path: string) => {
-    return path.split('.').reduce((value, key) => value?.[key], data)
   }
 
   const isEmptyCellValue = (value: unknown) => {
