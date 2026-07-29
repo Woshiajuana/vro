@@ -23,9 +23,9 @@
   import { ElTableColumn } from 'element-plus'
   import { computed, h } from 'vue'
 
+  import { elTableColumnProps } from '../utils'
   import { VroElIcon } from '../vro-el-icon'
   import {
-    elTableColumnProps,
     type VroElTableColumnIcon,
     vroElTableColumnProps,
     type VroElTableColumnScope,

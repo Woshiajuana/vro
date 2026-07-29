@@ -1,1 +1,12 @@
 .vro-el-table-actions-column { }
+.vro-el-table-actions-column-cell {
+  .cell {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 4px;
+    column-gap: 12px;
+    > .el-button + .el-button {
+      margin-left: 0;
+    }
+  }
+}
