@@ -45,6 +45,10 @@
   })
 
   const CellContent = ({ scope }: { scope: VroElTableColumnScope }) => {
+    if (scope.$index < 0) {
+      return null
+    }
+
     if (slots.default) {
       return slots.default(scope)
     }
