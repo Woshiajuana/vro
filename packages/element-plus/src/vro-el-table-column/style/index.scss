@@ -1,1 +1,34 @@
-.vro-el-table-column { }
+:root,
+:host {
+  --vro-el-table-column-gap: 4px;
+  --vro-el-table-column-icon-size: 14px;
+  --vro-el-table-column-line-clamp: 1;
+}
+
+.vro-el-table-column-content {
+  display: inline-flex;
+  max-width: 100%;
+  min-width: 0;
+  align-items: center;
+  gap: var(--vro-el-table-column-gap);
+  vertical-align: middle;
+
+  .vro-el-icon {
+    flex: none;
+    font-size: var(--vro-el-table-column-icon-size);
+  }
+}
+
+.vro-el-table-column-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &.is-line-clamp {
+    display: -webkit-box;
+    white-space: normal;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--vro-el-table-column-line-clamp);
+  }
+}
