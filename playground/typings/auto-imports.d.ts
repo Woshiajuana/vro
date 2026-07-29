@@ -7,7 +7,16 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue').EffectScope
+  const ElButton: typeof import('element-plus/es').ElButton
+  const ElTableColumn: typeof import('element-plus/es').ElTableColumn
+  const ElTag: typeof import('element-plus/es').ElTag
   const Element: typeof import('element-plus').Element
+  const VroElCopyTableColumn: typeof import('@vrojs/element-plus').VroElCopyTableColumn
+  const VroElDateTableColumn: typeof import('@vrojs/element-plus').VroElDateTableColumn
+  const VroElProTableColumn: typeof import('@vrojs/element-plus').VroElProTableColumn
+  const VroElTableActionsColumn: typeof import('@vrojs/element-plus').VroElTableActionsColumn
+  const VroElTableColumn: typeof import('@vrojs/element-plus').VroElTableColumn
+  const VroElTagTableColumn: typeof import('@vrojs/element-plus').VroElTagTableColumn
   const computed: typeof import('vue').computed
   const createApp: typeof import('vue').createApp
   const customRef: typeof import('vue').customRef

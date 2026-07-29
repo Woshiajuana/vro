@@ -11,6 +11,7 @@
   import { isFunction, isString } from '@daysnap/utils'
   import { computed } from 'vue'
 
+  import { VroElTableColumn } from '../vro-el-table-column'
   import { vroElTableColumnGroupProps } from './types'
   import { vroElTableColumnGroupColumnManager } from './vroElTableColumnGroupColumnManager'
 
@@ -19,11 +20,13 @@
   const props = defineProps(vroElTableColumnGroupProps)
 
   const metadata = computed(() => {
-    return props.columns.flatMap((item) => {
-      // eslint-disable-next-line prefer-const
-      let { props: columnProps, is, hidden, ...rest } = item
+    const columns = isFunction(props.columns) ? props.columns() : props.columns
 
-      if (isFunction(hidden) ? hidden() : hidden) {
+    return columns.flatMap((item, index) => {
+      // eslint-disable-next-line prefer-const
+      let { props: columnProps, is = VroElTableColumn, hidden, ...rest } = item
+
+      if (isFunction(hidden) ? hidden(item, index) : hidden) {
         return []
       }
 

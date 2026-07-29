@@ -2,46 +2,69 @@
 
 ### 介绍
 
-用于根据 `columns` 配置批量渲染表格列。适合和 `ElTable` 或 `VroElTable` 配合使用，也可以通过 `vroElTableColumnGroupColumnManager` 注册常用列模板。
+用于根据 `columns` 配置批量渲染表格列。默认使用 `VroElTableColumn`，也可以通过 `is` 指定组件名、组件对象，或使用 `vroElTableColumnGroupColumnManager` 注册的列模板。
 
 ## 代码演示
 
 ### 基础用法
 
 ```html
-<template>
-  <el-table :data="tableData">
-    <vro-el-table-column-group :columns="columns" />
-  </el-table>
-</template>
+<el-table :data="tableData" border>
+  <vro-el-table-column-group :columns="columns" />
+</el-table>
+```
 
-<script setup lang="ts">
-  import { ElTableColumn } from 'element-plus'
-  import type { VroElTableColumnGroupColumn } from '@vrojs/element-plus'
+```ts
+const columns = [
+  { type: 'index', label: '序号', width: 72 },
+  { label: '姓名', prop: 'name' },
+  { label: '状态', prop: 'status', map: statusMap },
+  { label: '金额', prop: 'amount', unit: ' 元', align: 'right' },
+]
+```
 
-  const tableData = [{ name: '张三', amount: 12800 }]
+### 指定列组件
 
-  const columns: VroElTableColumnGroupColumn[] = [
-    { is: ElTableColumn, label: '姓名', prop: 'name' },
-    {
-      is: ElTableColumn,
-      label: '金额',
-      prop: 'amount',
-      align: 'right',
-      formatter: (row) => `¥${row.amount.toLocaleString()}`,
-    },
-  ]
-</script>
+```ts
+const columns = [
+  { is: ElTableColumn, type: 'selection', width: 48 },
+  {
+    is: 'VroElTableActionsColumn',
+    width: 160,
+    actions: [{ label: '编辑', onAction: handleEdit }],
+  },
+]
 ```
 
 ### 隐藏列
 
-`hidden` 支持布尔值或函数。
+`hidden` 支持布尔值或函数，函数返回 `true` 时隐藏当前列。
 
 ```ts
 const columns = [
-  { is: ElTableColumn, label: '姓名', prop: 'name' },
-  { is: ElTableColumn, label: '金额', prop: 'amount', hidden: () => !showAmount.value },
+  { label: '姓名', prop: 'name' },
+  {
+    label: '金额',
+    prop: 'amount',
+    hidden: () => !showAmount.value,
+  },
+]
+```
+
+### 函数式列配置
+
+```ts
+const columns = () => [
+  { label: '姓名', prop: 'name' },
+  {
+    is: 'VroElTableActionsColumn',
+    actions: (row) => [
+      {
+        label: row.status === 'enabled' ? '停用' : '启用',
+        onAction: handleToggle,
+      },
+    ],
+  },
 ]
 ```
 
@@ -58,18 +81,18 @@ vroElTableColumnGroupColumnManager.add('selection', ElTableColumn, {
   width: 48,
 })
 
-const columns = [{ is: 'selection' }, { is: ElTableColumn, label: '姓名', prop: 'name' }]
+const columns = [{ is: 'selection' }, { label: '姓名', prop: 'name' }]
 ```
 
 ### useVroElTableColumnGroup
 
-`useVroElTableColumnGroup` 会将静态数组或函数返回值转为响应式列配置。
+`useVroElTableColumnGroup` 会将静态数组或函数返回值转为响应式列配置，适合需要动态修改列属性、排序或显隐的场景。
 
 ```ts
 import { useVroElTableColumnGroup } from '@vrojs/element-plus'
 
-const columns = useVroElTableColumnGroup(() => [
-  { is: ElTableColumn, label: '姓名', prop: 'name' },
+const columns = useVroElTableColumnGroup([
+  { label: '姓名', prop: 'name' },
 ])
 ```
 
@@ -88,6 +111,35 @@ const columns = useVroElTableColumnGroup(() => [
       <td>{{ key }}</td>
       <td>{{ parseType(item.type || item) }}</td>
       <td>{{ reserve(item.default, '-') }}</td>
+    </tr>
+  </tbody>
+</table>
+
+### Column
+
+`Column` 支持 `VroElTableColumn` 和 `VroElTableActionsColumn` 的属性，并额外支持以下属性。
+
+<table>
+  <tbody>
+    <tr>
+      <td>名称</td>
+      <td>类型</td>
+      <td>说明</td>
+    </tr>
+    <tr>
+      <td>is</td>
+      <td>string | Component</td>
+      <td>列组件，不传时默认使用 VroElTableColumn</td>
+    </tr>
+    <tr>
+      <td>props</td>
+      <td>Record&lt;string, any&gt;</td>
+      <td>额外列属性，会与当前配置合并后透传给列组件</td>
+    </tr>
+    <tr>
+      <td>hidden</td>
+      <td>boolean | (column, index) => boolean</td>
+      <td>是否隐藏当前列</td>
     </tr>
   </tbody>
 </table>

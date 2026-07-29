@@ -83,11 +83,7 @@
 
   const moreActionText = computed(() => props.moreText ?? t('tableActionsColumn.moreText'))
 
-  const getVisibleActions = (
-    actions: VroElTableActionsColumnActions,
-    row: any,
-    index: number,
-  ) => {
+  const getVisibleActions = (actions: VroElTableActionsColumnActions, row: any, index: number) => {
     const actionList = typeof actions === 'function' ? actions(row, index) : actions
 
     return actionList.filter((action) => {

@@ -1,10 +1,8 @@
 import { isFunction } from '@daysnap/utils'
 import { reactive } from 'vue'
 
-import type { VroElTableColumnGroupColumn } from './types'
+import type { VroElTableColumnGroupColumns } from './types'
 
-export function useVroElTableColumnGroup(
-  rawColumns: (() => VroElTableColumnGroupColumn[]) | VroElTableColumnGroupColumn[],
-) {
+export function useVroElTableColumnGroup(rawColumns: VroElTableColumnGroupColumns) {
   return reactive(isFunction(rawColumns) ? rawColumns() : rawColumns)
 }
