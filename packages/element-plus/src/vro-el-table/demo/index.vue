@@ -6,6 +6,9 @@
       </template>
 
       <template #actions>
+        <el-button plain @click="showRemark = !showRemark">
+          {{ showRemark ? '隐藏备注' : '显示备注' }}
+        </el-button>
         <el-button type="primary" plain @click="trigger({ currentPage: 1 })">重新加载</el-button>
       </template>
     </vro-el-table>
@@ -16,24 +19,45 @@
 
 <script setup lang="ts">
   import { sleep } from '@daysnap/utils'
+  import { Star } from '@element-plus/icons-vue'
   import { ElButton, ElTag } from 'element-plus'
   import { h, ref } from 'vue'
 
+  import type { VroElTableColumnGroupColumn } from '../../vro-el-table-column-group'
   import { useVroElTable } from '../useVroElTable'
 
   interface User {
     name: string
     status: 'enabled' | 'disabled'
     amount: number
+    score: number
+    remark?: string
   }
 
   const source: User[] = [
-    { name: '张三', status: 'enabled', amount: 12800 },
-    { name: '李四', status: 'disabled', amount: 8600 },
-    { name: '王五', status: 'enabled', amount: 23600 },
+    {
+      name: '张三',
+      status: 'enabled',
+      amount: 12800,
+      score: 92,
+      remark: '重点客户，最近有追加采购意向，需要优先跟进。',
+    },
+    { name: '李四', status: 'disabled', amount: 8600, score: 76 },
+    {
+      name: '王五',
+      status: 'enabled',
+      amount: 23600,
+      score: 88,
+      remark: '合同已进入复核阶段，等待财务确认付款周期。',
+    },
   ]
 
   const selectionCount = ref(0)
+  const showRemark = ref(true)
+  const statusMap = {
+    enabled: '启用',
+    disabled: '停用',
+  }
 
   const { attrs, trigger } = useVroElTable(
     {
@@ -58,21 +82,70 @@
     },
     [
       { type: 'selection', width: 48 },
+      { type: 'index', label: '序号', width: 72 },
       { label: '姓名', prop: 'name', minWidth: 120 },
+      { label: '状态', prop: 'status', width: 100, map: statusMap },
       {
-        label: '状态',
+        label: '状态标签',
         prop: 'status',
         width: 120,
         renderContent: ({ row }) =>
-          h(ElTag, { type: row.status === 'enabled' ? 'success' : 'info' }, () =>
-            row.status === 'enabled' ? '启用' : '停用',
+          h(
+            ElTag,
+            { type: row.status === 'enabled' ? 'success' : 'info' },
+            () => statusMap[row.status],
           ),
       },
       {
         label: '金额',
         prop: 'amount',
+        unit: ' 元',
         align: 'right',
-        formatter: (row) => `¥${row.amount.toLocaleString()}`,
+        width: 140,
+        formatter: (row) => row.amount.toLocaleString(),
+      },
+      {
+        label: '评分',
+        prop: 'score',
+        width: 100,
+        suffixIcon: { name: Star, color: '#e6a23c' },
+      },
+      {
+        label: '备注',
+        prop: 'remark',
+        placeholder: '暂无备注',
+        lineClamp: 1,
+        hidden: () => !showRemark.value,
+        minWidth: 180,
+      },
+      {
+        is: 'VroElTableActionsColumn',
+        width: 180,
+        actions: (row) => [
+          {
+            label: '编辑',
+            disabled: row.status === 'disabled',
+            onAction: () => {
+              console.log('edit => ', row)
+            },
+          },
+          {
+            label: row.status === 'enabled' ? '停用' : '启用',
+            type: row.status === 'enabled' ? 'warning' : 'success',
+            onAction: () => {
+              console.log('toggle => ', row)
+            },
+          },
+        ],
+        moreActions: [
+          {
+            label: '删除',
+            type: 'danger',
+            onAction: (row) => {
+              console.log('delete => ', row)
+            },
+          },
+        ],
       },
     ],
     async ([currentPage, pageSize], query) => {
