@@ -62,6 +62,11 @@ export type VroElTableColumnGroupRawComponent = Raw<Component>
 
 export interface VroElTableColumnGroupBaseColumn<TProps = Record<string, any>> {
   /**
+   * 列唯一标识，用于优化列表渲染。
+   */
+  key?: string | number
+
+  /**
    * 列组件。可以传入组件对象、内置组件名，或已扩展到 VroElTableColumnGroupColumnPropsMap 的注册 key。
    *
    * 不传时默认使用 VroElTableColumn。
