@@ -1,9 +1,6 @@
 import type { VroElSchemaFormSchema, VroElSchemaFormSchemaField } from '../vro-el-schema-form'
-import type {
-  UseVroElTableOptions,
-  UseVroElTableRawColumns,
-  UseVroElTableTask,
-} from './useVroElTable'
+import type { VroElTableRequest } from './types'
+import type { UseVroElTableOptions, UseVroElTableRawColumns } from './useVroElTable'
 import { useVroElTable } from './useVroElTable'
 
 export interface CreateUseVroElTable<Row extends Record<string, any> = any> {
@@ -13,7 +10,7 @@ export interface CreateUseVroElTable<Row extends Record<string, any> = any> {
   >(
     rowSchema: (() => R) | R,
     rawColumns: UseVroElTableRawColumns<Row>,
-    task: UseVroElTableTask<Row>,
+    request: VroElTableRequest<Row>,
     options?: UseVroElTableOptions<Row>,
   ): ReturnType<typeof useVroElTable<Row, R, S>>
 }

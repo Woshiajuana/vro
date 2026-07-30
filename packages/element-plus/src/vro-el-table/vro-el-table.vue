@@ -66,14 +66,12 @@
   import { useLocale } from '../locale'
   import { VroElSchemaFilter } from '../vro-el-schema-filter'
   import { VroElTableColumnGroup } from '../vro-el-table-column-group'
-  import { vroElTableProps, type VroElTableRequestPayload } from './types'
+  import { type VroElTableEmits, vroElTableProps, type VroElTableSlots } from './types'
 
   defineOptions({ name: 'VroElTable' })
 
-  defineEmits<{
-    request: [payload?: VroElTableRequestPayload]
-    'selection-change': [selection: any[]]
-  }>()
+  defineSlots<VroElTableSlots>()
+  defineEmits<VroElTableEmits>()
 
   const props = defineProps(vroElTableProps)
   const { t } = useLocale()
@@ -82,7 +80,7 @@
 
   const filterable = computed(() => {
     const { filterable, filterProps } = props
-    return filterable && filterProps && filterProps.schema && !isEmptyObject(filterProps.schema)
+    return Boolean(filterable && filterProps?.schema && !isEmptyObject(filterProps.schema))
   })
 
   defineExpose({

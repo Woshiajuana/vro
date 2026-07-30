@@ -5,15 +5,12 @@ import { computed, reactive, type Ref, ref } from 'vue'
 
 import type { VroElSchemaFormSchema, VroElSchemaFormSchemaField } from '../vro-el-schema-form'
 import { type VroElTableColumnGroupColumns } from '../vro-el-table-column-group'
+import type { VroElTableRequest } from './types'
 
 export interface UseVroElTableOptions<Row extends Record<string, any> = any>
   extends Pick<UseAsyncTaskOptions<any>, 'activated' | 'immediate' | 'throwError' | 'onError'> {
   query?: Ref<Record<string, any>>
   initialValue?: Row[]
-}
-
-export interface UseVroElTableTask<T = any> {
-  (state: [number, number], query: any): Promise<[T[], number]>
 }
 
 export type UseVroElTableAsyncTaskParams =
@@ -31,10 +28,10 @@ export function useVroElTable<
 >(
   rowSchema: (() => R) | R,
   rawColumns: UseVroElTableRawColumns<Row>,
-  task: UseVroElTableTask<Row>,
+  request: VroElTableRequest<Row>,
   options: UseVroElTableOptions<Row> = {},
 ) {
-  const { query: rawQuery } = options
+  const { query: rawQuery, ...asyncTaskOptions } = options
   const schema = reactive<S>((isFunction(rowSchema) ? rowSchema() : rowSchema) as any)
   const columns = reactive(isFunction(rawColumns) ? rawColumns() : rawColumns)
 
@@ -60,7 +57,7 @@ export function useVroElTable<
       pagination.currentPage = currentPage
       pagination.pageSize = pageSize
 
-      const [list, total] = await task([currentPage, pageSize], query.value)
+      const [list, total] = await request([currentPage, pageSize], query.value)
 
       pagination.total = total
 
@@ -70,7 +67,7 @@ export function useVroElTable<
       immediate: true,
       throwError: true,
       initialValue: [],
-      ...(options as any),
+      ...(asyncTaskOptions as any),
     },
   )
 

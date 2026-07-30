@@ -14,6 +14,33 @@ export interface VroElTableRequest<T = any> {
   (state: [number, number], query: any): Promise<[T[], number]>
 }
 
+export interface VroElTableEmits {
+  request: [payload?: VroElTableRequestPayload]
+  'selection-change': [selection: any[]]
+}
+
+export interface VroElTableSlots {
+  /**
+   * 自定义表格列内容，追加在 columns 渲染的列之后。
+   */
+  default?: () => any
+
+  /**
+   * 自定义头部标题区域。
+   */
+  title?: () => any
+
+  /**
+   * 自定义头部操作区域，追加在刷新按钮之后。
+   */
+  actions?: () => any
+
+  /**
+   * 自定义表格内部前置列内容，渲染在 columns 之前。
+   */
+  'content-prefix'?: () => any
+}
+
 export const vroElTableProps = {
   /**
    * 是否启用筛选区。

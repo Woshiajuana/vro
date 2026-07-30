@@ -1,9 +1,16 @@
+:root,
+:host {
+  --vro-el-table-gap: 16px;
+  --vro-el-table-padding: 16px;
+  --vro-el-table-inner-gap: var(--vro-el-table-gap);
+}
+
 .vro-el-table {
   display: flex;
   flex-direction: column;
   width: 100%;
   box-sizing: border-box;
-  gap: 16px;
+  gap: var(--vro-el-table-gap);
   .el-table-column--selection {
     line-height: normal;
   }
@@ -17,10 +24,10 @@
   flex: 1;
   position: relative;
   background-color: var(--el-bg-color);
-  padding: 16px;
+  padding: var(--vro-el-table-padding);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--vro-el-table-inner-gap);
 }
 .vro-el-table-header {
   display: flex;

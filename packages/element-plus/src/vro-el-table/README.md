@@ -164,8 +164,35 @@
       <td>说明</td>
     </tr>
     <tr>
-      <td>tableInstance</td>
+      <td>elTable</td>
       <td>内部 ElTable 实例</td>
+    </tr>
+  </tbody>
+</table>
+
+### 样式变量
+
+<table>
+  <tbody>
+    <tr>
+      <td>名称</td>
+      <td>默认值</td>
+      <td>说明</td>
+    </tr>
+    <tr>
+      <td>--vro-el-table-gap</td>
+      <td>16px</td>
+      <td>表格筛选区与内容区间距</td>
+    </tr>
+    <tr>
+      <td>--vro-el-table-padding</td>
+      <td>16px</td>
+      <td>表格内容区内边距</td>
+    </tr>
+    <tr>
+      <td>--vro-el-table-inner-gap</td>
+      <td>var(--vro-el-table-gap)</td>
+      <td>表格内容区内部间距</td>
     </tr>
   </tbody>
 </table>
