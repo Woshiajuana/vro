@@ -30,6 +30,11 @@ export interface VroElTableActionsColumnAction<T = any> {
   disabled?: boolean
 
   /**
+   * 是否加载中。设置初始值后，异步 onAction 会自动切换该值。
+   */
+  loading?: boolean
+
+  /**
    * 是否隐藏，返回 true 时隐藏当前操作。
    */
   hidden?: boolean | ((row: T, index: number) => boolean)

@@ -123,8 +123,10 @@
         actions: (row) => [
           {
             label: '编辑',
+            loading: false,
             disabled: row.status === 'disabled',
-            onAction: () => {
+            onAction: async () => {
+              await sleep(400)
               console.log('edit => ', row)
             },
           },

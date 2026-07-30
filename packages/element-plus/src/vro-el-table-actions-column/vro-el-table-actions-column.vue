@@ -8,8 +8,9 @@
           link
           :type="item.type || 'primary'"
           :icon="item.icon"
+          :loading="item.loading"
           :disabled="item.disabled"
-          @click.stop="item.onAction?.(scope.row, scope.$index)"
+          @click.stop="handleAction(item, scope.row, scope.$index)"
         >
           <slot name="action" v-bind="{ ...scope, action: item }">
             {{ item.label }}
@@ -33,8 +34,8 @@
                   item.type && `is-${item.type}`,
                 ]"
                 :icon="item.icon"
-                :disabled="item.disabled"
-                @click.stop="item.onAction?.(scope.row, scope.$index)"
+                :disabled="item.disabled || item.loading"
+                @click.stop="handleAction(item, scope.row, scope.$index)"
               >
                 <slot name="more-action" v-bind="{ ...scope, action: item }">
                   {{ item.label }}
@@ -49,7 +50,7 @@
 </template>
 
 <script setup lang="ts">
-  import { isFunction, pick, typedKeys } from '@daysnap/utils'
+  import { isBoolean, isFunction, isPromiseLike, pick, typedKeys } from '@daysnap/utils'
   import { ElButton, ElDropdown, ElDropdownItem, ElDropdownMenu, ElTableColumn } from 'element-plus'
   import { computed } from 'vue'
 
@@ -90,5 +91,27 @@
 
   const getActionKey = (action: VroElTableActionsColumnAction, index: number) => {
     return action.key ?? `${index}-${action.label}`
+  }
+
+  const handleAction = async (action: VroElTableActionsColumnAction, row: any, index: number) => {
+    const shouldAutoLoading = isBoolean(action.loading)
+
+    console.log('action => ', action, shouldAutoLoading)
+
+    if (shouldAutoLoading) {
+      action.loading = true
+    }
+
+    try {
+      const result = action.onAction?.(row, index)
+
+      if (isPromiseLike(result)) {
+        await result
+      }
+    } finally {
+      if (shouldAutoLoading) {
+        // action.loading = false
+      }
+    }
   }
 </script>
