@@ -14,14 +14,31 @@
   gap: var(--vro-el-table-column-gap);
   vertical-align: middle;
 
+  &.is-center {
+    justify-content: center;
+  }
+
+  &.is-right {
+    justify-content: flex-end;
+  }
+
   .vro-el-icon {
     flex: none;
     font-size: var(--vro-el-table-column-icon-size);
   }
 }
 
+.vro-el-table-column-prefix,
+.vro-el-table-column-suffix {
+  display: inline-flex;
+  flex: none;
+  min-width: 0;
+  align-items: center;
+}
+
 .vro-el-table-column-text {
-  flex: 1;
+  flex: 0 1 auto;
+  max-width: 100%;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;

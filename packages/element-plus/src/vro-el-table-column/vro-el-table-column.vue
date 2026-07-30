@@ -22,7 +22,7 @@
   import { pick, typedKeys } from '@daysnap/utils'
   import { ElTableColumn } from 'element-plus'
   import { getProp } from 'element-plus/es/utils/objects'
-  import { computed, h } from 'vue'
+  import { computed, h, type VNodeChild } from 'vue'
 
   import { elTableColumnProps } from '../utils'
   import { VroElIcon } from '../vro-el-icon'
@@ -57,11 +57,19 @@
       return props.renderDefault(scope)
     }
 
-    return h('div', { class: 'vro-el-table-column-content' }, [
-      slots.prefix?.(scope) ?? renderIcon(props.prefixIcon),
+    return h('div', { class: ['vro-el-table-column-content', `is-${props.align || 'left'}`] }, [
+      renderAffix('prefix', slots.prefix?.(scope) ?? renderIcon(props.prefixIcon)),
       renderContent(scope),
-      slots.suffix?.(scope) ?? renderIcon(props.suffixIcon),
+      renderAffix('suffix', slots.suffix?.(scope) ?? renderIcon(props.suffixIcon)),
     ])
+  }
+
+  const renderAffix = (name: 'prefix' | 'suffix', content?: VNodeChild) => {
+    if (content == null) {
+      return null
+    }
+
+    return h('span', { class: `vro-el-table-column-${name}` }, content)
   }
 
   const renderIcon = (icon?: VroElTableColumnIcon) => {
