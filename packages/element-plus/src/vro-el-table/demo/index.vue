@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
   import { sleep } from '@daysnap/utils'
-  import { Star } from '@element-plus/icons-vue'
+  import { Delete, Edit, Star } from '@element-plus/icons-vue'
   import { ElButton, ElTag } from 'element-plus'
   import { h, ref } from 'vue'
 
@@ -120,28 +120,31 @@
       {
         is: 'VroElTableActionsColumn',
         width: 180,
-        actions: (row) => [
-          {
-            label: '编辑',
-            loading: false,
-            disabled: row.status === 'disabled',
-            onAction: async () => {
-              await sleep(400)
-              console.log('edit => ', row)
+        actions: (row) => {
+          return [
+            {
+              label: '编辑',
+              icon: Edit,
+              disabled: row.status === 'disabled',
+              onAction: async () => {
+                await sleep(400)
+                console.log('edit => ', row)
+              },
             },
-          },
-          {
-            label: row.status === 'enabled' ? '停用' : '启用',
-            type: row.status === 'enabled' ? 'warning' : 'success',
-            onAction: () => {
-              console.log('toggle => ', row)
+            {
+              label: row.status === 'enabled' ? '停用' : '启用',
+              type: row.status === 'enabled' ? 'warning' : 'success',
+              onAction: () => {
+                console.log('toggle => ', row)
+              },
             },
-          },
-        ],
+          ]
+        },
         moreActions: [
           {
             label: '删除',
             type: 'danger',
+            icon: Delete,
             onAction: (row) => {
               console.log('delete => ', row)
             },

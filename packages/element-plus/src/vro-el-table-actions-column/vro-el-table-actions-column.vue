@@ -8,9 +8,9 @@
           link
           :type="item.type || 'primary'"
           :icon="item.icon"
-          :loading="item.loading"
+          :loading="getActionLoading(item, scope.$index, index)"
           :disabled="item.disabled"
-          @click.stop="handleAction(item, scope.row, scope.$index)"
+          @click.stop="handleAction(item, scope.row, scope.$index, index)"
         >
           <slot name="action" v-bind="{ ...scope, action: item }">
             {{ item.label }}
@@ -34,8 +34,8 @@
                   item.type && `is-${item.type}`,
                 ]"
                 :icon="item.icon"
-                :disabled="item.disabled || item.loading"
-                @click.stop="handleAction(item, scope.row, scope.$index)"
+                :disabled="item.disabled || getActionLoading(item, scope.$index, index)"
+                @click.stop="handleAction(item, scope.row, scope.$index, index)"
               >
                 <slot name="more-action" v-bind="{ ...scope, action: item }">
                   {{ item.label }}
@@ -50,9 +50,9 @@
 </template>
 
 <script setup lang="ts">
-  import { isBoolean, isFunction, isPromiseLike, pick, typedKeys } from '@daysnap/utils'
+  import { isFunction, isPromiseLike, pick, typedKeys } from '@daysnap/utils'
   import { ElButton, ElDropdown, ElDropdownItem, ElDropdownMenu, ElTableColumn } from 'element-plus'
-  import { computed } from 'vue'
+  import { computed, reactive } from 'vue'
 
   import { useLocale } from '../locale'
   import { elTableColumnProps } from '../utils'
@@ -80,6 +80,7 @@
   })
 
   const moreActionText = computed(() => props.moreText ?? t('tableActionsColumn.moreText'))
+  const loadingActionMap = reactive(new Map<string | number, boolean>())
 
   const getVisibleActions = (actions: VroElTableActionsColumnActions, row: any, index: number) => {
     const actionList = typeof actions === 'function' ? actions(row, index) : actions
@@ -93,25 +94,41 @@
     return action.key ?? `${index}-${action.label}`
   }
 
-  const handleAction = async (action: VroElTableActionsColumnAction, row: any, index: number) => {
-    const shouldAutoLoading = isBoolean(action.loading)
+  const getActionLoading = (
+    action: VroElTableActionsColumnAction,
+    rowIndex: number,
+    actionIndex: number,
+  ) => {
+    return !!loadingActionMap.get(`${rowIndex}-${getActionKey(action, actionIndex)}`)
+  }
 
-    console.log('action => ', action, shouldAutoLoading)
+  const setActionLoading = (
+    action: VroElTableActionsColumnAction,
+    rowIndex: number,
+    actionIndex: number,
+    loading: boolean,
+  ) => {
+    loadingActionMap.set(`${rowIndex}-${getActionKey(action, actionIndex)}`, loading)
+  }
 
-    if (shouldAutoLoading) {
-      action.loading = true
+  const handleAction = async (
+    action: VroElTableActionsColumnAction,
+    row: any,
+    rowIndex: number,
+    actionIndex: number,
+  ) => {
+    const result = action.onAction?.(row, rowIndex)
+
+    if (!action.icon || !isPromiseLike(result)) {
+      return
     }
 
-    try {
-      const result = action.onAction?.(row, index)
+    setActionLoading(action, rowIndex, actionIndex, true)
 
-      if (isPromiseLike(result)) {
-        await result
-      }
+    try {
+      await result
     } finally {
-      if (shouldAutoLoading) {
-        // action.loading = false
-      }
+      setActionLoading(action, rowIndex, actionIndex, false)
     }
   }
 </script>
