@@ -1,6 +1,6 @@
 <template>
   <demo-block title="基础用法">
-    <vro-el-table v-bind="attrs" @request="trigger" @selection-change="handleSelectionChange">
+    <vro-el-table v-bind="tableProps" @request="trigger" @selection-change="handleSelectionChange">
       <template #title>
         <h2 class="demo-table-title">用户列表</h2>
       </template>
@@ -23,8 +23,7 @@
   import { ElButton, ElTag } from 'element-plus'
   import { h, ref } from 'vue'
 
-  import type { VroElTableColumnGroupColumn } from '../../vro-el-table-column-group'
-  import { useVroElTable } from '../useVroElTable'
+  import { createUseVroElTable } from '../createUseVroElTable'
 
   interface User {
     name: string
@@ -59,7 +58,7 @@
     disabled: '停用',
   }
 
-  const { attrs, trigger } = useVroElTable(
+  const { tableProps, trigger, schema } = createUseVroElTable<User>()(
     {
       keyword: {
         label: '关键词',

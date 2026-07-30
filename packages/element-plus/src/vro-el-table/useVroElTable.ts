@@ -4,12 +4,12 @@ import { useAsyncTask, type UseAsyncTaskOptions } from '@vrojs/use'
 import { computed, reactive, type Ref, ref } from 'vue'
 
 import type { VroElSchemaFormSchema, VroElSchemaFormSchemaField } from '../vro-el-schema-form'
-import { type VroElTableColumnGroupColumn } from '../vro-el-table-column-group'
+import { type VroElTableColumnGroupColumns } from '../vro-el-table-column-group'
 
-export interface UseVroElTableOptions<D>
+export interface UseVroElTableOptions<Row extends Record<string, any> = any>
   extends Pick<UseAsyncTaskOptions<any>, 'activated' | 'immediate' | 'throwError' | 'onError'> {
   query?: Ref<Record<string, any>>
-  initialValue?: D
+  initialValue?: Row[]
 }
 
 export interface UseVroElTableTask<T = any> {
@@ -20,22 +20,19 @@ export type UseVroElTableAsyncTaskParams =
   | { currentPage?: number; pageSize?: number; query?: Record<string, any> }
   | number
 
-export type UseVroElTableResultRawSchema = (() => VroElSchemaFormSchema) | VroElSchemaFormSchema
-
-export type UseVroElTableResultRawColumns =
-  | (() => VroElTableColumnGroupColumn[])
-  | VroElTableColumnGroupColumn[]
+export type UseVroElTableRawColumns<T extends Record<string, any> = any> =
+  | (() => VroElTableColumnGroupColumns<T>)
+  | VroElTableColumnGroupColumns<T>
 
 export function useVroElTable<
-  R extends VroElSchemaFormSchema,
-  T extends UseVroElTableTask,
+  Row extends Record<string, any> = any,
+  R extends VroElSchemaFormSchema = VroElSchemaFormSchema,
   S extends VroElSchemaFormSchema = { [P in keyof R]: VroElSchemaFormSchemaField },
-  D = Awaited<ReturnType<T>>[0],
 >(
   rowSchema: (() => R) | R,
-  rawColumns: UseVroElTableResultRawColumns,
-  task: T,
-  options: UseVroElTableOptions<D> = {},
+  rawColumns: UseVroElTableRawColumns<Row>,
+  task: UseVroElTableTask<Row>,
+  options: UseVroElTableOptions<Row> = {},
 ) {
   const { query: rawQuery } = options
   const schema = reactive<S>((isFunction(rowSchema) ? rowSchema() : rowSchema) as any)
@@ -44,7 +41,7 @@ export function useVroElTable<
   const query =
     rawQuery ?? ref<Record<string, any>>(filterEmptyValue(banana.extract(schema as any), true))
 
-  const state = reactive({
+  const pagination = reactive({
     currentPage: 1,
     pageSize: 10,
     total: 0,
@@ -55,19 +52,19 @@ export function useVroElTable<
       if (isNumber(params)) {
         params = { currentPage: params }
       }
-      const { currentPage, pageSize } = Object.assign({}, state, params)
+      const { currentPage, pageSize } = Object.assign({}, pagination, params)
       if (params?.query) {
         query.value = params?.query
       }
 
-      state.currentPage = currentPage
-      state.pageSize = pageSize
+      pagination.currentPage = currentPage
+      pagination.pageSize = pageSize
 
       const [list, total] = await task([currentPage, pageSize], query.value)
 
-      state.total = total
+      pagination.total = total
 
-      return (list || []) as D
+      return list || []
     },
     {
       immediate: true,
@@ -77,7 +74,7 @@ export function useVroElTable<
     },
   )
 
-  const attrs = computed(() => {
+  const tableProps = computed(() => {
     return {
       filterProps: {
         schema,
@@ -85,18 +82,18 @@ export function useVroElTable<
       loading: loading.value,
       columns,
       data: data.value,
-      paginationProps: state,
+      paginationProps: pagination,
     }
   })
 
   return {
-    attrs,
+    tableProps,
     query,
     schema,
     columns,
     trigger,
     data,
     loading,
-    state,
+    pagination,
   }
 }

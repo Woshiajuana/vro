@@ -3,6 +3,7 @@ import { withInstall } from '@vrojs/base'
 import Component from './vro-el-table.vue'
 
 export * from './types'
+export * from './createUseVroElTable'
 export * from './useVroElTable'
 
 export const VroElTable = withInstall<typeof Component>(Component)

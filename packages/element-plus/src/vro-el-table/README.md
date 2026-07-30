@@ -59,18 +59,18 @@
 
 ### useVroElTable
 
-`useVroElTable` 会返回可直接绑定到组件的 `attrs`，并维护筛选、分页、数据和 loading 状态。
+`useVroElTable` 会返回可直接绑定到组件的 `tableProps`，并维护筛选、分页、数据和 loading 状态。
 
 ```html
 <template>
-  <vro-el-table v-bind="attrs" @request="trigger" />
+  <vro-el-table v-bind="tableProps" @request="trigger" />
 </template>
 
 <script setup lang="ts">
   import { ElTableColumn } from 'element-plus'
   import { useVroElTable } from '@vrojs/element-plus'
 
-  const { attrs, trigger } = useVroElTable(
+  const { tableProps, trigger } = useVroElTable(
     {
       keyword: {
         label: '关键词',
