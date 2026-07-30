@@ -1,6 +1,6 @@
 <template>
-  <ElConfigProvider :locale="en">
-    <VroElConfigProvider :locale="vroEn">
+  <ElConfigProvider :locale="zhCn">
+    <VroElConfigProvider :locale="vroZhCn">
       <DemoNav />
       <RouterView v-slot="{ Component }">
         <DemoSection>
@@ -14,9 +14,7 @@
 </template>
 
 <script setup lang="ts">
-  import vroEn from '@vrojs/element-plus/dist/locale/lang/en'
   import vroZhCn from '@vrojs/element-plus/dist/locale/lang/zh-cn'
-  import en from 'element-plus/es/locale/lang/en'
   import zhCn from 'element-plus/es/locale/lang/zh-cn'
   import { watch } from 'vue'
 
