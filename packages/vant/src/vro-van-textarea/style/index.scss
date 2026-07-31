@@ -2,7 +2,8 @@
 :host {
   --vro-van-textarea-input-color: var(--van-text-color);
   --vro-van-textarea-placeholder-color: var(--van-text-color-3);
-  --vro-van-textarea-disabled-color: var(--van-text-color-3);
+  --vro-van-textarea-disabled-color: var(--vro-van-disabled-color);
+  --vro-van-textarea-readonly-color: var(--vro-van-readonly-color);
   --vro-van-textarea-word-limit-color: var(--van-text-color-3);
 }
 
@@ -44,7 +45,9 @@
   }
 
   &[readonly] {
+    color: var(--vro-van-textarea-readonly-color);
     cursor: default;
+    -webkit-text-fill-color: var(--vro-van-textarea-readonly-color);
   }
 }
 

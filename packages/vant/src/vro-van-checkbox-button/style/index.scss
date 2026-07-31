@@ -14,7 +14,7 @@
     var(--vro-van-checkbox-button-checked-color) 8%,
     transparent
   );
-  --vro-van-checkbox-button-disabled-color: var(--van-text-color-2);
+  --vro-van-checkbox-button-disabled-color: var(--vro-van-disabled-color);
   --vro-van-checkbox-button-disabled-border-color: var(--van-border-color);
   --vro-van-checkbox-button-disabled-background: var(--van-gray-1);
 }

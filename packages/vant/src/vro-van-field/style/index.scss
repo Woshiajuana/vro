@@ -2,7 +2,8 @@
 :host {
   --vro-van-field-input-color: var(--van-text-color);
   --vro-van-field-placeholder-color: var(--van-text-color-3);
-  --vro-van-field-disabled-color: var(--van-text-color-3);
+  --vro-van-field-disabled-color: var(--vro-van-disabled-color);
+  --vro-van-field-readonly-color: var(--vro-van-readonly-color);
   --vro-van-field-clear-color: var(--van-gray-5);
   --vro-van-field-unit-color: var(--van-text-color);
 }
@@ -43,7 +44,9 @@
   }
 
   &[readonly] {
+    color: var(--vro-van-field-readonly-color);
     cursor: default;
+    -webkit-text-fill-color: var(--vro-van-field-readonly-color);
   }
 }
 

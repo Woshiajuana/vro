@@ -198,7 +198,11 @@
     </tr>
     <tr>
       <td>--vro-van-trigger-cell-disabled-color</td>
-      <td>var(--van-text-color-3)</td>
+      <td>var(--vro-van-disabled-color)</td>
+    </tr>
+    <tr>
+      <td>--vro-van-trigger-cell-readonly-color</td>
+      <td>var(--vro-van-readonly-color)</td>
     </tr>
     <tr>
       <td>--vro-van-trigger-cell-clear-color</td>

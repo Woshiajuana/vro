@@ -170,7 +170,11 @@
     </tr>
     <tr>
       <td>--vro-van-textarea-disabled-color</td>
-      <td>var(--van-text-color-3)</td>
+      <td>var(--vro-van-disabled-color)</td>
+    </tr>
+    <tr>
+      <td>--vro-van-textarea-readonly-color</td>
+      <td>var(--vro-van-readonly-color)</td>
     </tr>
     <tr>
       <td>--vro-van-textarea-word-limit-color</td>

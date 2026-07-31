@@ -161,7 +161,11 @@
     </tr>
     <tr>
       <td>--vro-van-field-disabled-color</td>
-      <td>var(--van-text-color-3)</td>
+      <td>var(--vro-van-disabled-color)</td>
+    </tr>
+    <tr>
+      <td>--vro-van-field-readonly-color</td>
+      <td>var(--vro-van-readonly-color)</td>
     </tr>
     <tr>
       <td>--vro-van-field-clear-color</td>

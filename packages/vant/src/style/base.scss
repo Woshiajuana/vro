@@ -1,4 +1,7 @@
 @forward 'vant/es/style/base.css';
 
-:root {
+:root,
+:host {
+  --vro-van-readonly-color: var(--van-text-color);
+  --vro-van-disabled-color: var(--van-text-color-3);
 }
