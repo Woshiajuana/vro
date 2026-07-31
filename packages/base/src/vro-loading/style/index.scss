@@ -33,28 +33,9 @@
 }
 
 .vro-loading-spinner {
-  position: relative;
   width: var(--size);
   height: var(--size);
   animation: vro-loading-fade var(--duration) linear infinite;
-
-  i {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    width: 2px;
-    height: 28%;
-    background: currentColor;
-    border-radius: 999px;
-    transform-origin: center calc(var(--size) / 2);
-
-    @for $i from 1 through 12 {
-      &:nth-child(#{$i}) {
-        opacity: calc(#{$i} / 12);
-        transform: translateX(-50%) rotate(#{($i - 1) * 30deg});
-      }
-    }
-  }
 }
 
 .vro-loading-dots {

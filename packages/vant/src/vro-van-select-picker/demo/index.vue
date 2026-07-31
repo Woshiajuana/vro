@@ -24,6 +24,7 @@
   <demo-block title="异步选项">
     <vro-van-select-picker
       v-model="asyncCity"
+      clearable
       label="出发地"
       placeholder="请选择出发地"
       title="选择出发地"
@@ -32,6 +33,7 @@
     />
     <vro-van-select-picker
       v-model="lazyAsyncCity"
+      clearable
       label="目的地"
       placeholder="请选择目的地"
       title="选择目的地"
