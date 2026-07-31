@@ -57,6 +57,16 @@
     />
   </demo-block>
 
+  <demo-block title="加载中">
+    <vro-van-trigger-cell
+      v-model="loadingValue"
+      clearable
+      label="加载中"
+      loading
+      placeholder="请选择"
+    />
+  </demo-block>
+
   <demo-block title="自定义内容">
     <vro-van-trigger-cell
       v-model="status"
@@ -84,6 +94,7 @@
   const user = ref({ id: 1, name: '张三' })
   const disabledValue = ref('不可点击')
   const readonlyValue = ref('只读内容')
+  const loadingValue = ref('加载中的内容')
   const status = ref('')
 </script>
 

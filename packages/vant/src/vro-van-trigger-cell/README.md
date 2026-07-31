@@ -69,6 +69,12 @@
 <vro-van-trigger-cell v-model="readonlyValue" readonly label="只读" placeholder="请选择" />
 ```
 
+### 加载中
+
+```html
+<vro-van-trigger-cell v-model="value" clearable label="加载中" loading placeholder="请选择" />
+```
+
 ### 自定义内容
 
 ```html
@@ -207,6 +213,14 @@
     <tr>
       <td>--vro-van-trigger-cell-clear-color</td>
       <td>var(--van-gray-5)</td>
+    </tr>
+    <tr>
+      <td>--vro-van-trigger-cell-loading-color</td>
+      <td>var(--van-gray-5)</td>
+    </tr>
+    <tr>
+      <td>--vro-van-trigger-cell-loading-size</td>
+      <td>16px</td>
     </tr>
   </tbody>
 </table>

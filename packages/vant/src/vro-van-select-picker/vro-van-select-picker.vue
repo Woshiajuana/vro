@@ -4,7 +4,7 @@
     class="vro-van-select-picker"
     :model-value="modelValue"
     :formatter="formatTriggerValue"
-    :disabled="disabled || loadingOptions"
+    :loading="loadingOptions"
     @click="handleSelect"
     @clear="handleClear"
     @click-prefix-icon="$emit('click-prefix-icon', $event)"
@@ -44,6 +44,7 @@
 
   const columns = ref<VroVanSelectPickerColumns>(isFunction(props.options) ? [] : props.options)
   const loadingOptions = ref(false)
+  const optionsLoaded = ref(!isFunction(props.options))
 
   const triggerCellProps = computed(() =>
     pick(props, typedKeys(vroVanSelectPickerTriggerCellProps)),
@@ -111,6 +112,11 @@
   const loadOptions = async () => {
     if (!isFunction(props.options)) {
       columns.value = props.options
+      optionsLoaded.value = true
+      return columns.value
+    }
+
+    if (props.trigger === 'immediately' && optionsLoaded.value) {
       return columns.value
     }
 
@@ -118,6 +124,7 @@
 
     if (!isPromiseLike(result)) {
       columns.value = result
+      optionsLoaded.value = true
       return columns.value
     }
 
@@ -125,6 +132,7 @@
 
     try {
       columns.value = await result
+      optionsLoaded.value = true
       return columns.value
     } finally {
       loadingOptions.value = false

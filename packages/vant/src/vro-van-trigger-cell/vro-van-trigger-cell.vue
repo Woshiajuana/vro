@@ -5,9 +5,10 @@
     :class="{
       'is-disabled': disabled,
       'is-readonly': readonly,
+      'is-loading': loading,
     }"
     :arrow="showArrow"
-    :clickable="clickable && !disabled && !readonly"
+    :clickable="clickable && !disabled && !readonly && !loading"
     @click="handleClick"
     @click-prefix-icon="$emit('click-prefix-icon', $event)"
     @click-suffix-icon="$emit('click-suffix-icon', $event)"
@@ -28,11 +29,14 @@
       name="van-icon-clear"
       @click.stop="handleClear"
     />
+
+    <vro-loading v-show="loading" class="vro-van-trigger-cell-loading" type="spinner" />
   </vro-van-cell>
 </template>
 
 <script setup lang="ts">
   import { isEmpty, pick, typedKeys } from '@daysnap/utils'
+  import { VroLoading } from '@vrojs/base'
   import { computed } from 'vue'
 
   import { VroVanCell } from '../vro-van-cell'
@@ -53,15 +57,15 @@
   const displayValue = computed(() => props.formatter(props.modelValue))
   const isEmptyValue = computed(() => isEmpty(displayValue.value))
   const showClear = computed(() => {
-    const { clearable, disabled, readonly } = props
-    return clearable && !disabled && !readonly && !isEmptyValue.value
+    const { clearable, disabled, loading, readonly } = props
+    return clearable && !disabled && !loading && !readonly && !isEmptyValue.value
   })
   const showArrow = computed(
-    () => props.arrow && !props.disabled && !props.readonly && !showClear.value,
+    () => props.arrow && !props.disabled && !props.loading && !props.readonly && !showClear.value,
   )
 
   const handleClick = (event: MouseEvent) => {
-    if (props.disabled || props.readonly) {
+    if (props.disabled || props.loading || props.readonly) {
       return
     }
 

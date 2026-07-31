@@ -45,6 +45,11 @@ export const vroVanTriggerCellProps = {
   readonly: Boolean,
 
   /**
+   * 是否加载中。
+   */
+  loading: Boolean,
+
+  /**
    * 是否显示清除按钮。
    */
   clearable: Boolean,

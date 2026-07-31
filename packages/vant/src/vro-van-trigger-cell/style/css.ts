@@ -1,4 +1,5 @@
 import '../../style/base.scss'
+import '@vrojs/base/src/vro-loading/style/css'
 import '../../vro-van-cell/style/css'
 import '../../vro-van-icon/style/css'
 import './index.scss'

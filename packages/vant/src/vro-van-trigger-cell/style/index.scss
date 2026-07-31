@@ -5,6 +5,8 @@
   --vro-van-trigger-cell-disabled-color: var(--vro-van-disabled-color);
   --vro-van-trigger-cell-readonly-color: var(--vro-van-readonly-color);
   --vro-van-trigger-cell-clear-color: var(--van-gray-5);
+  --vro-van-trigger-cell-loading-color: var(--van-gray-5);
+  --vro-van-trigger-cell-loading-size: 16px;
 }
 
 .vro-van-trigger-cell {
@@ -49,4 +51,10 @@
   color: var(--vro-van-trigger-cell-clear-color);
   line-height: 1;
   cursor: pointer;
+}
+
+.vro-van-trigger-cell-loading {
+  --vro-loading-color: var(--vro-van-trigger-cell-loading-color);
+  --vro-loading-size: var(--vro-van-trigger-cell-loading-size);
+  flex: none;
 }
