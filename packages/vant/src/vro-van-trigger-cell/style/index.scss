@@ -3,6 +3,7 @@
   --vro-van-trigger-cell-value-color: var(--van-text-color);
   --vro-van-trigger-cell-placeholder-color: var(--van-text-color-3);
   --vro-van-trigger-cell-disabled-color: var(--van-text-color-3);
+  --vro-van-trigger-cell-readonly-color: var(--vro-van-trigger-cell-value-color);
   --vro-van-trigger-cell-clear-color: var(--van-gray-5);
 }
 
@@ -12,6 +13,14 @@
 
     .vro-van-trigger-cell-value {
       color: var(--vro-van-trigger-cell-disabled-color);
+    }
+  }
+
+  &.is-readonly {
+    cursor: default;
+
+    .vro-van-trigger-cell-value {
+      color: var(--vro-van-trigger-cell-readonly-color);
     }
   }
 
