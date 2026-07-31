@@ -18,6 +18,8 @@ const packageImportMap: Record<string, PackageName> = {
 const importRE = /import\s+(?:type\s+)?(?:[\s\S]*?)\s+from\s+['"]([^'"]+)['"]/g
 const namedImportRE = /\{([^}]+)\}/
 const typeOnlyImportRE = /^import\s+type\b/
+const manualStyleDepsStart = '// sync-style-deps-manual-start'
+const manualStyleDepsEnd = '// sync-style-deps-manual-end'
 
 const kebabCase = (key: string) => {
   const result = key.replace(/([A-Z])/g, ' $1').trim()
@@ -130,6 +132,22 @@ const toImportCode = (packageName: PackageName, componentDir: string, deps: stri
   return deps
     .sort()
     .map((item) => `import '${toRelativeStyleImport(packageName, componentDir, item)}'`)
+}
+
+const getManualStyleDeps = (filePath: string) => {
+  if (!existsSync(filePath)) {
+    return ''
+  }
+
+  const code = readFileSync(filePath, 'utf8')
+  const startIndex = code.indexOf(manualStyleDepsStart)
+  const endIndex = code.indexOf(manualStyleDepsEnd)
+
+  if (startIndex < 0 || endIndex < 0 || endIndex < startIndex) {
+    return ''
+  }
+
+  return code.slice(startIndex, endIndex + manualStyleDepsEnd.length).trim()
 }
 
 const collectStyleDeps = (packageName: PackageName, componentDir: string) => {
@@ -250,8 +268,11 @@ const writeDepsStyle = (
     packageName,
     componentDir,
     internalDepsDeps.concat(externalDeps),
-  ).join('\n')
-  writeFileSync(depsPath, imports ? `${imports}\n` : '')
+  )
+  const manualStyleDeps = getManualStyleDeps(depsPath)
+  const code = manualStyleDeps ? imports.concat(manualStyleDeps).join('\n') : imports.join('\n')
+
+  writeFileSync(depsPath, code ? `${code}\n` : '')
 }
 
 const writeIndexStyle = (
