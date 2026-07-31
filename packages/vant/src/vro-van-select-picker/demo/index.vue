@@ -30,6 +30,14 @@
       trigger="immediately"
       :options="loadCityOptions"
     />
+    <vro-van-select-picker
+      v-model="lazyAsyncCity"
+      label="目的地"
+      placeholder="请选择目的地"
+      title="选择目的地"
+      trigger="lazy"
+      :options="loadCityOptions"
+    />
   </demo-block>
 
   <demo-block title="状态">
@@ -56,6 +64,7 @@
   const city = ref('hangzhou')
   const destination = ref('')
   const asyncCity = ref('')
+  const lazyAsyncCity = ref('')
   const readonlyCity = ref('shanghai')
   const disabledCity = ref('shenzhen')
 
@@ -68,7 +77,6 @@
   ]
 
   const loadCityOptions = async () => {
-    console.log('1111')
     await new Promise((resolve) => setTimeout(resolve, 300))
     return cityOptions
   }
