@@ -2,24 +2,69 @@ import { omit } from '@daysnap/utils'
 import type { PickerColumn } from 'vant'
 import type { ExtractPropTypes, PropType } from 'vue'
 
-import { vroVanPickerProps } from '../vro-van-picker'
-import { vroVanTriggerCellProps } from '../vro-van-trigger-cell'
+import {
+  type VroVanPickerEmits,
+  vroVanPickerProps,
+  type VroVanPickerResult,
+} from '../vro-van-picker'
+import {
+  type VroVanTriggerCellEmits,
+  vroVanTriggerCellProps,
+  type VroVanTriggerCellSlots,
+} from '../vro-van-trigger-cell'
 
 export const vroVanSelectPickerPickerProps = omit(vroVanPickerProps, ['modelValue', 'columns'])
+export const vroVanSelectPickerTriggerCellProps = vroVanTriggerCellProps
+
+export type VroVanSelectPickerColumns = PickerColumn | PickerColumn[]
+export type VroVanSelectPickerOptions =
+  | VroVanSelectPickerColumns
+  | (() => Promise<VroVanSelectPickerColumns> | VroVanSelectPickerColumns)
+export type VroVanSelectPickerTrigger = 'immediately' | 'lazy'
 
 export const vroVanSelectPickerProps = {
-  ...vroVanTriggerCellProps,
+  ...vroVanSelectPickerTriggerCellProps,
 
   ...vroVanSelectPickerPickerProps,
 
-  trigger: String as PropType<'immediately' | 'lazy'>,
+  /**
+   * 选项加载时机。immediately 会在组件挂载后立即加载，lazy 会在点击时加载。
+   *
+   * @default 'lazy'
+   */
+  trigger: {
+    type: String as PropType<VroVanSelectPickerTrigger>,
+    default: 'lazy',
+  },
 
+  /**
+   * 选择器选项，支持数组或异步函数。
+   */
   options: {
-    type: [Array, Function] as PropType<
-      PickerColumn | (() => Promise<PickerColumn> | PickerColumn)
-    >,
+    type: [Array, Function] as PropType<VroVanSelectPickerOptions>,
     default: () => [],
   },
 }
 
 export type VroVanSelectPickerProps = ExtractPropTypes<typeof vroVanSelectPickerProps>
+
+export interface VroVanSelectPickerSlots extends VroVanTriggerCellSlots {}
+
+export interface VroVanSelectPickerEmits
+  extends VroVanTriggerCellEmits,
+    Pick<VroVanPickerEmits, 'confirm' | 'cancel' | 'change' | 'clickOption' | 'scrollInto'> {
+  /**
+   * 选中值变化时触发。
+   */
+  'update:modelValue': [value: any]
+
+  /**
+   * 点击确认按钮时触发。
+   */
+  confirm: [params: VroVanPickerResult]
+
+  /**
+   * 选项加载失败时触发。
+   */
+  error: [error: unknown]
+}
