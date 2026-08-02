@@ -50,9 +50,7 @@ export type VroVanSelectPickerProps = ExtractPropTypes<typeof vroVanSelectPicker
 
 export interface VroVanSelectPickerSlots extends VroVanTriggerCellSlots {}
 
-export interface VroVanSelectPickerEmits
-  extends VroVanTriggerCellEmits,
-    Pick<VroVanPickerEmits, 'confirm' | 'cancel' | 'change' | 'clickOption' | 'scrollInto'> {
+export interface VroVanSelectPickerEmits {
   /**
    * 选中值变化时触发。
    */
@@ -61,7 +59,7 @@ export interface VroVanSelectPickerEmits
   /**
    * 点击确认按钮时触发。
    */
-  confirm: [params: VroVanPickerResult]
+  change: [value: any]
 
   /**
    * 选项加载失败时触发。
