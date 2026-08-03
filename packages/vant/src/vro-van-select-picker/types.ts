@@ -44,6 +44,21 @@ export const vroVanSelectPickerProps = {
     type: [Array, Function] as PropType<VroVanSelectPickerOptions>,
     default: () => [],
   },
+
+  valueType: {
+    type: String as PropType<'object' | 'string'>,
+    default: 'string',
+  },
+
+  labelKey: {
+    type: String,
+    default: 'text',
+  },
+
+  valueKey: {
+    type: String,
+    default: 'value',
+  },
 }
 
 export type VroVanSelectPickerProps = ExtractPropTypes<typeof vroVanSelectPickerProps>

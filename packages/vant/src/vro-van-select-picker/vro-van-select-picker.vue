@@ -70,15 +70,23 @@
     await trigger()
 
     const pickerProps = pick(props, typedKeys(vroVanSelectPickerPickerProps))
-    const result = await showVroVanPicker({
+    const { selectedOptions } = await showVroVanPicker({
       ...pickerProps,
       columns: columns.value,
     })
 
-    console.log('result => ', result)
-
-    emit('update:modelValue', result.value)
-    emit('change', result)
+    const { valueType } = props
+    const isMultiple = isArray(columns.value[0])
+    if (isMultiple) {
+      const value =
+        valueType === 'object' ? selectedOptions : selectedOptions.map((item) => item?.value)
+      emit('update:modelValue', value)
+      emit('change', value)
+    } else {
+      const value = valueType === 'object' ? selectedOptions[0] : selectedOptions[0]?.value
+      emit('update:modelValue', value)
+      emit('change', value)
+    }
   }
 
   const handleClear = () => {
