@@ -102,11 +102,13 @@
     const { valueType } = props
     if (isColumnGroup(columns.value)) {
       const value =
-        valueType === 'object' ? selectedOptions : selectedOptions.map((item) => item?.value)
+        valueType === 'object'
+          ? selectedOptions
+          : selectedOptions.map((item) => getOptionValue(item))
       emit('update:modelValue', value)
       emit('change', value)
     } else {
-      const value = valueType === 'object' ? selectedOptions[0] : selectedOptions[0]?.value
+      const value = valueType === 'object' ? selectedOptions[0] : getOptionValue(selectedOptions[0])
       emit('update:modelValue', value)
       emit('change', value)
     }
@@ -174,8 +176,8 @@
     return option?.[getFieldName('text')] ?? ''
   }
 
-  const getOptionValue = (option: PickerOption) => {
-    return option[getFieldName('value')]
+  const getOptionValue = (option?: PickerOption) => {
+    return option?.[getFieldName('value')]
   }
 
   const getOptionChildren = (option: PickerOption) => {

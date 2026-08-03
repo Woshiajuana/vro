@@ -264,11 +264,7 @@ const writeDepsStyle = (
     return
   }
 
-  const imports = toImportCode(
-    packageName,
-    componentDir,
-    internalDepsDeps.concat(externalDeps),
-  )
+  const imports = toImportCode(packageName, componentDir, internalDepsDeps.concat(externalDeps))
   const manualStyleDeps = getManualStyleDeps(depsPath)
   const code = manualStyleDeps ? imports.concat(manualStyleDeps).join('\n') : imports.join('\n')
 
