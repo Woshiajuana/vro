@@ -96,39 +96,34 @@ const loadCityOptions = async () => {
       <td>确认选择或清空值时触发</td>
     </tr>
     <tr>
-      <td>confirm</td>
-      <td>params: VroVanPickerResult</td>
-      <td>点击确认按钮时触发</td>
-    </tr>
-    <tr>
-      <td>cancel</td>
-      <td>params?: unknown</td>
-      <td>取消选择或关闭弹层时触发</td>
-    </tr>
-    <tr>
       <td>clear</td>
       <td>-</td>
       <td>点击清除按钮时触发</td>
     </tr>
     <tr>
       <td>change</td>
-      <td>params: PickerChangeEventParams</td>
-      <td>选项改变时触发</td>
-    </tr>
-    <tr>
-      <td>clickOption</td>
-      <td>option: PickerOption</td>
-      <td>点击选项时触发</td>
-    </tr>
-    <tr>
-      <td>scrollInto</td>
-      <td>option: PickerOption</td>
-      <td>选项滚动到可视区域时触发</td>
+      <td>value: any</td>
+      <td>确认选择或清空值时触发</td>
     </tr>
     <tr>
       <td>error</td>
       <td>error: unknown</td>
       <td>异步加载选项失败时触发</td>
+    </tr>
+    <tr>
+      <td>click</td>
+      <td>event: MouseEvent</td>
+      <td>点击组件且非 disabled/readonly/loading 时触发</td>
+    </tr>
+    <tr>
+      <td>click-prefix-icon</td>
+      <td>event: MouseEvent</td>
+      <td>点击 prefixIcon 时触发</td>
+    </tr>
+    <tr>
+      <td>click-suffix-icon</td>
+      <td>event: MouseEvent</td>
+      <td>点击 suffixIcon 时触发</td>
     </tr>
   </tbody>
 </table>

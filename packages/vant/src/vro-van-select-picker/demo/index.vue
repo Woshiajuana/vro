@@ -22,22 +22,69 @@
     />
   </demo-block>
 
+  <demo-block title="多列选择">
+    <vro-van-select-picker
+      v-model="date"
+      clearable
+      label="日期"
+      placeholder="请选择日期"
+      title="选择日期"
+      :options="dateOptions"
+    />
+  </demo-block>
+
+  <demo-block title="对象值">
+    <vro-van-select-picker
+      v-model="cityObject"
+      clearable
+      label="城市"
+      placeholder="请选择城市"
+      title="选择城市"
+      value-type="object"
+      :options="cityOptions"
+    />
+  </demo-block>
+
+  <demo-block title="自定义字段">
+    <vro-van-select-picker
+      v-model="customCity"
+      clearable
+      label="城市"
+      placeholder="请选择城市"
+      title="选择城市"
+      :columns-field-names="{ text: 'label', value: 'id', children: 'children' }"
+      :options="customCityOptions"
+    />
+  </demo-block>
+
+  <demo-block title="格式化展示">
+    <vro-van-select-picker
+      v-model="formattedCity"
+      clearable
+      label="城市"
+      placeholder="请选择城市"
+      title="选择城市"
+      :formatter="formatCity"
+      :options="cityOptions"
+    />
+  </demo-block>
+
   <demo-block title="异步选项">
     <vro-van-select-picker
       v-model="asyncCity"
       clearable
-      label="出发地"
-      placeholder="请选择出发地"
-      title="选择出发地"
+      label="预加载"
+      placeholder="请选择城市"
+      title="选择城市"
       trigger="immediately"
       :options="loadCityOptions"
     />
     <vro-van-select-picker
       v-model="lazyAsyncCity"
       clearable
-      label="目的地"
-      placeholder="请选择目的地"
-      title="选择目的地"
+      label="点击加载"
+      placeholder="请选择城市"
+      title="选择城市"
       trigger="lazy"
       :options="loadCityOptions"
     />
@@ -62,10 +109,15 @@
 </template>
 
 <script setup lang="ts">
+  import type { PickerOption } from 'vant'
   import { ref } from 'vue'
 
   const city = ref('hangzhou')
   const destination = ref('')
+  const date = ref(['2026', '08', '03'])
+  const cityObject = ref<PickerOption>({ text: '上海', value: 'shanghai' })
+  const customCity = ref(1)
+  const formattedCity = ref('chengdu')
   const asyncCity = ref('')
   const lazyAsyncCity = ref('')
   const readonlyCity = ref('shanghai')
@@ -79,8 +131,41 @@
     { text: '武汉', value: 'wuhan' },
   ]
 
+  const dateOptions = [
+    [
+      { text: '2025年', value: '2025' },
+      { text: '2026年', value: '2026' },
+      { text: '2027年', value: '2027' },
+    ],
+    [
+      { text: '07月', value: '07' },
+      { text: '08月', value: '08' },
+      { text: '09月', value: '09' },
+    ],
+    [
+      { text: '01日', value: '01' },
+      { text: '02日', value: '02' },
+      { text: '03日', value: '03' },
+    ],
+  ]
+
+  const customCityOptions = [
+    { label: '杭州', id: 1 },
+    { label: '上海', id: 2 },
+    { label: '深圳', id: 3 },
+  ]
+
+  const cityMap = cityOptions.reduce<Record<string, string>>((res, item) => {
+    res[item.value] = item.text
+    return res
+  }, {})
+
+  const formatCity = (value: string) => {
+    return value ? `当前：${cityMap[value] ?? value}` : ''
+  }
+
   const loadCityOptions = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 300))
+    await new Promise((resolve) => setTimeout(resolve, 500))
     return cityOptions
   }
 </script>

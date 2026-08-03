@@ -2,11 +2,7 @@ import { omit } from '@daysnap/utils'
 import type { PickerColumn } from 'vant'
 import type { ExtractPropTypes, PropType } from 'vue'
 
-import {
-  type VroVanPickerEmits,
-  vroVanPickerProps,
-  type VroVanPickerResult,
-} from '../vro-van-picker'
+import { vroVanPickerProps } from '../vro-van-picker'
 import {
   type VroVanTriggerCellEmits,
   vroVanTriggerCellProps,
@@ -45,6 +41,11 @@ export const vroVanSelectPickerProps = {
     default: () => [],
   },
 
+  /**
+   * 选中值类型。string 返回选项 value，object 返回选中 option。
+   *
+   * @default 'string'
+   */
   valueType: {
     type: String as PropType<'object' | 'string'>,
     default: 'string',
@@ -55,7 +56,7 @@ export type VroVanSelectPickerProps = ExtractPropTypes<typeof vroVanSelectPicker
 
 export interface VroVanSelectPickerSlots extends VroVanTriggerCellSlots {}
 
-export interface VroVanSelectPickerEmits {
+export interface VroVanSelectPickerEmits extends VroVanTriggerCellEmits {
   /**
    * 选中值变化时触发。
    */

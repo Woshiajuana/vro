@@ -6,6 +6,8 @@
     :loading="loading"
     @click="handleSelect"
     @clear="handleClear"
+    @click-prefix-icon="$emit('click-prefix-icon', $event)"
+    @click-suffix-icon="$emit('click-suffix-icon', $event)"
   >
     <template v-for="(_, name) in slots" #[name]="slotProps" :key="name">
       <slot :name="name" v-bind="slotProps"></slot>
@@ -77,9 +79,8 @@
     }
 
     const options = columns.value
-    const isMultiple = isArray(options[0])
     const values = toArray(modelValue)
-    const selectedOptions = isMultiple
+    const selectedOptions = isColumnGroup(options)
       ? values.map((value, index) =>
           findOptionByValue((options as VroVanSelectPickerColumns[])[index] ?? [], value),
         )
@@ -95,11 +96,11 @@
     const { selectedOptions } = await showVroVanPicker({
       ...pickerProps,
       columns: columns.value,
+      modelValue: getPickerModelValue(),
     })
 
     const { valueType } = props
-    const isMultiple = isArray(columns.value[0])
-    if (isMultiple) {
+    if (isColumnGroup(columns.value)) {
       const value =
         valueType === 'object' ? selectedOptions : selectedOptions.map((item) => item?.value)
       emit('update:modelValue', value)
@@ -114,10 +115,28 @@
   const handleClear = () => {
     const value = isArray(props.modelValue) ? [] : ''
     emit('update:modelValue', value)
+    emit('change', value)
+    emit('clear')
   }
 
   const toArray = <T,>(value: T | T[]) => {
     return isArray(value) ? value : [value]
+  }
+
+  const getPickerModelValue = () => {
+    if (isEmptyValue(props.modelValue)) {
+      return []
+    }
+
+    if (props.valueType === 'object') {
+      return toArray<PickerOption>(props.modelValue).map(getOptionValue)
+    }
+
+    return toArray(props.modelValue)
+  }
+
+  const isColumnGroup = (options: VroVanSelectPickerColumns) => {
+    return isArray(options[0])
   }
 
   const findOptionByValue = (
