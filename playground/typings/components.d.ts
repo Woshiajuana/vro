@@ -19,6 +19,7 @@ declare module 'vue' {
     ElTag: typeof import('element-plus/es')['ElTag']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    VanActionSheet: typeof import('vant/es')['ActionSheet']
     VanCheckbox: typeof import('vant/es')['Checkbox']
     VanCheckboxGroup: typeof import('vant/es')['CheckboxGroup']
     VanField: typeof import('vant/es')['Field']

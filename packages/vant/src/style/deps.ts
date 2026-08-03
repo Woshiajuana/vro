@@ -1,3 +1,4 @@
+import '../vro-van-action-sheet/style/deps'
 import '../vro-van-cell/style/deps'
 import '../vro-van-cell-group/style/deps'
 import '../vro-van-checkbox/style/deps'

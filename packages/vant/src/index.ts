@@ -2,6 +2,7 @@
 
 export * from './locale'
 export * from './utils'
+export * from './vro-van-action-sheet'
 export * from './vro-van-cell'
 export * from './vro-van-cell-group'
 export * from './vro-van-checkbox'
