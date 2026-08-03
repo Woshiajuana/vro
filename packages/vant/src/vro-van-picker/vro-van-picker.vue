@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-  import { isArray, pick, typedKeys } from '@daysnap/utils'
+  import { isArray, isEmpty, pick, typedKeys } from '@daysnap/utils'
   import { useVisible } from '@vrojs/use'
   import type { PickerColumn, PickerConfirmEventParams, PickerInstance, PickerOption } from 'vant'
   import { Picker as VanPicker, pickerProps as vanPickerProps, Popup as VanPopup } from 'vant'
@@ -67,11 +67,13 @@
   const pickerModelValue = computed(() => {
     const { modelValue } = computedProps.value
 
-    if (modelValue == null || modelValue === '') {
+    if (isEmpty(modelValue)) {
       return []
     }
 
-    return isArray(modelValue) ? modelValue : [modelValue]
+    return (isArray(modelValue) ? modelValue : [modelValue]).map((item) =>
+      isPickerOption(item) ? getOptionValue(item) : item,
+    )
   })
   const noDataOption = computed<PickerOption>(() => {
     const { text = 'text', value = 'value' } = computedProps.value.columnsFieldNames ?? {}
@@ -174,12 +176,24 @@
   }
 
   const isNoDataResult = (params: PickerConfirmEventParams) => {
-    const { value = 'value' } = computedProps.value.columnsFieldNames ?? {}
-
     return (
       params.selectedValues.includes(VRO_VAN_PICKER_NO_DATA_VALUE) ||
-      params.selectedOptions.some((option) => option?.[value] === VRO_VAN_PICKER_NO_DATA_VALUE)
+      params.selectedOptions.some(
+        (option) => getOptionValue(option) === VRO_VAN_PICKER_NO_DATA_VALUE,
+      )
     )
+  }
+
+  const getOptionValue = (option?: PickerOption) => {
+    return option?.[getFieldName('value')]
+  }
+
+  const getFieldName = (name: 'text' | 'value' | 'children') => {
+    return computedProps.value.columnsFieldNames?.[name] ?? name
+  }
+
+  const isPickerOption = (value: unknown): value is PickerOption => {
+    return value !== null && typeof value === 'object' && getFieldName('value') in value
   }
 
   defineExpose({

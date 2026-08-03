@@ -94,11 +94,10 @@
     let selectedOptions: PickerOption[]
 
     try {
-      console.log(' getPickerModelValue() => ', getPickerModelValue())
       ;({ selectedOptions } = await showVroVanPicker({
         ...pickerProps,
         columns: columns.value,
-        modelValue: getPickerModelValue(),
+        modelValue: props.modelValue,
       }))
     } catch (err) {
       if (err !== 'cancel') {
@@ -124,18 +123,6 @@
 
   const toArray = <T,>(value: T | T[]) => {
     return isArray(value) ? value : [value]
-  }
-
-  const getPickerModelValue = () => {
-    if (isEmptyValue(props.modelValue)) {
-      return []
-    }
-
-    if (props.valueType === 'object') {
-      return toArray<PickerOption>(props.modelValue).map(getOptionValue)
-    }
-
-    return toArray(props.modelValue)
   }
 
   const getEmptyValue = () => {
