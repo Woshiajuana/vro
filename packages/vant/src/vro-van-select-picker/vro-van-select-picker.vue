@@ -14,16 +14,12 @@
 </template>
 
 <script setup lang="ts">
-  import { isArray, isFunction, isPromiseLike, pick, typedKeys } from '@daysnap/utils'
+  import { isArray, isFunction, pick, typedKeys } from '@daysnap/utils'
   import { useAsyncTask } from '@vrojs/use'
-  import type { PickerChangeEventParams, PickerOption } from 'vant'
-  import { computed, onMounted, ref } from 'vue'
+  import type { PickerOption } from 'vant'
+  import { computed } from 'vue'
 
-  import {
-    showVroVanPicker,
-    type VroVanPickerProps,
-    type VroVanPickerResult,
-  } from '../vro-van-picker'
+  import { showVroVanPicker } from '../vro-van-picker'
   import { VroVanTriggerCell } from '../vro-van-trigger-cell'
   import {
     type VroVanSelectPickerColumns,
@@ -69,13 +65,27 @@
   const displayValue = computed(() => {
     const { formatter, modelValue, valueType } = props
     if (formatter) {
-      return modelValue
+      return formatter(modelValue)
     }
+
+    if (isEmptyValue(modelValue)) {
+      return ''
+    }
+
+    if (valueType === 'object') {
+      return toArray<PickerOption>(modelValue).map(getOptionText).filter(Boolean).join(' / ')
+    }
+
     const options = columns.value
     const isMultiple = isArray(options[0])
-    // 进行处理
-    // 这里帮我完善一下
-    return ''
+    const values = toArray(modelValue)
+    const selectedOptions = isMultiple
+      ? values.map((value, index) =>
+          findOptionByValue((options as VroVanSelectPickerColumns[])[index] ?? [], value),
+        )
+      : values.map((value) => findOptionByValue(options, value))
+
+    return selectedOptions.map(getOptionText).filter(Boolean).join(' / ')
   })
 
   const handleSelect = async () => {
@@ -104,5 +114,60 @@
   const handleClear = () => {
     const value = isArray(props.modelValue) ? [] : ''
     emit('update:modelValue', value)
+  }
+
+  const toArray = <T,>(value: T | T[]) => {
+    return isArray(value) ? value : [value]
+  }
+
+  const findOptionByValue = (
+    options: VroVanSelectPickerColumns,
+    value: unknown,
+  ): PickerOption | undefined => {
+    for (const option of options) {
+      if (isArray(option)) {
+        const matched = findOptionByValue(option, value)
+
+        if (matched) {
+          return matched
+        }
+
+        continue
+      }
+
+      if (getOptionValue(option) === value) {
+        return option
+      }
+
+      const children = getOptionChildren(option)
+
+      if (children?.length) {
+        const matched = findOptionByValue(children, value)
+
+        if (matched) {
+          return matched
+        }
+      }
+    }
+  }
+
+  const getOptionText = (option?: PickerOption) => {
+    return option?.[getFieldName('text')] ?? ''
+  }
+
+  const getOptionValue = (option: PickerOption) => {
+    return option[getFieldName('value')]
+  }
+
+  const getOptionChildren = (option: PickerOption) => {
+    return option[getFieldName('children')] as VroVanSelectPickerColumns | undefined
+  }
+
+  const getFieldName = (name: 'text' | 'value' | 'children') => {
+    return props.columnsFieldNames?.[name] ?? name
+  }
+
+  const isEmptyValue = (value: unknown) => {
+    return value == null || value === '' || (isArray(value) && !value.length)
   }
 </script>
