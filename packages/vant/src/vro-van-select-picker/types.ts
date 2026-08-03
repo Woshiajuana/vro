@@ -42,7 +42,7 @@ export const vroVanSelectPickerProps = {
   },
 
   /**
-   * 选中值类型。string 返回选项 value，object 返回选中 option。
+   * 选中值类型。string 返回选项 value，object 返回选中 option。多列或级联选择时返回数组。
    *
    * @default 'string'
    */
@@ -50,6 +50,11 @@ export const vroVanSelectPickerProps = {
     type: String as PropType<'object' | 'string'>,
     default: 'string',
   },
+
+  /**
+   * 清空时回填的值。未设置时，数组值清空为 []，其他值清空为 ''。
+   */
+  emptyValue: null as unknown as PropType<any>,
 }
 
 export type VroVanSelectPickerProps = ExtractPropTypes<typeof vroVanSelectPickerProps>
@@ -66,9 +71,4 @@ export interface VroVanSelectPickerEmits extends VroVanTriggerCellEmits {
    * 点击确认按钮时触发。
    */
   change: [value: any]
-
-  /**
-   * 选项加载失败时触发。
-   */
-  error: [error: unknown]
 }

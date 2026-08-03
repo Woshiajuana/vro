@@ -53,6 +53,8 @@ const loadCityOptions = async () => {
 }
 ```
 
+`trigger="lazy"` 时会在点击后加载选项。如果需要根据已有值立即展示选中文案，建议使用 `trigger="immediately"`，或通过 `formatter` 自定义展示内容。
+
 ### 禁用和只读
 
 ```html
@@ -104,11 +106,6 @@ const loadCityOptions = async () => {
       <td>change</td>
       <td>value: any</td>
       <td>确认选择或清空值时触发</td>
-    </tr>
-    <tr>
-      <td>error</td>
-      <td>error: unknown</td>
-      <td>异步加载选项失败时触发</td>
     </tr>
     <tr>
       <td>click</td>

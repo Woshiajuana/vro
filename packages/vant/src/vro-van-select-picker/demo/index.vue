@@ -33,6 +33,17 @@
     />
   </demo-block>
 
+  <demo-block title="级联选择">
+    <vro-van-select-picker
+      v-model="area"
+      clearable
+      label="地区"
+      placeholder="请选择地区"
+      title="选择地区"
+      :options="areaOptions"
+    />
+  </demo-block>
+
   <demo-block title="对象值">
     <vro-van-select-picker
       v-model="cityObject"
@@ -115,6 +126,7 @@
   const city = ref('hangzhou')
   const destination = ref('')
   const date = ref(['2026', '08', '03'])
+  const area = ref(['zhejiang', 'hangzhou', 'xihu'])
   const cityObject = ref<PickerOption>({ text: '上海', value: 'shanghai' })
   const customCity = ref(1)
   const formattedCity = ref('chengdu')
@@ -147,6 +159,45 @@
       { text: '02日', value: '02' },
       { text: '03日', value: '03' },
     ],
+  ]
+
+  const areaOptions = [
+    {
+      text: '浙江',
+      value: 'zhejiang',
+      children: [
+        {
+          text: '杭州',
+          value: 'hangzhou',
+          children: [
+            { text: '西湖区', value: 'xihu' },
+            { text: '余杭区', value: 'yuhang' },
+          ],
+        },
+        {
+          text: '温州',
+          value: 'wenzhou',
+          children: [
+            { text: '鹿城区', value: 'lucheng' },
+            { text: '瓯海区', value: 'ouhai' },
+          ],
+        },
+      ],
+    },
+    {
+      text: '福建',
+      value: 'fujian',
+      children: [
+        {
+          text: '福州',
+          value: 'fuzhou',
+          children: [
+            { text: '鼓楼区', value: 'gulou' },
+            { text: '台江区', value: 'taijiang' },
+          ],
+        },
+      ],
+    },
   ]
 
   const customCityOptions = [

@@ -18,7 +18,7 @@
 <script setup lang="ts">
   import { isArray, isFunction, pick, typedKeys } from '@daysnap/utils'
   import { useAsyncTask } from '@vrojs/use'
-  import type { PickerOption } from 'vant'
+  import type { PickerColumn, PickerOption } from 'vant'
   import { computed } from 'vue'
 
   import { showVroVanPicker } from '../vro-van-picker'
@@ -81,9 +81,7 @@
     const options = columns.value
     const values = toArray(modelValue)
     const selectedOptions = isColumnGroup(options)
-      ? values.map((value, index) =>
-          findOptionByValue((options as VroVanSelectPickerColumns[])[index] ?? [], value),
-        )
+      ? values.map((value, index) => findOptionByValue(options[index] ?? [], value))
       : values.map((value) => findOptionByValue(options, value))
 
     return selectedOptions.map(getOptionText).filter(Boolean).join(' / ')
@@ -93,29 +91,32 @@
     await trigger()
 
     const pickerProps = pick(props, typedKeys(vroVanSelectPickerPickerProps))
-    const { selectedOptions } = await showVroVanPicker({
-      ...pickerProps,
-      columns: columns.value,
-      modelValue: getPickerModelValue(),
-    })
+    let selectedOptions: PickerOption[]
 
-    const { valueType } = props
-    if (isColumnGroup(columns.value)) {
-      const value =
-        valueType === 'object'
-          ? selectedOptions
-          : selectedOptions.map((item) => getOptionValue(item))
-      emit('update:modelValue', value)
-      emit('change', value)
-    } else {
-      const value = valueType === 'object' ? selectedOptions[0] : getOptionValue(selectedOptions[0])
-      emit('update:modelValue', value)
-      emit('change', value)
+    try {
+      console.log(' getPickerModelValue() => ', getPickerModelValue())
+      ;({ selectedOptions } = await showVroVanPicker({
+        ...pickerProps,
+        columns: columns.value,
+        modelValue: getPickerModelValue(),
+      }))
+    } catch (err) {
+      if (err !== 'cancel') {
+        throw err
+      }
+
+      return
     }
+
+    const isMultipleValue = isColumnGroup(columns.value) || selectedOptions.length > 1
+    const value = getSelectedValue(selectedOptions, isMultipleValue)
+
+    emit('update:modelValue', value)
+    emit('change', value)
   }
 
   const handleClear = () => {
-    const value = isArray(props.modelValue) ? [] : ''
+    const value = getEmptyValue()
     emit('update:modelValue', value)
     emit('change', value)
     emit('clear')
@@ -137,7 +138,21 @@
     return toArray(props.modelValue)
   }
 
-  const isColumnGroup = (options: VroVanSelectPickerColumns) => {
+  const getEmptyValue = () => {
+    return props.emptyValue !== undefined ? props.emptyValue : isArray(props.modelValue) ? [] : ''
+  }
+
+  const getSelectedValue = (selectedOptions: PickerOption[], isMultipleValue: boolean) => {
+    if (props.valueType === 'object') {
+      return isMultipleValue ? selectedOptions : selectedOptions[0]
+    }
+
+    return isMultipleValue
+      ? selectedOptions.map((item) => getOptionValue(item))
+      : getOptionValue(selectedOptions[0])
+  }
+
+  const isColumnGroup = (options: VroVanSelectPickerColumns): options is PickerColumn[] => {
     return isArray(options[0])
   }
 
