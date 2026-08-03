@@ -91,6 +91,8 @@ const openFunctionCity = () => {
 
 支持 Vant Picker 的全部属性，并额外支持以下属性。
 
+`modelValue` 在单列选择时可传单个值，多列或级联选择时传数组；组件内部会统一转换为 Vant Picker 需要的数组格式。
+
 <table>
   <tbody>
     <tr>

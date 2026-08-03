@@ -18,6 +18,11 @@ export const vroVanPickerProps = {
   ...pickerProps,
 
   /**
+   * 当前选中值。单列可传单个值，多列或级联传数组。
+   */
+  modelValue: [Array, String, Number, Boolean, Object] as PropType<unknown | unknown[]>,
+
+  /**
    * VanPopup 属性配置。
    */
   popupProps: Object as PropType<Partial<PopupProps>>,

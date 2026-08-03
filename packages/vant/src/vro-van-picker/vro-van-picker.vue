@@ -10,9 +10,10 @@
     @closed="$emit('closed')"
   >
     <van-picker
-      v-bind="pickerAttrs"
+      v-bind="pickerProps"
       ref="vanPickerRef"
       :columns="filteredColumns"
+      :model-value="pickerModelValue"
       @update:model-value="$emit('update:modelValue', $event)"
       @confirm="handleConfirm"
       @cancel="hide('cancel')"
@@ -34,10 +35,10 @@
 </template>
 
 <script setup lang="ts">
-  import { pick, typedKeys } from '@daysnap/utils'
+  import { isArray, pick, typedKeys } from '@daysnap/utils'
   import { useVisible } from '@vrojs/use'
   import type { PickerColumn, PickerConfirmEventParams, PickerInstance, PickerOption } from 'vant'
-  import { Picker as VanPicker, pickerProps, Popup as VanPopup } from 'vant'
+  import { Picker as VanPicker, pickerProps as vanPickerProps, Popup as VanPopup } from 'vant'
   import { computed, ref, useTemplateRef } from 'vue'
 
   import { useLocale } from '../locale'
@@ -62,7 +63,16 @@
   const computedProps = computed<VroVanPickerProps>(() =>
     Object.assign({}, props, dynamicProps.value),
   )
-  const pickerAttrs = computed(() => pick(computedProps.value, typedKeys(pickerProps)))
+  const pickerProps = computed(() => pick(computedProps.value, typedKeys(vanPickerProps)))
+  const pickerModelValue = computed(() => {
+    const { modelValue } = computedProps.value
+
+    if (modelValue == null || modelValue === '') {
+      return []
+    }
+
+    return isArray(modelValue) ? modelValue : [modelValue]
+  })
   const noDataOption = computed<PickerOption>(() => {
     const { text = 'text', value = 'value' } = computedProps.value.columnsFieldNames ?? {}
 
