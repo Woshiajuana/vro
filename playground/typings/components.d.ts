@@ -46,6 +46,7 @@ declare module 'vue' {
     VroIcon: typeof import('@vrojs/base')['VroIcon']
     VroInput: typeof import('@vrojs/base')['VroInput']
     VroLoading: typeof import('@vrojs/base')['VroLoading']
+    VroVanActionSheet: typeof import('@vrojs/vant')['VroVanActionSheet']
     VroVanCell: typeof import('@vrojs/vant')['VroVanCell']
     VroVanCellGroup: typeof import('@vrojs/vant')['VroVanCellGroup']
     VroVanCheckbox: typeof import('@vrojs/vant')['VroVanCheckbox']
