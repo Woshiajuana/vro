@@ -2,6 +2,7 @@
   <demo-block title="基础用法">
     <vro-van-select-picker
       v-model="city"
+      clearable
       label="城市"
       placeholder="请选择城市"
       title="选择城市"

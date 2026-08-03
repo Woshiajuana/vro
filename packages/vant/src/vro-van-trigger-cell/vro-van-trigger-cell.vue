@@ -54,7 +54,7 @@
   const props = defineProps(vroVanTriggerCellProps)
 
   const cellProps = computed(() => pick(props, typedKeys(vroVanTriggerCellCellProps)))
-  const displayValue = computed(() => props.formatter(props.modelValue))
+  const displayValue = computed(() => props.formatter?.(props.modelValue) ?? props.modelValue)
   const isEmptyValue = computed(() => isEmpty(displayValue.value))
   const showClear = computed(() => {
     const { clearable, disabled, loading, readonly } = props

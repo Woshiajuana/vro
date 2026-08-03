@@ -29,10 +29,7 @@ export const vroVanTriggerCellProps = {
   /**
    * 展示值格式化函数。
    */
-  formatter: {
-    default: (value: any) => value,
-    type: Function as PropType<(value: any) => any>,
-  },
+  formatter: Function as PropType<(value: any) => any>,
 
   /**
    * 是否禁用。

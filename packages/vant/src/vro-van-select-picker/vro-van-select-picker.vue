@@ -2,7 +2,7 @@
   <vro-van-trigger-cell
     v-bind="triggerCellProps"
     class="vro-van-select-picker"
-    :model-value="modelValue"
+    :model-value="displayValue"
     :loading="loading"
     @click="handleSelect"
     @clear="handleClear"
@@ -60,11 +60,23 @@
       return res
     },
     {
-      immediate: props.trigger === 'immediately',
+      immediate: !isFunction(props.options) || props.trigger === 'immediately',
       throwError: true,
       initialValue: [],
     },
   )
+
+  const displayValue = computed(() => {
+    const { formatter, modelValue, valueType } = props
+    if (formatter) {
+      return modelValue
+    }
+    const options = columns.value
+    const isMultiple = isArray(options[0])
+    // 进行处理
+    // 这里帮我完善一下
+    return ''
+  })
 
   const handleSelect = async () => {
     await trigger()
