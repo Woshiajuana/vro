@@ -67,7 +67,7 @@
   const displayValue = computed(() => {
     const { formatter, modelValue, valueType } = props
     if (formatter) {
-      return formatter(modelValue)
+      return modelValue
     }
 
     if (isEmptyValue(modelValue)) {

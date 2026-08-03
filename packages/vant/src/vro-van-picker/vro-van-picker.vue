@@ -25,7 +25,9 @@
       v-if="computedProps.filterable"
       v-model="keyword"
       :placeholder="computedProps.filterPlaceholder || t('picker.filterPlaceholder')"
+      autocomplete="off"
       class="vro-van-picker-filter"
+      enterkeyhint="search"
       type="text"
     />
   </van-popup>

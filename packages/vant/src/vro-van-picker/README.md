@@ -174,7 +174,7 @@ const openFunctionCity = () => {
       <td>确认当前选择</td>
     </tr>
     <tr>
-      <td>picker</td>
+      <td>vanPickerRef</td>
       <td>底层 VanPicker 实例</td>
     </tr>
   </tbody>
@@ -189,24 +189,16 @@ const openFunctionCity = () => {
       <td>默认值</td>
     </tr>
     <tr>
-      <td>--vro-van-picker-filter-padding</td>
-      <td>8px 16px 12px</td>
-    </tr>
-    <tr>
-      <td>--vro-van-picker-filter-height</td>
-      <td>36px</td>
-    </tr>
-    <tr>
-      <td>--vro-van-picker-filter-background</td>
-      <td>var(--van-background-2)</td>
-    </tr>
-    <tr>
-      <td>--vro-van-picker-filter-border-color</td>
-      <td>var(--van-border-color)</td>
+      <td>--vro-van-picker-filter-font-size</td>
+      <td>14px</td>
     </tr>
     <tr>
       <td>--vro-van-picker-filter-color</td>
       <td>var(--van-text-color)</td>
+    </tr>
+    <tr>
+      <td>--vro-van-picker-filter-height</td>
+      <td>36px</td>
     </tr>
     <tr>
       <td>--vro-van-picker-filter-placeholder-color</td>
