@@ -18,8 +18,8 @@
       @confirm="handleConfirm"
       @cancel="hide('cancel')"
       @change="$emit('change', $event)"
-      @click-option="$emit('clickOption', $event)"
-      @scroll-into="$emit('scrollInto', $event)"
+      @click-option="$emit('click-option', $event)"
+      @scroll-into="$emit('scroll-into', $event)"
     ></van-picker>
 
     <input

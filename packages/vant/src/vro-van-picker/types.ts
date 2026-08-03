@@ -64,12 +64,12 @@ export interface VroVanPickerEmits {
   /**
    * 点击选项时触发。
    */
-  clickOption: [option: PickerOption]
+  'click-option': [option: PickerOption]
 
   /**
    * 选项滚动到可视区域时触发。
    */
-  scrollInto: [option: PickerOption]
+  'scroll-into': [option: PickerOption]
 
   /**
    * 弹层关闭动画结束时触发。

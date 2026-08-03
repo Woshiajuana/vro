@@ -82,7 +82,8 @@
     const values = toArray(modelValue)
     const selectedOptions = isColumnGroup(options)
       ? values.map((value, index) => findOptionByValue(options[index] ?? [], value))
-      : values.map((value) => findOptionByValue(options, value))
+      : (findOptionsByPath(options, values) ??
+        values.map((value) => findOptionByValue(options, value)))
 
     return selectedOptions.map(getOptionText).filter(Boolean).join(' / ')
   })
@@ -172,6 +173,29 @@
         }
       }
     }
+  }
+
+  const findOptionsByPath = (
+    options: VroVanSelectPickerColumns,
+    values: unknown[],
+  ): PickerOption[] | undefined => {
+    const selectedOptions: PickerOption[] = []
+    let currentOptions = options
+
+    for (const value of values) {
+      const option = currentOptions.find(
+        (item) => !isArray(item) && getOptionValue(item) === value,
+      ) as PickerOption | undefined
+
+      if (!option) {
+        return
+      }
+
+      selectedOptions.push(option)
+      currentOptions = getOptionChildren(option) ?? []
+    }
+
+    return selectedOptions
   }
 
   const getOptionText = (option?: PickerOption) => {
