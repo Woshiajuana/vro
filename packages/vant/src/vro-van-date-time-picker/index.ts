@@ -2,6 +2,7 @@ import { withInstall } from '@vrojs/base'
 
 import Component from './vro-van-date-time-picker.vue'
 
+export * from './function-call'
 export * from './types'
 
 export const VroVanDateTimePicker = withInstall<typeof Component>(Component)

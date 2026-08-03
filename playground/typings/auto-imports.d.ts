@@ -61,6 +61,7 @@ declare global {
   const shallowRef: typeof import('vue').shallowRef
   const showVroElSchemaFormDialog: typeof import('@vrojs/element-plus').showVroElSchemaFormDialog
   const showVroElSchemaFormDrawer: typeof import('@vrojs/element-plus').showVroElSchemaFormDrawer
+  const showVroVanActionSheet: typeof import('@vrojs/vant').showVroVanActionSheet
   const showVroVanPicker: typeof import('@vrojs/vant').showVroVanPicker
   const toRaw: typeof import('vue').toRaw
   const toRef: typeof import('vue').toRef
