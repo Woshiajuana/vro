@@ -1,0 +1,17 @@
+.vro-van-skeleton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.vro-van-skeleton-error {
+  .van-empty__description {
+    word-break: break-all;
+    color: var(--van-danger-color);
+  }
+}
+.vro-van-skeleton-button {
+  padding: 6px 32px;
+  color: var(--hor-text-color-2);
+  background-color: transparent;
+}
