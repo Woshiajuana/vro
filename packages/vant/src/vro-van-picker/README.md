@@ -118,11 +118,6 @@ const openFunctionCity = () => {
       <td>说明</td>
     </tr>
     <tr>
-      <td>update:modelValue</td>
-      <td>value: unknown[]</td>
-      <td>选中值变化时触发</td>
-    </tr>
-    <tr>
       <td>confirm</td>
       <td>params: VroVanPickerResult</td>
       <td>点击确认按钮时触发</td>
@@ -131,11 +126,6 @@ const openFunctionCity = () => {
       <td>cancel</td>
       <td>params?: PickerCancelEventParams | unknown</td>
       <td>点击取消按钮或关闭弹层时触发</td>
-    </tr>
-    <tr>
-      <td>change</td>
-      <td>params: PickerChangeEventParams</td>
-      <td>选项改变时触发</td>
     </tr>
     <tr>
       <td>click-option</td>

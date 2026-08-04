@@ -14,10 +14,8 @@
       ref="vanPickerRef"
       :columns="filteredColumns"
       :model-value="pickerModelValue"
-      @update:model-value="$emit('update:modelValue', $event)"
       @confirm="handleConfirm"
       @cancel="hide('cancel')"
-      @change="$emit('change', $event)"
       @click-option="$emit('click-option', $event)"
       @scroll-into="$emit('scroll-into', $event)"
     ></van-picker>

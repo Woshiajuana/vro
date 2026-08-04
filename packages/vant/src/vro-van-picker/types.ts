@@ -1,6 +1,5 @@
 import type {
   PickerCancelEventParams,
-  PickerChangeEventParams,
   PickerConfirmEventParams,
   PickerOption,
   PopupProps,
@@ -42,11 +41,6 @@ export type VroVanPickerProps = ExtractPropTypes<typeof vroVanPickerProps>
 
 export interface VroVanPickerEmits {
   /**
-   * 选中值变化时触发。
-   */
-  'update:modelValue': [value: unknown[]]
-
-  /**
    * 点击确认按钮时触发。
    */
   confirm: [params: VroVanPickerResult]
@@ -55,11 +49,6 @@ export interface VroVanPickerEmits {
    * 点击取消按钮或关闭弹层时触发。
    */
   cancel: [params?: PickerCancelEventParams | unknown]
-
-  /**
-   * 选项改变时触发。
-   */
-  change: [params: PickerChangeEventParams]
 
   /**
    * 点击选项时触发。
