@@ -52,7 +52,7 @@ declare module 'vue' {
     VroVanCheckbox: typeof import('@vrojs/vant')['VroVanCheckbox']
     VroVanCheckboxButton: typeof import('@vrojs/vant')['VroVanCheckboxButton']
     VroVanConfigProvider: typeof import('@vrojs/vant')['VroVanConfigProvider']
-    VroVanDateTimePicker: typeof import('@vrojs/vant')['VroVanDateTimePicker']
+    VroVanDatetimePicker: typeof import('@vrojs/vant')['VroVanDatetimePicker']
     VroVanField: typeof import('@vrojs/vant')['VroVanField']
     VroVanIcon: typeof import('@vrojs/vant')['VroVanIcon']
     VroVanPicker: typeof import('@vrojs/vant')['VroVanPicker']

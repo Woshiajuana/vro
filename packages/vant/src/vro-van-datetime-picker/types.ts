@@ -2,14 +2,14 @@ import type { PickerCancelEventParams, PickerConfirmEventParams, PopupProps } fr
 import { pickerProps } from 'vant'
 import type { ExtractPropTypes, PropType } from 'vue'
 
-export type VroVanDateTimePickerColumnType = 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'
+export type VroVanDatetimePickerColumnType = 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'
 
-export interface VroVanDateTimePickerResult extends PickerConfirmEventParams {
+export interface VroVanDatetimePickerResult extends PickerConfirmEventParams {
   value: string
   date: Date
 }
 
-export const vroVanDateTimePickerProps = {
+export const vroVanDatetimePickerProps = {
   ...pickerProps,
 
   /**
@@ -43,9 +43,9 @@ export const vroVanDateTimePickerProps = {
   popupProps: Object as PropType<Partial<PopupProps>>,
 }
 
-export type VroVanDateTimePickerProps = ExtractPropTypes<typeof vroVanDateTimePickerProps>
+export type VroVanDatetimePickerProps = ExtractPropTypes<typeof vroVanDatetimePickerProps>
 
-export interface VroVanDateTimePickerSlots {
+export interface VroVanDatetimePickerSlots {
   /**
    * 自定义标题左侧内容。
    */
@@ -67,11 +67,11 @@ export interface VroVanDateTimePickerSlots {
   option?: (scope: { option: unknown }) => any
 }
 
-export interface VroVanDateTimePickerEmits {
+export interface VroVanDatetimePickerEmits {
   /**
    * 点击确认按钮时触发。
    */
-  confirm: [params: VroVanDateTimePickerResult]
+  confirm: [params: VroVanDatetimePickerResult]
 
   /**
    * 点击取消按钮或关闭弹层时触发。

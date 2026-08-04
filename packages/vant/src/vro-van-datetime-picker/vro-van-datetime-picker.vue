@@ -3,7 +3,7 @@
     round
     position="bottom"
     v-bind="computedProps.popupProps"
-    class="vro-van-date-time-picker"
+    class="vro-van-datetime-picker"
     :show="visible"
     @click-overlay="hide('cancel')"
     @click-close-icon="hide('cancel')"
@@ -32,53 +32,53 @@
   import { computed, ref, useTemplateRef } from 'vue'
 
   import {
-    type VroVanDateTimePickerEmits,
-    type VroVanDateTimePickerProps,
-    vroVanDateTimePickerProps,
-    type VroVanDateTimePickerResult,
-    type VroVanDateTimePickerSlots,
+    type VroVanDatetimePickerEmits,
+    type VroVanDatetimePickerProps,
+    vroVanDatetimePickerProps,
+    type VroVanDatetimePickerResult,
+    type VroVanDatetimePickerSlots,
   } from './types'
   import {
-    createDateTimePickerColumns,
-    createDateTimePickerResult,
-    getDateTimePickerColumnTypes,
-    getDateTimePickerSelectedDate,
-    getDateTimePickerValuesByModelValue,
-    normalizeDateTimePickerFormat,
+    createDatetimePickerColumns,
+    createDatetimePickerResult,
+    getDatetimePickerColumnTypes,
+    getDatetimePickerSelectedDate,
+    getDatetimePickerValuesByModelValue,
+    normalizeDatetimePickerFormat,
   } from './utils'
 
-  defineOptions({ name: 'VroVanDateTimePicker' })
+  defineOptions({ name: 'VroVanDatetimePicker' })
 
-  const slots = defineSlots<VroVanDateTimePickerSlots>()
-  const emit = defineEmits<VroVanDateTimePickerEmits>()
-  const props = defineProps(vroVanDateTimePickerProps)
+  const slots = defineSlots<VroVanDatetimePickerSlots>()
+  const emit = defineEmits<VroVanDatetimePickerEmits>()
+  const props = defineProps(vroVanDatetimePickerProps)
 
   const vanPickerRef = useTemplateRef<PickerInstance>('vanPickerRef')
 
-  const dynamicProps = ref<Partial<VroVanDateTimePickerProps>>()
+  const dynamicProps = ref<Partial<VroVanDatetimePickerProps>>()
 
-  const computedProps = computed<VroVanDateTimePickerProps>(() =>
+  const computedProps = computed<VroVanDatetimePickerProps>(() =>
     Object.assign({}, props, dynamicProps.value),
   )
   const pickerProps = computed(() => pick(computedProps.value, typedKeys(vanPickerProps)))
-  const normalizedFormat = computed(() => normalizeDateTimePickerFormat(computedProps.value.format))
+  const normalizedFormat = computed(() => normalizeDatetimePickerFormat(computedProps.value.format))
   const utilsOptions = computed(() => ({
     format: normalizedFormat.value,
     min: computedProps.value.min,
     max: computedProps.value.max,
   }))
-  const columnTypes = computed(() => getDateTimePickerColumnTypes(normalizedFormat.value))
+  const columnTypes = computed(() => getDatetimePickerColumnTypes(normalizedFormat.value))
   const pickerValue = computed(() =>
-    getDateTimePickerValuesByModelValue(
+    getDatetimePickerValuesByModelValue(
       computedProps.value.modelValue,
       columnTypes.value,
       utilsOptions.value,
     ),
   )
   const columns = computed<PickerColumn>(() =>
-    createDateTimePickerColumns(
+    createDatetimePickerColumns(
       columnTypes.value,
-      getDateTimePickerSelectedDate(
+      getDatetimePickerSelectedDate(
         pickerValue.value,
         columnTypes.value,
         computedProps.value.modelValue,
@@ -93,14 +93,14 @@
     hide,
     confirm: confirmPicker,
     visible,
-  } = useVisible<Partial<VroVanDateTimePickerProps>, VroVanDateTimePickerResult>({
+  } = useVisible<Partial<VroVanDatetimePickerProps>, VroVanDatetimePickerResult>({
     showCallback: (options) => {
       dynamicProps.value = options
     },
     hideCallback: (reason) => {
       emit('cancel', reason)
     },
-    confirmCallback: (result: VroVanDateTimePickerResult) => {
+    confirmCallback: (result: VroVanDatetimePickerResult) => {
       emit('confirm', result)
       return result
     },
@@ -108,7 +108,7 @@
 
   const handleConfirm = (params: PickerConfirmEventParams) => {
     confirmPicker(
-      createDateTimePickerResult(
+      createDatetimePickerResult(
         params,
         columnTypes.value,
         computedProps.value.modelValue,

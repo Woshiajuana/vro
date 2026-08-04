@@ -61,7 +61,7 @@ function getAPIMap() {
     '@vrojs/vant': {
       VroVanPicker: ['showVroVanPicker'],
       VroVanActionSheet: ['showVroVanActionSheet'],
-      VroVanDateTimePicker: ['showVroVanDateTimePicker'],
+      VroVanDatetimePicker: ['showVroVanDatetimePicker'],
     },
   }
 

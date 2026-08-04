@@ -1,9 +1,9 @@
 import { formatDate, normalizeDate } from '@daysnap/utils'
 import type { PickerColumn, PickerConfirmEventParams, PickerOption } from 'vant'
 
-import type { VroVanDateTimePickerColumnType, VroVanDateTimePickerResult } from './types'
+import type { VroVanDatetimePickerColumnType, VroVanDatetimePickerResult } from './types'
 
-export interface VroVanDateTimePickerUtilsOptions {
+export interface VroVanDatetimePickerUtilsOptions {
   format: string
   min?: Date
   max?: Date
@@ -18,9 +18,9 @@ interface DateParts {
   second: number
 }
 
-type DateTimePickerModelValue = string | number | Date | undefined
+type DatetimePickerModelValue = string | number | Date | undefined
 
-const tokenMap: Record<VroVanDateTimePickerColumnType, string> = {
+const tokenMap: Record<VroVanDatetimePickerColumnType, string> = {
   year: 'yyyy',
   month: 'MM',
   day: 'dd',
@@ -29,12 +29,12 @@ const tokenMap: Record<VroVanDateTimePickerColumnType, string> = {
   second: 'ss',
 }
 
-export const normalizeDateTimePickerFormat = (format: string) => {
+export const normalizeDatetimePickerFormat = (format: string) => {
   return format.replace(/H/g, 'h')
 }
 
-export const getDateTimePickerColumnTypes = (format: string): VroVanDateTimePickerColumnType[] => {
-  const types: VroVanDateTimePickerColumnType[] = []
+export const getDatetimePickerColumnTypes = (format: string): VroVanDatetimePickerColumnType[] => {
+  const types: VroVanDatetimePickerColumnType[] = []
 
   if (/y+/.test(format)) types.push('year')
   if (/M+/.test(format)) types.push('month')
@@ -46,21 +46,21 @@ export const getDateTimePickerColumnTypes = (format: string): VroVanDateTimePick
   return types.length ? types : ['year', 'month', 'day']
 }
 
-export const createDateTimePickerColumns = (
-  columnTypes: VroVanDateTimePickerColumnType[],
+export const createDatetimePickerColumns = (
+  columnTypes: VroVanDatetimePickerColumnType[],
   selectedDate: Date,
-  options: VroVanDateTimePickerUtilsOptions,
+  options: VroVanDatetimePickerUtilsOptions,
 ): PickerColumn => {
-  return columnTypes.map((type) => createDateTimePickerColumn(type, selectedDate, options))
+  return columnTypes.map((type) => createDatetimePickerColumn(type, selectedDate, options))
 }
 
-export const createDateTimePickerResult = (
+export const createDatetimePickerResult = (
   params: PickerConfirmEventParams,
-  columnTypes: VroVanDateTimePickerColumnType[],
-  modelValue: DateTimePickerModelValue,
-  options: VroVanDateTimePickerUtilsOptions,
-): VroVanDateTimePickerResult => {
-  const date = getDateTimePickerDateByValues(
+  columnTypes: VroVanDatetimePickerColumnType[],
+  modelValue: DatetimePickerModelValue,
+  options: VroVanDatetimePickerUtilsOptions,
+): VroVanDatetimePickerResult => {
+  const date = getDatetimePickerDateByValues(
     params.selectedValues,
     columnTypes,
     modelValue,
@@ -74,12 +74,12 @@ export const createDateTimePickerResult = (
   }
 }
 
-export const createDateTimePickerColumn = (
-  type: VroVanDateTimePickerColumnType,
+export const createDatetimePickerColumn = (
+  type: VroVanDatetimePickerColumnType,
   selectedDate: Date,
-  options: VroVanDateTimePickerUtilsOptions,
+  options: VroVanDatetimePickerUtilsOptions,
 ): PickerOption[] => {
-  const [min, max] = getDateTimePickerColumnRange(type, selectedDate, options)
+  const [min, max] = getDatetimePickerColumnRange(type, selectedDate, options)
 
   return Array.from({ length: max - min + 1 }, (_, index) => {
     const value = `${type === 'year' ? min + index : padZero(min + index)}`
@@ -87,10 +87,10 @@ export const createDateTimePickerColumn = (
   })
 }
 
-export const getDateTimePickerColumnRange = (
-  type: VroVanDateTimePickerColumnType,
+export const getDatetimePickerColumnRange = (
+  type: VroVanDatetimePickerColumnType,
   selectedDate: Date,
-  options: VroVanDateTimePickerUtilsOptions,
+  options: VroVanDatetimePickerUtilsOptions,
 ) => {
   const min = getMinDate(options)
   const max = getMaxDate(options)
@@ -128,49 +128,49 @@ export const getDateTimePickerColumnRange = (
   }
 }
 
-export const getDateTimePickerModelDate = (
-  value: DateTimePickerModelValue,
-  columnTypes: VroVanDateTimePickerColumnType[],
-  options: VroVanDateTimePickerUtilsOptions,
+export const getDatetimePickerModelDate = (
+  value: DatetimePickerModelValue,
+  columnTypes: VroVanDatetimePickerColumnType[],
+  options: VroVanDatetimePickerUtilsOptions,
 ) => {
   const date =
     value == null || value === ''
       ? new Date()
       : typeof value === 'string'
-        ? normalizeDateTimePickerValue(value, columnTypes, options)
+        ? normalizeDatetimePickerValue(value, columnTypes, options)
         : normalizeDate(value)
 
   return clampDate(Number.isNaN(date.getTime()) ? new Date() : date, options)
 }
 
-export const getDateTimePickerSelectedDate = (
+export const getDatetimePickerSelectedDate = (
   pickerValue: unknown[],
-  columnTypes: VroVanDateTimePickerColumnType[],
-  modelValue: DateTimePickerModelValue,
-  options: VroVanDateTimePickerUtilsOptions,
+  columnTypes: VroVanDatetimePickerColumnType[],
+  modelValue: DatetimePickerModelValue,
+  options: VroVanDatetimePickerUtilsOptions,
 ) => {
-  return getDateTimePickerDateByValues(pickerValue, columnTypes, modelValue, options)
+  return getDatetimePickerDateByValues(pickerValue, columnTypes, modelValue, options)
 }
 
-export const getDateTimePickerDateByValues = (
+export const getDatetimePickerDateByValues = (
   values: unknown[],
-  columnTypes: VroVanDateTimePickerColumnType[],
-  modelValue: DateTimePickerModelValue,
-  options: VroVanDateTimePickerUtilsOptions,
+  columnTypes: VroVanDatetimePickerColumnType[],
+  modelValue: DatetimePickerModelValue,
+  options: VroVanDatetimePickerUtilsOptions,
 ) => {
-  return getDateTimePickerDate(
+  return getDatetimePickerDate(
     values,
     columnTypes,
-    getDateTimePickerModelDate(modelValue, columnTypes, options),
+    getDatetimePickerModelDate(modelValue, columnTypes, options),
     options,
   )
 }
 
-export const getDateTimePickerDate = (
+export const getDatetimePickerDate = (
   values: unknown[],
-  columnTypes: VroVanDateTimePickerColumnType[],
+  columnTypes: VroVanDatetimePickerColumnType[],
   baseDate: Date,
-  options: VroVanDateTimePickerUtilsOptions,
+  options: VroVanDatetimePickerUtilsOptions,
 ) => {
   const parts = getDateParts(baseDate)
 
@@ -185,9 +185,9 @@ export const getDateTimePickerDate = (
   return clampDate(createDate(parts), options)
 }
 
-export const getDateTimePickerValues = (
+export const getDatetimePickerValues = (
   date: Date,
-  columnTypes: VroVanDateTimePickerColumnType[],
+  columnTypes: VroVanDatetimePickerColumnType[],
 ) => {
   const parts = getDateParts(date)
 
@@ -196,51 +196,51 @@ export const getDateTimePickerValues = (
   })
 }
 
-export const getDateTimePickerValuesByModelValue = (
-  modelValue: DateTimePickerModelValue,
-  columnTypes: VroVanDateTimePickerColumnType[],
-  options: VroVanDateTimePickerUtilsOptions,
+export const getDatetimePickerValuesByModelValue = (
+  modelValue: DatetimePickerModelValue,
+  columnTypes: VroVanDatetimePickerColumnType[],
+  options: VroVanDatetimePickerUtilsOptions,
 ) => {
-  return getDateTimePickerValues(
-    getDateTimePickerModelDate(modelValue, columnTypes, options),
+  return getDatetimePickerValues(
+    getDatetimePickerModelDate(modelValue, columnTypes, options),
     columnTypes,
   )
 }
 
-export const formatDateTimePickerValue = (
+export const formatDatetimePickerValue = (
   values: unknown[],
-  columnTypes: VroVanDateTimePickerColumnType[],
+  columnTypes: VroVanDatetimePickerColumnType[],
   baseDate: Date,
-  options: VroVanDateTimePickerUtilsOptions,
+  options: VroVanDatetimePickerUtilsOptions,
 ) => {
-  return formatDate(getDateTimePickerDate(values, columnTypes, baseDate, options), options.format)
+  return formatDate(getDatetimePickerDate(values, columnTypes, baseDate, options), options.format)
 }
 
-export const formatDateTimePickerSelectedValue = (
+export const formatDatetimePickerSelectedValue = (
   values: unknown[],
-  columnTypes: VroVanDateTimePickerColumnType[],
-  modelValue: DateTimePickerModelValue,
-  options: VroVanDateTimePickerUtilsOptions,
+  columnTypes: VroVanDatetimePickerColumnType[],
+  modelValue: DatetimePickerModelValue,
+  options: VroVanDatetimePickerUtilsOptions,
 ) => {
-  return formatDateTimePickerValue(
+  return formatDatetimePickerValue(
     values,
     columnTypes,
-    getDateTimePickerModelDate(modelValue, columnTypes, options),
+    getDatetimePickerModelDate(modelValue, columnTypes, options),
     options,
   )
 }
 
-export const getMinDate = (options: VroVanDateTimePickerUtilsOptions) => {
+export const getMinDate = (options: VroVanDatetimePickerUtilsOptions) => {
   const year = new Date().getFullYear()
   return options.min ?? new Date(year - 10, 0, 1, 0, 0, 0)
 }
 
-export const getMaxDate = (options: VroVanDateTimePickerUtilsOptions) => {
+export const getMaxDate = (options: VroVanDatetimePickerUtilsOptions) => {
   const year = new Date().getFullYear()
   return options.max ?? new Date(year + 10, 11, 31, 23, 59, 59)
 }
 
-export const clampDate = (date: Date, options: VroVanDateTimePickerUtilsOptions) => {
+export const clampDate = (date: Date, options: VroVanDatetimePickerUtilsOptions) => {
   const min = getMinDate(options)
   const max = getMaxDate(options)
 
@@ -257,10 +257,10 @@ export const padZero = (value: number) => {
   return `${value}`.padStart(2, '0')
 }
 
-const normalizeDateTimePickerValue = (
+const normalizeDatetimePickerValue = (
   value: string,
-  columnTypes: VroVanDateTimePickerColumnType[],
-  options: VroVanDateTimePickerUtilsOptions,
+  columnTypes: VroVanDatetimePickerColumnType[],
+  options: VroVanDatetimePickerUtilsOptions,
 ) => {
   const parsedDate = normalizeDate(value)
 

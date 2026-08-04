@@ -58,7 +58,7 @@
     disabled: '停用',
   }
 
-  const { tableProps, trigger, schema } = createUseVroElTable<User>()(
+  const { tableProps, trigger } = createUseVroElTable<User>()(
     {
       keyword: {
         label: '关键词',

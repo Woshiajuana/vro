@@ -1,4 +1,4 @@
-# VroVanDateTimePicker
+# VroVanDatetimePicker
 
 ### 介绍
 
@@ -15,7 +15,7 @@
   placeholder="请选择日期时间"
   @click="open"
 />
-<vro-van-date-time-picker ref="dateTimePickerRef" />
+<vro-van-datetime-picker ref="dateTimePickerRef" />
 ```
 
 ```ts
@@ -54,7 +54,7 @@ dateTimePickerRef.value?.show({
 ### 函数式调用
 
 ```ts
-showVroVanDateTimePicker({
+showVroVanDatetimePicker({
   title: '选择开始时间',
   format: 'yyyy-MM-dd hh:mm',
   modelValue: startTime.value,
@@ -78,7 +78,7 @@ showVroVanDateTimePicker({
       <td>类型</td>
       <td>默认值</td>
     </tr>
-    <tr v-for="(item, key) in vroVanDateTimePickerProps" :key="key">
+    <tr v-for="(item, key) in vroVanDatetimePickerProps" :key="key">
       <td>{{ key }}</td>
       <td>{{ parseType(item.type || item) }}</td>
       <td>{{ reserve(item.default, '-') }}</td>
@@ -97,7 +97,7 @@ showVroVanDateTimePicker({
     </tr>
     <tr>
       <td>confirm</td>
-      <td>params: VroVanDateTimePickerResult</td>
+      <td>params: VroVanDatetimePickerResult</td>
       <td>点击确认按钮时触发</td>
     </tr>
     <tr>
@@ -146,6 +146,6 @@ showVroVanDateTimePicker({
 
 <script setup lang="ts">
   import { reserve } from '@daysnap/utils'
-  import { VroVanDateTimePicker, vroVanDateTimePickerProps } from '.'
+  import { VroVanDatetimePicker, vroVanDatetimePickerProps } from '.'
   import { parseType } from '../utils'
 </script>

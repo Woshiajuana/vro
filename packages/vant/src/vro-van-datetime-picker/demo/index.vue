@@ -5,9 +5,9 @@
       clearable
       label="日期时间"
       placeholder="请选择日期时间"
-      @click="openDateTime"
+      @click="openDatetime"
     />
-    <vro-van-date-time-picker ref="dateTimePickerRef" />
+    <vro-van-datetime-picker ref="dateTimePickerRef" />
   </demo-block>
 
   <demo-block title="日期格式">
@@ -62,12 +62,12 @@
   import { ref, useTemplateRef } from 'vue'
 
   import {
-    showVroVanDateTimePicker,
-    type VroVanDateTimePickerInstance,
-    type VroVanDateTimePickerResult,
+    showVroVanDatetimePicker,
+    type VroVanDatetimePickerInstance,
+    type VroVanDatetimePickerResult,
   } from '..'
 
-  const dateTimePickerRef = useTemplateRef<VroVanDateTimePickerInstance>('dateTimePickerRef')
+  const dateTimePickerRef = useTemplateRef<VroVanDatetimePickerInstance>('dateTimePickerRef')
 
   const dateTime = ref('2026-08-03 09:30:00')
   const date = ref('2026-08-03')
@@ -78,15 +78,15 @@
 
   const openPicker = (
     options: Record<string, any>,
-    callback: (result: VroVanDateTimePickerResult) => void,
+    callback: (result: VroVanDatetimePickerResult) => void,
   ) => {
     dateTimePickerRef.value
-      ?.show<VroVanDateTimePickerResult>(options)
+      ?.show<VroVanDatetimePickerResult>(options)
       .then(callback)
       .catch(() => {})
   }
 
-  const openDateTime = () => {
+  const openDatetime = () => {
     openPicker(
       {
         title: '选择日期时间',
@@ -153,7 +153,7 @@
   }
 
   const openFunction = () => {
-    showVroVanDateTimePicker({
+    showVroVanDatetimePicker({
       title: '选择开始时间',
       format: 'yyyy-MM-dd hh:mm',
       modelValue: functionDate.value,
