@@ -1,17 +1,51 @@
+:root,
+:host {
+  --vro-van-skeleton-min-height: 240px;
+  --vro-van-skeleton-color: var(--van-text-color-2);
+  --vro-van-skeleton-description-margin-top: 16px;
+  --vro-van-skeleton-description-color: var(--van-text-color-2);
+  --vro-van-skeleton-description-font-size: var(--van-font-size-md);
+  --vro-van-skeleton-description-line-height: var(--van-line-height-md);
+  --vro-van-skeleton-error-color: var(--van-danger-color);
+  --vro-van-skeleton-button-padding: 6px 32px;
+  --vro-van-skeleton-button-color: var(--van-text-color-2);
+}
+
 .vro-van-skeleton {
+  width: 100%;
+  min-height: var(--vro-van-skeleton-min-height);
+}
+
+.vro-van-skeleton-state {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  min-height: inherit;
 }
+
+.vro-van-skeleton-loading {
+  flex-direction: column;
+  color: var(--vro-van-skeleton-color);
+}
+
+.vro-van-skeleton-description {
+  margin: var(--vro-van-skeleton-description-margin-top) 0 0;
+  color: var(--vro-van-skeleton-description-color);
+  font-size: var(--vro-van-skeleton-description-font-size);
+  line-height: var(--vro-van-skeleton-description-line-height);
+  text-align: center;
+}
+
 .vro-van-skeleton-error {
   .van-empty__description {
+    color: var(--vro-van-skeleton-error-color);
     word-break: break-all;
-    color: var(--van-danger-color);
   }
 }
+
 .vro-van-skeleton-button {
-  padding: 6px 32px;
-  color: var(--hor-text-color-2);
+  padding: var(--vro-van-skeleton-button-padding);
+  color: var(--vro-van-skeleton-button-color);
   background-color: transparent;
 }

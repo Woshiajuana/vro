@@ -8,5 +8,11 @@ export default {
       filterPlaceholder: 'Enter keywords to filter',
       emptyText: 'No data',
     },
+    skeleton: {
+      loadingDescription: 'Loading',
+      errorBtnText: 'Refresh',
+      emptyDescription: 'No data',
+      emptyBtnText: 'Refresh',
+    },
   },
 }
