@@ -48,11 +48,17 @@ showVroVanActionSheet({
 ### 自定义选项
 
 ```html
-<vro-van-action-sheet v-model:show="visible" title="选择文件操作" :actions="actions">
+<vro-van-action-sheet ref="actionSheetRef" title="选择文件操作" :actions="actions">
   <template #action="{ action }">
     <span>{{ action.name }}</span>
   </template>
 </vro-van-action-sheet>
+```
+
+```ts
+actionSheetRef.value?.show().then(({ action }) => {
+  text.value = action.name ?? ''
+})
 ```
 
 ## API
@@ -84,16 +90,6 @@ showVroVanActionSheet({
       <td>名称</td>
       <td>参数</td>
       <td>说明</td>
-    </tr>
-    <tr>
-      <td>update:show</td>
-      <td>value: boolean</td>
-      <td>显示状态变化时触发</td>
-    </tr>
-    <tr>
-      <td>select</td>
-      <td>action: ActionSheetAction, index: number</td>
-      <td>选择选项时触发</td>
     </tr>
     <tr>
       <td>cancel</td>

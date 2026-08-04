@@ -128,16 +128,6 @@ const openFunctionCity = () => {
       <td>点击取消按钮或关闭弹层时触发</td>
     </tr>
     <tr>
-      <td>click-option</td>
-      <td>option: PickerOption</td>
-      <td>点击选项时触发</td>
-    </tr>
-    <tr>
-      <td>scroll-into</td>
-      <td>option: PickerOption</td>
-      <td>选项滚动到可视区域时触发</td>
-    </tr>
-    <tr>
       <td>closed</td>
       <td>-</td>
       <td>弹层关闭动画结束时触发</td>

@@ -33,7 +33,6 @@
       cancel-text="关闭"
       title="选择文件操作"
       :actions="fileActions"
-      @select="handleCustomSelect"
     >
       <template #action="{ action }">
         <div class="demo-action-sheet-action">
@@ -52,7 +51,6 @@
 </template>
 
 <script setup lang="ts">
-  import type { ActionSheetAction } from 'vant'
   import { ref, useTemplateRef } from 'vue'
 
   import { type VroVanActionSheetInstance, type VroVanActionSheetResult } from '..'
@@ -123,12 +121,13 @@
       .catch(() => {})
   }
 
-  const handleCustomSelect = (action: ActionSheetAction) => {
-    customText.value = action.name ?? ''
-  }
-
   const openCustom = () => {
-    customActionSheetRef.value?.show()
+    customActionSheetRef.value
+      ?.show<VroVanActionSheetResult>()
+      .then(({ action }) => {
+        customText.value = action.name ?? ''
+      })
+      .catch(() => {})
   }
 </script>
 

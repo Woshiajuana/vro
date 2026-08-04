@@ -37,16 +37,6 @@ export interface VroVanActionSheetSlots {
 
 export interface VroVanActionSheetEmits {
   /**
-   * 显示状态变化时触发。
-   */
-  'update:show': [value: boolean]
-
-  /**
-   * 选择选项时触发。
-   */
-  select: [action: ActionSheetAction, index: number]
-
-  /**
    * 点击取消、关闭图标或遮罩关闭时触发。
    */
   cancel: [reason?: unknown]

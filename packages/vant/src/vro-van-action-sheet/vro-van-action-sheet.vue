@@ -5,8 +5,8 @@
     :actions="computedProps.actions"
     :cancel-text="computedProps.cancelText || t('actionSheet.cancelText')"
     :close-on-click-action="false"
-    :show="computedVisible"
-    @update:show="handleUpdateShow"
+    :show="visible"
+    @update:show="handleVisibleChange"
     @select="handleSelect"
     @closed="$emit('closed')"
   >
@@ -44,7 +44,6 @@
   const computedProps = computed<VroVanActionSheetProps>(() =>
     Object.assign({}, props, dynamicProps.value),
   )
-  const computedVisible = computed(() => visible.value || computedProps.value.show)
   const actionSheetProps = computed(() => pick(computedProps.value, typedKeys(vanActionSheetProps)))
 
   const { visible, show, hide, confirm } = useVisible<
@@ -58,28 +57,18 @@
       emit('cancel', reason)
     },
     confirmCallback: (action: ActionSheetAction, index: number) => {
-      emit('select', action, index)
       return { action, index }
     },
   })
 
-  const handleUpdateShow = (value: boolean) => {
-    emit('update:show', value)
-
-    if (value) {
-      return
-    }
-
-    if (visible.value) {
+  const handleVisibleChange = (value: boolean) => {
+    if (!value && visible.value) {
       hide('cancel')
-    } else {
-      emit('cancel', 'cancel')
     }
   }
 
   const handleSelect = async (action: ActionSheetAction, index: number) => {
     await confirm(action, index)
-    emit('update:show', false)
   }
 
   defineExpose({

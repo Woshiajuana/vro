@@ -1,9 +1,4 @@
-import type {
-  PickerCancelEventParams,
-  PickerConfirmEventParams,
-  PickerOption,
-  PopupProps,
-} from 'vant'
+import type { PickerCancelEventParams, PickerConfirmEventParams, PopupProps } from 'vant'
 import { pickerProps } from 'vant'
 import type { ExtractPropTypes, PropType } from 'vue'
 
@@ -49,16 +44,6 @@ export interface VroVanPickerEmits {
    * 点击取消按钮或关闭弹层时触发。
    */
   cancel: [params?: PickerCancelEventParams | unknown]
-
-  /**
-   * 点击选项时触发。
-   */
-  'click-option': [option: PickerOption]
-
-  /**
-   * 选项滚动到可视区域时触发。
-   */
-  'scroll-into': [option: PickerOption]
 
   /**
    * 弹层关闭动画结束时触发。
