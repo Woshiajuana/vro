@@ -96,11 +96,6 @@ showVroVanDateTimePicker({
       <td>说明</td>
     </tr>
     <tr>
-      <td>update:modelValue</td>
-      <td>value: string</td>
-      <td>点击确认按钮时触发</td>
-    </tr>
-    <tr>
       <td>confirm</td>
       <td>params: VroVanDateTimePickerResult</td>
       <td>点击确认按钮时触发</td>

@@ -71,11 +71,6 @@ export interface VroVanDateTimePickerEmits {
   /**
    * 点击确认按钮时触发。
    */
-  'update:modelValue': [value: string]
-
-  /**
-   * 点击确认按钮时触发。
-   */
   confirm: [params: VroVanDateTimePickerResult]
 
   /**

@@ -29,7 +29,7 @@
   import { useVisible } from '@vrojs/use'
   import type { PickerColumn, PickerConfirmEventParams, PickerInstance } from 'vant'
   import { Picker as VanPicker, pickerProps as vanPickerProps, Popup as VanPopup } from 'vant'
-  import { computed, ref, useTemplateRef, watch } from 'vue'
+  import { computed, ref, useTemplateRef } from 'vue'
 
   import {
     type VroVanDateTimePickerEmits,
@@ -67,7 +67,7 @@
     min: computedProps.value.min,
     max: computedProps.value.max,
   }))
-
+  const columnTypes = computed(() => getDateTimePickerColumnTypes(normalizedFormat.value))
   const pickerValue = computed(() =>
     getDateTimePickerValuesByModelValue(
       computedProps.value.modelValue,
@@ -75,7 +75,6 @@
       utilsOptions.value,
     ),
   )
-  const columnTypes = computed(() => getDateTimePickerColumnTypes(normalizedFormat.value))
   const columns = computed<PickerColumn>(() =>
     createDateTimePickerColumns(
       columnTypes.value,
@@ -102,7 +101,6 @@
       emit('cancel', reason)
     },
     confirmCallback: (result: VroVanDateTimePickerResult) => {
-      emit('update:modelValue', result.value)
       emit('confirm', result)
       return result
     },
