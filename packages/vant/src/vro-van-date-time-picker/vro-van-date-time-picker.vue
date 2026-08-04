@@ -14,10 +14,8 @@
       ref="vanPickerRef"
       :columns="columns"
       :model-value="pickerValue"
-      @update:model-value="handleUpdateModelValue"
       @confirm="handleConfirm"
       @cancel="hide('cancel')"
-      @change="$emit('change', $event)"
     >
       <template v-for="(_, name) in slots" #[name]="slotProps" :key="name">
         <slot :name="name" v-bind="slotProps"></slot>
@@ -58,7 +56,6 @@
   const vanPickerRef = useTemplateRef<PickerInstance>('vanPickerRef')
 
   const dynamicProps = ref<Partial<VroVanDateTimePickerProps>>()
-  const pickerValue = ref<string[]>([])
 
   const computedProps = computed<VroVanDateTimePickerProps>(() =>
     Object.assign({}, props, dynamicProps.value),
@@ -70,6 +67,14 @@
     min: computedProps.value.min,
     max: computedProps.value.max,
   }))
+
+  const pickerValue = computed(() =>
+    getDateTimePickerValuesByModelValue(
+      computedProps.value.modelValue,
+      columnTypes.value,
+      utilsOptions.value,
+    ),
+  )
   const columnTypes = computed(() => getDateTimePickerColumnTypes(normalizedFormat.value))
   const columns = computed<PickerColumn>(() =>
     createDateTimePickerColumns(
@@ -92,11 +97,6 @@
   } = useVisible<Partial<VroVanDateTimePickerProps>, VroVanDateTimePickerResult>({
     showCallback: (options) => {
       dynamicProps.value = options
-      pickerValue.value = getDateTimePickerValuesByModelValue(
-        computedProps.value.modelValue,
-        columnTypes.value,
-        utilsOptions.value,
-      )
     },
     hideCallback: (reason) => {
       emit('cancel', reason)
@@ -107,22 +107,6 @@
       return result
     },
   })
-
-  watch(
-    () => computedProps.value.modelValue,
-    (value) => {
-      pickerValue.value = getDateTimePickerValuesByModelValue(
-        value,
-        columnTypes.value,
-        utilsOptions.value,
-      )
-    },
-    { immediate: true },
-  )
-
-  const handleUpdateModelValue = (value: string[]) => {
-    pickerValue.value = value
-  }
 
   const handleConfirm = (params: PickerConfirmEventParams) => {
     confirmPicker(

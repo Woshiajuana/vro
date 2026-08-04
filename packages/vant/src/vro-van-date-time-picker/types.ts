@@ -1,9 +1,4 @@
-import type {
-  PickerCancelEventParams,
-  PickerChangeEventParams,
-  PickerConfirmEventParams,
-  PopupProps,
-} from 'vant'
+import type { PickerCancelEventParams, PickerConfirmEventParams, PopupProps } from 'vant'
 import { pickerProps } from 'vant'
 import type { ExtractPropTypes, PropType } from 'vue'
 
@@ -74,7 +69,7 @@ export interface VroVanDateTimePickerSlots {
 
 export interface VroVanDateTimePickerEmits {
   /**
-   * 选中值变化时触发。
+   * 点击确认按钮时触发。
    */
   'update:modelValue': [value: string]
 
@@ -87,11 +82,6 @@ export interface VroVanDateTimePickerEmits {
    * 点击取消按钮或关闭弹层时触发。
    */
   cancel: [params?: PickerCancelEventParams | unknown]
-
-  /**
-   * 选项改变时触发。
-   */
-  change: [params: PickerChangeEventParams]
 
   /**
    * 弹层关闭动画结束时触发。
