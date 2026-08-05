@@ -1,11 +1,7 @@
 <template>
   <demo-block title="基础用法">
     <div class="demo-scroll">
-      <vro-van-scroll
-        :finished="basicFinished"
-        @load="loadBasic"
-        @refresh="refreshBasic"
-      >
+      <vro-van-scroll :finished="basicFinished" @load="loadBasic" @refresh="refreshBasic">
         <div v-for="item in basicList" :key="item" class="demo-scroll-item">
           列表内容 {{ item }}
         </div>
@@ -15,11 +11,7 @@
 
   <demo-block title="加载错误">
     <div class="demo-scroll">
-      <vro-van-scroll
-        :finished="errorFinished"
-        @load="loadError"
-        @refresh="refreshError"
-      >
+      <vro-van-scroll immediate-check :finished="errorFinished" @load="loadError" @refresh="refreshError">
         <div v-for="item in errorList" :key="item" class="demo-scroll-item">
           错误重试 {{ item }}
         </div>
@@ -37,19 +29,15 @@
         pulling-text="继续下拉"
         success-text="刷新完成"
       >
-        <div v-for="item in 3" :key="item" class="demo-scroll-item">
-          自定义文案 {{ item }}
-        </div>
+        <div v-for="item in 3" :key="item" class="demo-scroll-item">自定义文案 {{ item }}</div>
       </vro-van-scroll>
     </div>
   </demo-block>
 
   <demo-block title="禁用刷新和加载">
     <div class="demo-scroll">
-      <vro-van-scroll list-disabled pull-disabled>
-        <div v-for="item in 3" :key="item" class="demo-scroll-item">
-          静态内容 {{ item }}
-        </div>
+      <vro-van-scroll load-disabled refresh-disabled>
+        <div v-for="item in 3" :key="item" class="demo-scroll-item">静态内容 {{ item }}</div>
       </vro-van-scroll>
     </div>
   </demo-block>
@@ -57,6 +45,7 @@
 
 <script setup lang="ts">
   import { computed, ref } from 'vue'
+
   import type { VroVanScrollDone } from '..'
 
   const basicList = ref([1, 2, 3, 4, 5])

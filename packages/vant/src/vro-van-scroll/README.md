@@ -41,8 +41,16 @@ const load = (done: VroVanScrollDone) => {
 ### 禁用刷新和加载
 
 ```html
-<vro-van-scroll list-disabled pull-disabled>
+<vro-van-scroll load-disabled refresh-disabled>
   <div>静态内容</div>
+</vro-van-scroll>
+```
+
+### 初始化检查
+
+```html
+<vro-van-scroll immediate-check :finished="finished" @load="load">
+  <div v-for="item in list" :key="item">列表内容 {{ item }}</div>
 </vro-van-scroll>
 ```
 

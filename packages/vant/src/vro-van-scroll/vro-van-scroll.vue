@@ -6,7 +6,7 @@
     :loosing-text="loosingText || t('scroll.loosingText')"
     :loading-text="loadingText || t('scroll.loadingText')"
     :success-text="refreshErrorText || successText || t('scroll.successText')"
-    :disabled="pullDisabled"
+    :disabled="refreshDisabled"
     :success-duration="successDuration"
     @refresh="handleRefresh"
   >
@@ -18,9 +18,9 @@
       :offset="offset"
       :loading-text="loadingText || t('scroll.loadingText')"
       :finished-text="finishedText || t('scroll.finishedText')"
-      :disabled="listDisabled"
+      :disabled="loadDisabled"
       :finished="finished"
-      :immediate-check="false"
+      :immediate-check="immediateCheck"
       @load="handleLoad"
     >
       <slot></slot>

@@ -76,12 +76,17 @@ export const vroVanScrollProps = {
   /**
    * 是否禁用下拉刷新。
    */
-  pullDisabled: Boolean,
+  refreshDisabled: Boolean,
 
   /**
    * 是否禁用列表加载。
    */
-  listDisabled: Boolean,
+  loadDisabled: Boolean,
+
+  /**
+   * 是否在初始化时立即触发滚动位置检查。
+   */
+  immediateCheck: Boolean,
 }
 
 export type VroVanScrollProps = ExtractPropTypes<typeof vroVanScrollProps>
