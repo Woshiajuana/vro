@@ -63,6 +63,7 @@ declare module 'vue' {
     VroVanDatetimeSelectPicker: typeof import('@vrojs/vant')['VroVanDatetimeSelectPicker']
     VroVanField: typeof import('@vrojs/vant')['VroVanField']
     VroVanIcon: typeof import('@vrojs/vant')['VroVanIcon']
+    VroVanImage: typeof import('@vrojs/vant')['VroVanImage']
     VroVanPicker: typeof import('@vrojs/vant')['VroVanPicker']
     VroVanRadio: typeof import('@vrojs/vant')['VroVanRadio']
     VroVanRadioButton: typeof import('@vrojs/vant')['VroVanRadioButton']

@@ -59,6 +59,7 @@ declare global {
   const shallowReactive: typeof import('vue').shallowReactive
   const shallowReadonly: typeof import('vue').shallowReadonly
   const shallowRef: typeof import('vue').shallowRef
+  const showImagePreview: typeof import('vant/es').showImagePreview
   const showVroElSchemaFormDialog: typeof import('@vrojs/element-plus').showVroElSchemaFormDialog
   const showVroElSchemaFormDrawer: typeof import('@vrojs/element-plus').showVroElSchemaFormDrawer
   const showVroVanActionSheet: typeof import('@vrojs/vant').showVroVanActionSheet

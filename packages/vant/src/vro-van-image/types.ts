@@ -34,6 +34,15 @@ export const vroVanImageProps = {
 
   // 图片地址转换方法。
   normalizeSrc: Function as PropType<VroVanImageNormalizeSrc>,
+
+  preview: {
+    type: [String, Boolean, Array] as PropType<string | boolean | string[]>,
+    default: false,
+  },
+  previewIndex: {
+    type: [Number, String],
+    default: 0,
+  },
 }
 
 export type VroVanImageProps = ExtractPropTypes<typeof vroVanImageProps>

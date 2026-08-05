@@ -1,1 +1,7 @@
-.vro-van-image { }
+.vro-van-image {
+  &.is-loading {
+    background: #f2f2f2 url('../img-loading.gif') center no-repeat;
+    background-size: 10px;
+    background-size: min(10px, 10%);
+  }
+}
