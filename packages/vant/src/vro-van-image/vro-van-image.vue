@@ -43,7 +43,7 @@
     }
   }
 
-  const handleLoad = (event: Event) => {
+  const handleLoad = () => {
     loading.value = true
   }
 

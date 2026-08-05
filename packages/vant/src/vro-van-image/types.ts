@@ -7,14 +7,24 @@ export type VroVanImageNormalizeSrc = (options: {
 }) => string
 
 export const vroVanImageProps = {
+  /**
+   * 图片地址。
+   */
   src: String,
 
+  /**
+   * 替代文本。
+   */
   alt: String,
 
-  // 加载失败占位图
+  /**
+   * 加载失败占位图。
+   */
   placeholder: String,
 
-  // loading 图 // 默认使用 img-loading.gif
+  /**
+   * 加载占位图。
+   */
   loading: String,
 
   /**
@@ -32,13 +42,26 @@ export const vroVanImageProps = {
    */
   previewRatio: [String, Number],
 
-  // 图片地址转换方法。
+  /**
+   * 图片地址转换方法。
+   */
   normalizeSrc: Function as PropType<VroVanImageNormalizeSrc>,
 
+  /**
+   * 是否开启图片预览。传入字符串或字符串数组时作为预览图片地址。
+   *
+   * @default false
+   */
   preview: {
     type: [String, Boolean, Array] as PropType<string | boolean | string[]>,
     default: false,
   },
+
+  /**
+   * 预览起始位置。
+   *
+   * @default 0
+   */
   previewIndex: {
     type: [Number, String],
     default: 0,

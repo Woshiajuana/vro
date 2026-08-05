@@ -2,11 +2,56 @@
 
 ### 介绍
 
-...
+基于原生 `img` 标签封装的图片组件，支持加载失败占位、图片地址转换和图片预览。
 
 ## 代码演示
 
 ### 基础用法
+
+```html
+<vro-van-image class="demo-image" :src="imageUrl" alt="图片" />
+```
+
+### 加载失败占位
+
+```html
+<vro-van-image class="demo-image" src="/not-found.png" :placeholder="placeholderUrl" />
+```
+
+### 图片预览
+
+```html
+<vro-van-image class="demo-image" :preview="[imageUrl, previewUrl]" :src="imageUrl" />
+<vro-van-image
+  class="demo-image"
+  :preview="[imageUrl, previewUrl]"
+  preview-index="1"
+  :src="previewUrl"
+/>
+```
+
+### 图片地址转换
+
+```html
+<vro-van-image
+  src="/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+  base-url="https://fuss10.elemecdn.com"
+  class="demo-image"
+  ratio="300x300"
+  preview-ratio="origin"
+  :normalize-src="normalizeSrc"
+/>
+```
+
+### 自定义加载样式
+
+```html
+<vro-van-image
+  class="demo-image"
+  :src="imageUrl"
+  style="--vro-van-image-loading-size: min(18px, 16%)"
+/>
+```
 
 ## API
 
@@ -29,33 +74,34 @@
 
 ### 插槽 Slots
 
+暂无。
+
+### CSS 变量
+
 <table>
   <tbody>
     <tr>
       <td>名称</td>
-      <td>说明</td>
+      <td>默认值</td>
     </tr>
     <tr>
-      <td>xx</td>
-      <td>xxx</td>
+      <td>--vro-van-image-loading-background</td>
+      <td>#f2f2f2</td>
+    </tr>
+    <tr>
+      <td>--vro-van-image-loading-image</td>
+      <td>url('../img-loading.gif')</td>
+    </tr>
+    <tr>
+      <td>--vro-van-image-loading-size</td>
+      <td>min(10px, 10%)</td>
     </tr>
   </tbody>
 </table>
 
 ### 实例方法
 
-<table>
-  <tbody>
-    <tr>
-      <td>名称</td>
-      <td>说明</td>
-    </tr>
-    <tr>
-      <td>xx</td>
-      <td>xxx</td>
-    </tr>
-  </tbody>
-</table>
+暂无。
 
 <script setup lang="ts">
   import { reserve } from '@daysnap/utils'

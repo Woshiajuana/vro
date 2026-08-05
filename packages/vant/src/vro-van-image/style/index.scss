@@ -1,7 +1,14 @@
+:root,
+:host {
+  --vro-van-image-loading-background: #f2f2f2;
+  --vro-van-image-loading-image: url('../img-loading.gif');
+  --vro-van-image-loading-size: min(10px, 10%);
+}
+
 .vro-van-image {
   &.is-loading {
-    background: #f2f2f2 url('../img-loading.gif') center no-repeat;
-    background-size: 10px;
-    background-size: min(10px, 10%);
+    background: var(--vro-van-image-loading-background) var(--vro-van-image-loading-image) center
+      no-repeat;
+    background-size: var(--vro-van-image-loading-size);
   }
 }
