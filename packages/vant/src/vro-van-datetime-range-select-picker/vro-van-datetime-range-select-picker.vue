@@ -5,11 +5,10 @@
     :class="{
       'is-disabled': disabled,
       'is-readonly': readonly,
-      'is-loading': loading,
     }"
     :arrow="showArrow"
-    :clickable="clickable && !disabled && !readonly && !loading"
-    @click="handleClick(0, $event)"
+    :clickable="clickable && !disabled && !readonly"
+    @click="handleClick(0)"
     @click-prefix-icon="$emit('click-prefix-icon', $event)"
     @click-suffix-icon="$emit('click-suffix-icon', $event)"
   >
@@ -22,7 +21,7 @@
         class="vro-van-datetime-range-select-picker-value"
         :class="{ 'is-placeholder': !modelValue?.[0] }"
         type="button"
-        @click.stop="handleClick(0, $event)"
+        @click.stop="handleClick(0)"
       >
         <slot name="start" :text="modelValue?.[0] || ''" :value="modelValue?.[0]">
           {{
@@ -39,7 +38,7 @@
         class="vro-van-datetime-range-select-picker-value"
         :class="{ 'is-placeholder': !modelValue?.[1] }"
         type="button"
-        @click.stop="handleClick(1, $event)"
+        @click.stop="handleClick(1)"
       >
         <slot name="end" :text="modelValue?.[1] || ''" :value="modelValue?.[1]">
           {{ modelValue?.[1] || endPlaceholder || t('datetimeRangeSelectPicker.endPlaceholder') }}
@@ -53,26 +52,19 @@
       name="van-icon-clear"
       @click.stop="handleClear"
     />
-
-    <vro-loading
-      v-show="loading"
-      class="vro-van-datetime-range-select-picker-loading"
-      type="spinner"
-    />
   </vro-van-cell>
 </template>
 
 <script setup lang="ts">
   import { isEmpty, normalizeDate, pick, typedKeys } from '@daysnap/utils'
-  import { VroLoading } from '@vrojs/base'
   import { computed } from 'vue'
 
   import { useLocale } from '../locale'
   import { VroVanCell } from '../vro-van-cell'
   import { showVroVanDatetimePicker } from '../vro-van-datetime-picker'
   import { VroVanIcon } from '../vro-van-icon'
-  import { vroVanTriggerCellCellProps } from '../vro-van-trigger-cell'
   import {
+    vroVanDatetimeRangeSelectPickerCellProps,
     type VroVanDatetimeRangeSelectPickerEmits,
     vroVanDatetimeRangeSelectPickerPickerProps,
     vroVanDatetimeRangeSelectPickerProps,
@@ -87,19 +79,18 @@
 
   const { t } = useLocale()
 
-  const cellProps = computed(() => pick(props, typedKeys(vroVanTriggerCellCellProps)))
+  const cellProps = computed(() => pick(props, typedKeys(vroVanDatetimeRangeSelectPickerCellProps)))
   const showClear = computed(() => {
-    const { clearable, disabled, loading, readonly } = props
+    const { clearable, disabled, readonly } = props
     return (
       clearable &&
       !disabled &&
-      !loading &&
       !readonly &&
       (!isEmpty(props.modelValue?.[0]) || !isEmpty(props.modelValue?.[1]))
     )
   })
   const showArrow = computed(
-    () => props.arrow && !props.disabled && !props.loading && !props.readonly && !showClear.value,
+    () => props.arrow && !props.disabled && !props.readonly && !showClear.value,
   )
 
   const normalizePickerDate = (value: string | undefined) => {
@@ -127,12 +118,10 @@
     }
   }
 
-  const handleClick = async (index: 0 | 1, event: MouseEvent) => {
-    if (props.disabled || props.loading || props.readonly) {
+  const handleClick = async (index: 0 | 1) => {
+    if (props.disabled || props.readonly) {
       return
     }
-
-    emit('click', event)
 
     try {
       const pickerResult = await showVroVanDatetimePicker(createPickerProps(index))

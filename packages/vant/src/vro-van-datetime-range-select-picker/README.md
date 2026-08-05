@@ -47,7 +47,7 @@
 
 ### 属性 Props
 
-支持 VroVanTriggerCell 的展示类属性和 VroVanDatetimePicker 的弹层选择属性，其中 VroVanDatetimePicker 的 `modelValue`、`title` 由当前组件接管。组件的 `modelValue` 为字符串范围数组。
+支持 VroVanCell 的展示类属性和 VroVanDatetimePicker 的弹层选择属性，其中 VroVanDatetimePicker 的 `modelValue`、`title` 由当前组件接管。组件的 `modelValue` 为字符串范围数组。
 
 <table>
   <tbody>
@@ -89,11 +89,6 @@
       <td>点击清除按钮时触发</td>
     </tr>
     <tr>
-      <td>click</td>
-      <td>event: MouseEvent</td>
-      <td>点击组件且非 disabled/readonly/loading 时触发</td>
-    </tr>
-    <tr>
       <td>click-prefix-icon</td>
       <td>event: MouseEvent</td>
       <td>点击 prefixIcon 时触发</td>
@@ -108,7 +103,7 @@
 
 ### 插槽 Slots
 
-支持 VroVanTriggerCell 的插槽，并额外支持以下插槽。
+支持 VroVanCell 的插槽，并额外支持以下插槽。
 
 <table>
   <tbody>
@@ -141,7 +136,7 @@
     </tr>
     <tr>
       <td>--vro-van-datetime-range-select-picker-gap</td>
-      <td>6px</td>
+      <td>10px</td>
     </tr>
     <tr>
       <td>--vro-van-datetime-range-select-picker-value-color</td>
@@ -166,10 +161,6 @@
     <tr>
       <td>--vro-van-datetime-range-select-picker-clear-color</td>
       <td>var(--van-text-color-3)</td>
-    </tr>
-    <tr>
-      <td>--vro-van-datetime-range-select-picker-loading-size</td>
-      <td>16px</td>
     </tr>
   </tbody>
 </table>

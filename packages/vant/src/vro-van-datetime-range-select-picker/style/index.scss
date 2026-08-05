@@ -8,7 +8,6 @@
   --vro-van-datetime-range-select-picker-readonly-color: var(--vro-van-readonly-color);
   --vro-van-datetime-range-select-picker-separator-color: var(--van-text-color-3);
   --vro-van-datetime-range-select-picker-clear-color: var(--van-text-color-3);
-  --vro-van-datetime-range-select-picker-loading-size: 16px;
 }
 
 .vro-van-datetime-range-select-picker {
@@ -80,9 +79,4 @@
 .vro-van-datetime-range-select-picker-clear {
   flex: none;
   color: var(--vro-van-datetime-range-select-picker-clear-color);
-}
-
-.vro-van-datetime-range-select-picker-loading {
-  flex: none;
-  --vro-loading-size: var(--vro-van-datetime-range-select-picker-loading-size);
 }
