@@ -7,7 +7,9 @@ export * from './types'
 export const VroVanDatetimeRangeSelectPicker = withInstall<typeof Component>(Component)
 export default VroVanDatetimeRangeSelectPicker
 
-export type VroVanDatetimeRangeSelectPickerInstance = InstanceType<typeof VroVanDatetimeRangeSelectPicker>
+export type VroVanDatetimeRangeSelectPickerInstance = InstanceType<
+  typeof VroVanDatetimeRangeSelectPicker
+>
 
 declare module 'vue' {
   export interface GlobalComponents {

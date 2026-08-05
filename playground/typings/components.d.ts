@@ -59,6 +59,7 @@ declare module 'vue' {
     VroVanConfigProvider: typeof import('@vrojs/vant')['VroVanConfigProvider']
     VroVanDatetimePicker: typeof import('@vrojs/vant')['VroVanDatetimePicker']
     VroVanDateTimePicker: typeof import('@vrojs/vant')['VroVanDateTimePicker']
+    VroVanDatetimeRangeSelectPicker: typeof import('@vrojs/vant')['VroVanDatetimeRangeSelectPicker']
     VroVanDatetimeSelectPicker: typeof import('@vrojs/vant')['VroVanDatetimeSelectPicker']
     VroVanField: typeof import('@vrojs/vant')['VroVanField']
     VroVanIcon: typeof import('@vrojs/vant')['VroVanIcon']

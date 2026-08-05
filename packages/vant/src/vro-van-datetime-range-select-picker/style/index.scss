@@ -1,1 +1,88 @@
-.vro-van-datetime-range-select-picker { }
+:root,
+:host {
+  --vro-van-datetime-range-select-picker-gap: 10px;
+  --vro-van-datetime-range-select-picker-border-color: var(--van-border-color);
+  --vro-van-datetime-range-select-picker-value-color: var(--van-text-color);
+  --vro-van-datetime-range-select-picker-placeholder-color: var(--van-text-color-3);
+  --vro-van-datetime-range-select-picker-disabled-color: var(--vro-van-disabled-color);
+  --vro-van-datetime-range-select-picker-readonly-color: var(--vro-van-readonly-color);
+  --vro-van-datetime-range-select-picker-separator-color: var(--van-text-color-3);
+  --vro-van-datetime-range-select-picker-clear-color: var(--van-text-color-3);
+  --vro-van-datetime-range-select-picker-loading-size: 16px;
+}
+
+.vro-van-datetime-range-select-picker {
+  &.is-disabled {
+    .vro-van-datetime-range-select-picker-value,
+    .vro-van-datetime-range-select-picker-separator {
+      color: var(--vro-van-datetime-range-select-picker-disabled-color);
+    }
+  }
+
+  &.is-readonly {
+    .vro-van-datetime-range-select-picker-value,
+    .vro-van-datetime-range-select-picker-separator {
+      color: var(--vro-van-datetime-range-select-picker-readonly-color);
+    }
+  }
+  &.is-column {
+    .vro-van-datetime-range-select-picker-values {
+      margin-top: 4px;
+      flex: 1;
+    }
+    .vro-van-datetime-range-select-picker-value {
+      text-align: center;
+      flex: 1;
+      /* prettier-ignore */
+      border: 1PX solid var(--vro-van-datetime-range-select-picker-border-color);
+      /* prettier-ignore */
+      border-radius: 2PX;
+      padding: 4px 0;
+    }
+  }
+
+  .vro-van-cell-value {
+    gap: var(--vro-van-datetime-range-select-picker-gap);
+  }
+}
+
+.vro-van-datetime-range-select-picker-values {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.vro-van-datetime-range-select-picker-value {
+  min-width: 0;
+  padding: 0;
+  overflow: hidden;
+  font: inherit;
+  color: var(--vro-van-datetime-range-select-picker-value-color);
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: inherit;
+  background: transparent;
+  border: 0;
+
+  &.is-placeholder {
+    color: var(--vro-van-datetime-range-select-picker-placeholder-color);
+  }
+}
+
+.vro-van-datetime-range-select-picker-separator {
+  flex: none;
+  margin: 0 var(--vro-van-datetime-range-select-picker-gap);
+  color: var(--vro-van-datetime-range-select-picker-separator-color);
+}
+
+.vro-van-datetime-range-select-picker-clear {
+  flex: none;
+  color: var(--vro-van-datetime-range-select-picker-clear-color);
+}
+
+.vro-van-datetime-range-select-picker-loading {
+  flex: none;
+  --vro-loading-size: var(--vro-van-datetime-range-select-picker-loading-size);
+}
