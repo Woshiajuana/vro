@@ -11,7 +11,12 @@
 
   <demo-block title="加载错误">
     <div class="demo-scroll">
-      <vro-van-scroll immediate-check :finished="errorFinished" @load="loadError" @refresh="refreshError">
+      <vro-van-scroll
+        immediate-check
+        :finished="errorFinished"
+        @load="loadError"
+        @refresh="refreshError"
+      >
         <div v-for="item in errorList" :key="item" class="demo-scroll-item">
           错误重试 {{ item }}
         </div>
