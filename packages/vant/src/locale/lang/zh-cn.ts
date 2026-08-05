@@ -14,5 +14,13 @@ export default {
       emptyDescription: '暂无数据',
       emptyBtnText: '刷新一下',
     },
+    scroll: {
+      loadingText: '加载中，请稍后...',
+      pullingText: '↓ 下拉即可刷新',
+      loosingText: '↑ 释放即可刷新',
+      successText: '刷新成功',
+      finishedText: '没有更多了',
+      loadErrorText: '{error}，请点击重新加载',
+    },
   },
 }

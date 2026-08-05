@@ -1,1 +1,25 @@
-.vro-van-scroll { }
+:root,
+:host {
+  --vro-van-scroll-height: 100%;
+  --vro-van-scroll-state-min-height: 80px;
+  --vro-van-scroll-state-padding: 16px;
+}
+
+.vro-van-scroll {
+  box-sizing: border-box;
+  flex: 1;
+  height: var(--vro-van-scroll-height);
+  overflow-y: auto;
+
+  .van-list__finished-text,
+  .van-list__error-text,
+  .van-list__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: var(--vro-van-scroll-state-min-height);
+    padding: var(--vro-van-scroll-state-padding);
+    line-height: normal;
+  }
+}

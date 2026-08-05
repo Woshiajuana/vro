@@ -14,5 +14,13 @@ export default {
       emptyDescription: 'No data',
       emptyBtnText: 'Refresh',
     },
+    scroll: {
+      loadingText: 'Loading...',
+      pullingText: 'Pull to refresh',
+      loosingText: 'Release to refresh',
+      successText: 'Refresh successful',
+      finishedText: 'No more',
+      loadErrorText: '{error}, tap to retry',
+    },
   },
 }
