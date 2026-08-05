@@ -9,13 +9,7 @@
 ### 基础用法
 
 ```html
-<vro-van-datetime-range-select-picker
-  v-model="datetimeRange"
-  clearable
-  label="日期时间"
-  start-title="选择开始时间"
-  end-title="选择结束时间"
-/>
+<vro-van-datetime-range-select-picker v-model="datetimeRange" clearable label="日期时间" />
 ```
 
 ### 日期格式
@@ -27,17 +21,6 @@
   label="日期范围"
   start-placeholder="开始日期"
   end-placeholder="结束日期"
-/>
-```
-
-### 返回 Date
-
-```html
-<vro-van-datetime-range-select-picker
-  v-model="dateValueRange"
-  format="yyyy-MM-dd hh:mm"
-  label="预约时间"
-  value-type="date"
 />
 ```
 
@@ -64,7 +47,7 @@
 
 ### 属性 Props
 
-支持 VroVanTriggerCell 的展示类属性和 VroVanDatetimePicker 的弹层选择属性，其中 VroVanDatetimePicker 的 `modelValue`、`title` 由当前组件接管。
+支持 VroVanTriggerCell 的展示类属性和 VroVanDatetimePicker 的弹层选择属性，其中 VroVanDatetimePicker 的 `modelValue`、`title` 由当前组件接管。组件的 `modelValue` 为字符串范围数组。
 
 <table>
   <tbody>
@@ -92,12 +75,12 @@
     </tr>
     <tr>
       <td>update:modelValue</td>
-      <td>value: VroVanDatetimeRangeSelectPickerModelValue</td>
+      <td>value: [string?, string?]</td>
       <td>确认选择或清空值时触发</td>
     </tr>
     <tr>
       <td>change</td>
-      <td>value, result?: VroVanDatetimeRangeSelectPickerResult</td>
+      <td>value: [string?, string?]</td>
       <td>确认选择或清空值时触发</td>
     </tr>
     <tr>

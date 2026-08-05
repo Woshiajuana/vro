@@ -23,8 +23,6 @@ export default {
       loadErrorText: '{error}，请点击重新加载',
     },
     datetimeRangeSelectPicker: {
-      startTitle: '选择开始时间',
-      endTitle: '选择结束时间',
       startPlaceholder: '开始时间',
       endPlaceholder: '结束时间',
       separator: '至',

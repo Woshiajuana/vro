@@ -23,8 +23,6 @@ export default {
       loadErrorText: '{error}, tap to retry',
     },
     datetimeRangeSelectPicker: {
-      startTitle: 'Select start time',
-      endTitle: 'Select end time',
       startPlaceholder: 'Start time',
       endPlaceholder: 'End time',
       separator: 'to',

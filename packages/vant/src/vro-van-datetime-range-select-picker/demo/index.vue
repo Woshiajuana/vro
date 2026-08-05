@@ -1,12 +1,6 @@
 <template>
   <demo-block title="基础用法">
-    <vro-van-datetime-range-select-picker
-      v-model="datetimeRange"
-      clearable
-      label="日期时间"
-      start-title="选择开始时间"
-      end-title="选择结束时间"
-    />
+    <vro-van-datetime-range-select-picker v-model="datetimeRange" clearable label="日期时间" />
   </demo-block>
 
   <demo-block title="日期格式">
@@ -17,8 +11,6 @@
       label="日期范围"
       start-placeholder="开始日期"
       end-placeholder="结束日期"
-      start-title="选择开始日期"
-      end-title="选择结束日期"
     />
     <vro-van-datetime-range-select-picker
       v-model="timeRange"
@@ -28,18 +20,6 @@
       separator="~"
       start-placeholder="开始时间"
       end-placeholder="结束时间"
-      start-title="选择开始时间"
-      end-title="选择结束时间"
-    />
-  </demo-block>
-
-  <demo-block title="返回 Date">
-    <vro-van-datetime-range-select-picker
-      v-model="dateValueRange"
-      clearable
-      format="yyyy-MM-dd hh:mm"
-      label="预约时间"
-      value-type="date"
     />
   </demo-block>
 
@@ -75,31 +55,15 @@
 <script setup lang="ts">
   import { ref } from 'vue'
 
-  import type { VroVanDatetimeRangeSelectPickerModelValue } from '..'
+  type DatetimeRange = [string?, string?]
 
-  const datetimeRange = ref<VroVanDatetimeRangeSelectPickerModelValue>([
-    '2026-08-03 09:30:00',
-    '2026-08-03 18:30:00',
-  ])
-  const dateRange = ref<VroVanDatetimeRangeSelectPickerModelValue>(['2026-08-03', '2026-08-08'])
-  const timeRange = ref<VroVanDatetimeRangeSelectPickerModelValue>(['09:30', '18:30'])
-  const dateValueRange = ref<VroVanDatetimeRangeSelectPickerModelValue>([
-    new Date(2026, 7, 3, 9, 30, 0),
-    new Date(2026, 7, 3, 18, 30, 0),
-  ])
-  const limitedRange = ref<VroVanDatetimeRangeSelectPickerModelValue>([])
-  const columnRange = ref<VroVanDatetimeRangeSelectPickerModelValue>([
-    '2026-08-03 09:30',
-    '2026-08-03 18:30',
-  ])
-  const readonlyRange = ref<VroVanDatetimeRangeSelectPickerModelValue>([
-    '2026-08-03 09:30:00',
-    '2026-08-03 18:30:00',
-  ])
-  const disabledRange = ref<VroVanDatetimeRangeSelectPickerModelValue>([
-    '2026-08-03 09:30:00',
-    '2026-08-03 18:30:00',
-  ])
+  const datetimeRange = ref<DatetimeRange>(['2026-08-03 09:30:00', '2026-08-03 18:30:00'])
+  const dateRange = ref<DatetimeRange>(['2026-08-03', '2026-08-08'])
+  const timeRange = ref<DatetimeRange>(['09:30', '18:30'])
+  const limitedRange = ref<DatetimeRange>([])
+  const columnRange = ref<DatetimeRange>(['2026-08-03 09:30', '2026-08-03 18:30'])
+  const readonlyRange = ref<DatetimeRange>(['2026-08-03 09:30:00', '2026-08-03 18:30:00'])
+  const disabledRange = ref<DatetimeRange>(['2026-08-03 09:30:00', '2026-08-03 18:30:00'])
 
   const minDate = new Date(2026, 7, 1, 9, 0, 0)
   const maxDate = new Date(2026, 7, 31, 18, 30, 0)

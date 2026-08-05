@@ -2,29 +2,9 @@ import { omit } from '@daysnap/utils'
 import type { VroSlot } from '@vrojs/base'
 import type { ExtractPropTypes, PropType } from 'vue'
 
-import {
-  vroVanDatetimePickerProps,
-  type VroVanDatetimePickerResult,
-} from '../vro-van-datetime-picker'
-import {
-  type VroVanTriggerCellEmits,
-  vroVanTriggerCellProps,
-  type VroVanTriggerCellSlots,
-} from '../vro-van-trigger-cell'
-
-export type VroVanDatetimeRangeSelectPickerValue = string | number | Date
-export type VroVanDatetimeRangeSelectPickerModelValue = [
-  VroVanDatetimeRangeSelectPickerValue?,
-  VroVanDatetimeRangeSelectPickerValue?,
-]
-export type VroVanDatetimeRangeSelectPickerValueType = 'date' | 'string'
-export type VroVanDatetimeRangeSelectPickerType = 'start' | 'end'
-
-export interface VroVanDatetimeRangeSelectPickerResult {
-  type: VroVanDatetimeRangeSelectPickerType
-  value: VroVanDatetimeRangeSelectPickerModelValue
-  result: VroVanDatetimePickerResult
-}
+import type { VroVanCellSlots } from '../vro-van-cell'
+import { vroVanDatetimePickerProps } from '../vro-van-datetime-picker'
+import { type VroVanTriggerCellEmits, vroVanTriggerCellProps } from '../vro-van-trigger-cell'
 
 export const vroVanDatetimeRangeSelectPickerPickerProps = omit(vroVanDatetimePickerProps, [
   'modelValue',
@@ -44,17 +24,7 @@ export const vroVanDatetimeRangeSelectPickerProps = {
   /**
    * 当前选中日期时间范围。
    */
-  modelValue: Array as unknown as PropType<VroVanDatetimeRangeSelectPickerModelValue>,
-
-  /**
-   * 开始日期时间选择器标题。
-   */
-  startTitle: String,
-
-  /**
-   * 结束日期时间选择器标题。
-   */
-  endTitle: String,
+  modelValue: Array as unknown as PropType<[string?, string?]>,
 
   /**
    * 开始日期时间占位内容。
@@ -77,20 +47,10 @@ export const vroVanDatetimeRangeSelectPickerProps = {
   },
 
   /**
-   * 选中值类型。string 返回格式化字符串，date 返回 Date 对象。
-   *
-   * @default 'string'
-   */
-  valueType: {
-    type: String as PropType<VroVanDatetimeRangeSelectPickerValueType>,
-    default: 'string',
-  },
-
-  /**
    * 清空时回填的值。
    */
   emptyValue: {
-    type: Array as unknown as PropType<VroVanDatetimeRangeSelectPickerModelValue>,
+    type: Array as unknown as PropType<[string?, string?]>,
     default: () => [],
   },
 }
@@ -99,7 +59,7 @@ export type VroVanDatetimeRangeSelectPickerProps = ExtractPropTypes<
   typeof vroVanDatetimeRangeSelectPickerProps
 >
 
-export interface VroVanDatetimeRangeSelectPickerSlots extends VroVanTriggerCellSlots {
+export interface VroVanDatetimeRangeSelectPickerSlots extends Omit<VroVanCellSlots, 'default'> {
   /**
    * 自定义开始日期时间内容。
    */
@@ -120,13 +80,10 @@ export interface VroVanDatetimeRangeSelectPickerEmits extends VroVanTriggerCellE
   /**
    * 确认选择或清空值时触发。
    */
-  'update:modelValue': [value: VroVanDatetimeRangeSelectPickerModelValue]
+  'update:modelValue': [value: [string?, string?]]
 
   /**
    * 确认选择或清空值时触发。
    */
-  change: [
-    value: VroVanDatetimeRangeSelectPickerModelValue,
-    result?: VroVanDatetimeRangeSelectPickerResult,
-  ]
+  change: [value: [string?, string?]]
 }
