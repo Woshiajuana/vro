@@ -53,6 +53,25 @@
 />
 ```
 
+### 全局配置
+
+```ts
+import { setVroVanImageOptions } from '@vrojs/vant'
+
+setVroVanImageOptions({
+  baseUrl: 'https://fuss10.elemecdn.com',
+  loadingSrc: '/loading.gif',
+  placeholder: '/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+  preview: true,
+  ratio: '300x300',
+  previewRatio: 'origin',
+  normalizeSrc: ({ src, ratio, baseUrl }) => {
+    const url = src.startsWith('http') ? src : `${baseUrl}${src}`
+    return ratio ? `${url}?ratio=${ratio}` : url
+  },
+})
+```
+
 ## API
 
 ### 属性 Props
@@ -68,6 +87,28 @@
       <td>{{ key }}</td>
       <td>{{ parseType(item.type || item) }}</td>
       <td>{{ reserve(item.default, '-') }}</td>
+    </tr>
+  </tbody>
+</table>
+
+### 事件 Events
+
+<table>
+  <tbody>
+    <tr>
+      <td>名称</td>
+      <td>参数</td>
+      <td>说明</td>
+    </tr>
+    <tr>
+      <td>load</td>
+      <td>event: Event</td>
+      <td>图片加载完成时触发</td>
+    </tr>
+    <tr>
+      <td>error</td>
+      <td>event: Event</td>
+      <td>图片加载失败时触发</td>
     </tr>
   </tbody>
 </table>

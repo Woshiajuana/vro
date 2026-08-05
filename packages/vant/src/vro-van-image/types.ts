@@ -23,9 +23,9 @@ export const vroVanImageProps = {
   placeholder: String,
 
   /**
-   * 加载占位图。
+   * 加载占位图地址。
    */
-  loading: String,
+  loadingSrc: String,
 
   /**
    * 图片基础地址，会传入 normalizeSrc 统一处理。
@@ -69,3 +69,15 @@ export const vroVanImageProps = {
 }
 
 export type VroVanImageProps = ExtractPropTypes<typeof vroVanImageProps>
+
+export interface VroVanImageEmits {
+  /**
+   * 图片加载完成时触发。
+   */
+  load: [event: Event]
+
+  /**
+   * 图片加载失败时触发。
+   */
+  error: [event: Event]
+}
