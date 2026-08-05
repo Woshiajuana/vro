@@ -20,6 +20,7 @@
       <button
         class="vro-van-datetime-range-select-picker-value"
         :class="{ 'is-placeholder': !modelValue?.[0] }"
+        :disabled="disabled || readonly"
         type="button"
         @click.stop="handleClick(0)"
       >
@@ -37,6 +38,7 @@
       <button
         class="vro-van-datetime-range-select-picker-value"
         :class="{ 'is-placeholder': !modelValue?.[1] }"
+        :disabled="disabled || readonly"
         type="button"
         @click.stop="handleClick(1)"
       >
@@ -56,12 +58,17 @@
 </template>
 
 <script setup lang="ts">
-  import { isEmpty, normalizeDate, pick, typedKeys } from '@daysnap/utils'
+  import { isEmpty, pick, typedKeys } from '@daysnap/utils'
   import { computed } from 'vue'
 
   import { useLocale } from '../locale'
   import { VroVanCell } from '../vro-van-cell'
   import { showVroVanDatetimePicker } from '../vro-van-datetime-picker'
+  import {
+    getDatetimePickerColumnTypes,
+    getDatetimePickerModelDate,
+    normalizeDatetimePickerFormat,
+  } from '../vro-van-datetime-picker/utils'
   import { VroVanIcon } from '../vro-van-icon'
   import {
     vroVanDatetimeRangeSelectPickerCellProps,
@@ -98,7 +105,13 @@
       return undefined
     }
 
-    const date = normalizeDate(value)
+    const format = normalizeDatetimePickerFormat(props.format)
+    const date = getDatetimePickerModelDate(value, getDatetimePickerColumnTypes(format), {
+      format,
+      min: props.min,
+      max: props.max,
+    })
+
     return Number.isNaN(date.getTime()) ? undefined : date
   }
 

@@ -36,6 +36,19 @@
 />
 ```
 
+### 垂直布局
+
+```html
+<vro-van-datetime-range-select-picker
+  v-model="range"
+  direction="column"
+  format="yyyy-MM-dd hh:mm"
+  label="活动时间"
+  start-placeholder="请选择开始时间"
+  end-placeholder="请选择结束时间"
+/>
+```
+
 ### 禁用和只读
 
 ```html
@@ -137,6 +150,10 @@
     <tr>
       <td>--vro-van-datetime-range-select-picker-gap</td>
       <td>10px</td>
+    </tr>
+    <tr>
+      <td>--vro-van-datetime-range-select-picker-border-color</td>
+      <td>var(--van-border-color)</td>
     </tr>
     <tr>
       <td>--vro-van-datetime-range-select-picker-value-color</td>
