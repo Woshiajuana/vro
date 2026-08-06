@@ -19,7 +19,7 @@
     omitBy,
   } from '@daysnap/utils'
   import { showImagePreview } from 'vant'
-  import { computed, ref } from 'vue'
+  import { computed, ref, watch } from 'vue'
 
   import { getVroVanImageOptions } from './setup'
   import type { VroVanImageEmits, VroVanImageProps } from './types'
@@ -31,6 +31,7 @@
   const props = defineProps(vroVanImageProps)
 
   const loading = ref(true)
+  const isPlaceholder = ref(false)
   const dynamicProps = computed(() => {
     return {
       ...getVroVanImageOptions(),
@@ -61,16 +62,36 @@
     const target = event.target as HTMLImageElement
     const { src } = target
     const { placeholder } = dynamicProps.value
+
+    loading.value = false
+    if (isPlaceholder.value) {
+      return
+    }
+
     emit('error', event)
     if (placeholder && src !== placeholder) {
+      isPlaceholder.value = true
       target.src = placeholder
     }
   }
 
   const handleLoad = (event: Event) => {
     loading.value = false
+    if (isPlaceholder.value) {
+      return
+    }
+
     emit('load', event)
   }
+
+  watch(
+    () => imageProps.value.src,
+    (src) => {
+      isPlaceholder.value = false
+      loading.value = !!src
+    },
+    { immediate: true },
+  )
 
   // 预览
   const handlePreview = async (event: Event) => {
