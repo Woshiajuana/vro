@@ -1,1 +1,31 @@
-.vro-van-image-uploader { }
+:root,
+:host {
+  --vro-van-image-uploader-box-background: var(--van-gray-1);
+}
+
+.vro-van-image-uploader {
+}
+
+.vro-van-image-uploader-content {
+  display: flex;
+  gap: 10px;
+}
+
+.vro-van-image-uploader-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.vro-van-image-uploader-item-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background-color: var(--vro-van-image-uploader-box-background);
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  i {
+    font-size: 24px;
+  }
+}
