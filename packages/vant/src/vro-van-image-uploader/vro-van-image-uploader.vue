@@ -2,14 +2,20 @@
   <VroVanCell class="vro-van-image-uploader" direction="column">
     <div class="vro-van-image-uploader-content">
       <div
-        v-for="(item, index) in preset"
+        v-for="(item, index) in images"
         :key="index"
         class="vro-van-image-uploader-item"
         :class="{ 'is-required': item.required }"
       >
         <div class="vro-van-image-uploader-item-box">
-          <VroVanIcon class="vro-van-image-uploader-item-plus" name="van-icon-plus" />
-          <input type="file" />
+          <template v-if="item.url">
+            <VroVanImage :src="item.url" />
+            <VroVanIcon class="vro-van-image-uploader-item-delete" name="van-icon-cross" />
+          </template>
+          <template v-else>
+            <VroVanIcon class="vro-van-image-uploader-item-plus" name="van-icon-plus" />
+            <input type="file" />
+          </template>
         </div>
         <span v-if="item.label" class="vro-van-image-uploader-item-label">
           {{ item.label }}
@@ -26,12 +32,33 @@
 </template>
 
 <script setup lang="ts">
+  import { isArray, isString } from '@daysnap/utils'
+  import { ref, watchEffect } from 'vue'
+
   import { VroVanCell } from '../vro-van-cell'
   import { VroVanIcon } from '../vro-van-icon'
   import { VroVanImage } from '../vro-van-image'
-  import { vroVanImageUploaderProps } from './types'
+  import {
+    type VroVanImageUploaderItem,
+    type VroVanImageUploaderPresetItem,
+    vroVanImageUploaderProps,
+  } from './types'
 
   defineOptions({ name: 'VroVanImageUploader' })
 
-  defineProps(vroVanImageUploaderProps)
+  const props = defineProps(vroVanImageUploaderProps)
+
+  const images = ref<(VroVanImageUploaderPresetItem & { url?: VroVanImageUploaderItem })[]>([])
+
+  watchEffect(() => {
+    const { preset = [], modelValue } = props
+    const value = isArray(modelValue) ? modelValue : modelValue ? [modelValue] : []
+    images.value = preset
+      .map((item, index) => {
+        const url = value[index] || ''
+        const props = isString(item) ? { label: item } : item
+        return { ...props, url }
+      })
+      .concat(value.slice(preset.length).map((url) => ({ url })))
+  })
 </script>

@@ -20,8 +20,8 @@ export interface VroVanImageUploaderCallback<T = any> {
 }
 
 export interface VroVanImageUploaderPresetItem {
-  label: string
-  required: string
+  label?: string
+  required?: boolean
 }
 
 export const vroVanImageUploaderProps = {
