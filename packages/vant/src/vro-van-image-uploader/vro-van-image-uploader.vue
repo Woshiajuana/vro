@@ -3,7 +3,7 @@
     <div class="vro-van-image-uploader-content">
       <div class="vro-van-image-uploader-item is-required">
         <div class="vro-van-image-uploader-item-box">
-          <VroVanIcon name="van-icon-plus" />
+          <VroVanIcon class="vro-van-image-uploader-item-plus" name="van-icon-plus" />
           <input type="file" />
         </div>
         <span class="vro-van-image-uploader-item-label">身份证反面</span>
@@ -27,7 +27,7 @@
       </div>
       <div class="vro-van-image-uploader-item">
         <div class="vro-van-image-uploader-item-box">
-          <VroVanIcon name="van-icon-plus" />
+          <VroVanIcon class="vro-van-image-uploader-item-plus" name="van-icon-plus" />
           <input type="file" />
         </div>
       </div>

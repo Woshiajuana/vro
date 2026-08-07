@@ -19,6 +19,11 @@ export interface VroVanImageUploaderCallback<T = any> {
   ): Promise<VroVanImageUploaderResult>
 }
 
+export interface VroVanImageUploaderPresetItem {
+  label: string
+  required: string
+}
+
 export const vroVanImageUploaderProps = {
   /**
    * 绑定值，字符串为单图远程地址，数组为多图或本地 File 列表。
@@ -55,6 +60,16 @@ export const vroVanImageUploaderProps = {
    * 自定义上传方法，默认返回 File 列表用于本地预览和后续业务处理。
    */
   upload: Function as PropType<VroVanImageUploaderCallback>,
+
+  /**
+   * 选择资源
+   */
+  chooseMedia: Function as PropType<() => any>,
+
+  /**
+   * 预设
+   */
+  preset: Array as PropType<VroVanImageUploaderPresetItem[]>,
 }
 
 export type VroVanImageUploaderProps = ExtractPropTypes<typeof vroVanImageUploaderProps>
