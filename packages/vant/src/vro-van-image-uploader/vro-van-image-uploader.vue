@@ -1,5 +1,5 @@
 <template>
-  <VroVanCell class="vro-van-image-uploader" direction="column">
+  <vro-van-cell class="vro-van-image-uploader" direction="column">
     <div class="vro-van-image-uploader-content">
       <div
         v-for="(item, index) in images"
@@ -9,12 +9,12 @@
       >
         <div class="vro-van-image-uploader-item-box">
           <template v-if="item.url">
-            <VroVanImage :src="item.url" />
-            <VroVanIcon class="vro-van-image-uploader-item-delete" name="van-icon-cross" />
+            <vro-van-image v-bind="imageProps" :src="getImageUrl(item.url)" />
+            <vro-van-icon class="vro-van-image-uploader-item-delete" name="van-icon-cross" />
           </template>
           <template v-else>
-            <VroVanIcon class="vro-van-image-uploader-item-plus" name="van-icon-plus" />
-            <input type="file" />
+            <vro-van-icon class="vro-van-image-uploader-item-plus" name="van-icon-plus" />
+            <input :accept="accept" :disabled="disabled" :multiple="multiple" type="file" />
           </template>
         </div>
         <span v-if="item.label" class="vro-van-image-uploader-item-label">
@@ -23,12 +23,12 @@
       </div>
       <div class="vro-van-image-uploader-item">
         <div class="vro-van-image-uploader-item-box">
-          <VroVanIcon class="vro-van-image-uploader-item-plus" name="van-icon-plus" />
-          <input type="file" />
+          <vro-van-icon class="vro-van-image-uploader-item-plus" name="van-icon-plus" />
+          <input :accept="accept" :disabled="disabled" :multiple="multiple" type="file" />
         </div>
       </div>
     </div>
-  </VroVanCell>
+  </vro-van-cell>
 </template>
 
 <script setup lang="ts">
@@ -49,6 +49,10 @@
   const props = defineProps(vroVanImageUploaderProps)
 
   const images = ref<(VroVanImageUploaderPresetItem & { url?: VroVanImageUploaderItem })[]>([])
+
+  const getImageUrl = (url?: VroVanImageUploaderItem) => {
+    return isString(url) ? url : ''
+  }
 
   watchEffect(() => {
     const { preset = [], modelValue } = props

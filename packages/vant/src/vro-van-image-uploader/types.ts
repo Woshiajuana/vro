@@ -20,7 +20,14 @@ export interface VroVanImageUploaderCallback<T = any> {
 }
 
 export interface VroVanImageUploaderPresetItem {
+  /**
+   * 预设图片位标题。
+   */
   label?: string
+
+  /**
+   * 是否必填。
+   */
   required?: boolean
 }
 
@@ -61,20 +68,28 @@ export const vroVanImageUploaderProps = {
    */
   upload: Function as PropType<VroVanImageUploaderCallback>,
 
+  /**
+   * 文件选择类型。
+   *
+   * @default 'image/*'
+   */
   accept: {
     type: String as PropType<InputHTMLAttributes['accept']>,
     default: 'image/*',
   },
 
+  /**
+   * 是否支持多选。
+   */
   multiple: Boolean,
 
   /**
-   * 选择资源
+   * 自定义选择资源方法。
    */
   chooseMedia: Function as PropType<() => any>,
 
   /**
-   * 预设
+   * 预设图片位。
    */
   preset: Array as PropType<VroVanImageUploaderPresetItem[]>,
 }
