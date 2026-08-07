@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, InputHTMLAttributes, PropType } from 'vue'
 
 import type { VroVanImageProps } from '../vro-van-image'
 
@@ -60,6 +60,13 @@ export const vroVanImageUploaderProps = {
    * 自定义上传方法，默认返回 File 列表用于本地预览和后续业务处理。
    */
   upload: Function as PropType<VroVanImageUploaderCallback>,
+
+  accept: {
+    type: String as PropType<InputHTMLAttributes['accept']>,
+    default: 'image/*',
+  },
+
+  multiple: Boolean,
 
   /**
    * 选择资源

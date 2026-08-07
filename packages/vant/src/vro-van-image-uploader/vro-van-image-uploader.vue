@@ -1,29 +1,19 @@
 <template>
   <VroVanCell class="vro-van-image-uploader" direction="column">
     <div class="vro-van-image-uploader-content">
-      <div class="vro-van-image-uploader-item is-required">
+      <div
+        v-for="(item, index) in preset"
+        :key="index"
+        class="vro-van-image-uploader-item"
+        :class="{ 'is-required': item.required }"
+      >
         <div class="vro-van-image-uploader-item-box">
           <VroVanIcon class="vro-van-image-uploader-item-plus" name="van-icon-plus" />
           <input type="file" />
         </div>
-        <span class="vro-van-image-uploader-item-label">身份证反面</span>
-      </div>
-      <div class="vro-van-image-uploader-item is-required">
-        <div class="vro-van-image-uploader-item-box">
-          <VroVanIcon class="vro-van-image-uploader-item-plus" name="van-icon-plus" />
-          <input type="file" />
-          <VroVanIcon class="vro-van-image-uploader-item-delete" name="van-icon-cross" />
-        </div>
-        <span class="vro-van-image-uploader-item-label">身份证正面</span>
-      </div>
-      <div class="vro-van-image-uploader-item is-required">
-        <div class="vro-van-image-uploader-item-box">
-          <VroVanIcon class="vro-van-image-uploader-item-plus" name="van-icon-plus" />
-          <input type="file" />
-          <VroVanImage />
-          <VroVanIcon class="vro-van-image-uploader-item-delete" name="van-icon-cross" />
-        </div>
-        <span class="vro-van-image-uploader-item-label">身份证正面</span>
+        <span v-if="item.label" class="vro-van-image-uploader-item-label">
+          {{ item.label }}
+        </span>
       </div>
       <div class="vro-van-image-uploader-item">
         <div class="vro-van-image-uploader-item-box">
