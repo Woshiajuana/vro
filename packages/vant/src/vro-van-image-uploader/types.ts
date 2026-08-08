@@ -85,8 +85,17 @@ export const vroVanImageUploaderProps = {
 
   /**
    * 自定义选择资源方法。
+   * 如果传递了这个，则隐藏 input file
+   * 后续则直接返回上传后的结果
    */
-  chooseMedia: Function as PropType<() => any>,
+  chooseMedia: Function as PropType<
+    (params: {
+      max: number
+      value: string[] | File[]
+      multiple: boolean
+      upload: VroVanImageUploaderCallback
+    }) => string[]
+  >,
 
   /**
    * 预设图片位。
