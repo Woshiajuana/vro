@@ -60,8 +60,7 @@
     images.value = preset
       .map((item, index) => {
         const url = value[index] || ''
-        const props = isString(item) ? { label: item } : item
-        return { ...props, url }
+        return { ...item, url }
       })
       .concat(value.slice(preset.length).map((url) => ({ url })))
   })
