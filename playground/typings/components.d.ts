@@ -29,6 +29,7 @@ declare module 'vue' {
     VanLoading: typeof import('vant/es')['Loading']
     VanPullRefresh: typeof import('vant/es')['PullRefresh']
     VroAspectRatio: typeof import('@vrojs/base')['VroAspectRatio']
+    VroCircleProgress: typeof import('@vrojs/base')['VroCircleProgress']
     VroElCheckboxGroup: typeof import('@vrojs/element-plus')['VroElCheckboxGroup']
     VroElConfigProvider: typeof import('@vrojs/element-plus')['VroElConfigProvider']
     VroElFileUpload: typeof import('@vrojs/element-plus')['VroElFileUpload']

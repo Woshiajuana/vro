@@ -3,6 +3,7 @@
 export * from './types'
 export * from './utils'
 export * from './vro-aspect-ratio'
+export * from './vro-circle-progress'
 export * from './vro-icon'
 export * from './vro-input'
 export * from './vro-loading'
