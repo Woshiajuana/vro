@@ -14,7 +14,7 @@
         :cy="center"
         :r="radius"
         fill="none"
-        :stroke-width="strokeWidth"
+        :stroke-width="strokeWidthValue"
       />
       <circle
         class="vro-circle-progress-line"
@@ -22,7 +22,7 @@
         :cy="center"
         :r="radius"
         fill="none"
-        :stroke-width="strokeWidth"
+        :stroke-width="strokeWidthValue"
         :stroke-linecap="strokeLinecap"
         :stroke-dasharray="circumference"
         :stroke-dashoffset="strokeDashoffset"
@@ -53,8 +53,12 @@
     return clamp(0, props.modelValue, 100)
   })
 
+  const strokeWidthValue = computed(() => {
+    return clamp(0, props.strokeWidth, 100)
+  })
+
   const radius = computed(() => {
-    return Math.max(0, center - props.strokeWidth / 2)
+    return center - strokeWidthValue.value / 2
   })
 
   const text = computed(() => {

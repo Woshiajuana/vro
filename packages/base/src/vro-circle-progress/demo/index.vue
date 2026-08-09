@@ -32,7 +32,7 @@
     <div class="demo-circle-progress-row">
       <vro-circle-progress
         :model-value="countdownProgress"
-        duration="10s"
+        :duration="countdownDuration"
         curve="cubic-bezier(0, 0, 0.2, 1)"
         color="#1989fa"
       />
@@ -50,18 +50,21 @@
 </template>
 
 <script setup lang="ts">
-  import { onBeforeUnmount, ref } from 'vue'
+  import { nextTick, onBeforeUnmount, ref } from 'vue'
 
   const progress = ref(20)
   const countdownProgress = ref(100)
+  const countdownDuration = ref('10s')
   const timer = window.setInterval(() => {
     progress.value = progress.value >= 90 ? 20 : progress.value + 10
   }, 1200)
 
   const startCountdown = () => {
+    countdownDuration.value = '0ms'
     countdownProgress.value = 100
-    window.requestAnimationFrame(() => {
+    nextTick(() => {
       window.requestAnimationFrame(() => {
+        countdownDuration.value = '10s'
         countdownProgress.value = 0
       })
     })
