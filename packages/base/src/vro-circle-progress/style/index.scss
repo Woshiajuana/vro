@@ -1,1 +1,51 @@
-.vro-circle-progress { }
+:root,
+:host {
+  --vro-circle-progress-size: 100px;
+  --vro-circle-progress-color: currentColor;
+  --vro-circle-progress-background-color: rgba(0, 0, 0, 0.08);
+  --vro-circle-progress-duration: 300ms;
+  --vro-circle-progress-curve: ease;
+  --vro-circle-progress-content-color: currentColor;
+  --vro-circle-progress-content-font-size: 16px;
+}
+
+.vro-circle-progress {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size);
+  height: var(--size);
+  color: var(--vro-circle-progress-content-color);
+  font-size: var(--vro-circle-progress-content-font-size);
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.vro-circle-progress-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.vro-circle-progress-track {
+  stroke: var(--background-color);
+}
+
+.vro-circle-progress-line {
+  stroke: var(--color);
+  transition:
+    stroke-dashoffset var(--duration) var(--curve),
+    stroke var(--duration) var(--curve);
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.vro-circle-progress-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}

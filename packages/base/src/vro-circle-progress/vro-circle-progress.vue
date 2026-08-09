@@ -1,13 +1,77 @@
 <template>
-  <div class="vro-circle-progress">
-    <span>vro-circle-progress</span>
+  <div
+    class="vro-circle-progress"
+    :style="style"
+    role="progressbar"
+    :aria-valuenow="value"
+    aria-valuemin="0"
+    aria-valuemax="100"
+  >
+    <svg class="vro-circle-progress-svg" viewBox="0 0 100 100">
+      <circle
+        class="vro-circle-progress-track"
+        :cx="center"
+        :cy="center"
+        :r="radius"
+        fill="none"
+        :stroke-width="strokeWidth"
+      />
+      <circle
+        class="vro-circle-progress-line"
+        :cx="center"
+        :cy="center"
+        :r="radius"
+        fill="none"
+        :stroke-width="strokeWidth"
+        :stroke-linecap="strokeLinecap"
+        :stroke-dasharray="circumference"
+        :stroke-dashoffset="strokeDashoffset"
+      />
+    </svg>
+    <div class="vro-circle-progress-content">
+      <slot :value="value">{{ value }}%</slot>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { vroCircleProgressProps } from './types'
+  import { clamp } from '@daysnap/utils'
+  import { computed, type HTMLAttributes } from 'vue'
+
+  import { addUnit } from '../utils'
+  import { vroCircleProgressProps, type VroCircleProgressSlots } from './types'
 
   defineOptions({ name: 'VroCircleProgress' })
 
-  defineProps(vroCircleProgressProps)
+  const props = defineProps(vroCircleProgressProps)
+
+  defineSlots<VroCircleProgressSlots>()
+
+  const center = 50
+
+  const value = computed(() => {
+    return clamp(0, props.modelValue, 100)
+  })
+
+  const radius = computed(() => {
+    return center - props.strokeWidth / 2
+  })
+
+  const circumference = computed(() => {
+    return 2 * Math.PI * radius.value
+  })
+
+  const strokeDashoffset = computed(() => {
+    return circumference.value * (1 - value.value / 100)
+  })
+
+  const style = computed<HTMLAttributes['style']>(() => {
+    return {
+      '--size': addUnit(props.size) || 'var(--vro-circle-progress-size)',
+      '--color': props.color || 'var(--vro-circle-progress-color)',
+      '--background-color': props.backgroundColor || 'var(--vro-circle-progress-background-color)',
+      '--duration': addUnit(props.duration, 'ms') || 'var(--vro-circle-progress-duration)',
+      '--curve': props.curve || 'var(--vro-circle-progress-curve)',
+    }
+  })
 </script>

@@ -1,40 +1,66 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 
-export const vroCircleProgressProps = {
-  // 0 ~ 100
-  modelValue: Number,
+export type VroCircleProgressStrokeLinecap = 'butt' | 'round' | 'square'
 
-  // 进度条的宽度
+export const vroCircleProgressProps = {
+  /**
+   * 当前进度，取值范围为 0 ~ 100。
+   */
+  modelValue: {
+    type: Number,
+    default: 0,
+  },
+
+  /**
+   * 圆环尺寸，传入数字时单位为 px。
+   */
+  size: {
+    type: [Number, String] as PropType<string | number>,
+    default: 100,
+  },
+
+  /**
+   * 进度条宽度。
+   */
   strokeWidth: {
     type: Number,
     default: 10,
   },
 
+  /**
+   * 进度条端点样式。
+   */
   strokeLinecap: {
-    type: String as PropType<'square' | 'round'>,
-    default: 'square',
+    type: String as PropType<VroCircleProgressStrokeLinecap>,
+    default: 'round',
   },
 
-  // 时间
+  /**
+   * 动画时长，传入数字时单位为 ms。
+   */
   duration: {
-    type: Number,
-    default: 3,
+    type: [Number, String] as PropType<string | number>,
+    default: 300,
   },
 
-  // 颜色
+  /**
+   * 进度条颜色。
+   */
   color: String,
 
-  // 背景颜色
+  /**
+   * 轨道颜色。
+   */
   backgroundColor: String,
 
-  // 速度曲线
+  /**
+   * 动画速度曲线。
+   */
   curve: String,
+}
 
-  // 大小
-  size: {
-    type: [Number, String] as PropType<string | number>,
-    default: 100,
-  },
+export interface VroCircleProgressSlots {
+  default?: (props: { value: number }) => any
 }
 
 export type VroCircleProgressProps = ExtractPropTypes<typeof vroCircleProgressProps>
