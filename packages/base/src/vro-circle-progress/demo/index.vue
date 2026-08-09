@@ -61,7 +61,9 @@
   const startCountdown = () => {
     countdownProgress.value = 100
     window.requestAnimationFrame(() => {
-      countdownProgress.value = 0
+      window.requestAnimationFrame(() => {
+        countdownProgress.value = 0
+      })
     })
   }
 

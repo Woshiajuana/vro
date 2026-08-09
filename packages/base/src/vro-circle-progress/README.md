@@ -32,6 +32,16 @@
 <vro-circle-progress :model-value="progress" duration="1.2s" curve="ease-in-out" />
 ```
 
+### 倒计时动画
+
+```html
+<vro-circle-progress
+  :model-value="countdownProgress"
+  duration="10s"
+  curve="cubic-bezier(0, 0, 0.2, 1)"
+/>
+```
+
 ### 自定义内容
 
 ```html

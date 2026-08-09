@@ -29,7 +29,7 @@
       />
     </svg>
     <div class="vro-circle-progress-content">
-      <slot :value="value">{{ value }}%</slot>
+      <slot :value="value">{{ text }}</slot>
     </div>
   </div>
 </template>
@@ -54,7 +54,11 @@
   })
 
   const radius = computed(() => {
-    return center - props.strokeWidth / 2
+    return Math.max(0, center - props.strokeWidth / 2)
+  })
+
+  const text = computed(() => {
+    return `${Math.round(value.value)}%`
   })
 
   const circumference = computed(() => {
