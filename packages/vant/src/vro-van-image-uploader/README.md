@@ -9,7 +9,7 @@
 ### 基础用法
 
 ```html
-<vro-van-image-uploader />
+<vro-van-image-uploader v-model="basicValue" />
 ```
 
 ### 已有图片
@@ -21,7 +21,7 @@
 ### 多图展示
 
 ```html
-<vro-van-image-uploader :model-value="images" :image-props="{ preview: images }" :max="4" />
+<vro-van-image-uploader v-model="images" :image-props="{ preview: images }" :max="4" />
 ```
 
 ### 预设图片位
@@ -33,7 +33,7 @@
 ### 文件类型和多选
 
 ```html
-<vro-van-image-uploader accept="image/png,image/jpeg" multiple :max="3" />
+<vro-van-image-uploader v-model="fileTypeValue" accept="image/png,image/jpeg" multiple :max="3" />
 ```
 
 ### 禁用状态
@@ -64,6 +64,38 @@
 ### 插槽 Slots
 
 暂无。
+
+### 事件 Events
+
+<table>
+  <tbody>
+    <tr>
+      <td>名称</td>
+      <td>说明</td>
+      <td>参数</td>
+    </tr>
+    <tr>
+      <td>update:modelValue</td>
+      <td>绑定值变化时触发</td>
+      <td>value: VroVanImageUploaderModelValue</td>
+    </tr>
+    <tr>
+      <td>change</td>
+      <td>图片列表变化时触发</td>
+      <td>value: VroVanImageUploaderModelValue</td>
+    </tr>
+    <tr>
+      <td>delete</td>
+      <td>删除图片时触发</td>
+      <td>item: VroVanImageUploaderItem, index: number</td>
+    </tr>
+    <tr>
+      <td>error</td>
+      <td>选择或上传失败时触发</td>
+      <td>error: unknown</td>
+    </tr>
+  </tbody>
+</table>
 
 ### CSS 变量
 

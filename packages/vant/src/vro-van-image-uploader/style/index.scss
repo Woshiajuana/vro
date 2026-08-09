@@ -72,6 +72,14 @@
   }
 }
 
+.vro-van-image-uploader-item-trigger {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .vro-van-image-uploader-item-plus {
   font-size: var(--vro-van-image-uploader-plus-size);
 }

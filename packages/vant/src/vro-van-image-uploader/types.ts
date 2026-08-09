@@ -3,7 +3,7 @@ import type { ExtractPropTypes, InputHTMLAttributes, PropType } from 'vue'
 import type { VroVanImageProps } from '../vro-van-image'
 
 export type VroVanImageUploaderItem = string | File
-export type VroVanImageUploaderModelValue = string | VroVanImageUploaderItem[]
+export type VroVanImageUploaderModelValue = VroVanImageUploaderItem | VroVanImageUploaderItem[]
 export type VroVanImageUploaderResult = string[] | File[]
 
 export interface VroVanImageUploaderCallback<T = any> {
@@ -17,6 +17,24 @@ export interface VroVanImageUploaderCallback<T = any> {
       params: T
     },
   ): Promise<VroVanImageUploaderResult>
+}
+
+export interface VroVanImageUploaderChooseMediaParams<T = any> {
+  /** 最多可选择数量 */
+  max: number
+  /** 当前绑定值 */
+  value: VroVanImageUploaderItem[]
+  /** 是否支持多选 */
+  multiple: boolean
+  /** 自定义上传方法 */
+  upload: VroVanImageUploaderCallback<T>
+}
+
+export interface VroVanImageUploaderEmits {
+  'update:modelValue': [value: VroVanImageUploaderModelValue]
+  change: [value: VroVanImageUploaderModelValue]
+  delete: [item: VroVanImageUploaderItem, index: number]
+  error: [error: unknown]
 }
 
 export interface VroVanImageUploaderPresetItem {
@@ -36,7 +54,7 @@ export const vroVanImageUploaderProps = {
    * 绑定值，字符串为单图远程地址，数组为多图或本地 File 列表。
    */
   modelValue: {
-    type: [String, Array] as PropType<VroVanImageUploaderModelValue>,
+    type: [String, Object, Array] as PropType<VroVanImageUploaderModelValue>,
     default: '',
   },
 
@@ -89,12 +107,9 @@ export const vroVanImageUploaderProps = {
    * 后续则直接返回上传后的结果
    */
   chooseMedia: Function as PropType<
-    (params: {
-      max: number
-      value: string[] | File[]
-      multiple: boolean
-      upload: VroVanImageUploaderCallback
-    }) => string[]
+    (
+      params: VroVanImageUploaderChooseMediaParams,
+    ) => VroVanImageUploaderResult | Promise<VroVanImageUploaderResult>
   >,
 
   /**

@@ -1,6 +1,6 @@
 <template>
   <demo-block title="基础用法">
-    <vro-van-image-uploader />
+    <vro-van-image-uploader v-model="basicValue" />
   </demo-block>
 
   <demo-block title="已有图片">
@@ -8,7 +8,11 @@
   </demo-block>
 
   <demo-block title="多图展示">
-    <vro-van-image-uploader :model-value="images" :image-props="{ preview: images }" :max="4" />
+    <vro-van-image-uploader
+      v-model="multipleValue"
+      :image-props="{ preview: multipleValue }"
+      :max="4"
+    />
   </demo-block>
 
   <demo-block title="预设图片位">
@@ -16,7 +20,12 @@
   </demo-block>
 
   <demo-block title="文件类型和多选">
-    <vro-van-image-uploader accept="image/png,image/jpeg" multiple :max="3" />
+    <vro-van-image-uploader
+      v-model="fileTypeValue"
+      accept="image/png,image/jpeg"
+      multiple
+      :max="3"
+    />
   </demo-block>
 
   <demo-block title="禁用状态">
@@ -25,6 +34,8 @@
 </template>
 
 <script setup lang="ts">
+  import { ref } from 'vue'
+
   import type { VroVanImageUploaderPresetItem } from '../types'
 
   const imageUrl = 'https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg'
@@ -38,4 +49,8 @@
     { label: '身份证国徽面', required: true },
     { label: '手持证件照' },
   ]
+
+  const basicValue = ref('')
+  const multipleValue = ref([...images])
+  const fileTypeValue = ref<string[]>([])
 </script>
