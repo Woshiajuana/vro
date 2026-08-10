@@ -1,9 +1,9 @@
 <template>
   <div
     class="vro-circle-progress"
-    :style="style"
+    :style="progress.style"
     role="progressbar"
-    :aria-valuenow="value"
+    :aria-valuenow="progress.value"
     aria-valuemin="0"
     aria-valuemax="100"
   >
@@ -12,24 +12,24 @@
         class="vro-circle-progress-track"
         :cx="center"
         :cy="center"
-        :r="radius"
+        :r="progress.radius"
         fill="none"
-        :stroke-width="strokeWidthValue"
+        :stroke-width="progress.strokeWidth"
       />
       <circle
         class="vro-circle-progress-line"
         :cx="center"
         :cy="center"
-        :r="radius"
+        :r="progress.radius"
         fill="none"
-        :stroke-width="strokeWidthValue"
+        :stroke-width="progress.strokeWidth"
         :stroke-linecap="strokeLinecap"
-        :stroke-dasharray="circumference"
-        :stroke-dashoffset="strokeDashoffset"
+        :stroke-dasharray="progress.circumference"
+        :stroke-dashoffset="progress.strokeDashoffset"
       />
     </svg>
     <div class="vro-circle-progress-content">
-      <slot :value="value">{{ text }}</slot>
+      <slot :value="progress.value">{{ progress.text }}</slot>
     </div>
   </div>
 </template>
@@ -49,37 +49,27 @@
 
   const center = 50
 
-  const value = computed(() => {
-    return clamp(0, props.modelValue, 100)
-  })
+  const progress = computed(() => {
+    const value = clamp(0, props.modelValue, 100)
+    const strokeWidth = clamp(0, props.strokeWidth, 100)
+    const radius = center - strokeWidth / 2
+    const circumference = 2 * Math.PI * radius
 
-  const strokeWidthValue = computed(() => {
-    return clamp(0, props.strokeWidth, 100)
-  })
-
-  const radius = computed(() => {
-    return center - strokeWidthValue.value / 2
-  })
-
-  const text = computed(() => {
-    return `${Math.round(value.value)}%`
-  })
-
-  const circumference = computed(() => {
-    return 2 * Math.PI * radius.value
-  })
-
-  const strokeDashoffset = computed(() => {
-    return circumference.value * (1 - value.value / 100)
-  })
-
-  const style = computed<HTMLAttributes['style']>(() => {
     return {
-      '--size': addUnit(props.size) || 'var(--vro-circle-progress-size)',
-      '--color': props.color || 'var(--vro-circle-progress-color)',
-      '--background-color': props.backgroundColor || 'var(--vro-circle-progress-background-color)',
-      '--duration': addUnit(props.duration, 'ms') || 'var(--vro-circle-progress-duration)',
-      '--curve': props.curve || 'var(--vro-circle-progress-curve)',
+      value,
+      strokeWidth,
+      radius,
+      circumference,
+      strokeDashoffset: circumference * (1 - value / 100),
+      text: `${Math.round(value)}%`,
+      style: {
+        '--size': addUnit(props.size) || 'var(--vro-circle-progress-size)',
+        '--color': props.color || 'var(--vro-circle-progress-color)',
+        '--background-color':
+          props.backgroundColor || 'var(--vro-circle-progress-background-color)',
+        '--duration': addUnit(props.duration, 'ms') || 'var(--vro-circle-progress-duration)',
+        '--curve': props.curve || 'var(--vro-circle-progress-curve)',
+      } as HTMLAttributes['style'],
     }
   })
 </script>
