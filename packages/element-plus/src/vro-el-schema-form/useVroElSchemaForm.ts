@@ -29,7 +29,7 @@ export function useVroElSchemaForm<
   options: UseVroElSchemaFormOptions = {},
 ) {
   const { instanceRef, source, ...rest } = options
-  const schema = reactive<UseVroElSchemaFormSchema<TSchema>>(
+  const schema = reactive<UseVroElSchemaFormSchema<T>>(
     (isFunction(rawSchema) ? rawSchema() : rawSchema) as any,
   )
 
