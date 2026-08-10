@@ -58,7 +58,7 @@
     disabled: '停用',
   }
 
-  const { tableProps, trigger } = createUseVroElTable<User>()(
+  const { tableProps, trigger, schema } = createUseVroElTable<User>()(
     {
       keyword: {
         label: '关键词',
@@ -72,6 +72,9 @@
         label: '状态',
         value: '',
         is: 'VroElSelect',
+        props: {
+          options: [],
+        },
         options: [
           { label: '全部', value: '' },
           { label: '启用', value: 'enabled' },
@@ -163,6 +166,10 @@
       return [list.slice(start, start + pageSize), list.length]
     },
   )
+
+  schema.status.props = {
+    options: [],
+  }
 
   const handleSelectionChange = (selection: User[]) => {
     selectionCount.value = selection.length

@@ -3,7 +3,7 @@ import { filterEmptyValue, isFunction, isNumber } from '@daysnap/utils'
 import { useAsyncTask, type UseAsyncTaskOptions } from '@vrojs/use'
 import { computed, reactive, type Ref, ref } from 'vue'
 
-import type { VroElSchemaFormSchema, VroElSchemaFormSchemaField } from '../vro-el-schema-form'
+import type { VroElSchemaFormSchema, VroElSchemaFormSchemaFieldBase } from '../vro-el-schema-form'
 import { type VroElTableColumnGroupColumns } from '../vro-el-table-column-group'
 import type { VroElTableRequest } from './types'
 
@@ -21,10 +21,13 @@ export type UseVroElTableRawColumns<T extends Record<string, any> = any> =
   | (() => VroElTableColumnGroupColumns<T>)
   | VroElTableColumnGroupColumns<T>
 
+export type UseVroElTableSchema<T extends VroElSchemaFormSchema> = {
+  [P in keyof T]: VroElSchemaFormSchemaFieldBase
+}
+
 export function useVroElTable<
   Row extends Record<string, any> = any,
   R extends VroElSchemaFormSchema = VroElSchemaFormSchema,
-  S extends VroElSchemaFormSchema = { [P in keyof R]: VroElSchemaFormSchemaField },
 >(
   rowSchema: (() => R) | R,
   rawColumns: UseVroElTableRawColumns<Row>,
@@ -32,7 +35,9 @@ export function useVroElTable<
   options: UseVroElTableOptions<Row> = {},
 ) {
   const { query: rawQuery, ...asyncTaskOptions } = options
-  const schema = reactive<S>((isFunction(rowSchema) ? rowSchema() : rowSchema) as any)
+  const schema = reactive<UseVroElTableSchema<R>>(
+    (isFunction(rowSchema) ? rowSchema() : rowSchema) as any,
+  )
   const columns = reactive(isFunction(rawColumns) ? rawColumns() : rawColumns)
 
   const query =

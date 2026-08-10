@@ -20,10 +20,35 @@
   import { ElMessage } from 'element-plus'
   import { ref } from 'vue'
 
+  import { useVroElTable } from '../../vro-el-table'
   import { useVroElSchemaForm, type VroElSchemaFormInstance } from '..'
 
   const values = ref<Record<string, any>>({})
   const schemaFormRef = ref<VroElSchemaFormInstance>()
+
+  const { schema: schema1 } = useVroElTable(
+    () => ({
+      elInput: {
+        label: 'ElInput',
+        value: '',
+        is: 'ElInput',
+        rules: [{ required: true }],
+      },
+      elSelect: {
+        label: 'ElSelect',
+        value: '',
+        is: 'ElSelect',
+        options: [
+          { label: '选项一', value: '1' },
+          { label: '选项二', value: '2' },
+        ],
+      },
+    }),
+    () => [],
+    async () => [[{}], 1],
+  )
+
+  schema1.elSelect.props = {}
 
   const { schema, loading, trigger } = useVroElSchemaForm(
     {
@@ -31,6 +56,7 @@
         label: 'ElInput',
         value: '',
         is: 'ElInput',
+        props: { maxlength: 50, showWordLimit: false },
         rules: [{ required: true }],
       },
       elSelect: {
@@ -72,6 +98,7 @@
       elInputNumber: {
         label: 'ElInputNumber',
         value: 1,
+        props: { max: 1 },
         is: 'ElInputNumber',
       },
       elTreeSelect: {
@@ -177,6 +204,7 @@
       },
     },
     async (data) => {
+      data.elCascader = 1
       values.value = data
       ElMessage.success('提交成功')
     },
@@ -184,6 +212,10 @@
       instanceRef: schemaFormRef,
     },
   )
+
+  schema.elSelect.props = {
+    options: [],
+  }
 
   const handleExtract = async () => {
     values.value = (await schemaFormRef.value?.extractValues()) ?? {}

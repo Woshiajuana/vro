@@ -170,6 +170,7 @@ export type VroElSchemaFormSchemaField =
   | VroElSchemaFormMappedSchemaField
   | VroElSchemaFormCustomSchemaField
 
+export type VroElSchemaFormSchemaBase = Record<string, VroElSchemaFormSchemaFieldBase>
 export type VroElSchemaFormSchema = Record<string, VroElSchemaFormSchemaField>
 export type VroElSchemaFormFormProps = Partial<Omit<FormProps, 'model' | 'rules'>>
 

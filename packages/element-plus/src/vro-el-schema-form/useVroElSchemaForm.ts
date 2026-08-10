@@ -4,7 +4,11 @@ import { useAsyncTask, type UseAsyncTaskOptions } from '@vrojs/use'
 import { reactive, type Ref, ref } from 'vue'
 
 import type { VroElSchemaFormInstance } from '.'
-import type { VroElSchemaFormSchema } from './types'
+import type {
+  VroElSchemaFormSchema,
+  VroElSchemaFormSchemaBase,
+  VroElSchemaFormSchemaFieldBase,
+} from './types'
 
 export interface UseVroElSchemaFormOptions
   extends Pick<UseAsyncTaskOptions<any>, 'throwError' | 'onError'> {
@@ -12,13 +16,22 @@ export interface UseVroElSchemaFormOptions
   instanceRef?: Ref<VroElSchemaFormInstance | undefined>
 }
 
-export function useVroElSchemaForm<T extends Record<string, any> = Record<string, any>>(
-  rawSchema: (() => VroElSchemaFormSchema) | VroElSchemaFormSchema,
-  task?: (data: T) => Promise<void>,
+export type UseVroElSchemaFormSchema<TSchema extends VroElSchemaFormSchema> = {
+  [K in keyof TSchema]: VroElSchemaFormSchemaFieldBase
+}
+
+export function useVroElSchemaForm<
+  D extends Record<string, any> = any,
+  T extends VroElSchemaFormSchema = VroElSchemaFormSchemaBase,
+>(
+  rawSchema: (() => T) | T,
+  task?: (data: D) => Promise<void>,
   options: UseVroElSchemaFormOptions = {},
 ) {
   const { instanceRef, source, ...rest } = options
-  const schema = reactive(isFunction(rawSchema) ? rawSchema() : rawSchema)
+  const schema = reactive<UseVroElSchemaFormSchema<TSchema>>(
+    (isFunction(rawSchema) ? rawSchema() : rawSchema) as any,
+  )
 
   const schemaFormRef = instanceRef ?? ref<VroElSchemaFormInstance>()
 
@@ -31,7 +44,7 @@ export function useVroElSchemaForm<T extends Record<string, any> = Record<string
     } catch {
       throw ''
     }
-    const data = (await schemaFormRef.value.extractValues()) as T
+    const data = (await schemaFormRef.value.extractValues()) as D
     await task?.(data)
     return data
   }, rest)
