@@ -1,6 +1,6 @@
 {
   "name": "@vrojs/element-plus",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "vrojs ui",
   "type": "module",
   "main": "src/index.ts",
@@ -46,8 +46,8 @@
     "@daysnap/banana": ">=0.0.15",
     "@daysnap/utils": ">=0.1.34",
     "@element-plus/icons-vue": ">=2.3.2",
-    "@vrojs/base": "workspace:*",
-    "@vrojs/use": "workspace:*",
+    "@vrojs/base": ">=0.0.6",
+    "@vrojs/use": ">=0.0.3",
     "element-plus": ">=2.11.9",
     "vue": ">=3.0.0"
   },
