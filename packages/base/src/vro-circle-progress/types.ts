@@ -63,4 +63,8 @@ export interface VroCircleProgressSlots {
   default?: (props: { value: number }) => any
 }
 
+export interface VroCircleProgressEmits {
+  finish: [value: number]
+}
+
 export type VroCircleProgressProps = ExtractPropTypes<typeof vroCircleProgressProps>

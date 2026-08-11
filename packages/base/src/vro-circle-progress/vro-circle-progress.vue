@@ -26,6 +26,7 @@
         :stroke-linecap="strokeLinecap"
         :stroke-dasharray="progress.circumference"
         :stroke-dashoffset="progress.strokeDashoffset"
+        @transitionend="handleTransitionEnd"
       />
     </svg>
     <slot :value="progress.value">{{ progress.text }}</slot>
@@ -37,17 +38,30 @@
   import { computed, type HTMLAttributes } from 'vue'
 
   import { addUnit } from '../utils'
-  import { vroCircleProgressProps, type VroCircleProgressSlots } from './types'
+  import {
+    type VroCircleProgressEmits,
+    vroCircleProgressProps,
+    type VroCircleProgressSlots,
+  } from './types'
 
   defineOptions({ name: 'VroCircleProgress' })
 
   const props = defineProps(vroCircleProgressProps)
+  const emit = defineEmits<VroCircleProgressEmits>()
 
   defineSlots<VroCircleProgressSlots>()
 
   const getNumber = (value: string | number) => {
     const numberValue = Number(value)
     return Number.isFinite(numberValue) ? numberValue : undefined
+  }
+
+  const getDuration = (value: string | number) => {
+    if (typeof value === 'number') return value
+
+    const duration = Number.parseFloat(value)
+    if (!Number.isFinite(duration)) return 0
+    return value.trim().endsWith('ms') ? duration : duration * 1000
   }
 
   const progress = computed(() => {
@@ -77,4 +91,9 @@
       } as HTMLAttributes['style'],
     }
   })
+
+  const handleTransitionEnd = (event: TransitionEvent) => {
+    if (event.propertyName !== 'stroke-dashoffset' || getDuration(props.duration) <= 0) return
+    emit('finish', progress.value.value)
+  }
 </script>

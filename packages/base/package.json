@@ -1,6 +1,6 @@
 {
   "name": "@vrojs/base",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "vrojs ui",
   "type": "module",
   "main": "src/index.ts",
