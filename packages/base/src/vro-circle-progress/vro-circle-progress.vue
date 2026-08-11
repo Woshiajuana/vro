@@ -28,9 +28,7 @@
         :stroke-dashoffset="progress.strokeDashoffset"
       />
     </svg>
-    <div class="vro-circle-progress-content">
-      <slot :value="progress.value">{{ progress.text }}</slot>
-    </div>
+    <slot :value="progress.value">{{ progress.text }}</slot>
   </div>
 </template>
 
