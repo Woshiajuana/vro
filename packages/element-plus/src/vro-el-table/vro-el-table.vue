@@ -60,7 +60,9 @@
 <script setup lang="ts">
   import { isEmptyObject } from '@daysnap/utils'
   import { RefreshRight } from '@element-plus/icons-vue'
-  import { ElButton, ElPagination, ElTable } from 'element-plus'
+  import type { TableInstance } from 'element-plus'
+  import type { Component as VueComponent } from 'vue'
+  import { ElButton, ElPagination, ElTable as RawElTable } from 'element-plus'
   import { computed, useTemplateRef } from 'vue'
 
   import { useLocale } from '../locale'
@@ -76,7 +78,9 @@
   const props = defineProps(vroElTableProps)
   const { t } = useLocale()
 
-  const refElTable = useTemplateRef('refElTable')
+  const ElTable = RawElTable as VueComponent
+
+  const refElTable = useTemplateRef<TableInstance>('refElTable')
 
   const filterable = computed(() => {
     const { filterable, filterProps } = props
