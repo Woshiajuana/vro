@@ -23,7 +23,7 @@ export const vroCircleProgressProps = {
    * 进度条宽度。
    */
   strokeWidth: {
-    type: Number,
+    type: [Number, String] as PropType<string | number>,
     default: 10,
   },
 

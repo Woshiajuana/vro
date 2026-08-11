@@ -8,7 +8,7 @@
   <demo-block title="自定义样式">
     <div class="demo-circle-progress-row">
       <vro-circle-progress :model-value="68" color="#1989fa" background-color="#ebedf0" />
-      <vro-circle-progress :model-value="68" :size="80" :stroke-width="6" color="#07c160" />
+      <vro-circle-progress :model-value="68" :size="80" :stroke-width="1" color="#07c160" />
       <vro-circle-progress :model-value="68" :size="120" :stroke-width="12" color="#ee0a24" />
     </div>
   </demo-block>
