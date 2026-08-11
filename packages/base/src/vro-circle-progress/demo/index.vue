@@ -35,8 +35,9 @@
         :duration="countdownDuration"
         curve="cubic-bezier(0, 0, 0.2, 1)"
         color="#1989fa"
+        stroke-linecap="butt"
       />
-      <button class="demo-circle-progress-button" @click="startCountdown">开始</button>
+      <button class="demo-circle-progress-button" @click="startCountdown">开始1</button>
     </div>
   </demo-block>
 
