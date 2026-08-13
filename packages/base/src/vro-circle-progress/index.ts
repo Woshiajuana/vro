@@ -2,6 +2,7 @@ import { withInstall } from '../utils'
 import Component from './vro-circle-progress.vue'
 
 export * from './types'
+export * from './useVroCircleProgress'
 
 export const VroCircleProgress = withInstall<typeof Component>(Component)
 export default VroCircleProgress

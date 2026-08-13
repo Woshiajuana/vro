@@ -51,25 +51,20 @@
 </template>
 
 <script setup lang="ts">
-  import { nextTick, onBeforeUnmount, ref } from 'vue'
+  import { onBeforeUnmount, ref } from 'vue'
+
+  import { useVroCircleProgress } from '../useVroCircleProgress'
 
   const progress = ref(20)
-  const countdownProgress = ref(100)
-  const countdownDuration = ref('10s')
+  const {
+    progress: countdownProgress,
+    duration: countdownDuration,
+    start: startCountdown,
+  } = useVroCircleProgress()
+
   const timer = window.setInterval(() => {
     progress.value = progress.value >= 90 ? 20 : progress.value + 10
   }, 1200)
-
-  const startCountdown = () => {
-    countdownDuration.value = '0ms'
-    countdownProgress.value = 100
-    nextTick(() => {
-      window.requestAnimationFrame(() => {
-        countdownDuration.value = '10s'
-        countdownProgress.value = 0
-      })
-    })
-  }
 
   onBeforeUnmount(() => {
     window.clearInterval(timer)
