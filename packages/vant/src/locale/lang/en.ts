@@ -8,6 +8,24 @@ export default {
       filterPlaceholder: 'Enter keywords to filter',
       emptyText: 'No data',
     },
+    schemaForm: {
+      VroVanField: {
+        placeholder: 'Please enter',
+      },
+      VroVanTextarea: {
+        placeholder: 'Please enter',
+      },
+      VroVanSelectPicker: {
+        placeholder: 'Please select',
+      },
+      VroVanDatetimeSelectPicker: {
+        placeholder: 'Please select',
+      },
+      VroVanDatetimeRangeSelectPicker: {
+        startPlaceholder: 'Start time',
+        endPlaceholder: 'End time',
+      },
+    },
     skeleton: {
       loadingDescription: 'Loading',
       errorBtnText: 'Refresh',

@@ -8,6 +8,24 @@ export default {
       filterPlaceholder: '输入关键词进行筛选',
       emptyText: '暂无数据',
     },
+    schemaForm: {
+      VroVanField: {
+        placeholder: '请填写',
+      },
+      VroVanTextarea: {
+        placeholder: '请填写',
+      },
+      VroVanSelectPicker: {
+        placeholder: '请选择',
+      },
+      VroVanDatetimeSelectPicker: {
+        placeholder: '请选择',
+      },
+      VroVanDatetimeRangeSelectPicker: {
+        startPlaceholder: '开始时间',
+        endPlaceholder: '结束时间',
+      },
+    },
     skeleton: {
       loadingDescription: '加载中',
       errorBtnText: '刷新一下',
