@@ -1,1 +1,112 @@
-.vro-van-navbar { }
+:root,
+:host {
+  --vro-van-navbar-height: 46px;
+  --vro-van-navbar-padding-x: 16px;
+  --vro-van-navbar-background: var(--van-background-2);
+  --vro-van-navbar-title-color: var(--van-text-color);
+  --vro-van-navbar-title-font-size: var(--van-font-size-lg);
+  --vro-van-navbar-title-font-weight: var(--van-font-bold);
+  --vro-van-navbar-text-color: var(--van-primary-color);
+  --vro-van-navbar-icon-size: 18px;
+  --vro-van-navbar-border-color: var(--van-border-color);
+}
+
+.vro-van-navbar {
+  position: relative;
+  width: 100%;
+  color: var(--vro-van-navbar-title-color);
+  background: var(--vro-van-navbar-background);
+
+  &.is-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  &.is-border::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    background: var(--vro-van-navbar-border-color);
+    transform: scaleY(0.5);
+    content: '';
+  }
+
+  &.is-safe-area-inset-top {
+    padding-top: constant(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+.vro-van-navbar-placeholder {
+  height: var(--vro-van-navbar-height);
+
+  &.is-safe-area-inset-top {
+    height: calc(var(--vro-van-navbar-height) + constant(safe-area-inset-top));
+    height: calc(var(--vro-van-navbar-height) + env(safe-area-inset-top));
+  }
+}
+
+.vro-van-navbar-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--vro-van-navbar-height);
+  padding: 0 var(--vro-van-navbar-padding-x);
+}
+
+.vro-van-navbar-title {
+  position: absolute;
+  right: calc(var(--vro-van-navbar-padding-x) + 72px);
+  left: calc(var(--vro-van-navbar-padding-x) + 72px);
+  overflow: hidden;
+  color: var(--vro-van-navbar-title-color);
+  font-weight: var(--vro-van-navbar-title-font-weight);
+  font-size: var(--vro-van-navbar-title-font-size);
+  line-height: var(--vro-van-navbar-height);
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.vro-van-navbar-left,
+.vro-van-navbar-right {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  flex: 0 0 72px;
+  align-items: center;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  color: var(--vro-van-navbar-text-color);
+  font: inherit;
+  line-height: 1;
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.vro-van-navbar-left {
+  justify-content: flex-start;
+}
+
+.vro-van-navbar-right {
+  justify-content: flex-end;
+}
+
+.vro-van-navbar-left-icon {
+  flex: none;
+  font-size: var(--vro-van-navbar-icon-size);
+}
+
+.vro-van-navbar-left-text,
+.vro-van-navbar-right-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

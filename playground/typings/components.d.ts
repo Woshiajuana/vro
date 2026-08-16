@@ -66,6 +66,7 @@ declare module 'vue' {
     VroVanIcon: typeof import('@vrojs/vant')['VroVanIcon']
     VroVanImage: typeof import('@vrojs/vant')['VroVanImage']
     VroVanImageUploader: typeof import('@vrojs/vant')['VroVanImageUploader']
+    VroVanNavbar: typeof import('@vrojs/vant')['VroVanNavbar']
     VroVanPicker: typeof import('@vrojs/vant')['VroVanPicker']
     VroVanRadio: typeof import('@vrojs/vant')['VroVanRadio']
     VroVanRadioButton: typeof import('@vrojs/vant')['VroVanRadioButton']
