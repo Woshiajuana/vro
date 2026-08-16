@@ -1,10 +1,15 @@
 import type { ExtractPropTypes } from 'vue'
 
 export const vroVanNavbarProps = {
-  safeAreaInsetTop: {
+  leftArrow: {
     type: Boolean,
     default: true,
   },
+  safeAreaInsetTop: Boolean,
+  border: Boolean,
+  fixed: Boolean,
+  placeholder: Boolean,
+  title: String,
 }
 
 export type VroVanNavbarProps = ExtractPropTypes<typeof vroVanNavbarProps>
