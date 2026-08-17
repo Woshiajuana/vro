@@ -14,3 +14,4 @@
 - 如果有 `defineSlots` 需要将类型提取到 `type.ts` 下
 - 如果有对模板的引用，则使用 `useTemplateRef`，命名建议 `xxxRef`，例如：`const inputRef = useTemplateRef('inputRef')`
 - 组件里去掉不必要使用的 `computed`
+- 暂不考虑 `a11y`

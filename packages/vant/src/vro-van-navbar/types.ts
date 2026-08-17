@@ -77,6 +77,11 @@ export type VroVanNavbarProps = ExtractPropTypes<typeof vroVanNavbarProps>
 
 export interface VroVanNavbarSlots {
   /**
+   * 自定义导航栏主体内容，会覆盖默认标题区域。
+   */
+  default?: VroSlot
+
+  /**
    * 自定义标题内容。
    */
   title?: VroSlot

@@ -5,6 +5,7 @@
     :class="{ 'is-safe-area-inset-top': safeAreaInsetTop }"
   ></div>
   <div
+    v-bind="$attrs"
     class="vro-van-navbar"
     :class="{
       'is-fixed': fixed,
@@ -14,22 +15,32 @@
     :style="{ zIndex }"
   >
     <div class="vro-van-navbar-inner">
-      <button class="vro-van-navbar-left" type="button" @click="$emit('click-left', $event)">
+      <div
+        class="vro-van-navbar-left"
+        :class="{ 'is-clickable': $slots.left || leftArrow || leftText }"
+        @click="$slots.left || leftArrow || leftText ? $emit('click-left', $event) : undefined"
+      >
         <slot name="left">
           <vro-van-icon v-if="leftArrow" class="vro-van-navbar-left-icon" :name="leftIcon" />
-          <span v-if="leftText" class="vro-van-navbar-left-text">{{ leftText }}</span>
+          <span v-if="leftText">{{ leftText }}</span>
         </slot>
-      </button>
-
-      <div class="vro-van-navbar-title">
-        <slot name="title">{{ title }}</slot>
       </div>
 
-      <button class="vro-van-navbar-right" type="button" @click="$emit('click-right', $event)">
+      <slot>
+        <div class="vro-van-navbar-title">
+          <slot name="title">{{ title }}</slot>
+        </div>
+      </slot>
+
+      <div
+        class="vro-van-navbar-right"
+        :class="{ 'is-clickable': $slots.right || rightText }"
+        @click="$slots.right || rightText ? $emit('click-right', $event) : undefined"
+      >
         <slot name="right">
-          <span v-if="rightText" class="vro-van-navbar-right-text">{{ rightText }}</span>
+          <span v-if="rightText">{{ rightText }}</span>
         </slot>
-      </button>
+      </div>
     </div>
   </div>
 </template>

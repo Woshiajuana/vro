@@ -14,13 +14,14 @@
 .vro-van-navbar {
   position: relative;
   width: 100%;
-  color: var(--vro-van-navbar-title-color);
-  background: var(--vro-van-navbar-background);
+  box-sizing: border-box;
+  background-color: var(--vro-van-navbar-background);
 
   &.is-fixed {
     position: fixed;
     top: 0;
     left: 0;
+    right: 0;
   }
 
   &.is-border::after {
@@ -29,7 +30,7 @@
     bottom: 0;
     left: 0;
     height: 1px;
-    background: var(--vro-van-navbar-border-color);
+    background-color: var(--vro-van-navbar-border-color);
     transform: scaleY(0.5);
     content: '';
   }
@@ -40,73 +41,64 @@
   }
 }
 
+.vro-van-navbar-inner {
+  position: relative;
+  width: 100%;
+  height: var(--vro-van-navbar-height);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
 .vro-van-navbar-placeholder {
   height: var(--vro-van-navbar-height);
 
   &.is-safe-area-inset-top {
-    height: calc(var(--vro-van-navbar-height) + constant(safe-area-inset-top));
-    height: calc(var(--vro-van-navbar-height) + env(safe-area-inset-top));
+    padding-top: constant(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top);
   }
 }
 
-.vro-van-navbar-inner {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: var(--vro-van-navbar-height);
-  padding: 0 var(--vro-van-navbar-padding-x);
-}
-
 .vro-van-navbar-title {
-  position: absolute;
-  right: calc(var(--vro-van-navbar-padding-x) + 72px);
-  left: calc(var(--vro-van-navbar-padding-x) + 72px);
-  overflow: hidden;
+  margin: 0 auto;
+  max-width: 60%;
   color: var(--vro-van-navbar-title-color);
   font-weight: var(--vro-van-navbar-title-font-weight);
   font-size: var(--vro-van-navbar-title-font-size);
-  line-height: var(--vro-van-navbar-height);
+  overflow: hidden;
   text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
-  pointer-events: none;
 }
 
 .vro-van-navbar-left,
 .vro-van-navbar-right {
-  position: relative;
-  z-index: 1;
-  display: inline-flex;
-  flex: 0 0 72px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
   align-items: center;
-  min-width: 0;
-  height: 100%;
-  padding: 0;
+  padding: 0 var(--vro-van-navbar-padding-x);
   color: var(--vro-van-navbar-text-color);
-  font: inherit;
-  line-height: 1;
-  background: transparent;
-  border: 0;
-  outline: 0;
+  font-size: 14px;
+
+  &.is-clickable {
+    cursor: pointer;
+  }
 }
 
 .vro-van-navbar-left {
+  left: 0;
   justify-content: flex-start;
+  gap: 4px;
 }
 
 .vro-van-navbar-right {
+  right: 0;
   justify-content: flex-end;
 }
 
 .vro-van-navbar-left-icon {
   flex: none;
   font-size: var(--vro-van-navbar-icon-size);
-}
-
-.vro-van-navbar-left-text,
-.vro-van-navbar-right-text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }

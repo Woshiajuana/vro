@@ -31,10 +31,6 @@
   <demo-block title="无边框">
     <vro-van-navbar title="无边框" :border="false" />
   </demo-block>
-
-  <demo-block title="固定在顶部">
-    <vro-van-navbar title="固定导航" fixed placeholder safe-area-inset-top />
-  </demo-block>
 </template>
 
 <script setup lang="ts">
