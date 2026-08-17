@@ -1,5 +1,9 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 
-export const vroVanViewProps = {}
+import type { VroVanNavbarProps } from '../vro-van-navbar'
+
+export const vroVanViewProps = {
+  navbarProps: Object as PropType<Partial<VroVanNavbarProps>>,
+}
 
 export type VroVanViewProps = ExtractPropTypes<typeof vroVanViewProps>
