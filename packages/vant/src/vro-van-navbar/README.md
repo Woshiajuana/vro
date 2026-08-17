@@ -73,6 +73,10 @@
       <td>说明</td>
     </tr>
     <tr>
+      <td>default</td>
+      <td>自定义导航栏主体内容，会覆盖默认标题区域</td>
+    </tr>
+    <tr>
       <td>title</td>
       <td>自定义标题内容</td>
     </tr>
