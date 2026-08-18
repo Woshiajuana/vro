@@ -1,6 +1,6 @@
 <template>
   <div class="vro-van-safe-area">
-    <span>vro-van-safe-area</span>
+    <slot></slot>
   </div>
 </template>
 
