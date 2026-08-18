@@ -1,12 +1,46 @@
+:root,
+:host {
+  --vro-van-view-background: var(--van-background);
+  --vro-van-view-footer-background: var(--van-background-2);
+}
+
 .vro-van-view {
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
-  flex: 1;
+  height: 100%;
   box-sizing: border-box;
+  overflow: hidden;
+  background-color: var(--vro-van-view-background);
 
   > * {
     flex-shrink: 0;
   }
+
+  &.is-scrollable {
+    .vro-van-view-inner {
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+}
+
+.vro-van-view-inner {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+
+  > * {
+    flex-shrink: 0;
+  }
+}
+
+.vro-van-view-footer {
+  position: relative;
+  z-index: 1;
+  background-color: var(--vro-van-view-footer-background);
 }

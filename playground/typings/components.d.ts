@@ -77,6 +77,7 @@ declare module 'vue' {
     VroVanTest: typeof import('@vrojs/vant')['VroVanTest']
     VroVanTextarea: typeof import('@vrojs/vant')['VroVanTextarea']
     VroVanTriggerCell: typeof import('@vrojs/vant')['VroVanTriggerCell']
+    VroVanView: typeof import('@vrojs/vant')['VroVanView']
     VroVnr: typeof import('@vrojs/base')['VroVnr']
   }
   export interface GlobalDirectives {
