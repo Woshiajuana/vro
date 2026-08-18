@@ -34,9 +34,9 @@
       </vro-van-navbar>
     </slot>
 
-    <main class="vro-van-view-inner">
+    <div class="vro-van-view-inner">
       <slot></slot>
-    </main>
+    </div>
 
     <slot name="footer"></slot>
   </div>
