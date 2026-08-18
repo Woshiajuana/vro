@@ -5,6 +5,11 @@ import type { VroVanNavbarProps } from '../vro-van-navbar'
 
 export const vroVanViewProps = {
   /**
+   * 导航栏标题文本。
+   */
+  title: String,
+
+  /**
    * 是否显示默认导航栏。
    *
    * @default true
@@ -18,7 +23,7 @@ export const vroVanViewProps = {
    * 透传给 VroVanNavbar 的属性。
    */
   navbarProps: {
-    type: Object as PropType<Partial<VroVanNavbarProps>>,
+    type: Object as PropType<Partial<Omit<VroVanNavbarProps, 'title'>>>,
     default: () => ({}),
   },
 

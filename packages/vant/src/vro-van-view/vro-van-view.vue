@@ -9,6 +9,7 @@
       <vro-van-navbar
         v-if="showNavbar"
         safe-area-inset-top
+        :title="title"
         v-bind="navbarProps"
         class="vro-van-view-navbar"
         @click-left="$emit('click-left', $event)"
@@ -17,8 +18,12 @@
         <template v-if="$slots.navbar" #default>
           <slot name="navbar"></slot>
         </template>
-        <template v-if="$slots.title" #title>
-          <slot name="title"></slot>
+        <template #title>
+          <slot name="title">
+            <span v-if="title" v-html="title" key="no-once"></span>
+            <!-- todo vue3 这里使用 v-else 时，v-once 失效 -->
+            <span v-if="!title" v-html="$route.meta?.title" v-once key="once"></span>
+          </slot>
         </template>
         <template v-if="$slots.left" #left>
           <slot name="left"></slot>

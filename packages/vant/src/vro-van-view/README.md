@@ -8,8 +8,31 @@
 
 ### 基础用法
 
+通过 `title` 设置导航栏标题。
+
 ```html
-<vro-van-view :navbar-props="{ title: '页面标题' }">
+<vro-van-view title="页面标题">
+  <div>
+    <p>页面内容 1</p>
+    <p>页面内容 2</p>
+  </div>
+</vro-van-view>
+```
+
+### 导航栏属性
+
+通过 `navbarProps` 透传 `VroVanNavbar` 支持的其它属性。
+
+```html
+<vro-van-view
+  title="详情页"
+  :navbar-props="{
+    leftText: '返回',
+    rightText: '保存',
+  }"
+  @click-left="onClickLeft"
+  @click-right="onClickRight"
+>
   <div>页面内容</div>
 </vro-van-view>
 ```
@@ -25,8 +48,25 @@
 ### 自定义导航栏插槽
 
 ```html
-<vro-van-view :navbar-props="{ rightText: '保存' }" @click-right="onClickRight">
+<vro-van-view @click-left="onClickLeft" @click-right="onClickRight">
+  <template #left>取消</template>
   <template #title>编辑资料</template>
+  <template #right>保存</template>
+
+  <div>页面内容</div>
+</vro-van-view>
+```
+
+### 自定义导航栏内容
+
+通过 `navbar` 插槽可以覆盖默认导航栏标题区域。
+
+```html
+<vro-van-view>
+  <template #navbar>
+    <div>消息 12</div>
+  </template>
+
   <div>页面内容</div>
 </vro-van-view>
 ```
@@ -34,7 +74,7 @@
 ### 自定义头部和底部
 
 ```html
-<vro-van-view safe-area-inset-bottom>
+<vro-van-view>
   <template #header>
     <div>自定义头部</div>
   </template>
@@ -50,8 +90,11 @@
 ### 禁止内容滚动
 
 ```html
-<vro-van-view :navbar-props="{ title: '固定内容' }" :scrollable="false">
-  <div>页面内容</div>
+<vro-van-view title="固定内容" :scrollable="false">
+  <div>
+    <p>页面内容 1</p>
+    <p>页面内容 2</p>
+  </div>
 </vro-van-view>
 ```
 
@@ -146,10 +189,6 @@
     <tr>
       <td>--vro-van-view-background</td>
       <td>var(--van-background)</td>
-    </tr>
-    <tr>
-      <td>--vro-van-view-content-padding</td>
-      <td>0</td>
     </tr>
     <tr>
       <td>--vro-van-view-footer-background</td>
