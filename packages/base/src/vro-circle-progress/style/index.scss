@@ -36,9 +36,7 @@
 
 .vro-circle-progress-line {
   stroke: var(--color);
-  transition:
-    stroke-dashoffset var(--duration) var(--curve),
-    stroke var(--duration) var(--curve);
+  transition: stroke-dashoffset var(--duration) var(--curve);
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
 }
