@@ -1,5 +1,42 @@
 import type { ExtractPropTypes } from 'vue'
 
-export const vroVanPlatePickerProps = {}
+export const platePreSource = [
+  '京',
+  '津',
+  '沪',
+  '渝',
+  '冀',
+  '晋',
+  '陕',
+  '鲁',
+  '豫',
+  '辽',
+  '吉',
+  '黑',
+  '苏',
+  '浙',
+  '皖',
+  '赣',
+  '闽',
+  '鄂',
+  '湘',
+  '川',
+  '贵',
+  '云',
+  '粤',
+  '琼',
+  '甘',
+  '青',
+  '台',
+  '蒙',
+  '新',
+  '藏',
+  '桂',
+  '宁',
+]
+
+export const vroVanPlatePickerProps = {
+  modelValue: String,
+}
 
 export type VroVanPlatePickerProps = ExtractPropTypes<typeof vroVanPlatePickerProps>
