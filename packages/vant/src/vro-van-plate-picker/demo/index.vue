@@ -1,6 +1,6 @@
 <template>
   <demo-block title="基础用法">
-    <vro-van-safe-area />
+    <vro-van-plate-picker />
   </demo-block>
 </template>
 
