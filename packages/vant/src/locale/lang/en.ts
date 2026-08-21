@@ -8,6 +8,10 @@ export default {
       filterPlaceholder: 'Enter keywords to filter',
       emptyText: 'No data',
     },
+    pickerToolbar: {
+      cancelText: 'Cancel',
+      confirmText: 'Confirm',
+    },
     platePicker: {
       title: 'Select plate number',
       cancelText: 'Cancel',
