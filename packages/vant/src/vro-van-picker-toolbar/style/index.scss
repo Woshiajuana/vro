@@ -20,34 +20,37 @@
 }
 
 .vro-van-picker-toolbar-button {
+  position: absolute;
   min-width: var(--vro-van-picker-toolbar-action-min-width);
-  height: 100%;
   padding: var(--vro-van-picker-toolbar-action-padding);
   border: none;
   font-size: var(--vro-van-picker-toolbar-action-font-size);
   background-color: transparent;
+  top: 0;
+  bottom: 0;
+  cursor: pointer;
 
   &.is-cancel {
+    left: 0;
     color: var(--vro-van-picker-toolbar-cancel-action-color);
     text-align: left;
   }
 
   &.is-confirm {
+    right: 0;
     color: var(--vro-van-picker-toolbar-confirm-action-color);
     text-align: right;
   }
 }
 
 .vro-van-picker-toolbar-title {
-  position: absolute;
-  left: 50%;
-  max-width: 50%;
+  max-width: 60%;
   overflow: hidden;
+  margin: 0 auto;
   color: var(--vro-van-picker-toolbar-title-color);
   font-weight: var(--vro-van-picker-toolbar-title-font-weight);
   font-size: var(--vro-van-picker-toolbar-title-font-size);
   text-align: center;
   text-overflow: ellipsis;
-  transform: translate(-50%);
   white-space: nowrap;
 }
