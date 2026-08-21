@@ -1,0 +1,41 @@
+:root,
+:host {
+  --vro-van-picker-header-height: 44px;
+  --vro-van-picker-header-action-padding: 0 16px;
+  --vro-van-picker-header-cancel-action-color: var(--van-text-color-2);
+  --vro-van-picker-header-confirm-action-color: var(--van-primary-color);
+  --vro-van-picker-header-title-color: var(--van-text-color);
+}
+
+.vro-van-picker-header {
+  height: var(--vro-van-picker-header-height);
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.vro-van-picker-header-button {
+  height: 100%;
+  padding: var(--vro-van-picker-header-action-padding);
+  font-size: 14px;
+  background-color: transparent;
+  border: none;
+  &.is-cancel {
+    color: var(--vro-van-picker-header-cancel-action-color);
+  }
+  &.is-confirm {
+    color: var(--vro-van-picker-header-confirm-action-color);
+  }
+}
+
+.vro-van-picker-header-title {
+  color: var(--vro-van-picker-header-title-color);
+  max-width: 50%;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+}
