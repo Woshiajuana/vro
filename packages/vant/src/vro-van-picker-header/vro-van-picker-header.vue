@@ -1,10 +1,18 @@
 <template>
   <div class="vro-van-picker-header">
-    <button v-if="showCancelButton" class="vro-van-picker-header-button is-cancel">
+    <button
+      v-if="showCancelButton"
+      class="vro-van-picker-header-button is-cancel"
+      @click="$emit('cancel')"
+    >
       {{ cancelText || '取消' }}
     </button>
     <span class="vro-van-picker-header-title">{{ title }}</span>
-    <button v-if="showConfirmButton" class="vro-van-picker-header-button is-confirm">
+    <button
+      v-if="showConfirmButton"
+      class="vro-van-picker-header-button is-confirm"
+      @click="$emit('confirm')"
+    >
       {{ confirmText || '确认' }}
     </button>
   </div>
