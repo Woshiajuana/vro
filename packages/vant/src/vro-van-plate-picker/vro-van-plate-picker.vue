@@ -5,11 +5,21 @@
       <span class="vro-van-plate-picker-header-title">请选择车牌号</span>
       <button class="vro-van-plate-picker-button is-confirm">确认</button>
     </div>
-    <ul class="vro-van-plate-picker-content">
+    <ul class="vro-van-plate-picker-extra-keys">
       <li
         v-for="(item, index) in platePreSource"
         :key="index"
-        class="vro-van-plate-picker-item"
+        class="vro-van-plate-picker-extra-key"
+        :class="{ 'is-active': item === modelValue }"
+      >
+        {{ item }}
+      </li>
+    </ul>
+    <ul class="vro-van-plate-picker-keys">
+      <li
+        v-for="(item, index) in platePreSource"
+        :key="index"
+        class="vro-van-plate-picker-key"
         :class="{ 'is-active': item === modelValue }"
       >
         {{ item }}

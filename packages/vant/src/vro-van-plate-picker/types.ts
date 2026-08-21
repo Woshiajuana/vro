@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 
 export const platePreSource = [
   '京',
@@ -37,6 +37,11 @@ export const platePreSource = [
 
 export const vroVanPlatePickerProps = {
   modelValue: String,
+  showExtra: Boolean,
+  extraKeys: {
+    type: Array as PropType<string[]>,
+    default: () => ['未上牌', '未知'],
+  },
 }
 
 export type VroVanPlatePickerProps = ExtractPropTypes<typeof vroVanPlatePickerProps>
