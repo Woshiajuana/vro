@@ -8,6 +8,11 @@ export default {
       filterPlaceholder: '输入关键词进行筛选',
       emptyText: '暂无数据',
     },
+    platePicker: {
+      title: '请选择车牌号',
+      cancelText: '取消',
+      confirmText: '确认',
+    },
     schemaForm: {
       VroVanField: {
         placeholder: '请填写',

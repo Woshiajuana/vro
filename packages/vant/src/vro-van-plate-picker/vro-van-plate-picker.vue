@@ -1,49 +1,125 @@
 <template>
-  <VanPopup class="vro-van-plate-picker" round position="bottom">
+  <van-popup
+    round
+    position="bottom"
+    v-bind="computedProps.popupProps"
+    class="vro-van-plate-picker"
+    :show="visible"
+    @click-overlay="hide('cancel')"
+    @click-close-icon="hide('cancel')"
+    @closed="$emit('closed')"
+  >
     <div class="vro-van-plate-picker-header">
-      <button class="vro-van-plate-picker-button is-cancel">取消</button>
-      <span class="vro-van-plate-picker-header-title">请选择车牌号</span>
-      <button class="vro-van-plate-picker-button is-confirm">确认</button>
+      <button class="vro-van-plate-picker-button is-cancel" type="button" @click="hide('cancel')">
+        {{ computedProps.cancelText || t('platePicker.cancelText') }}
+      </button>
+      <span class="vro-van-plate-picker-header-title">
+        {{ computedProps.title || t('platePicker.title') }}
+      </span>
+      <button class="vro-van-plate-picker-button is-confirm" type="button" @click="handleConfirm">
+        {{ computedProps.confirmText || t('platePicker.confirmText') }}
+      </button>
     </div>
-    <ul class="vro-van-plate-picker-extra-keys">
+    <ul
+      v-if="computedProps.showExtra && computedProps.extraKeys.length"
+      class="vro-van-plate-picker-extra-keys"
+    >
       <li
-        v-for="(item, index) in platePreSource"
-        :key="index"
+        v-for="item in computedProps.extraKeys"
+        :key="item"
         class="vro-van-plate-picker-extra-key"
-        :class="{ 'is-active': item === modelValue }"
+        :class="{ 'is-active': item === currentValue }"
+        @click="selectKey(item)"
       >
         {{ item }}
       </li>
     </ul>
     <ul class="vro-van-plate-picker-keys">
       <li
-        v-for="(item, index) in platePreSource"
-        :key="index"
+        v-for="item in platePreSource"
+        :key="item"
         class="vro-van-plate-picker-key"
-        :class="{ 'is-active': item === modelValue }"
+        :class="{ 'is-active': item === currentValue }"
+        @click="selectKey(item)"
       >
         {{ item }}
       </li>
     </ul>
-  </VanPopup>
+  </van-popup>
 </template>
 
 <script setup lang="ts">
   import { useVisible } from '@vrojs/use'
   import { Popup as VanPopup } from 'vant'
+  import { computed, ref, watch } from 'vue'
 
-  import { platePreSource, vroVanPlatePickerProps } from './types'
+  import { useLocale } from '../locale'
+  import {
+    platePreSource,
+    type VroVanPlatePickerEmits,
+    type VroVanPlatePickerProps,
+    vroVanPlatePickerProps,
+    type VroVanPlatePickerResult,
+  } from './types'
 
   defineOptions({ name: 'VroVanPlatePicker' })
 
-  defineProps(vroVanPlatePickerProps)
+  const emit = defineEmits<VroVanPlatePickerEmits>()
+  const props = defineProps(vroVanPlatePickerProps)
 
-  const { visible, show, hide, confirm } = useVisible()
+  const { t } = useLocale()
+
+  const currentValue = ref('')
+  const dynamicProps = ref<Partial<VroVanPlatePickerProps>>()
+
+  const computedProps = computed<VroVanPlatePickerProps>(() =>
+    Object.assign({}, props, dynamicProps.value),
+  )
+
+  const {
+    visible,
+    show,
+    hide,
+    confirm: confirmPicker,
+  } = useVisible<Partial<VroVanPlatePickerProps>, VroVanPlatePickerResult>({
+    showCallback: (options) => {
+      dynamicProps.value = options
+      currentValue.value = options?.modelValue ?? props.modelValue ?? ''
+    },
+    hideCallback: (reason) => {
+      emit('cancel', reason)
+    },
+    confirmCallback: (value: string) => {
+      const result = { value }
+
+      emit('update:modelValue', value)
+      emit('confirm', result)
+      return result
+    },
+  })
+
+  watch(
+    () => computedProps.value.modelValue,
+    (value) => {
+      if (!visible.value) {
+        currentValue.value = value ?? ''
+      }
+    },
+    { immediate: true },
+  )
+
+  const selectKey = (value: string) => {
+    currentValue.value = value
+  }
+
+  const handleConfirm = () => {
+    confirmPicker(currentValue.value)
+  }
 
   defineExpose({
     visible,
     show,
     hide,
-    confirm,
+    confirm: handleConfirm,
   })
 </script>

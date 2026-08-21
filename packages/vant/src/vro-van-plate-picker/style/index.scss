@@ -1,1 +1,91 @@
-.vro-van-plate-picker { }
+.vro-van-plate-picker {
+  --vro-van-plate-picker-padding: 0 12px 16px;
+  --vro-van-plate-picker-header-height: 48px;
+  --vro-van-plate-picker-title-color: var(--van-text-color);
+  --vro-van-plate-picker-button-color: var(--van-primary-color);
+  --vro-van-plate-picker-cancel-color: var(--van-text-color-2);
+  --vro-van-plate-picker-key-height: 40px;
+  --vro-van-plate-picker-key-gap: 8px;
+  --vro-van-plate-picker-key-radius: 4px;
+  --vro-van-plate-picker-key-color: var(--van-text-color);
+  --vro-van-plate-picker-key-background: var(--van-background);
+  --vro-van-plate-picker-key-active-color: var(--van-primary-color);
+  --vro-van-plate-picker-key-active-background: color-mix(
+    in srgb,
+    var(--van-primary-color) 10%,
+    #fff
+  );
+
+  padding: var(--vro-van-plate-picker-padding);
+  background: var(--van-background-2);
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--vro-van-plate-picker-header-height);
+  }
+
+  &-header-title {
+    flex: 1;
+    overflow: hidden;
+    color: var(--vro-van-plate-picker-title-color);
+    font-weight: var(--van-font-bold);
+    font-size: var(--van-font-size-lg);
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &-button {
+    flex: none;
+    min-width: 56px;
+    padding: 0;
+    border: 0;
+    color: var(--vro-van-plate-picker-button-color);
+    font-size: var(--van-font-size-md);
+    line-height: var(--vro-van-plate-picker-header-height);
+    background: transparent;
+
+    &.is-cancel {
+      color: var(--vro-van-plate-picker-cancel-color);
+      text-align: left;
+    }
+
+    &.is-confirm {
+      text-align: right;
+    }
+  }
+
+  &-extra-keys,
+  &-keys {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--vro-van-plate-picker-key-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &-keys {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    margin-top: var(--vro-van-plate-picker-key-gap);
+  }
+
+  &-extra-key,
+  &-key {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--vro-van-plate-picker-key-height);
+    border-radius: var(--vro-van-plate-picker-key-radius);
+    color: var(--vro-van-plate-picker-key-color);
+    font-size: var(--van-font-size-md);
+    background: var(--vro-van-plate-picker-key-background);
+
+    &.is-active {
+      color: var(--vro-van-plate-picker-key-active-color);
+      background: var(--vro-van-plate-picker-key-active-background);
+    }
+  }
+}

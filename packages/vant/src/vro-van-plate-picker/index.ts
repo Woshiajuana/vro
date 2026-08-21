@@ -2,6 +2,7 @@ import { withInstall } from '@vrojs/base'
 
 import Component from './vro-van-plate-picker.vue'
 
+export * from './function-call'
 export * from './types'
 
 export const VroVanPlatePicker = withInstall<typeof Component>(Component)

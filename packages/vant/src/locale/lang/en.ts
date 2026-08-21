@@ -8,6 +8,11 @@ export default {
       filterPlaceholder: 'Enter keywords to filter',
       emptyText: 'No data',
     },
+    platePicker: {
+      title: 'Select plate number',
+      cancelText: 'Cancel',
+      confirmText: 'Confirm',
+    },
     schemaForm: {
       VroVanField: {
         placeholder: 'Please enter',
