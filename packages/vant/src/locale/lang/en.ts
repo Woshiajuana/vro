@@ -14,8 +14,6 @@ export default {
     },
     platePicker: {
       title: 'Select plate number',
-      cancelText: 'Cancel',
-      confirmText: 'Confirm',
     },
     schemaForm: {
       VroVanField: {

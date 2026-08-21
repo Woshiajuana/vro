@@ -2,7 +2,7 @@
 
 ### 介绍
 
-用于选择车牌省份简称的底部弹层选择器。支持额外选项、自定义标题按钮文案、实例方法打开和函数式调用。
+用于选择车牌省份简称的底部弹层选择器。顶部操作栏基于 VroVanPickerToolbar，支持额外选项、自定义标题按钮文案、实例方法打开和函数式调用。
 
 ## 代码演示
 
@@ -132,6 +132,8 @@ showVroVanPlatePicker({
 
 ### CSS 变量
 
+顶部操作栏样式可参考 VroVanPickerToolbar 的 CSS 变量。
+
 <table>
   <tbody>
     <tr>
@@ -141,10 +143,6 @@ showVroVanPlatePicker({
     <tr>
       <td>--vro-van-plate-picker-padding</td>
       <td>0 12px 16px</td>
-    </tr>
-    <tr>
-      <td>--vro-van-plate-picker-header-height</td>
-      <td>48px</td>
     </tr>
     <tr>
       <td>--vro-van-plate-picker-key-height</td>

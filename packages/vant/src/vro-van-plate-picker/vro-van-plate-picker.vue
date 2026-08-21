@@ -9,17 +9,13 @@
     @click-close-icon="hide('cancel')"
     @closed="$emit('closed')"
   >
-    <div class="vro-van-plate-picker-header">
-      <button class="vro-van-plate-picker-button is-cancel" type="button" @click="hide('cancel')">
-        {{ computedProps.cancelText || t('platePicker.cancelText') }}
-      </button>
-      <span class="vro-van-plate-picker-header-title">
-        {{ computedProps.title || t('platePicker.title') }}
-      </span>
-      <button class="vro-van-plate-picker-button is-confirm" type="button" @click="handleConfirm">
-        {{ computedProps.confirmText || t('platePicker.confirmText') }}
-      </button>
-    </div>
+    <vro-van-picker-toolbar
+      :cancel-text="computedProps.cancelText"
+      :confirm-text="computedProps.confirmText"
+      :title="computedProps.title || t('platePicker.title')"
+      @cancel="hide('cancel')"
+      @confirm="handleConfirm"
+    />
     <ul
       v-if="computedProps.showExtra && computedProps.extraKeys.length"
       class="vro-van-plate-picker-extra-keys"
@@ -54,6 +50,7 @@
   import { computed, ref, watch } from 'vue'
 
   import { useLocale } from '../locale'
+  import { VroVanPickerToolbar } from '../vro-van-picker-toolbar'
   import {
     platePreSource,
     type VroVanPlatePickerEmits,
