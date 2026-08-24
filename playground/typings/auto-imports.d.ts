@@ -64,6 +64,7 @@ declare global {
   const showVroElSchemaFormDrawer: typeof import('@vrojs/element-plus').showVroElSchemaFormDrawer
   const showVroVanActionSheet: typeof import('@vrojs/vant').showVroVanActionSheet
   const showVroVanPicker: typeof import('@vrojs/vant').showVroVanPicker
+  const showVroVanPlatePicker: typeof import('@vrojs/vant').showVroVanPlatePicker
   const toRaw: typeof import('vue').toRaw
   const toRef: typeof import('vue').toRef
   const toRefs: typeof import('vue').toRefs

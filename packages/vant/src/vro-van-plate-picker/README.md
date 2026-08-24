@@ -60,7 +60,7 @@ showVroVanPlatePicker({
 
 ### 属性 Props
 
-`value` 仅作为打开弹层时的初始选中值，确认结果通过 `show` 返回的 Promise 或 `confirm` 事件获取。
+`value` 仅作为打开弹层时的初始选中值，确认结果通过 `show` 返回的 Promise 获取。
 
 <table>
   <tbody>
@@ -95,6 +95,8 @@ showVroVanPlatePicker({
 </table>
 
 ### 确认结果 Result
+
+点击确认且当前已有选中值时，`show` 返回的 Promise 会 resolve 以下结果；点击取消、关闭弹层或未选择直接确认时，Promise 会 reject。
 
 <table>
   <tbody>
@@ -134,7 +136,7 @@ showVroVanPlatePicker({
     </tr>
     <tr>
       <td>confirm</td>
-      <td>确认当前选择</td>
+      <td>确认当前选择，未选择时会按取消处理</td>
     </tr>
   </tbody>
 </table>
