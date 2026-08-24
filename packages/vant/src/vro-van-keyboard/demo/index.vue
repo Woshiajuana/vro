@@ -45,7 +45,6 @@
   import { ref, useTemplateRef } from 'vue'
 
   import {
-    showVroVanKeyboard,
     type VroVanKeyboardInstance,
     type VroVanKeyboardProps,
     type VroVanKeyboardResult,
