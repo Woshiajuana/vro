@@ -101,7 +101,7 @@
   font-size: var(--van-font-size-md);
   background: var(--vro-van-keyboard-key-background);
   box-shadow: 0 1px 0 rgb(0 0 0 / 10%);
-  transition: all 0.1s;
+  transition: transform 0.1s;
   &:active {
     transform: translate3d(0, 1px, 0);
   }

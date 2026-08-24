@@ -170,7 +170,7 @@ showVroVanKeyboard({
     </tr>
     <tr>
       <td>--vro-van-keyboard-key-height</td>
-      <td>44px</td>
+      <td>40px</td>
     </tr>
     <tr>
       <td>--vro-van-keyboard-key-radius</td>

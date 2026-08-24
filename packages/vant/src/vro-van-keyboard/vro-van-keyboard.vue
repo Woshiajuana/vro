@@ -114,6 +114,12 @@
     Object.assign({}, props, dynamicProps.value),
   )
 
+  const inputKeys = new Set(
+    VRO_VAN_KEYBOARD_KEYS.flat().filter(
+      (key) => key !== VRO_VAN_KEYBOARD_HIDE_KEY && key !== VRO_VAN_KEYBOARD_DELETE_KEY,
+    ),
+  )
+
   const { visible, show, hide, confirm } = useVisible<
     Partial<VroVanKeyboardProps>,
     VroVanKeyboardResult
@@ -127,7 +133,17 @@
     },
   })
 
-  const maxLength = computed(() => Number(computedProps.value.maxlength) || Infinity)
+  const maxLength = computed(() => {
+    const { maxlength } = computedProps.value
+
+    if (maxlength === undefined || maxlength === null || maxlength === '') {
+      return Infinity
+    }
+
+    const value = Math.floor(Number(maxlength))
+
+    return Number.isFinite(value) ? Math.max(value, 0) : Infinity
+  })
 
   const isDisabledKey = (key: string) => {
     return computedProps.value.disabledKeys.includes(key)
@@ -135,6 +151,12 @@
 
   const appendValue = (value: string) => {
     currentValue.value = `${currentValue.value}${value}`.slice(0, maxLength.value)
+  }
+
+  const normalizeValue = (value: string) => {
+    return Array.from(value.toUpperCase())
+      .filter((key) => inputKeys.has(key))
+      .join('')
   }
 
   const handleKeyClick = (key: string) => {
@@ -152,7 +174,9 @@
   }
 
   const handlePaste = async () => {
-    appendValue((await computedProps.value.onPaste?.()) || '')
+    try {
+      appendValue(normalizeValue((await computedProps.value.onPaste?.()) || ''))
+    } catch {}
   }
 
   const handleConfirm = () => {
