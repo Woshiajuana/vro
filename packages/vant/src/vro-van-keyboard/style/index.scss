@@ -8,7 +8,8 @@
   --vro-van-keyboard-display-color: var(--van-text-color);
   --vro-van-keyboard-display-placeholder-color: var(--van-text-color-3);
   --vro-van-keyboard-display-background: var(--van-background);
-  --vro-van-keyboard-key-height: 44px;
+  --vro-van-keyboard-paste-icon-size: 20px;
+  --vro-van-keyboard-key-height: 40px;
   --vro-van-keyboard-key-radius: 6px;
   --vro-van-keyboard-key-color: var(--van-text-color);
   --vro-van-keyboard-key-background: var(--van-background);
@@ -23,7 +24,10 @@
 }
 
 .vro-van-keyboard {
+  display: flex;
+  flex-direction: column;
   background: var(--van-background-2);
+  gap: var(--vro-van-keyboard-row-gap);
 }
 
 .vro-van-keyboard-display {
@@ -31,7 +35,7 @@
   align-items: center;
   gap: var(--vro-van-keyboard-gap);
   height: var(--vro-van-keyboard-display-height);
-  margin: 0 var(--vro-van-keyboard-padding) var(--vro-van-keyboard-gap);
+  margin: 0 var(--vro-van-keyboard-padding);
   padding: var(--vro-van-keyboard-display-padding);
   border-radius: var(--vro-van-keyboard-key-radius);
   color: var(--vro-van-keyboard-display-color);
@@ -52,26 +56,33 @@
 
 .vro-van-keyboard-display-copy {
   flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--vro-van-keyboard-display-height);
+  height: var(--vro-van-keyboard-display-height);
   padding: 0;
   border: 0;
   color: var(--van-primary-color);
-  font-size: var(--van-font-size-md);
   background: transparent;
+}
+
+.vro-van-keyboard-paste-icon {
+  width: var(--vro-van-keyboard-paste-icon-size);
+  height: var(--vro-van-keyboard-paste-icon-size);
 }
 
 .vro-van-keyboard-content {
   margin: 0;
   padding: 0 var(--vro-van-keyboard-padding) var(--vro-van-keyboard-padding);
-  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--vro-van-keyboard-row-gap);
 }
 
 .vro-van-keyboard-row {
   display: flex;
   gap: var(--vro-van-keyboard-gap);
-}
-
-.vro-van-keyboard-row + .vro-van-keyboard-row {
-  margin-top: var(--vro-van-keyboard-row-gap);
 }
 
 .vro-van-keyboard-row:nth-child(3) {
@@ -90,6 +101,10 @@
   font-size: var(--van-font-size-md);
   background: var(--vro-van-keyboard-key-background);
   box-shadow: 0 1px 0 rgb(0 0 0 / 10%);
+  transition: all 0.1s;
+  &:active {
+    transform: translate3d(0, 1px, 0);
+  }
 }
 
 .vro-van-keyboard-key.is-hide,

@@ -14,7 +14,6 @@ export default {
     },
     keyboard: {
       placeholder: 'Please enter',
-      pasteText: 'Paste',
     },
     platePicker: {
       title: 'Select plate number',

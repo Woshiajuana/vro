@@ -27,7 +27,12 @@
         type="button"
         @click="handlePaste"
       >
-        {{ t('keyboard.pasteText') }}
+        <svg class="vro-van-keyboard-paste-icon" viewBox="0 0 24 24">
+          <path
+            d="M9 3h6a2 2 0 0 1 2 2h1a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h1a2 2 0 0 1 2-2zm0 2v2h6V5H9zM6 7v12h12V7h-1a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2H6zm3 5h6v2H9v-2zm0 4h5v2H9v-2z"
+            fill="currentColor"
+          ></path>
+        </svg>
       </button>
     </div>
 

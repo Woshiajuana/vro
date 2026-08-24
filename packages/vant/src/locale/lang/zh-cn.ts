@@ -14,7 +14,6 @@ export default {
     },
     keyboard: {
       placeholder: '请输入',
-      pasteText: '粘贴',
     },
     platePicker: {
       title: '请选择车牌号',

@@ -165,6 +165,10 @@ showVroVanKeyboard({
       <td>40px</td>
     </tr>
     <tr>
+      <td>--vro-van-keyboard-paste-icon-size</td>
+      <td>20px</td>
+    </tr>
+    <tr>
       <td>--vro-van-keyboard-key-height</td>
       <td>44px</td>
     </tr>
