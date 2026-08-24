@@ -1,10 +1,11 @@
 <template>
-  <div class="vro-van-plate-input">
+  <VroVanCell class="vro-van-plate-input">
     <span>vro-van-plate-input</span>
-  </div>
+  </VroVanCell>
 </template>
 
 <script setup lang="ts">
+  import { VroVanCell } from '../vro-van-cell'
   import { vroVanPlateInputProps } from './types'
 
   defineOptions({ name: 'VroVanPlateInput' })
