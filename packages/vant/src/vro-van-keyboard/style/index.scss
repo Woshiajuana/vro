@@ -105,14 +105,14 @@
   &:active {
     transform: translate3d(0, 1px, 0);
   }
-}
 
-.vro-van-keyboard-key.is-hide,
-.vro-van-keyboard-key.is-delete {
-  flex-grow: 1.6;
-  color: var(--vro-van-keyboard-action-key-color);
-  font-size: var(--van-font-size-sm);
-  background: var(--vro-van-keyboard-action-key-background);
+  &.is-hide,
+  &.is-delete {
+    flex-grow: 1.6;
+    color: var(--vro-van-keyboard-action-key-color);
+    font-size: var(--van-font-size-sm);
+    background: var(--vro-van-keyboard-action-key-background);
+  }
 }
 
 .vro-van-keyboard-key:disabled {
