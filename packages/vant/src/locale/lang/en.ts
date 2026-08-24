@@ -16,8 +16,8 @@ export default {
       title: 'Input',
       placeholder: 'Please enter',
       pasteText: 'Paste',
+      hideText: 'Hide keyboard',
       deleteText: 'Delete',
-      sureText: 'Done',
     },
     platePicker: {
       title: 'Select plate number',

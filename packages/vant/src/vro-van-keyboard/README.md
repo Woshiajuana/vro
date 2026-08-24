@@ -154,6 +154,10 @@ showVroVanKeyboard({
     </tr>
     <tr>
       <td>--vro-van-keyboard-gap</td>
+      <td>6px</td>
+    </tr>
+    <tr>
+      <td>--vro-van-keyboard-row-gap</td>
       <td>8px</td>
     </tr>
     <tr>
@@ -162,11 +166,11 @@ showVroVanKeyboard({
     </tr>
     <tr>
       <td>--vro-van-keyboard-key-height</td>
-      <td>42px</td>
+      <td>44px</td>
     </tr>
     <tr>
       <td>--vro-van-keyboard-key-radius</td>
-      <td>4px</td>
+      <td>6px</td>
     </tr>
     <tr>
       <td>--vro-van-keyboard-key-color</td>
@@ -177,12 +181,20 @@ showVroVanKeyboard({
       <td>var(--van-background)</td>
     </tr>
     <tr>
-      <td>--vro-van-keyboard-key-active-color</td>
-      <td>var(--van-primary-color)</td>
+      <td>--vro-van-keyboard-key-disabled-color</td>
+      <td>var(--van-text-color-3)</td>
     </tr>
     <tr>
-      <td>--vro-van-keyboard-key-active-background</td>
-      <td>color-mix(in srgb, var(--van-primary-color) 10%, #fff)</td>
+      <td>--vro-van-keyboard-key-disabled-background</td>
+      <td>var(--van-gray-2)</td>
+    </tr>
+    <tr>
+      <td>--vro-van-keyboard-action-key-color</td>
+      <td>var(--van-text-color)</td>
+    </tr>
+    <tr>
+      <td>--vro-van-keyboard-action-key-background</td>
+      <td>var(--van-gray-3)</td>
     </tr>
   </tbody>
 </table>

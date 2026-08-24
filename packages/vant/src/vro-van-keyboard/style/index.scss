@@ -1,24 +1,21 @@
 :root,
 :host {
   --vro-van-keyboard-padding: 12px;
-  --vro-van-keyboard-gap: 8px;
+  --vro-van-keyboard-gap: 6px;
+  --vro-van-keyboard-row-gap: 8px;
   --vro-van-keyboard-display-height: 40px;
   --vro-van-keyboard-display-padding: 0 12px;
   --vro-van-keyboard-display-color: var(--van-text-color);
   --vro-van-keyboard-display-placeholder-color: var(--van-text-color-3);
   --vro-van-keyboard-display-background: var(--van-background);
-  --vro-van-keyboard-key-height: 42px;
-  --vro-van-keyboard-key-radius: 4px;
+  --vro-van-keyboard-key-height: 44px;
+  --vro-van-keyboard-key-radius: 6px;
   --vro-van-keyboard-key-color: var(--van-text-color);
   --vro-van-keyboard-key-background: var(--van-background);
-  --vro-van-keyboard-key-active-color: var(--van-primary-color);
-  --vro-van-keyboard-key-active-background: color-mix(
-    in srgb,
-    var(--van-primary-color) 10%,
-    #fff
-  );
   --vro-van-keyboard-key-disabled-color: var(--van-text-color-3);
   --vro-van-keyboard-key-disabled-background: var(--van-gray-2);
+  --vro-van-keyboard-action-key-color: var(--van-text-color);
+  --vro-van-keyboard-action-key-background: var(--van-gray-3);
 }
 
 .vro-van-keyboard {
@@ -59,38 +56,44 @@
 }
 
 .vro-van-keyboard-content {
-  display: grid;
-  gap: var(--vro-van-keyboard-gap);
   margin: 0;
   padding: 0 var(--vro-van-keyboard-padding) var(--vro-van-keyboard-padding);
   list-style: none;
 }
 
 .vro-van-keyboard-row {
-  display: grid;
-  grid-template-columns: repeat(10, minmax(0, 1fr));
+  display: flex;
   gap: var(--vro-van-keyboard-gap);
 }
 
+.vro-van-keyboard-row + .vro-van-keyboard-row {
+  margin-top: var(--vro-van-keyboard-row-gap);
+}
+
+.vro-van-keyboard-row:nth-child(3) {
+  padding: 0 5%;
+}
+
 .vro-van-keyboard-key {
-  grid-column: span 1;
+  flex: 1 1 0;
+  min-width: 0;
   height: var(--vro-van-keyboard-key-height);
   padding: 0 4px;
   border: 0;
   border-radius: var(--vro-van-keyboard-key-radius);
   color: var(--vro-van-keyboard-key-color);
+  font-weight: 500;
   font-size: var(--van-font-size-md);
   background: var(--vro-van-keyboard-key-background);
+  box-shadow: 0 1px 0 rgb(0 0 0 / 10%);
 }
 
-.vro-van-keyboard-key.is-delete,
-.vro-van-keyboard-key.is-sure {
-  grid-column: span 2;
-}
-
-.vro-van-keyboard-key.is-sure {
-  color: var(--vro-van-keyboard-key-active-color);
-  background: var(--vro-van-keyboard-key-active-background);
+.vro-van-keyboard-key.is-hide,
+.vro-van-keyboard-key.is-delete {
+  flex-grow: 1.6;
+  color: var(--vro-van-keyboard-action-key-color);
+  font-size: var(--van-font-size-sm);
+  background: var(--vro-van-keyboard-action-key-background);
 }
 
 .vro-van-keyboard-key:disabled {
