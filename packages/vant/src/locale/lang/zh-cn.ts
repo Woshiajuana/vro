@@ -13,11 +13,8 @@ export default {
       confirmText: '确认',
     },
     keyboard: {
-      title: '请输入',
       placeholder: '请输入',
       pasteText: '粘贴',
-      hideText: '收起键盘',
-      deleteText: '删除',
     },
     platePicker: {
       title: '请选择车牌号',

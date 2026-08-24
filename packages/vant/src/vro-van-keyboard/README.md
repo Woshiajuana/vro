@@ -196,6 +196,22 @@ showVroVanKeyboard({
       <td>--vro-van-keyboard-action-key-background</td>
       <td>var(--van-gray-3)</td>
     </tr>
+    <tr>
+      <td>--vro-van-keyboard-hide-icon-width</td>
+      <td>22px</td>
+    </tr>
+    <tr>
+      <td>--vro-van-keyboard-hide-icon-height</td>
+      <td>18px</td>
+    </tr>
+    <tr>
+      <td>--vro-van-keyboard-delete-icon-width</td>
+      <td>24px</td>
+    </tr>
+    <tr>
+      <td>--vro-van-keyboard-delete-icon-height</td>
+      <td>17px</td>
+    </tr>
   </tbody>
 </table>
 

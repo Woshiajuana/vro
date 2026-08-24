@@ -13,11 +13,8 @@ export default {
       confirmText: 'Confirm',
     },
     keyboard: {
-      title: 'Input',
       placeholder: 'Please enter',
       pasteText: 'Paste',
-      hideText: 'Hide keyboard',
-      deleteText: 'Delete',
     },
     platePicker: {
       title: 'Select plate number',

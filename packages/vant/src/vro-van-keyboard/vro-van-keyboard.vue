@@ -12,7 +12,7 @@
     <vro-van-picker-toolbar
       :cancel-text="computedProps.cancelText"
       :confirm-text="computedProps.confirmText"
-      :title="computedProps.title || t('keyboard.title')"
+      :title="computedProps.title"
       @cancel="hide('cancel')"
       @confirm="handleConfirm"
     />
@@ -46,13 +46,12 @@
             'is-delete': key === VRO_VAN_KEYBOARD_DELETE_KEY,
           }"
           type="button"
-          :aria-label="getKeyLabel(key)"
           :disabled="isDisabledKey(key)"
           @click="handleKeyClick(key)"
         >
           <svg
             v-if="key === VRO_VAN_KEYBOARD_HIDE_KEY"
-            class="van-icon-arrow-down"
+            class="vro-van-keyboard-icon vro-van-keyboard-hide-icon"
             viewBox="0 0 30 24"
           >
             <path
@@ -62,7 +61,7 @@
           </svg>
           <svg
             v-else-if="key === VRO_VAN_KEYBOARD_DELETE_KEY"
-            class="van-icon-delete-o"
+            class="vro-van-keyboard-icon vro-van-keyboard-delete-icon"
             viewBox="0 0 32 22"
           >
             <path
@@ -83,7 +82,6 @@
   import { computed, ref } from 'vue'
 
   import { useLocale } from '../locale'
-  import { VroVanIcon } from '../vro-van-icon'
   import { VroVanPickerToolbar } from '../vro-van-picker-toolbar'
   import {
     VRO_VAN_KEYBOARD_DELETE_KEY,
@@ -128,18 +126,6 @@
 
   const isDisabledKey = (key: string) => {
     return computedProps.value.disabledKeys.includes(key)
-  }
-
-  const getKeyLabel = (key: string) => {
-    if (key === VRO_VAN_KEYBOARD_HIDE_KEY) {
-      return t('keyboard.hideText')
-    }
-
-    if (key === VRO_VAN_KEYBOARD_DELETE_KEY) {
-      return t('keyboard.deleteText')
-    }
-
-    return key
   }
 
   const appendValue = (value: string) => {

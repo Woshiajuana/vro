@@ -16,6 +16,10 @@
   --vro-van-keyboard-key-disabled-background: var(--van-gray-2);
   --vro-van-keyboard-action-key-color: var(--van-text-color);
   --vro-van-keyboard-action-key-background: var(--van-gray-3);
+  --vro-van-keyboard-hide-icon-width: 22px;
+  --vro-van-keyboard-hide-icon-height: 18px;
+  --vro-van-keyboard-delete-icon-width: 24px;
+  --vro-van-keyboard-delete-icon-height: 17px;
 }
 
 .vro-van-keyboard {
@@ -99,4 +103,19 @@
 .vro-van-keyboard-key:disabled {
   color: var(--vro-van-keyboard-key-disabled-color);
   background: var(--vro-van-keyboard-key-disabled-background);
+}
+
+.vro-van-keyboard-icon {
+  display: block;
+  margin: 0 auto;
+}
+
+.vro-van-keyboard-hide-icon {
+  width: var(--vro-van-keyboard-hide-icon-width);
+  height: var(--vro-van-keyboard-hide-icon-height);
+}
+
+.vro-van-keyboard-delete-icon {
+  width: var(--vro-van-keyboard-delete-icon-width);
+  height: var(--vro-van-keyboard-delete-icon-height);
 }
