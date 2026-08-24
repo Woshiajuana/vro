@@ -62,6 +62,7 @@ function getAPIMap() {
       VroVanPicker: ['showVroVanPicker'],
       VroVanActionSheet: ['showVroVanActionSheet'],
       VroVanDatetimePicker: ['showVroVanDatetimePicker'],
+      VroVanPlatePicker: ['showVroVanPlatePicker'],
     },
   }
 

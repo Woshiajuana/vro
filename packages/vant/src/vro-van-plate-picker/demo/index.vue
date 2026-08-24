@@ -41,7 +41,6 @@
   import { ref, useTemplateRef } from 'vue'
 
   import {
-    showVroVanPlatePicker,
     type VroVanPlatePickerInstance,
     type VroVanPlatePickerProps,
     type VroVanPlatePickerResult,
