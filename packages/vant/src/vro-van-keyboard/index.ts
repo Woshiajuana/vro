@@ -2,6 +2,7 @@ import { withInstall } from '@vrojs/base'
 
 import Component from './vro-van-keyboard.vue'
 
+export * from './function-call'
 export * from './types'
 
 export const VroVanKeyboard = withInstall<typeof Component>(Component)

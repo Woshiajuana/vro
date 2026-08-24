@@ -12,6 +12,13 @@ export default {
       cancelText: 'Cancel',
       confirmText: 'Confirm',
     },
+    keyboard: {
+      title: 'Input',
+      placeholder: 'Please enter',
+      pasteText: 'Paste',
+      deleteText: 'Delete',
+      sureText: 'Done',
+    },
     platePicker: {
       title: 'Select plate number',
     },

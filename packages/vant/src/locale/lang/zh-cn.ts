@@ -12,6 +12,13 @@ export default {
       cancelText: '取消',
       confirmText: '确认',
     },
+    keyboard: {
+      title: '请输入',
+      placeholder: '请输入',
+      pasteText: '粘贴',
+      deleteText: '删除',
+      sureText: '确定',
+    },
     platePicker: {
       title: '请选择车牌号',
     },
