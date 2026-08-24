@@ -20,7 +20,7 @@
 
 ```ts
 const openPlate = () => {
-  platePickerRef.value?.show({ modelValue: plateText.value }).then((result) => {
+  platePickerRef.value?.show({ value: plateText.value }).then((result) => {
     plateText.value = result.value
   })
 }
@@ -31,7 +31,7 @@ const openPlate = () => {
 ```ts
 platePickerRef.value?.show({
   title: '选择省份简称',
-  modelValue: plateText.value,
+  value: plateText.value,
   showExtra: false,
 })
 ```
@@ -41,7 +41,7 @@ platePickerRef.value?.show({
 ```ts
 platePickerRef.value?.show({
   title: '选择车牌状态',
-  modelValue: plateText.value,
+  value: plateText.value,
   extraKeys: ['新能源', '临牌'],
 })
 ```
@@ -50,7 +50,7 @@ platePickerRef.value?.show({
 
 ```ts
 showVroVanPlatePicker({
-  modelValue: plateText.value,
+  value: plateText.value,
 }).then((result) => {
   plateText.value = result.value
 })
@@ -59,6 +59,8 @@ showVroVanPlatePicker({
 ## API
 
 ### 属性 Props
+
+`value` 仅作为打开弹层时的初始选中值，确认结果通过 `show` 返回的 Promise 或 `confirm` 事件获取。
 
 <table>
   <tbody>
@@ -85,24 +87,31 @@ showVroVanPlatePicker({
       <td>说明</td>
     </tr>
     <tr>
-      <td>update:modelValue</td>
-      <td>value: string</td>
-      <td>确认选中值时触发</td>
-    </tr>
-    <tr>
-      <td>confirm</td>
-      <td>params: VroVanPlatePickerResult</td>
-      <td>点击确认按钮时触发</td>
-    </tr>
-    <tr>
-      <td>cancel</td>
-      <td>params?: PickerCancelEventParams | unknown</td>
-      <td>点击取消按钮或关闭弹层时触发</td>
-    </tr>
-    <tr>
       <td>closed</td>
       <td>-</td>
       <td>弹层关闭动画结束时触发</td>
+    </tr>
+  </tbody>
+</table>
+
+### 确认结果 Result
+
+<table>
+  <tbody>
+    <tr>
+      <td>名称</td>
+      <td>类型</td>
+      <td>说明</td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td>当前选中的车牌前缀或额外选项</td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>'plate' | 'extra'</td>
+      <td>当前选中值的来源类型</td>
     </tr>
   </tbody>
 </table>
@@ -141,8 +150,8 @@ showVroVanPlatePicker({
       <td>默认值</td>
     </tr>
     <tr>
-      <td>--vro-van-plate-picker-padding</td>
-      <td>0 12px 16px</td>
+      <td>--vro-van-plate-picker-keys-padding</td>
+      <td>16px</td>
     </tr>
     <tr>
       <td>--vro-van-plate-picker-key-height</td>
@@ -155,6 +164,26 @@ showVroVanPlatePicker({
     <tr>
       <td>--vro-van-plate-picker-key-radius</td>
       <td>4px</td>
+    </tr>
+    <tr>
+      <td>--vro-van-plate-picker-key-color</td>
+      <td>var(--van-text-color)</td>
+    </tr>
+    <tr>
+      <td>--vro-van-plate-picker-key-background</td>
+      <td>var(--van-background)</td>
+    </tr>
+    <tr>
+      <td>--vro-van-plate-picker-key-active-color</td>
+      <td>var(--van-primary-color)</td>
+    </tr>
+    <tr>
+      <td>--vro-van-plate-picker-key-active-background</td>
+      <td>color-mix(in srgb, var(--van-primary-color) 10%, #fff)</td>
+    </tr>
+    <tr>
+      <td>--vro-van-plate-picker-border-color</td>
+      <td>var(--van-border-color)</td>
     </tr>
   </tbody>
 </table>

@@ -1,4 +1,4 @@
-import type { PickerCancelEventParams, PopupProps } from 'vant'
+import type { PopupProps } from 'vant'
 import type { ExtractPropTypes, PropType } from 'vue'
 
 export const platePreSource = [
@@ -36,18 +36,25 @@ export const platePreSource = [
   '宁',
 ]
 
+export type VroVanPlatePickerValueType = 'plate' | 'extra'
+
 export interface VroVanPlatePickerResult {
   /**
-   * 当前选中的车牌前缀。
+   * 当前选中的车牌前缀或额外选项。
    */
   value: string
+
+  /**
+   * 当前选中值的来源类型。
+   */
+  type: VroVanPlatePickerValueType
 }
 
 export const vroVanPlatePickerProps = {
   /**
-   * 当前选中的车牌前缀。
+   * 初始选中的车牌前缀或额外选项。
    */
-  modelValue: String as PropType<string>,
+  value: String as PropType<string>,
 
   /**
    * 标题文案。
@@ -91,21 +98,6 @@ export const vroVanPlatePickerProps = {
 export type VroVanPlatePickerProps = ExtractPropTypes<typeof vroVanPlatePickerProps>
 
 export interface VroVanPlatePickerEmits {
-  /**
-   * 选中值确认时触发。
-   */
-  'update:modelValue': [value: string]
-
-  /**
-   * 点击确认按钮时触发。
-   */
-  confirm: [params: VroVanPlatePickerResult]
-
-  /**
-   * 点击取消按钮或关闭弹层时触发。
-   */
-  cancel: [params?: PickerCancelEventParams | unknown]
-
   /**
    * 弹层关闭动画结束时触发。
    */

@@ -14,7 +14,7 @@
       :confirm-text="computedProps.confirmText"
       :title="computedProps.title || t('platePicker.title')"
       @cancel="hide('cancel')"
-      @confirm="handleConfirm"
+      @confirm="handleConfirm()"
     />
     <ul
       v-if="computedProps.showExtra && computedProps.extraKeys.length"
@@ -25,7 +25,7 @@
         :key="item"
         class="vro-van-plate-picker-extra-key"
         :class="{ 'is-active': item === currentValue }"
-        @click="selectKey(item)"
+        @click="handleSelect(item)"
       >
         {{ item }}
       </li>
@@ -36,7 +36,7 @@
         :key="item"
         class="vro-van-plate-picker-key"
         :class="{ 'is-active': item === currentValue }"
-        @click="selectKey(item)"
+        @click="handleSelect(item)"
       >
         {{ item }}
       </li>
@@ -47,7 +47,7 @@
 <script setup lang="ts">
   import { useVisible } from '@vrojs/use'
   import { Popup as VanPopup } from 'vant'
-  import { computed, ref, watch } from 'vue'
+  import { computed, ref } from 'vue'
 
   import { useLocale } from '../locale'
   import { VroVanPickerToolbar } from '../vro-van-picker-toolbar'
@@ -61,7 +61,7 @@
 
   defineOptions({ name: 'VroVanPlatePicker' })
 
-  const emit = defineEmits<VroVanPlatePickerEmits>()
+  defineEmits<VroVanPlatePickerEmits>()
   const props = defineProps(vroVanPlatePickerProps)
 
   const { t } = useLocale()
@@ -73,50 +73,40 @@
     Object.assign({}, props, dynamicProps.value),
   )
 
-  const {
-    visible,
-    show,
-    hide,
-    confirm: confirmPicker,
-  } = useVisible<Partial<VroVanPlatePickerProps>, VroVanPlatePickerResult>({
+  const { visible, show, hide, confirm } = useVisible<
+    Partial<VroVanPlatePickerProps>,
+    VroVanPlatePickerResult
+  >({
     showCallback: (options) => {
       dynamicProps.value = options
-      currentValue.value = options?.modelValue ?? props.modelValue ?? ''
-    },
-    hideCallback: (reason) => {
-      emit('cancel', reason)
+      currentValue.value = options?.value ?? props.value ?? ''
     },
     confirmCallback: (value: string) => {
-      const result = { value }
+      const result: VroVanPlatePickerResult = {
+        value,
+        type: computedProps.value.extraKeys.includes(value) ? 'extra' : 'plate',
+      }
 
-      emit('update:modelValue', value)
-      emit('confirm', result)
       return result
     },
   })
 
-  watch(
-    () => computedProps.value.modelValue,
-    (value) => {
-      if (!visible.value) {
-        currentValue.value = value ?? ''
-      }
-    },
-    { immediate: true },
-  )
-
-  const selectKey = (value: string) => {
+  const handleSelect = (value: string) => {
     currentValue.value = value
   }
 
   const handleConfirm = () => {
-    confirmPicker(currentValue.value)
+    if (currentValue.value) {
+      confirm(currentValue.value)
+    } else {
+      hide('cancel')
+    }
   }
 
   defineExpose({
     visible,
     show,
     hide,
-    confirm: handleConfirm,
+    confirm,
   })
 </script>

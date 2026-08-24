@@ -69,7 +69,7 @@
   const openPlate = () => {
     openPicker(
       {
-        modelValue: plateText.value,
+        value: plateText.value,
       },
       (result) => {
         plateText.value = result.value
@@ -81,7 +81,7 @@
     openPicker(
       {
         title: '选择省份简称',
-        modelValue: simplePlateText.value,
+        value: simplePlateText.value,
         showExtra: false,
       },
       (result) => {
@@ -94,7 +94,7 @@
     openPicker(
       {
         title: '选择车牌状态',
-        modelValue: customPlateText.value,
+        value: customPlateText.value,
         extraKeys: ['新能源', '临牌'],
       },
       (result) => {
@@ -105,7 +105,7 @@
 
   const openFunctionPlate = () => {
     showVroVanPlatePicker({
-      modelValue: functionPlateText.value,
+      value: functionPlateText.value,
     })
       .then((result) => {
         functionPlateText.value = result.value

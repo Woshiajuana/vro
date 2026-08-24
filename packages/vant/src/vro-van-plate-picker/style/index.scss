@@ -1,6 +1,6 @@
 :root,
 :host {
-  --vro-van-plate-picker-padding: 0 12px 16px;
+  --vro-van-plate-picker-keys-padding: 16px;
   --vro-van-plate-picker-key-height: 40px;
   --vro-van-plate-picker-key-gap: 8px;
   --vro-van-plate-picker-key-radius: 4px;
@@ -24,10 +24,9 @@
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: var(--vro-van-plate-picker-key-gap);
   margin: 0;
-  padding: 0;
-  padding: 16px;
+  padding: var(--vro-van-plate-picker-keys-padding);
   /* prettier-ignore */
-  border-bottom: 1PX solid var(--vro-van-cell-border-color);
+  border-bottom: 1PX solid var(--vro-van-plate-picker-border-color);
 }
 
 .vro-van-plate-picker-keys {
@@ -35,8 +34,7 @@
   grid-template-columns: repeat(8, minmax(0, 1fr));
   gap: var(--vro-van-plate-picker-key-gap);
   margin: 0;
-  padding: 0;
-  padding: 16px;
+  padding: var(--vro-van-plate-picker-keys-padding);
 }
 
 .vro-van-plate-picker-extra-key,
