@@ -29,12 +29,7 @@ export const vroVanPlateInputProps = {
   placeholder: String,
 
   /**
-   * 展示值格式化函数。
-   */
-  formatter: Function as PropType<(value: string) => string>,
-
-  /**
-   * 最大车牌长度。
+   * 车牌后缀最大长度。
    *
    * @default 8
    */
@@ -93,11 +88,6 @@ export interface VroVanPlateInputEmits {
    * 车牌号变化时触发。
    */
   change: [value: string]
-
-  /**
-   * 点击车牌前缀时触发。
-   */
-  'click-prefix': [event: MouseEvent]
 
   /**
    * 点击清除按钮时触发。

@@ -21,9 +21,9 @@
     <span
       v-show="!isExtraValue"
       class="vro-van-plate-input-value"
-      :class="{ 'is-placeholder': !displayValue }"
+      :class="{ 'is-placeholder': !suffix }"
     >
-      {{ displayValue || placeholder || t('plateInput.placeholder') }}
+      {{ suffix || placeholder || t('plateInput.placeholder') }}
     </span>
 
     <vro-van-icon
@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
   import { pick, typedKeys } from '@daysnap/utils'
-  import { computed } from 'vue'
+  import { computed, ref, watch } from 'vue'
 
   import { useLocale } from '../locale'
   import { VroVanCell } from '../vro-van-cell'
@@ -62,52 +62,59 @@
   const props = defineProps(vroVanPlateInputProps)
 
   const { t } = useLocale()
+  const currentValue = ref(props.modelValue)
 
   const cellProps = computed(() => pick(props, typedKeys(vroVanPlateInputCellProps)))
   const extraKeys = computed(
     () => props.platePickerProps?.extraKeys ?? vroVanPlatePickerProps.extraKeys.default(),
   )
-  const isExtraValue = computed(() => extraKeys.value.includes(props.modelValue))
+  const isExtraValue = computed(() => extraKeys.value.includes(currentValue.value))
   const prefix = computed(() => {
     if (isExtraValue.value) {
-      return props.modelValue
+      return currentValue.value
     }
 
-    return props.modelValue.slice(0, 1)
+    return currentValue.value.slice(0, 1)
   })
   const suffix = computed(() => {
     if (isExtraValue.value) {
       return ''
     }
 
-    return props.modelValue.slice(1)
-  })
-  const displayValue = computed(() => {
-    return suffix.value ? (props.formatter?.(suffix.value) ?? suffix.value) : ''
+    return currentValue.value.slice(1)
   })
   const showClear = computed(() => {
-    const { clearable, disabled, readonly, modelValue } = props
-    return clearable && !disabled && !readonly && !!modelValue
+    const { clearable, disabled, readonly } = props
+    return clearable && !disabled && !readonly && !!currentValue.value
   })
-  const suffixMaxlength = computed(() => {
-    const value = Math.floor(Number(props.maxlength))
+  watch(
+    () => props.modelValue,
+    (value) => {
+      currentValue.value = value
+    },
+  )
 
-    if (!Number.isFinite(value)) {
-      return undefined
-    }
-
-    return Math.max(value - prefix.value.length, 0)
-  })
-
-  const updateValue = (value: string) => {
+  const emitValue = (value: string) => {
     emit('update:modelValue', value)
     emit('change', value)
+  }
+
+  const canEmitValue = (value: string) => {
+    return !value || extraKeys.value.includes(value) || (!!value.slice(0, 1) && !!value.slice(1))
+  }
+
+  const updateValue = (value: string) => {
+    currentValue.value = value
+
+    if (canEmitValue(value)) {
+      emitValue(value)
+    }
   }
 
   const openPlatePicker = () => {
     showVroVanPlatePicker<VroVanPlatePickerResult>({
       ...props.platePickerProps,
-      value: isExtraValue.value ? props.modelValue : prefix.value,
+      value: isExtraValue.value ? currentValue.value : prefix.value,
     })
       .then((result) => {
         updateValue(result.type === 'extra' ? result.value : `${result.value}${suffix.value}`)
@@ -119,7 +126,7 @@
     showVroVanKeyboard({
       ...props.keyboardProps,
       value: suffix.value,
-      maxlength: suffixMaxlength.value,
+      maxlength: props.maxlength,
     })
       .then((result) => {
         updateValue(`${prefix.value}${result.value}`)
@@ -139,12 +146,11 @@
     }
   }
 
-  const handlePrefixClick = (event: MouseEvent) => {
+  const handlePrefixClick = () => {
     if (props.disabled || props.readonly) {
       return
     }
 
-    emit('click-prefix', event)
     openPlatePicker()
   }
 
