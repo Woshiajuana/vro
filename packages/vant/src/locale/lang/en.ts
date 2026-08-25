@@ -18,6 +18,9 @@ export default {
     platePicker: {
       title: 'Select plate number',
     },
+    plateInput: {
+      placeholder: 'Enter plate number',
+    },
     schemaForm: {
       VroVanField: {
         placeholder: 'Please enter',

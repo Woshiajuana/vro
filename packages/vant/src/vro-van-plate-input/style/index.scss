@@ -1,1 +1,69 @@
-.vro-van-plate-input { }
+:root,
+:host {
+  --vro-van-plate-input-gap: 8px;
+  --vro-van-plate-input-prefix-height: 30px;
+  --vro-van-plate-input-prefix-padding: 0 8px;
+  --vro-van-plate-input-prefix-radius: 2px;
+  --vro-van-plate-input-prefix-color: var(--van-text-color);
+  --vro-van-plate-input-prefix-background: var(--van-background);
+  --vro-van-plate-input-placeholder-color: var(--van-text-color-3);
+  --vro-van-plate-input-clear-size: 16px;
+}
+
+.vro-van-plate-input {
+  &.is-disabled {
+    cursor: not-allowed;
+    opacity: var(--van-disabled-opacity);
+  }
+
+  &.is-row {
+    .vro-van-cell-label {
+      width: 40%;
+    }
+  }
+}
+
+.vro-van-plate-input-prefix {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  height: 30px;
+  min-width: 30px;
+  padding: 0 5px;
+  border: none;
+  border-radius: 2px;
+  box-sizing: border-box;
+  color: var(--van-primary-color);
+  font-size: var(--van-font-size-md);
+  background: var(--vro-van-plate-input-prefix-background);
+  &:after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid var(--van-primary-color);
+  }
+}
+
+.vro-van-plate-input-value {
+  flex: 1;
+  margin-left: var(--vro-van-plate-input-gap);
+  color: var(--van-text-color);
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &.is-placeholder {
+    color: var(--vro-van-plate-input-placeholder-color);
+  }
+}
+
+.vro-van-plate-input-clear {
+  flex: none;
+  color: var(--van-text-color-3);
+  font-size: var(--vro-van-plate-input-clear-size);
+}

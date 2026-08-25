@@ -18,6 +18,9 @@ export default {
     platePicker: {
       title: '请选择车牌号',
     },
+    plateInput: {
+      placeholder: '请输入车牌号',
+    },
     schemaForm: {
       VroVanField: {
         placeholder: '请填写',

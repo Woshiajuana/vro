@@ -1,3 +1,6 @@
 import '../../style/base.scss'
 import '../../vro-van-cell/style/css'
+import '../../vro-van-icon/style/css'
+import '../../vro-van-keyboard/style/css'
+import '../../vro-van-plate-picker/style/css'
 import './index.scss'
