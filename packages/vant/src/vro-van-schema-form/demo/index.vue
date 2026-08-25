@@ -26,6 +26,51 @@
         is: 'VroVanField',
         rules: [{ required: true, message: '请填写姓名' }],
       },
+      remark: {
+        label: '备注',
+        value: '',
+        is: 'VroVanTextarea',
+        props: {
+          maxlength: 50,
+          showWordLimit: true,
+        },
+      },
+      gender: {
+        label: '性别',
+        value: 'male',
+        is: 'VroVanRadio',
+        options: [
+          { label: '男', value: 'male' },
+          { label: '女', value: 'female' },
+        ],
+      },
+      hobby: {
+        label: '爱好',
+        value: ['music'],
+        is: 'VroVanCheckbox',
+        options: [
+          { label: '音乐', value: 'music' },
+          { label: '运动', value: 'sport' },
+        ],
+      },
+      contactTime: {
+        label: '联系时间',
+        value: 'morning',
+        is: 'VroVanRadioButton',
+        options: [
+          { label: '上午', value: 'morning' },
+          { label: '下午', value: 'afternoon' },
+        ],
+      },
+      tags: {
+        label: '标签',
+        value: ['new'],
+        is: 'VroVanCheckboxButton',
+        options: [
+          { label: '新客户', value: 'new' },
+          { label: '重点', value: 'important' },
+        ],
+      },
       city: {
         label: '城市',
         value: '',
@@ -35,28 +80,29 @@
           { text: '上海', value: 'shanghai' },
         ],
       },
+      appointment: {
+        label: '预约时间',
+        value: '',
+        is: 'VroVanDatetimeSelectPicker',
+      },
+      dateRange: {
+        label: '日期范围',
+        value: [],
+        is: 'VroVanDatetimeRangeSelectPicker',
+      },
+      images: {
+        label: '图片',
+        value: [],
+        is: 'VroVanImageUploader',
+        props: {
+          max: 2,
+          multiple: true,
+        },
+      },
       plateNo: {
         label: '车牌号',
         value: '',
         is: 'VroVanPlateInput',
-      },
-      gender: {
-        label: '性别',
-        value: 'male',
-        is: 'VroVanRadioButton',
-        options: [
-          { label: '男', value: 'male' },
-          { label: '女', value: 'female' },
-        ],
-      },
-      remark: {
-        label: '备注',
-        value: '',
-        is: 'VroVanTextarea',
-        props: {
-          maxlength: 50,
-          showWordLimit: true,
-        },
       },
     },
     async (data) => {

@@ -54,9 +54,9 @@ export interface VroVanSchemaFormRule {
 
 export interface VroVanSchemaFormSchemaFieldBase<TProps = Record<string, any>> {
   /**
-   * 字段渲染组件，支持内置注册名、外部注册名或组件对象。
+   * 字段渲染组件，支持内置注册名或组件对象。
    */
-  is?: VroVanSchemaFormFieldType | VroVanSchemaFormRawComponent | string
+  is?: VroVanSchemaFormFieldType | VroVanSchemaFormRawComponent
 
   /**
    * 字段标题文本。
@@ -165,7 +165,7 @@ export type VroVanSchemaFormMappedSchemaField = {
 }[VroVanSchemaFormFieldType]
 
 export type VroVanSchemaFormCustomSchemaField = VroVanSchemaFormSchemaFieldBase & {
-  is?: VroVanSchemaFormRawComponent | string
+  is?: VroVanSchemaFormRawComponent
 }
 
 export type VroVanSchemaFormSchemaField =
