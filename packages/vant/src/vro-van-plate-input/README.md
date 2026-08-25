@@ -105,7 +105,7 @@
     </tr>
     <tr>
       <td>--vro-van-plate-input-prefix-height</td>
-      <td>28px</td>
+      <td>30px</td>
     </tr>
     <tr>
       <td>--vro-van-plate-input-prefix-padding</td>
@@ -113,7 +113,7 @@
     </tr>
     <tr>
       <td>--vro-van-plate-input-prefix-radius</td>
-      <td>4px</td>
+      <td>2px</td>
     </tr>
     <tr>
       <td>--vro-van-plate-input-prefix-color</td>

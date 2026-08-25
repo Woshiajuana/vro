@@ -29,11 +29,11 @@
   align-items: center;
   justify-content: center;
   gap: 2px;
-  height: 30px;
+  height: var(--vro-van-plate-input-prefix-height);
   min-width: 30px;
-  padding: 0 8px;
+  padding: var(--vro-van-plate-input-prefix-padding);
   border: none;
-  border-radius: 2px;
+  border-radius: var(--vro-van-plate-input-prefix-radius);
   box-sizing: border-box;
   color: var(--van-primary-color);
   font-size: var(--van-font-size-md);

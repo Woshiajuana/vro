@@ -65,9 +65,13 @@
   const currentValue = ref(props.modelValue)
 
   const cellProps = computed(() => pick(props, typedKeys(vroVanPlateInputCellProps)))
-  const extraKeys = computed(
-    () => props.platePickerProps?.extraKeys ?? vroVanPlatePickerProps.extraKeys.default(),
-  )
+  const extraKeys = computed(() => {
+    if (props.platePickerProps?.showExtra === false) {
+      return []
+    }
+
+    return props.platePickerProps?.extraKeys ?? vroVanPlatePickerProps.extraKeys.default()
+  })
   const isExtraValue = computed(() => extraKeys.value.includes(currentValue.value))
   const prefix = computed(() => {
     if (isExtraValue.value) {
@@ -94,64 +98,58 @@
     },
   )
 
-  const emitValue = (value: string) => {
-    emit('update:modelValue', value)
-    emit('change', value)
-  }
-
-  const canEmitValue = (value: string) => {
-    return !value || extraKeys.value.includes(value) || (!!value.slice(0, 1) && !!value.slice(1))
-  }
-
   const updateValue = (value: string) => {
     currentValue.value = value
 
-    if (canEmitValue(value)) {
-      emitValue(value)
+    if (!value || extraKeys.value.includes(value) || (!!value.slice(0, 1) && !!value.slice(1))) {
+      emit('update:modelValue', value)
+      emit('change', value)
     }
   }
 
-  const openPlatePicker = () => {
-    showVroVanPlatePicker<VroVanPlatePickerResult>({
-      ...props.platePickerProps,
-      value: isExtraValue.value ? currentValue.value : prefix.value,
-    })
-      .then((result) => {
-        updateValue(result.type === 'extra' ? result.value : `${result.value}${suffix.value}`)
+  const openPlatePicker = async () => {
+    try {
+      const res = await showVroVanPlatePicker<VroVanPlatePickerResult>({
+        ...props.platePickerProps,
+        value: isExtraValue.value ? currentValue.value : prefix.value,
       })
-      .catch(() => {})
+      updateValue(res.type === 'extra' ? res.value : `${res.value}${suffix.value}`)
+
+      if (res.type === 'plate' && !suffix.value) {
+        await openPlateKeyboard()
+      }
+    } catch {}
   }
 
-  const openKeyboard = () => {
-    showVroVanKeyboard({
-      ...props.keyboardProps,
-      value: suffix.value,
-      maxlength: props.maxlength,
-    })
-      .then((result) => {
-        updateValue(`${prefix.value}${result.value}`)
+  const openPlateKeyboard = async () => {
+    try {
+      const res = await showVroVanKeyboard({
+        maxlength: props.maxlength,
+        ...props.keyboardProps,
+        value: suffix.value,
       })
-      .catch(() => {})
+      updateValue(`${prefix.value}${res.value}`)
+    } catch {}
   }
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (props.disabled || props.readonly) {
       return
     }
 
     if (prefix.value && !isExtraValue.value) {
-      openKeyboard()
+      await openPlateKeyboard()
     } else {
-      openPlatePicker()
+      await openPlatePicker()
     }
   }
 
-  const handlePrefixClick = () => {
+  const handlePrefixClick = async () => {
     if (props.disabled || props.readonly) {
       return
     }
 
-    openPlatePicker()
+    await openPlatePicker()
   }
 
   const handleClear = () => {
