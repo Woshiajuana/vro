@@ -6,6 +6,7 @@ import { VroVanDatetimeRangeSelectPicker } from '../vro-van-datetime-range-selec
 import { VroVanDatetimeSelectPicker } from '../vro-van-datetime-select-picker'
 import { VroVanField } from '../vro-van-field'
 import { VroVanImageUploader } from '../vro-van-image-uploader'
+import { VroVanPlateInput } from '../vro-van-plate-input'
 import { VroVanRadio } from '../vro-van-radio'
 import { VroVanRadioButton } from '../vro-van-radio-button'
 import { VroVanSelectPicker } from '../vro-van-select-picker'
@@ -34,3 +35,6 @@ vroVanSchemaFormFieldManager
     clearable: true,
   })
   .add('VroVanImageUploader', VroVanImageUploader)
+  .add('VroVanPlateInput', VroVanPlateInput, {
+    clearable: true,
+  })

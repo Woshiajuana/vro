@@ -38,6 +38,9 @@ export default {
         startPlaceholder: '开始时间',
         endPlaceholder: '结束时间',
       },
+      VroVanPlateInput: {
+        placeholder: '请输入车牌号',
+      },
     },
     skeleton: {
       loadingDescription: '加载中',

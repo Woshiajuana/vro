@@ -36,6 +36,11 @@ const { schema, loading, trigger } = useVroVanSchemaForm(
         { text: '上海', value: 'shanghai' },
       ],
     },
+    plateNo: {
+      label: '车牌号',
+      value: '',
+      is: 'VroVanPlateInput',
+    },
   },
   async (data) => {
     console.log(data)

@@ -1,6 +1,6 @@
 <template>
   <demo-block title="基础用法">
-    <vro-van-schema-form ref="schemaFormRef" :schema="schema" :cell-group-props="{ inset: true }" />
+    <vro-van-schema-form ref="schemaFormRef" :schema="schema" />
     <div class="demo-schema-form-actions">
       <van-button type="primary" size="small" :loading="loading" @click="trigger">提交</van-button>
       <van-button size="small" @click="handleExtract">获取值</van-button>
@@ -34,6 +34,11 @@
           { text: '杭州', value: 'hangzhou' },
           { text: '上海', value: 'shanghai' },
         ],
+      },
+      plateNo: {
+        label: '车牌号',
+        value: '',
+        is: 'VroVanPlateInput',
       },
       gender: {
         label: '性别',

@@ -8,6 +8,7 @@ import type { VroVanDatetimeRangeSelectPickerProps } from '../vro-van-datetime-r
 import type { VroVanDatetimeSelectPickerProps } from '../vro-van-datetime-select-picker'
 import type { VroVanFieldProps } from '../vro-van-field'
 import type { VroVanImageUploaderProps } from '../vro-van-image-uploader'
+import type { VroVanPlateInputProps } from '../vro-van-plate-input'
 import type { VroVanRadioProps } from '../vro-van-radio'
 import type { VroVanRadioButtonProps } from '../vro-van-radio-button'
 import type { VroVanSelectPickerProps } from '../vro-van-select-picker'
@@ -24,6 +25,7 @@ export interface VroVanSchemaFormFieldPropsMap {
   VroVanDatetimeSelectPicker: Partial<VroVanDatetimeSelectPickerProps>
   VroVanDatetimeRangeSelectPicker: Partial<VroVanDatetimeRangeSelectPickerProps>
   VroVanImageUploader: Partial<VroVanImageUploaderProps>
+  VroVanPlateInput: Partial<VroVanPlateInputProps>
 }
 
 export type VroVanSchemaFormFieldType = keyof VroVanSchemaFormFieldPropsMap

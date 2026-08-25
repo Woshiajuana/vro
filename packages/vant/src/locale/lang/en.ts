@@ -38,6 +38,9 @@ export default {
         startPlaceholder: 'Start time',
         endPlaceholder: 'End time',
       },
+      VroVanPlateInput: {
+        placeholder: 'Enter plate number',
+      },
     },
     skeleton: {
       loadingDescription: 'Loading',
