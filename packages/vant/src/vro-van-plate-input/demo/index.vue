@@ -4,6 +4,7 @@
   </demo-block>
 
   <demo-block title="可清空">
+    <p>{{ clearableValue }}</p>
     <vro-van-plate-input v-model="clearableValue" label="车牌号" clearable />
   </demo-block>
 

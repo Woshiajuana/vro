@@ -95,11 +95,6 @@ export interface VroVanPlateInputEmits {
   change: [value: string]
 
   /**
-   * 点击组件且非 disabled/readonly 时触发。
-   */
-  click: [event: MouseEvent]
-
-  /**
    * 点击车牌前缀时触发。
    */
   'click-prefix': [event: MouseEvent]

@@ -84,11 +84,6 @@
       <td>车牌号变化时触发</td>
     </tr>
     <tr>
-      <td>click</td>
-      <td>event: MouseEvent</td>
-      <td>点击组件且非 disabled/readonly 时触发</td>
-    </tr>
-    <tr>
       <td>click-prefix</td>
       <td>event: MouseEvent</td>
       <td>点击车牌前缀时触发</td>

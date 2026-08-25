@@ -18,7 +18,11 @@
       {{ prefix }}
     </button>
 
-    <span class="vro-van-plate-input-value" :class="{ 'is-placeholder': !displayValue }">
+    <span
+      v-show="!isExtraValue"
+      class="vro-van-plate-input-value"
+      :class="{ 'is-placeholder': !displayValue }"
+    >
       {{ displayValue || placeholder || t('plateInput.placeholder') }}
     </span>
 
@@ -66,7 +70,7 @@
   const isExtraValue = computed(() => extraKeys.value.includes(props.modelValue))
   const prefix = computed(() => {
     if (isExtraValue.value) {
-      return ''
+      return props.modelValue
     }
 
     return props.modelValue.slice(0, 1)
@@ -79,8 +83,7 @@
     return props.modelValue.slice(1)
   })
   const displayValue = computed(() => {
-    const value = isExtraValue.value ? props.modelValue : suffix.value
-    return value ? (props.formatter?.(value) ?? value) : ''
+    return suffix.value ? (props.formatter?.(suffix.value) ?? suffix.value) : ''
   })
   const showClear = computed(() => {
     const { clearable, disabled, readonly, modelValue } = props
@@ -124,14 +127,12 @@
       .catch(() => {})
   }
 
-  const handleClick = (event: MouseEvent) => {
+  const handleClick = () => {
     if (props.disabled || props.readonly) {
       return
     }
 
-    emit('click', event)
-
-    if (prefix.value) {
+    if (prefix.value && !isExtraValue.value) {
       openKeyboard()
     } else {
       openPlatePicker()
