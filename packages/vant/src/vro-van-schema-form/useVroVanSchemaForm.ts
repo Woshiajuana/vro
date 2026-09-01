@@ -1,3 +1,4 @@
+import banana from '@daysnap/banana'
 import { isFunction } from '@daysnap/utils'
 import { useAsyncTask, type UseAsyncTaskOptions } from '@vrojs/use'
 import { reactive, type Ref, ref } from 'vue'
@@ -46,19 +47,7 @@ export function useVroVanSchemaForm<
   }, rest)
 
   if (source) {
-    Object.entries(source).forEach(([key, value]) => {
-      const field = (schema as Record<string, VroVanSchemaFormSchemaFieldBase>)[key]
-
-      if (!field) {
-        return
-      }
-
-      if (field.set) {
-        field.set(source, field as any, schema as any)
-      } else {
-        field.value = value
-      }
-    })
+    banana.assignment(source, schema as any)
   }
 
   return {

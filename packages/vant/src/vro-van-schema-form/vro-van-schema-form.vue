@@ -25,9 +25,9 @@
 </template>
 
 <script setup lang="ts">
-  import { filterEmptyValue, isArray, isEmpty, isFunction, isString } from '@daysnap/utils'
+  import banana from '@daysnap/banana'
+  import { filterEmptyValue, isFunction, isString } from '@daysnap/utils'
   import { getSlotEntries } from '@vrojs/base'
-  import { showToast } from 'vant'
   import { computed, ref, useTemplateRef, watchEffect } from 'vue'
 
   import { useLocale } from '../locale'
@@ -36,7 +36,6 @@
   import {
     type VroVanSchemaFormEmits,
     vroVanSchemaFormProps,
-    type VroVanSchemaFormRule,
     type VroVanSchemaFormSchema,
     type VroVanSchemaFormSlots,
   } from './types'
@@ -108,37 +107,11 @@
 
   const componentRefs = useTemplateRef<any[]>('componentRefs')
 
-  const normalizeRules = (rules: VroVanSchemaFormRule | VroVanSchemaFormRule[] | undefined) => {
-    return isArray(rules) ? rules : rules ? [rules] : []
-  }
-
   const validate = async () => {
     const instances = componentRefs.value?.filter((item) => isFunction(item.validate)) ?? []
     await Promise.all(instances.map((item) => item.validate()))
 
-    for (const item of Object.values(metadata.value)) {
-      let rules = item.rules
-
-      if (isFunction(rules)) {
-        rules = rules(item.value, item, props.schema)
-      }
-
-      for (const rule of normalizeRules(rules)) {
-        if (rule.required && isEmpty(item.value)) {
-          throw showValidateMessage(rule.message)
-        }
-
-        if (rule.validator) {
-          const result = await rule.validator(item.value, item, props.schema)
-
-          if (result === false || isString(result) || result instanceof Error) {
-            throw showValidateMessage(
-              isString(result) ? result : result instanceof Error ? result.message : rule.message,
-            )
-          }
-        }
-      }
-    }
+    banana.validate(props.schema as any)
   }
 
   const resetFields = () => {
@@ -152,27 +125,10 @@
     const results = await Promise.all<Record<string, any>[]>(
       instances.map((item) => item.extractValues()),
     )
-
-    results.push(
-      Object.entries(props.schema).reduce<Record<string, any>>((res, [key, item]) => {
-        res[key] = item.get ? item.get(item.value, item, props.schema) : item.value
-        return res
-      }, {}),
-    )
-
+    results.push(banana.extract(props.schema as any))
     return results.filter(Boolean).reduce<Record<string, any>>((res, item) => {
       return { ...res, ...item }
     }, {})
-  }
-
-  const showValidateMessage = (message?: string) => {
-    const err = message || ''
-
-    if (err) {
-      showToast(err)
-    }
-
-    return err
   }
 
   const trigger = defineVroVanSchemaFormFieldTrigger(async (ctx) => {

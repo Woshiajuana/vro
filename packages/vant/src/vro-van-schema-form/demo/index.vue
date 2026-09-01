@@ -10,7 +10,6 @@
 </template>
 
 <script setup lang="ts">
-  import { Button as VanButton, showToast } from 'vant'
   import { ref } from 'vue'
 
   import { useVroVanSchemaForm, type VroVanSchemaFormInstance } from '..'
@@ -107,10 +106,10 @@
     },
     async (data) => {
       values.value = data
-      showToast('提交成功')
     },
     {
       instanceRef: schemaFormRef,
+      throwError: true,
     },
   )
 
