@@ -4,11 +4,7 @@ import { useAsyncTask, type UseAsyncTaskOptions } from '@vrojs/use'
 import { reactive, type Ref, ref } from 'vue'
 
 import type { VroVanSchemaFormInstance } from '.'
-import type {
-  VroVanSchemaFormSchema,
-  VroVanSchemaFormSchemaBase,
-  VroVanSchemaFormSchemaFieldBase,
-} from './types'
+import type { VroVanSchemaFormSchema, VroVanSchemaFormSchemaFieldBase } from './types'
 
 export interface UseVroVanSchemaFormOptions
   extends Pick<UseAsyncTaskOptions<any>, 'throwError' | 'onError'> {
@@ -22,7 +18,7 @@ export type UseVroVanSchemaFormSchema<TSchema extends VroVanSchemaFormSchema> = 
 
 export function useVroVanSchemaForm<
   D extends Record<string, any> = any,
-  T extends VroVanSchemaFormSchema = VroVanSchemaFormSchemaBase,
+  T extends VroVanSchemaFormSchema = VroVanSchemaFormSchema,
 >(
   rawSchema: (() => T) | T,
   task?: (data: D) => Promise<void>,

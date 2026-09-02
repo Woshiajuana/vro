@@ -106,6 +106,10 @@
         label: '日期范围',
         value: [],
         is: 'VroVanDatetimeRangeSelectPicker',
+        props: {
+          clickable: true,
+          direction: 'column',
+        },
       },
       images: {
         label: '图片',
