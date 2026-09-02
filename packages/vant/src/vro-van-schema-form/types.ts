@@ -1,4 +1,4 @@
-import type { Arrayable, VroSlot } from '@vrojs/base'
+import type { VroSlot } from '@vrojs/base'
 import type { ExtractPropTypes, PropType, Raw } from 'vue'
 
 import type { VroVanCellGroupProps } from '../vro-van-cell-group'
@@ -127,13 +127,7 @@ export interface VroVanSchemaFormSchemaFieldBase<TProps = Record<string, any>> {
   /**
    * 字段校验规则。
    */
-  rules?:
-    | Arrayable<VroVanSchemaFormRule>
-    | ((
-        value: any,
-        field: VroVanSchemaFormSchemaField,
-        metadata: VroVanSchemaFormSchema,
-      ) => Arrayable<VroVanSchemaFormRule>)
+  rules?: VroVanSchemaFormRule[]
 
   /**
    * 字段 change 事件回调。

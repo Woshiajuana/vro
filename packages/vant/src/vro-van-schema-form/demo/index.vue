@@ -43,6 +43,24 @@
           { label: '女', value: 'female' },
         ],
       },
+      femaleRemark: {
+        label: '女性备注',
+        value: '',
+        is: 'VroVanField',
+        hidden: (_, __, schema) => schema.gender.value !== 'female',
+        props: {
+          placeholder: '性别为女时显示',
+        },
+      },
+      maleRemark: {
+        label: '男性备注',
+        value: '',
+        is: 'VroVanField',
+        hidden: (_, __, schema) => schema.gender.value !== 'male',
+        props: {
+          placeholder: '性别为男时显示',
+        },
+      },
       hobby: {
         label: '爱好',
         value: ['music'],

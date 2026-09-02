@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
   import banana from '@daysnap/banana'
-  import { filterEmptyValue, isFunction, isString } from '@daysnap/utils'
+  import { filterEmptyValue, isFunction, isString, isUndefined } from '@daysnap/utils'
   import { getSlotEntries } from '@vrojs/base'
   import { computed, ref, useTemplateRef, watchEffect } from 'vue'
 
@@ -74,8 +74,12 @@
   const mapping = computed(() => {
     return Object.entries(metadata.value).reduce<Record<string, any>>((res, [key, item]) => {
       // eslint-disable-next-line prefer-const
-      let { is, options, labelKey, valueKey } = item
+      let { is, options, labelKey, valueKey, rules } = item
       let fieldProps = { ...item.props } as Record<string, any>
+
+      if (rules?.length && isUndefined(fieldProps.required)) {
+        fieldProps.required = !!rules.find((item) => item.required)
+      }
 
       if (isString(is)) {
         const data = vroVanSchemaFormFieldManager.get(is)
