@@ -12,7 +12,11 @@
 <script setup lang="ts">
   import { ref } from 'vue'
 
-  import { useVroVanSchemaForm, type VroVanSchemaFormInstance } from '..'
+  import {
+    useVroVanSchemaForm,
+    type VroVanSchemaFormInstance,
+    type VroVanSchemaFormSchema,
+  } from '..'
 
   const values = ref<Record<string, any>>({})
   const schemaFormRef = ref<VroVanSchemaFormInstance>()
@@ -125,7 +129,7 @@
         value: '',
         is: 'VroVanPlateInput',
       },
-    },
+    } satisfies VroVanSchemaFormSchema,
     async (data) => {
       values.value = data
     },
