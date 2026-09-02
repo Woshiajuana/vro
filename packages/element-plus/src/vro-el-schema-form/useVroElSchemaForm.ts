@@ -4,11 +4,7 @@ import { useAsyncTask, type UseAsyncTaskOptions } from '@vrojs/use'
 import { reactive, type Ref, ref } from 'vue'
 
 import type { VroElSchemaFormInstance } from '.'
-import type {
-  VroElSchemaFormSchema,
-  VroElSchemaFormSchemaBase,
-  VroElSchemaFormSchemaFieldBase,
-} from './types'
+import type { VroElSchemaFormSchema, VroElSchemaFormSchemaFieldBase } from './types'
 
 export interface UseVroElSchemaFormOptions
   extends Pick<UseAsyncTaskOptions<any>, 'throwError' | 'onError'> {
@@ -22,7 +18,7 @@ export type UseVroElSchemaFormSchema<TSchema extends VroElSchemaFormSchema> = {
 
 export function useVroElSchemaForm<
   D extends Record<string, any> = any,
-  T extends VroElSchemaFormSchema = VroElSchemaFormSchemaBase,
+  T extends VroElSchemaFormSchema = VroElSchemaFormSchema,
 >(
   rawSchema: (() => T) | T,
   task?: (data: D) => Promise<void>,
