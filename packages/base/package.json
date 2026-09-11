@@ -1,6 +1,6 @@
 {
   "name": "@vrojs/base",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "vrojs ui",
   "type": "module",
   "main": "src/index.ts",
@@ -39,7 +39,7 @@
   },
   "peerDependencies": {
     "@daysnap/utils": ">=0.1.34",
-    "@vrojs/use": "workspace:*",
+    "@vrojs/use": ">=0.0.4",
     "vue": ">=3.0.0"
   },
   "devDependencies": {
