@@ -24,6 +24,21 @@ trigger()
 trigger(10)
 ```
 
+### 监听倒计时
+
+通过 `onChange` 监听每次倒计时变化，通过 `onFinish` 监听倒计时结束。
+
+```ts
+const [count, trigger] = useCountDown(60, {
+  onChange(count) {
+    console.log('当前倒计时:', count)
+  },
+  onFinish() {
+    console.log('倒计时结束')
+  },
+})
+```
+
 ## API
 
 ### 参数
@@ -39,6 +54,33 @@ trigger(10)
       <td>start</td>
       <td>number</td>
       <td>默认倒计时秒数，默认 60</td>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td>UseCountDownOptions</td>
+      <td>配置项</td>
+    </tr>
+  </tbody>
+</table>
+
+### UseCountDownOptions
+
+<table>
+  <tbody>
+    <tr>
+      <td>名称</td>
+      <td>类型</td>
+      <td>说明</td>
+    </tr>
+    <tr>
+      <td>onChange</td>
+      <td>(count: number) => void</td>
+      <td>每次倒计时值变化时触发，包括初始值和最终的 0</td>
+    </tr>
+    <tr>
+      <td>onFinish</td>
+      <td>() => void</td>
+      <td>倒计时结束时触发</td>
     </tr>
   </tbody>
 </table>
