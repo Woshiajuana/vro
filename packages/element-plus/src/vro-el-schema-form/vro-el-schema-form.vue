@@ -44,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-  import banana from '@daysnap/banana'
+  import banana from '@ajuanjs/banana'
   import { filterEmptyValue, isFunction, isString } from '@daysnap/utils'
   import { getSlotEntries } from '@vrojs/base'
   import { ElCol, ElForm, ElFormItem, ElRow } from 'element-plus'
@@ -173,7 +173,7 @@
     const results = await Promise.all<Record<string, any>[]>(
       instances.map((item) => item.extractValues()),
     )
-    results.push(banana.extract(props.schema as any))
+    results.push(await banana.extract(props.schema as any))
     return results.filter(Boolean).reduce<Record<string, any>>((res, item) => {
       return { ...res, ...item }
     }, {})

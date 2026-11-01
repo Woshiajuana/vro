@@ -1,4 +1,4 @@
-import banana from '@daysnap/banana'
+import banana from '@ajuanjs/banana'
 import { filterEmptyValue, isFunction, isNumber } from '@daysnap/utils'
 import { useAsyncTask, type UseAsyncTaskOptions } from '@vrojs/use'
 import { computed, reactive, type Ref, ref } from 'vue'
@@ -25,7 +25,7 @@ export type UseVroElTableSchema<T extends VroElSchemaFormSchema> = {
   [P in keyof T]: VroElSchemaFormSchemaFieldBase
 }
 
-export function useVroElTable<
+export async function useVroElTable<
   Row extends Record<string, any> = any,
   R extends VroElSchemaFormSchema = VroElSchemaFormSchema,
 >(
@@ -41,7 +41,8 @@ export function useVroElTable<
   const columns = reactive(isFunction(rawColumns) ? rawColumns() : rawColumns)
 
   const query =
-    rawQuery ?? ref<Record<string, any>>(filterEmptyValue(banana.extract(schema as any), true))
+    rawQuery ??
+    ref<Record<string, any>>(filterEmptyValue(await banana.extract(schema as any), true))
 
   const pagination = reactive({
     currentPage: 1,

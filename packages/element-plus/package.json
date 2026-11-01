@@ -1,6 +1,6 @@
 {
   "name": "@vrojs/element-plus",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "vrojs ui",
   "type": "module",
   "main": "src/index.ts",
@@ -43,7 +43,7 @@
     "vue-draggable-plus": "^0.6.1"
   },
   "peerDependencies": {
-    "@daysnap/banana": ">=0.0.15",
+    "@ajuanjs/banana": ">=0.0.2",
     "@daysnap/utils": ">=0.1.34",
     "@element-plus/icons-vue": ">=2.3.2",
     "@vrojs/base": ">=0.0.6",
@@ -52,7 +52,7 @@
     "vue": ">=3.0.0"
   },
   "devDependencies": {
-    "@daysnap/banana": "^0.0.15",
+    "@ajuanjs/banana": "^0.0.2",
     "@daysnap/utils": "^0.1.36",
     "@element-plus/icons-vue": "^2.3.2",
     "@vitejs/plugin-vue": "^6.0.1",

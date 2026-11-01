@@ -1,7 +1,7 @@
-import banana from '@daysnap/banana'
+import banana from '@ajuanjs/banana'
 import { isFunction } from '@daysnap/utils'
 import { useAsyncTask, type UseAsyncTaskOptions } from '@vrojs/use'
-import { reactive, type Ref, ref } from 'vue'
+import { onBeforeMount, reactive, type Ref, ref } from 'vue'
 
 import type { VroElSchemaFormInstance } from '.'
 import type { VroElSchemaFormSchema, VroElSchemaFormSchemaFieldBase } from './types'
@@ -45,9 +45,11 @@ export function useVroElSchemaForm<
     return data
   }, rest)
 
-  if (source) {
-    banana.assignment(source, schema as any)
-  }
+  onBeforeMount(async () => {
+    if (source) {
+      await banana.assign(source, schema as any)
+    }
+  })
 
   return {
     data,

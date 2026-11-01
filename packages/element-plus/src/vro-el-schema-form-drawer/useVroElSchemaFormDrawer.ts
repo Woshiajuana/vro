@@ -1,4 +1,4 @@
-import banana from '@daysnap/banana'
+import banana from '@ajuanjs/banana'
 import { getCurrentInstance, type Ref, ref } from 'vue'
 
 import type { VroElSchemaFormSchema, VroElSchemaFormSchemaField } from '../vro-el-schema-form'
@@ -31,7 +31,7 @@ export function useVroElSchemaFormDrawer<
   const trigger = async (...args: any[]) => {
     schema.value = (await generator()) as unknown as S
     if (args[0]) {
-      banana.assignment(args[0], schema.value as any)
+      await banana.assign(args[0], schema.value as any)
     }
 
     onGenerate?.(schema.value as any, ...args)
