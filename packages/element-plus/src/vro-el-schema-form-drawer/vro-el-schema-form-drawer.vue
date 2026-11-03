@@ -31,14 +31,19 @@
 
     <template v-if="computedProps.showCancelButton || computedProps.showConfirmButton" #footer>
       <div class="vro-el-schema-form-drawer-footer">
-        <el-button v-if="computedProps.showCancelButton" @click="hide('cancel')">
+        <el-button
+          v-if="computedProps.showCancelButton"
+          v-bind="computedProps.cancelButtonProps"
+          @click="hide('cancel')"
+        >
           {{ computedProps.cancelButtonText || t('schemaFormDrawer.cancelText') }}
         </el-button>
         <el-button
           v-if="computedProps.showConfirmButton"
           type="primary"
-          @click="handleSubmit"
+          v-bind="computedProps.confirmButtonProps"
           :loading="loading"
+          @click="handleSubmit"
         >
           {{ computedProps.confirmButtonText || t('schemaFormDrawer.confirmText') }}
         </el-button>

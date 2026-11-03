@@ -1,5 +1,5 @@
 import type { VroSlot } from '@vrojs/base'
-import type { DrawerProps } from 'element-plus'
+import type { ButtonProps, DrawerProps } from 'element-plus'
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
 
 import {
@@ -99,9 +99,25 @@ export const vroElSchemaFormDrawerProps = {
   cancelButtonText: String,
 
   /**
+   * 透传给取消按钮 ElButton 的属性。
+   */
+  cancelButtonProps: {
+    type: Object as PropType<Partial<ButtonProps>>,
+    default: () => ({}),
+  },
+
+  /**
    * 确认按钮文本。
    */
   confirmButtonText: String,
+
+  /**
+   * 透传给确认按钮 ElButton 的属性。
+   */
+  confirmButtonProps: {
+    type: Object as PropType<Partial<ButtonProps>>,
+    default: () => ({}),
+  },
 }
 
 export type VroElSchemaFormDrawerProps = ExtractPropTypes<typeof vroElSchemaFormDrawerProps>

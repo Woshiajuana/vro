@@ -27,19 +27,24 @@
     </vro-el-schema-form>
 
     <template v-if="computedProps.showCancelButton || computedProps.showConfirmButton" #footer>
-      <span class="dialog-footer">
-        <el-button v-if="computedProps.showCancelButton" @click="hide('cancel')">
+      <div class="dialog-footer">
+        <el-button
+          v-if="computedProps.showCancelButton"
+          v-bind="computedProps.cancelButtonProps"
+          @click="hide('cancel')"
+        >
           {{ computedProps.cancelButtonText || t('schemaFormDialog.cancelText') }}
         </el-button>
         <el-button
           v-if="computedProps.showConfirmButton"
           type="primary"
-          @click="handleSubmit"
+          v-bind="computedProps.confirmButtonProps"
           :loading="loading"
+          @click="handleSubmit"
         >
           {{ computedProps.confirmButtonText || t('schemaFormDialog.confirmText') }}
         </el-button>
-      </span>
+      </div>
     </template>
   </el-dialog>
 </template>
@@ -76,7 +81,6 @@
     return Object.keys(slots).filter((name) => name !== 'default')
   })
   const computedProps = computed<VroElSchemaFormDialogProps>(() => {
-    console.log('computedProps => ', Object.assign({}, props, dynamicProps.value))
     return Object.assign({}, props, dynamicProps.value)
   })
   const schemaFormProps = computed(() => {

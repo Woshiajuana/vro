@@ -39,6 +39,20 @@ const data = await showVroElSchemaFormDrawer({
 </template>
 ```
 
+### 自定义按钮属性
+
+通过 `cancelButtonProps` 和 `confirmButtonProps` 透传 `ElButton` 属性，例如按钮尺寸、类型和样式。
+
+```vue
+<template>
+  <vro-el-schema-form-drawer
+    :schema="schema"
+    :cancel-button-props="{ plain: true, size: 'small' }"
+    :confirm-button-props="{ type: 'success', size: 'small' }"
+  />
+</template>
+```
+
 ## API
 
 ### 属性 Props

@@ -87,6 +87,18 @@ const data = await showVroElSchemaFormDialog({
 />
 ```
 
+### 自定义按钮属性
+
+通过 `cancelButtonProps` 和 `confirmButtonProps` 透传 `ElButton` 属性，例如按钮尺寸、类型和样式。
+
+```html
+<vro-el-schema-form-dialog
+  :schema="schema"
+  :cancel-button-props="{ plain: true, size: 'small' }"
+  :confirm-button-props="{ type: 'success', size: 'small' }"
+/>
+```
+
 ### 字段插槽
 
 具名插槽会转发给内部 `VroElSchemaForm`，可配合 schema 字段的 `slots` 和 `itemSlots` 使用。
