@@ -5,7 +5,7 @@
   import { VroElConfigProvider } from '../vro-el-config-provider'
   import { vroElWithConfigProps } from './types'
 
-  defineOptions({ name: 'VroElWithConfig' })
+  defineOptions({ name: 'VroElWithConfig', inheritAttrs: false })
 
   const props = defineProps(vroElWithConfigProps)
   const attrs = useAttrs()
