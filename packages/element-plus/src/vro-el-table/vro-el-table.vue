@@ -64,7 +64,7 @@
   import { isEmptyObject } from '@daysnap/utils'
   import { RefreshRight } from '@element-plus/icons-vue'
   import type { TableInstance } from 'element-plus'
-  import { ElButton, ElPagination, ElTable as RawElTable } from 'element-plus'
+  import { ElButton, ElLoading, ElPagination, ElTable as RawElTable } from 'element-plus'
   import type { Component as VueComponent } from 'vue'
   import { computed, useTemplateRef } from 'vue'
 
@@ -82,6 +82,7 @@
   const { t } = useLocale()
 
   const ElTable = RawElTable as VueComponent
+  const vLoading = ElLoading.directive
 
   const refElTable = useTemplateRef<TableInstance>('refElTable')
 
