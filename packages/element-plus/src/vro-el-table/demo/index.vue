@@ -21,7 +21,7 @@
   import { sleep } from '@daysnap/utils'
   import { Delete, Edit, Star } from '@element-plus/icons-vue'
   import { ElButton, ElTag } from 'element-plus'
-  import { h, ref } from 'vue'
+  import { h, markRaw, ref } from 'vue'
 
   import { createUseVroElTable } from '../createUseVroElTable'
 
@@ -110,7 +110,7 @@
         label: '评分',
         prop: 'score',
         width: 100,
-        suffixIcon: { name: Star, color: '#e6a23c' },
+        suffixIcon: { name: markRaw(Star), color: '#e6a23c' },
       },
       {
         label: '备注',
@@ -127,7 +127,7 @@
           return [
             {
               label: '编辑',
-              icon: Edit,
+              icon: markRaw(Edit),
               disabled: row.status === 'disabled',
               onAction: async () => {
                 await sleep(400)
@@ -147,7 +147,7 @@
           {
             label: '删除',
             type: 'danger',
-            icon: Delete,
+            icon: markRaw(Delete),
             onAction: (row) => {
               console.log('delete => ', row)
             },
