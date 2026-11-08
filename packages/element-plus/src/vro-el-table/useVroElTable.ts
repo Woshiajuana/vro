@@ -25,7 +25,7 @@ export type UseVroElTableSchema<T extends VroElSchemaFormSchema> = {
   [P in keyof T]: VroElSchemaFormSchemaFieldBase
 }
 
-export async function useVroElTable<
+export function useVroElTable<
   Row extends Record<string, any> = any,
   R extends VroElSchemaFormSchema = VroElSchemaFormSchema,
 >(
@@ -40,9 +40,7 @@ export async function useVroElTable<
   )
   const columns = reactive(isFunction(rawColumns) ? rawColumns() : rawColumns)
 
-  const query =
-    rawQuery ??
-    ref<Record<string, any>>(filterEmptyValue(await banana.extract(schema as any), true))
+  const query = rawQuery ?? ref<Record<string, any>>()
 
   const pagination = reactive({
     currentPage: 1,
@@ -58,6 +56,10 @@ export async function useVroElTable<
       const { currentPage, pageSize } = Object.assign({}, pagination, params)
       if (params?.query) {
         query.value = params?.query
+      }
+
+      if (!query.value) {
+        query.value = filterEmptyValue(await banana.extract(schema as any), true)
       }
 
       pagination.currentPage = currentPage

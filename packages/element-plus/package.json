@@ -1,6 +1,6 @@
 {
   "name": "@vrojs/element-plus",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "vrojs ui",
   "type": "module",
   "main": "src/index.ts",
@@ -52,7 +52,7 @@
     "vue": ">=3.0.0"
   },
   "devDependencies": {
-    "@ajuanjs/banana": "^0.0.2",
+    "@ajuanjs/banana": "^0.0.3",
     "@daysnap/utils": "^0.1.36",
     "@element-plus/icons-vue": "^2.3.2",
     "@vitejs/plugin-vue": "^6.0.1",

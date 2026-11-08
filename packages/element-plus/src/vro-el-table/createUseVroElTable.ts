@@ -12,6 +12,9 @@ export interface CreateUseVroElTable<Row extends Record<string, any> = any> {
   ): ReturnType<typeof useVroElTable<Row, R>>
 }
 
+/**
+ * 类型辅助器，现在 typescript 升级了之后，应该用不到了
+ */
 export function createUseVroElTable<
   Row extends Record<string, any> = any,
 >(): CreateUseVroElTable<Row> {

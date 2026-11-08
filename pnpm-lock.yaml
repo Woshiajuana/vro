@@ -82,8 +82,8 @@ importers:
         version: 0.6.1(@types/sortablejs@1.15.9)
     devDependencies:
       '@ajuanjs/banana':
-        specifier: ^0.0.2
-        version: 0.0.2
+        specifier: ^0.0.3
+        version: 0.0.3
       '@daysnap/utils':
         specifier: ^0.1.36
         version: 0.1.36
@@ -156,8 +156,8 @@ importers:
         version: 0.0.4(@daysnap/utils@0.1.36)(vue-router@4.6.3(vue@3.5.22(typescript@5.9.3)))(vue@3.5.22(typescript@5.9.3))
     devDependencies:
       '@ajuanjs/banana':
-        specifier: ^0.0.2
-        version: 0.0.2
+        specifier: ^0.0.3
+        version: 0.0.3
       '@daysnap/utils':
         specifier: ^0.1.36
         version: 0.1.36
@@ -276,8 +276,8 @@ importers:
 
 packages:
 
-  '@ajuanjs/banana@0.0.2':
-    resolution: {integrity: sha512-LaYa99wh/AgV8pPb99TOe4C0s7XQsRv4Np1uwv32mxXitQEPargk/mSMuAOOWnXdihKhas9tHNCcGNgpZF29DA==}
+  '@ajuanjs/banana@0.0.3':
+    resolution: {integrity: sha512-4nh84OQT88RT+BZOCHT3buwekoHzcCkHkZR6bIUh7oy/0gtlNNc/3cfIls8BHoILefnDT4iroXl9fHZnOXrLAw==}
 
   '@babel/helper-string-parser@7.27.1':
     resolution: {integrity: sha512-qMlSxKbpRlAridDExk92nSobyDdpPijUq2DW6oDnUqd0iOGxmQjyqhMIihI9+zv4LPyZdRje2cavWPbCbWm3eA==}
@@ -3111,7 +3111,7 @@ packages:
 
 snapshots:
 
-  '@ajuanjs/banana@0.0.2': {}
+  '@ajuanjs/banana@0.0.3': {}
 
   '@babel/helper-string-parser@7.27.1': {}
 
