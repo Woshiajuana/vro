@@ -9,7 +9,10 @@
     />
 
     <div class="vro-el-table-inner">
-      <div v-if="showHeader" class="vro-el-table-header">
+      <div
+        v-if="showHeader && ($slots.title || $slots.actions || showRefresh)"
+        class="vro-el-table-header"
+      >
         <slot name="title"></slot>
         <div class="vro-el-table-actions">
           <el-button
