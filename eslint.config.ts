@@ -1,4 +1,4 @@
-import prettierConfig from '@vue/eslint-config-prettier'
+import prettierConfig from '@vue/eslint-config-prettier/skip-formatting'
 import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
 import { globalIgnores } from 'eslint/config'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
@@ -26,8 +26,6 @@ export default defineConfigWithVueTs(
       'simple-import-sort': simpleImportSort,
     },
     rules: {
-      'prettier/prettier': 'error',
-
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
 
