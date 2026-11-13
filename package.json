@@ -9,7 +9,7 @@
     "dev": "pnpm -C ./playground dev",
     "build": "pnpm -C ./playground build",
     "preview": "pnpm -C ./playground preview",
-    "lint": "eslint . --fix",
+    "fix": "npm run lint && npm run format",
     "build:base": "pnpm -C ./packages/base build",
     "build:element-plus": "pnpm -C ./packages/element-plus build",
     "build:vant": "pnpm -C ./packages/vant build",
@@ -29,6 +29,8 @@
     "sync:vant": "pnpm -C ./packages/vant sync",
     "plop": "plop --plopfile=./scripts/index.ts",
     "clean": "rimraf --glob **/node_modules",
+    "lint": "eslint . --fix",
+    "format": "prettier --write ./packages/**/*.{ts,vue,js,tsx,jsx}",
     "preinstall": "npx only-allow pnpm"
   },
   "repository": {
