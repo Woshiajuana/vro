@@ -38,13 +38,20 @@ export interface UseVroElTableTableProps<
   pagination: UseVroElTablePagination
 }
 
+/**
+ * 传入了筛选表单时返回 schema 类型，未传入时返回 undefined。
+ */
+export type UseVroElTableSchemaResult<R extends VroElSchemaFormSchema> = [R] extends [never]
+  ? undefined
+  : UseVroElTableSchema<R>
+
 export interface UseVroElTableReturn<
   Row extends Record<string, any> = any,
   R extends VroElSchemaFormSchema = never,
 > {
   tableProps: ComputedRef<UseVroElTableTableProps<Row, R>>
   query: Ref<Record<string, any> | undefined>
-  schema: UseVroElTableSchema<R> | undefined
+  schema: UseVroElTableSchemaResult<R>
   columns: VroElTableColumnGroupColumns<Row>
   trigger: (params?: UseVroElTableAsyncTaskParams) => Promise<Row[]>
   data: Ref<Row[]>
@@ -52,37 +59,57 @@ export interface UseVroElTableReturn<
   pagination: UseVroElTablePagination
 }
 
-// 重载 1：有筛选表单
+/**
+ * 表格请求状态管理。
+ *
+ * 参数统一按「筛选表单 → 请求函数 → 列配置 → 选项」排列，`request` 始终紧跟筛选表单，
+ * 因此 `Row` 在解析列配置之前就能从 `request` 的返回值推断出来，列配置里的 `row` 可以直接拿到具体类型。
+ */
+// 重载 1：筛选表单 + 请求函数 + 列配置
 export function useVroElTable<
-  Row extends Record<string, any> = any,
+  Row extends Record<string, any>,
   R extends VroElSchemaFormSchema = VroElSchemaFormSchema,
 >(
   rowSchema: R,
+  request: VroElTableRequest<Row>,
   rawColumns: VroElTableColumnGroupColumns<Row>,
+  options?: UseVroElTableOptions<Row>,
+): UseVroElTableReturn<Row, R>
+
+// 重载 2：请求函数 + 列配置
+export function useVroElTable<Row extends Record<string, any>>(
+  request: VroElTableRequest<Row>,
+  rawColumns: VroElTableColumnGroupColumns<Row>,
+  options?: UseVroElTableOptions<Row>,
+): UseVroElTableReturn<Row, never>
+
+// 重载 3：筛选表单 + 请求函数（不传列配置，列由插槽或 tableProps.columns 自行补充）
+export function useVroElTable<
+  Row extends Record<string, any>,
+  R extends VroElSchemaFormSchema = VroElSchemaFormSchema,
+>(
+  rowSchema: R,
   request: VroElTableRequest<Row>,
   options?: UseVroElTableOptions<Row>,
 ): UseVroElTableReturn<Row, R>
 
-// 重载 2：无筛选表单
-export function useVroElTable<Row extends Record<string, any> = any>(
-  rawColumns: VroElTableColumnGroupColumns<Row>,
-  request: VroElTableRequest<Row>,
-  options?: UseVroElTableOptions<Row>,
-): UseVroElTableReturn<Row, never>
-
 // 实现签名
 export function useVroElTable(
-  schemaOrColumns: any,
-  columnsOrRequest: any,
-  requestOrOptions?: any,
+  schemaOrRequest: any,
+  requestOrColumns?: any,
+  columnsOrOptions?: any,
   maybeOptions?: any,
 ): UseVroElTableReturn<any, any> {
-  const firstIsColumns = Array.isArray(schemaOrColumns)
+  // 第一个参数是筛选表单（既不是数组也不是函数），否则就是请求函数
+  const hasSchema = !Array.isArray(schemaOrRequest) && typeof schemaOrRequest !== 'function'
 
-  const rawSchema = firstIsColumns ? undefined : schemaOrColumns
-  const rawColumns = firstIsColumns ? schemaOrColumns : columnsOrRequest
-  const request = (firstIsColumns ? columnsOrRequest : requestOrOptions) as VroElTableRequest<any>
-  const options = ((firstIsColumns ? requestOrOptions : maybeOptions) ??
+  const rawSchema = hasSchema ? schemaOrRequest : undefined
+  const request = (hasSchema ? requestOrColumns : schemaOrRequest) as VroElTableRequest<any>
+
+  // 列配置可省略：传数组就是列配置，否则当作 options
+  const columnsOrOptionsArg = hasSchema ? columnsOrOptions : requestOrColumns
+  const rawColumns = Array.isArray(columnsOrOptionsArg) ? columnsOrOptionsArg : []
+  const options = ((Array.isArray(columnsOrOptionsArg) ? maybeOptions : columnsOrOptionsArg) ??
     {}) as UseVroElTableOptions<any>
 
   const schema = rawSchema ? reactive<UseVroElTableSchema<any>>(rawSchema) : undefined
@@ -145,5 +172,5 @@ export function useVroElTable(
     data,
     loading,
     pagination,
-  }
+  } as UseVroElTableReturn<any, any>
 }

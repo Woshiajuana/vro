@@ -70,7 +70,12 @@
   import { ElTableColumn } from 'element-plus'
   import { useVroElTable } from '@vrojs/element-plus'
 
-  const { tableProps, trigger } = useVroElTable(
+  interface User {
+    name: string
+    amount: number
+  }
+
+  const { tableProps, trigger, schema } = useVroElTable(
     {
       keyword: {
         label: '关键词',
@@ -78,14 +83,39 @@
         is: 'ElInput',
       },
     },
-    [{ is: ElTableColumn, label: '姓名', prop: 'name' }],
     async ([currentPage, pageSize], query) => {
       const res = await fetchList({ currentPage, pageSize, ...query })
       return [res.list, res.total]
     },
+    [
+      { is: ElTableColumn, label: '姓名', prop: 'name' },
+      {
+        is: ElTableColumn,
+        label: '金额',
+        prop: 'amount',
+        renderContent: ({ row }) => `${row.amount} 元`,
+      },
+    ],
   )
 </script>
 ```
+
+> **参数顺序固定为「筛选表单 → 请求函数 → 列配置 → 选项」。**
+>
+> `Row` 只能从 `request` 的返回值推断，TypeScript 按参数顺序解析上下文敏感参数（`request` 的参数、列配置里的回调通常都不带类型标注）。`request` 排在列配置之前，才能先解析出 `Row`，列配置里的 `row` 才会拿到具体类型。目前支持三种入参形式：
+>
+> ```ts
+> // ① 筛选表单 + 请求函数 + 列配置
+> useVroElTable(schema, request, columns, options?)
+>
+> // ② 请求函数 + 列配置
+> useVroElTable(request, columns, options?)
+>
+> // ③ 筛选表单 + 请求函数（列配置省略，由插槽或 tableProps.columns 自行补充）
+> useVroElTable(schema, request, options?)
+> ```
+>
+> 不再支持 `useVroElTable(schema, columns, request)` 这类旧顺序；若确实需要固定行类型，仍可显式指定泛型 `useVroElTable<User>(...)`。
 
 ## API
 

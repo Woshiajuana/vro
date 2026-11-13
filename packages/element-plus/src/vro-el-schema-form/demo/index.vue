@@ -26,8 +26,8 @@
   const values = ref<Record<string, any>>({})
   const schemaFormRef = ref<VroElSchemaFormInstance>()
 
-  const { schema: schema1 } = useVroElTable(
-    () => ({
+  const { schema: schema1 } = useVroElTable<Record<string, any>>(
+    {
       elInput: {
         label: 'ElInput',
         value: '',
@@ -43,9 +43,9 @@
           { label: '选项二', value: '2' },
         ],
       },
-    }),
-    () => [],
-    async () => [[{}], 1],
+    },
+    [],
+    async () => [[], 0],
   )
 
   schema1.elSelect.props = {}

@@ -58,7 +58,7 @@
     disabled: '停用',
   }
 
-  const { tableProps, trigger, schema } = useVroElTable<User>(
+  const { tableProps, trigger, schema } = useVroElTable(
     {
       keyword: {
         label: '关键词',
@@ -81,6 +81,10 @@
           { label: '停用', value: 'disabled' },
         ],
       },
+    },
+    async ([currentPage, pageSize], query) => {
+      await sleep(400)
+      return [source, source.length]
     },
     [
       { type: 'selection', width: 48 },
@@ -159,16 +163,6 @@
         ],
       },
     ],
-    async ([currentPage, pageSize], query) => {
-      await sleep(400)
-      const list = source.filter((item) => {
-        const keywordMatched = !query.keyword || item.name.includes(query.keyword)
-        const statusMatched = !query.status || item.status === query.status
-        return keywordMatched && statusMatched
-      })
-      const start = (currentPage - 1) * pageSize
-      return [list.slice(start, start + pageSize), list.length]
-    },
   )
 
   schema.status.props = {

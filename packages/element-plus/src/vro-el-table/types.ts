@@ -10,8 +10,18 @@ export interface VroElTableRequestPayload {
   query?: Record<string, any>
 }
 
+/**
+ * 请求函数的分页参数：[currentPage, pageSize]。
+ */
+export type VroElTableRequestParams = [currentPage: number, pageSize: number]
+
+/**
+ * 请求函数的查询参数。
+ */
+export type VroElTableRequestQuery = Record<string, any>
+
 export interface VroElTableRequest<T = any> {
-  (state: [number, number], query: any): Promise<[T[], number]>
+  (state: VroElTableRequestParams, query: VroElTableRequestQuery): Promise<[T[], number]>
 }
 
 export interface VroElTableEmits {
