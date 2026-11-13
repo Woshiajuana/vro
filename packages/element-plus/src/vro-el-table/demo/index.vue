@@ -127,8 +127,10 @@
           return [
             {
               label: '编辑',
-              icon: markRaw(Edit),
-              disabled: row.status === 'disabled',
+              buttonProps: {
+                icon: markRaw(Edit),
+                disabled: row.status === 'disabled',
+              },
               onAction: async () => {
                 await sleep(400)
                 console.log('edit => ', row)
@@ -136,7 +138,7 @@
             },
             {
               label: row.status === 'enabled' ? '停用' : '启用',
-              type: row.status === 'enabled' ? 'warning' : 'success',
+              buttonProps: { type: row.status === 'enabled' ? 'warning' : 'success' },
               onAction: () => {
                 console.log('toggle => ', row)
               },
@@ -146,8 +148,10 @@
         moreActions: [
           {
             label: '删除',
-            type: 'danger',
-            icon: markRaw(Delete),
+            buttonProps: {
+              type: 'danger',
+              icon: markRaw(Delete),
+            },
             onAction: (row) => {
               console.log('delete => ', row)
             },

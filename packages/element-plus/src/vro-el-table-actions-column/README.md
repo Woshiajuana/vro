@@ -43,11 +43,11 @@ const actions = [
 const actions = (row) => [
   {
     label: '编辑',
-    disabled: row.status === 'disabled',
+    buttonProps: { disabled: row.status === 'disabled' },
   },
   {
     label: row.status === 'enabled' ? '停用' : '启用',
-    type: row.status === 'enabled' ? 'warning' : 'success',
+    buttonProps: { type: row.status === 'enabled' ? 'warning' : 'success' },
     onAction: handleToggle,
   },
 ]
@@ -59,7 +59,7 @@ const actions = (row) => [
 const actions = [
   {
     label: '编辑',
-    disabled: true,
+    buttonProps: { disabled: true },
   },
   {
     label: '启用',
@@ -68,6 +68,30 @@ const actions = [
   {
     label: '隐藏',
     hidden: true,
+  },
+]
+```
+
+### 自定义按钮属性
+
+```html
+<vro-el-table-actions-column
+  :actions="actions"
+  :more-actions="moreActions"
+  :more-button-props="{ type: 'warning', icon: MoreFilled }"
+/>
+```
+
+```ts
+const actions = [
+  {
+    label: '删除',
+    buttonProps: {
+      type: 'danger',
+      icon: Delete,
+      round: true,
+    },
+    onAction: handleDelete,
   },
 ]
 ```
@@ -127,21 +151,6 @@ const actions = [
       <td>操作文本</td>
     </tr>
     <tr>
-      <td>icon</td>
-      <td>string | Component</td>
-      <td>操作图标</td>
-    </tr>
-    <tr>
-      <td>type</td>
-      <td>primary | success | warning | danger | info</td>
-      <td>按钮类型</td>
-    </tr>
-    <tr>
-      <td>disabled</td>
-      <td>boolean</td>
-      <td>是否禁用</td>
-    </tr>
-    <tr>
       <td>hidden</td>
       <td>boolean | (row, index) => boolean</td>
       <td>是否隐藏，返回 true 时隐藏当前操作</td>
@@ -150,6 +159,11 @@ const actions = [
       <td>onAction</td>
       <td>(row, index) => any</td>
       <td>点击操作时触发</td>
+    </tr>
+    <tr>
+      <td>buttonProps</td>
+      <td>Partial&lt;ButtonProps&gt;</td>
+      <td>按钮属性，直接展示的操作项透传给 ElButton；收纳到更多下拉菜单中的操作项，取其中的 icon、disabled、type</td>
     </tr>
   </tbody>
 </table>

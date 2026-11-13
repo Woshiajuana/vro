@@ -5,11 +5,8 @@
         <el-button
           v-for="(item, index) in getVisibleActions(actions, scope.row, scope.$index)"
           :key="getActionKey(item, index)"
-          link
-          :type="item.type || 'primary'"
-          :icon="item.icon"
+          v-bind="{ link: true, type: 'primary', ...item.buttonProps }"
           :loading="getActionLoading(item, scope.$index, index)"
-          :disabled="item.disabled"
           @click.stop="handleAction(item, scope.row, scope.$index, index)"
         >
           <slot name="action" v-bind="{ ...scope, action: item }">
@@ -21,7 +18,7 @@
           v-if="getVisibleActions(moreActions, scope.row, scope.$index).length"
           :trigger="moreTrigger"
         >
-          <el-button type="primary" link>
+          <el-button type="primary" link v-bind="moreButtonProps">
             {{ moreActionText }}
           </el-button>
           <template #dropdown>
@@ -31,10 +28,12 @@
                 :key="getActionKey(item, index)"
                 :class="[
                   'vro-el-table-actions-column-dropdown-action',
-                  item.type && `is-${item.type}`,
+                  item.buttonProps?.type && `is-${item.buttonProps.type}`,
                 ]"
-                :icon="item.icon"
-                :disabled="item.disabled || getActionLoading(item, scope.$index, index)"
+                :icon="item.buttonProps?.icon"
+                :disabled="
+                  item.buttonProps?.disabled || getActionLoading(item, scope.$index, index)
+                "
                 @click.stop="handleAction(item, scope.row, scope.$index, index)"
               >
                 <slot name="more-action" v-bind="{ ...scope, action: item }">
@@ -119,7 +118,7 @@
   ) => {
     const result = action.onAction?.(row, rowIndex)
 
-    if (!action.icon || !isPromiseLike(result)) {
+    if (!action.buttonProps?.icon || !isPromiseLike(result)) {
       return
     }
 

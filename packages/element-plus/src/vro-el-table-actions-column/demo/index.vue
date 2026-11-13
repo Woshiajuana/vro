@@ -75,7 +75,7 @@
     },
     {
       label: '详情',
-      type: 'success',
+      buttonProps: { type: 'success' },
       onAction: (row) => {
         console.log('detail => ', row)
       },
@@ -91,7 +91,7 @@
     },
     {
       label: '删除',
-      type: 'danger',
+      buttonProps: { type: 'danger' },
       onAction: (row) => {
         console.log('delete => ', row)
       },
@@ -105,7 +105,7 @@
     },
     {
       label: '编辑',
-      disabled: true,
+      buttonProps: { disabled: true },
     },
     {
       label: '启用',
@@ -113,7 +113,7 @@
     },
     {
       label: '停用',
-      type: 'warning',
+      buttonProps: { type: 'warning' },
       hidden: (row) => row.status === '停用',
     },
   ]
@@ -122,11 +122,11 @@
     return [
       {
         label: '编辑',
-        disabled: row.status === '停用',
+        buttonProps: { disabled: row.status === '停用' },
       },
       {
         label: row.status === '启用' ? '停用' : '启用',
-        type: row.status === '启用' ? 'warning' : 'success',
+        buttonProps: { type: row.status === '启用' ? 'warning' : 'success' },
         onAction: () => {
           console.log('toggle => ', row)
         },
