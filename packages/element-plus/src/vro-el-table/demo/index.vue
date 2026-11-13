@@ -23,7 +23,7 @@
   import { ElButton, ElTag } from 'element-plus'
   import { h, markRaw, ref } from 'vue'
 
-  import { createUseVroElTable } from '../createUseVroElTable'
+  import { useVroElTable } from '../useVroElTable'
 
   interface User {
     name: string
@@ -58,7 +58,7 @@
     disabled: '停用',
   }
 
-  const { tableProps, trigger, schema } = createUseVroElTable<User>()(
+  const { tableProps, trigger, schema } = useVroElTable<User>(
     {
       keyword: {
         label: '关键词',

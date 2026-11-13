@@ -2,7 +2,6 @@ import { withInstall } from '@vrojs/base'
 
 import Component from './vro-el-table.vue'
 
-export * from './createUseVroElTable'
 export * from './types'
 export * from './useVroElTable'
 

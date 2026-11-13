@@ -67,14 +67,14 @@
       actions: (row) => [
         {
           label: '编辑',
-          disabled: row.status === 'disabled',
+          buttonProps: { disabled: row.status === 'disabled' },
           onAction: () => {
             console.log('edit => ', row)
           },
         },
         {
           label: row.status === 'enabled' ? '停用' : '启用',
-          type: row.status === 'enabled' ? 'warning' : 'success',
+          buttonProps: { type: row.status === 'enabled' ? 'warning' : 'success' },
           onAction: () => {
             console.log('toggle => ', row)
           },
@@ -83,7 +83,7 @@
       moreActions: [
         {
           label: '删除',
-          type: 'danger',
+          buttonProps: { type: 'danger' },
           onAction: (row) => {
             console.log('delete => ', row)
           },
