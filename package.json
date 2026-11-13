@@ -30,7 +30,7 @@
     "plop": "plop --plopfile=./scripts/index.ts",
     "clean": "rimraf --glob **/node_modules",
     "lint": "eslint . --fix",
-    "format": "prettier --write ./packages/**/*.{ts,vue,js,tsx,jsx}",
+    "format": "prettier --write ./packages/**/*",
     "preinstall": "npx only-allow pnpm"
   },
   "repository": {
