@@ -93,6 +93,12 @@ export function useVroElTable<
   options?: UseVroElTableOptions<Row>,
 ): UseVroElTableReturn<Row, R>
 
+// 重载 4：请求函数（不传筛选表单和列配置）
+export function useVroElTable<Row extends Record<string, any>>(
+  request: VroElTableRequest<Row>,
+  options?: UseVroElTableOptions<Row>,
+): UseVroElTableReturn<Row, never>
+
 // 实现签名
 export function useVroElTable(
   schemaOrRequest: any,

@@ -113,6 +113,9 @@
 >
 > // ③ 筛选表单 + 请求函数（列配置省略，由插槽或 tableProps.columns 自行补充）
 > useVroElTable(schema, request, options?)
+>
+> // ④ 请求函数（筛选表单和列配置都省略）
+> useVroElTable(request, options?)
 > ```
 >
 > 不再支持 `useVroElTable(schema, columns, request)` 这类旧顺序；若确实需要固定行类型，仍可显式指定泛型 `useVroElTable<User>(...)`。
