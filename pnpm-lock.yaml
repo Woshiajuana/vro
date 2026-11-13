@@ -48,8 +48,8 @@ importers:
   packages/base:
     devDependencies:
       '@daysnap/utils':
-        specifier: ^0.1.36
-        version: 0.1.36
+        specifier: ^0.1.37
+        version: 0.1.37
       '@vitejs/plugin-vue':
         specifier: ^6.0.1
         version: 6.0.1(vite@7.1.12(@types/node@24.10.0)(jiti@2.7.0)(sass@1.93.3))(vue@3.5.22(typescript@5.9.3))
@@ -85,8 +85,8 @@ importers:
         specifier: ^0.0.3
         version: 0.0.3
       '@daysnap/utils':
-        specifier: ^0.1.36
-        version: 0.1.36
+        specifier: ^0.1.37
+        version: 0.1.37
       '@element-plus/icons-vue':
         specifier: ^2.3.2
         version: 2.3.2(vue@3.5.22(typescript@5.9.3))
@@ -134,8 +134,8 @@ importers:
         version: 4.6.3(vue@3.5.22(typescript@5.9.3))
     devDependencies:
       '@daysnap/utils':
-        specifier: ^0.1.36
-        version: 0.1.36
+        specifier: ^0.1.37
+        version: 0.1.37
       rimraf:
         specifier: ^6.0.1
         version: 6.1.3
@@ -159,8 +159,8 @@ importers:
         specifier: ^0.0.3
         version: 0.0.3
       '@daysnap/utils':
-        specifier: ^0.1.36
-        version: 0.1.36
+        specifier: ^0.1.37
+        version: 0.1.37
       '@vitejs/plugin-vue':
         specifier: ^6.0.1
         version: 6.0.1(vite@7.1.12(@types/node@24.10.0)(jiti@2.7.0)(sass@1.93.3))(vue@3.5.22(typescript@5.9.3))
@@ -189,8 +189,8 @@ importers:
   playground:
     dependencies:
       '@daysnap/utils':
-        specifier: ^0.1.36
-        version: 0.1.36
+        specifier: ^0.1.37
+        version: 0.1.37
       '@vant/touch-emulator':
         specifier: ^1.4.0
         version: 1.4.0
@@ -302,6 +302,9 @@ packages:
 
   '@daysnap/utils@0.1.36':
     resolution: {integrity: sha512-l4pdRghu57w7MUYEe5iVCnWx8bzgHyzLWriZdujLih7PuSQvrGaVluJcKSfjphGDCN58gVPq3ND1ZdozRPie+g==}
+
+  '@daysnap/utils@0.1.37':
+    resolution: {integrity: sha512-VvXJycikjMUGo75yt3iys5WcwiMRxWZXpGhYDrICFcD6weO284UkQVD+5XsAMQgm0RlXaEMFUkOgX7JCOjSMmw==}
 
   '@element-plus/icons-vue@2.3.2':
     resolution: {integrity: sha512-OzIuTaIfC8QXEPmJvB4Y4kw34rSXdCJzxcD1kFStBvr8bK6X1zQAYDo0CNMjojnfTqRQCJ0I7prlErcoRiET2A==}
@@ -3129,6 +3132,8 @@ snapshots:
   '@ctrl/tinycolor@4.2.0': {}
 
   '@daysnap/utils@0.1.36': {}
+
+  '@daysnap/utils@0.1.37': {}
 
   '@element-plus/icons-vue@2.3.2(vue@3.5.22(typescript@5.9.3))':
     dependencies:

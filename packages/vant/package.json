@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@ajuanjs/banana": "^0.0.3",
-    "@daysnap/utils": "^0.1.36",
+    "@daysnap/utils": "^0.1.37",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vrojs/base": "workspace:*",
     "rimraf": "^6.0.1",

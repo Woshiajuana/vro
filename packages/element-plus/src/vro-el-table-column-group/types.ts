@@ -1,31 +1,30 @@
-import type { TableColumnCtx } from 'element-plus'
 import type { Component, ExtractPropTypes, PropType, Raw } from 'vue'
 
 import type {
   VroElTableActionsColumnActions,
   VroElTableActionsColumnProps,
 } from '../vro-el-table-actions-column'
-import type { VroElTableColumnProps, VroElTableColumnRender } from '../vro-el-table-column'
+import type {
+  VroElTableColumnFormatter,
+  VroElTableColumnProps,
+  VroElTableColumnRender,
+} from '../vro-el-table-column'
 
-export type VroElTableColumnGroupFormatter<T extends Record<string, any> = any> = (
-  row: T,
-  column: TableColumnCtx<T>,
-  cellValue: any,
-  index: number,
-) => any
+export type VroElTableColumnGroupFormatter<T extends Record<string, any> = any> =
+  VroElTableColumnFormatter<T>
 
 export type VroElTableColumnGroupTableColumnProps<T extends Record<string, any> = any> = Partial<
-  Omit<VroElTableColumnProps, 'formatter' | 'renderDefault' | 'renderContent'>
+  Omit<VroElTableColumnProps, 'formatter' | 'render' | 'renderContent'>
 > & {
   /**
    * 单元格格式化函数。
    */
-  formatter?: VroElTableColumnGroupFormatter<T>
+  formatter?: VroElTableColumnFormatter<T>
 
   /**
    * 自定义整格内容渲染函数，优先级高于 renderContent、formatter、map。
    */
-  renderDefault?: VroElTableColumnRender<T>
+  render?: VroElTableColumnRender<T>
 
   /**
    * 自定义中间主体内容渲染函数。

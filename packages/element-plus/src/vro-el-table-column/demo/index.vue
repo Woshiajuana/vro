@@ -39,14 +39,38 @@
       </vro-el-table-column>
     </el-table>
   </demo-block>
+
+  <demo-block title="自定义渲染">
+    <el-table :data="tableData" border>
+      <vro-el-table-column label="姓名" prop="name" />
+      <vro-el-table-column label="状态" prop="status" :render="renderStatus" />
+      <vro-el-table-column label="评分" prop="score" :map="getScoreMap" />
+    </el-table>
+  </demo-block>
 </template>
 
 <script setup lang="ts">
   import { Document, Star } from '@element-plus/icons-vue'
+  import { ElTag } from 'element-plus'
+  import { h } from 'vue'
+
+  import type { VroElTableColumnRenderScope } from '..'
 
   const statusMap = {
     enabled: '启用',
     disabled: '停用',
+  }
+
+  const renderStatus = ({ row }: VroElTableColumnRenderScope) => {
+    return h(
+      ElTag,
+      { type: row.status === 'enabled' ? 'success' : 'info' },
+      () => statusMap[row.status as keyof typeof statusMap],
+    )
+  }
+
+  const getScoreMap = (row: { score: number }) => {
+    return row.score >= 5 ? { 5: '优秀' } : { 4: '良好' }
   }
 
   const tableData = [
