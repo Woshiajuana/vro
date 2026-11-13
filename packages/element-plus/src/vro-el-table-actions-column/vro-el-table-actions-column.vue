@@ -5,7 +5,7 @@
         <el-button
           v-for="(item, index) in getVisibleActions(actions, scope.row, scope.$index)"
           :key="getActionKey(item, index)"
-          v-bind="{ link: true, type: 'primary', ...item.buttonProps }"
+          v-bind="item.buttonProps"
           :loading="getActionLoading(item, scope.$index, index)"
           @click.stop="handleAction(item, scope.row, scope.$index, index)"
         >
@@ -18,7 +18,7 @@
           v-if="getVisibleActions(moreActions, scope.row, scope.$index).length"
           :trigger="moreTrigger"
         >
-          <el-button type="primary" link v-bind="moreButtonProps">
+          <el-button v-bind="moreButtonProps">
             {{ moreActionText }}
           </el-button>
           <template #dropdown>
