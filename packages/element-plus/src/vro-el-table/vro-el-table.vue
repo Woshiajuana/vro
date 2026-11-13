@@ -1,8 +1,9 @@
 <template>
   <div class="vro-el-table">
     <vro-el-schema-filter
-      v-if="filterable"
+      v-if="filterable && schema"
       v-bind="filterProps"
+      :schema="schema"
       :loading="loading"
       class="vro-el-table-filter"
       @query="$emit('request', { query: $event, currentPage: 1 })"
@@ -61,7 +62,6 @@
 </template>
 
 <script setup lang="ts">
-  import { isEmptyObject } from '@daysnap/utils'
   import { RefreshRight } from '@element-plus/icons-vue'
   import type { TableInstance } from 'element-plus'
   import { ElButton, ElLoading, ElPagination, ElTable as RawElTable } from 'element-plus'
@@ -81,15 +81,15 @@
   const props = defineProps(vroElTableProps)
   const { t } = useLocale()
 
+  const paginationProps = computed(() => ({
+    ...props.paginationProps,
+    ...props.pagination,
+  }))
+
   const ElTable = RawElTable as VueComponent
   const vLoading = ElLoading.directive
 
   const refElTable = useTemplateRef<TableInstance>('refElTable')
-
-  const filterable = computed(() => {
-    const { filterable, filterProps } = props
-    return Boolean(filterable && filterProps?.schema && !isEmptyObject(filterProps.schema))
-  })
 
   defineExpose({
     get elTable() {

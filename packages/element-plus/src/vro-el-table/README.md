@@ -13,7 +13,7 @@
   <vro-el-table
     :columns="columns"
     :data="data"
-    :pagination-props="{ currentPage: 1, pageSize: 10, total: 100 }"
+    :pagination="{ currentPage: 1, pageSize: 10, total: 100 }"
     @request="handleRequest"
   />
 </template>
@@ -35,13 +35,17 @@
 </script>
 ```
 
+`pagination` 只接收分页状态（`currentPage`、`pageSize`、`total`）；其余 ElPagination 属性（`layout`、`pageSizes`、`background`、`size` 等）继续用 `paginationProps` 传。两者会合并，同名字段以 `pagination` 为准。
+
 ### 筛选表格
 
-传入 `filterProps.schema` 后会展示筛选区。筛选提交时会触发 `request`，并带上 `query` 和 `currentPage: 1`。
+传入 `schema` 后会展示筛选区（`filterable` 为 `false` 时不展示）。筛选提交时会触发 `request`，并带上 `query` 和 `currentPage: 1`。
 
 ```html
-<vro-el-table :filter-props="{ schema }" :columns="columns" :data="data" @request="handleRequest" />
+<vro-el-table :schema="schema" :columns="columns" :data="data" @request="handleRequest" />
 ```
+
+> `filterProps` 现在仅保留 `schema` 的透传能力（`:filter-props="{ schema }"` 等价），同时传时以 `schema` 为准，推荐直接使用 `schema`。
 
 ### 自定义头部
 
@@ -59,7 +63,7 @@
 
 ### useVroElTable
 
-`useVroElTable` 会返回可直接绑定到组件的 `tableProps`，并维护筛选、分页、数据和 loading 状态。
+`useVroElTable` 会返回可直接绑定到组件的 `tableProps`，并维护筛选、分页、数据和 loading 状态。`tableProps` 里已经包含 `schema`、`columns`、`data`、`loading` 和 `pagination`，直接 `v-bind` 即可，不需要再手动拼 `filterProps`。
 
 ```html
 <template>
@@ -75,7 +79,7 @@
     amount: number
   }
 
-  const { tableProps, trigger, schema } = useVroElTable(
+  const { tableProps, trigger } = useVroElTable(
     {
       keyword: {
         label: '关键词',
@@ -99,6 +103,8 @@
   )
 </script>
 ```
+
+> `schema` 只在传入了筛选表单时存在，未传时为 `undefined`，此时表格不渲染筛选区；需要单独操作筛选字段时再从返回值里取 `schema`。
 
 > **参数顺序固定为「筛选表单 → 请求函数 → 列配置 → 选项」。**
 >

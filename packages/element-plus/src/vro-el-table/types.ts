@@ -2,6 +2,7 @@ import { type PaginationProps, type TableProps } from 'element-plus'
 import type { ExtractPropTypes, PropType } from 'vue'
 
 import type { VroElSchemaFilterProps } from '../vro-el-schema-filter'
+import type { VroElSchemaFormSchema } from '../vro-el-schema-form'
 import type { VroElTableColumnGroupColumn } from '../vro-el-table-column-group'
 
 export interface VroElTableRequestPayload {
@@ -63,9 +64,14 @@ export const vroElTableProps = {
   },
 
   /**
+   * 表单字段 schema 配置。
+   */
+  schema: Object as PropType<VroElSchemaFormSchema>,
+
+  /**
    * 筛选区属性，透传给 VroElSchemaFilter。
    */
-  filterProps: Object as PropType<Partial<VroElSchemaFilterProps>>,
+  filterProps: Object as PropType<Partial<Pick<VroElSchemaFilterProps, 'schema'>>>,
 
   /**
    * 表格列配置。
@@ -105,6 +111,13 @@ export const vroElTableProps = {
    * 分页属性，透传给 ElPagination。
    */
   paginationProps: Object as PropType<Partial<PaginationProps>>,
+
+  /**
+   * 分页属性，透传给 ElPagination。
+   */
+  pagination: Object as PropType<
+    Partial<Pick<PaginationProps, 'currentPage' | 'total' | 'pageSize'>>
+  >,
 
   /**
    * 是否显示刷新按钮。
