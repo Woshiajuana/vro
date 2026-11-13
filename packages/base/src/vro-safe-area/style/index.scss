@@ -5,11 +5,8 @@
   --vro-safe-area-padding-left: 0px;
 
   box-sizing: border-box;
-  padding:
-    var(--vro-safe-area-padding-top)
-    var(--vro-safe-area-padding-right)
-    var(--vro-safe-area-padding-bottom)
-    var(--vro-safe-area-padding-left);
+  padding: var(--vro-safe-area-padding-top) var(--vro-safe-area-padding-right)
+    var(--vro-safe-area-padding-bottom) var(--vro-safe-area-padding-left);
 
   &.is-top {
     padding-top: calc(var(--vro-safe-area-padding-top) + constant(safe-area-inset-top));
