@@ -9,8 +9,21 @@ import type { VroElTableRequest } from './types'
 
 export interface UseVroElTableOptions<Row extends Record<string, any> = any>
   extends Pick<UseAsyncTaskOptions<any>, 'activated' | 'immediate' | 'throwError' | 'onError'> {
+  /**
+   * 表格列配置。
+   */
+  columns?: VroElTableColumnGroupColumns<Row>
+
   query?: Ref<Record<string, any>>
   initialValue?: Row[]
+
+  // /**
+  //  * 请求失败时的回调。
+  //  *
+  //  * 返回 `false` 时阻断默认错误处理（不写入 `error`、不按 `throwError` 抛出），
+  //  * 返回 `true` 或不返回值时走默认逻辑。允许直接写成不返回值的回调，如 `onError: (err) => console.log(err)`。
+  //  */
+  // onError?: (err: unknown) => void | boolean | undefined | Promise<void | boolean | undefined>
 }
 
 export type UseVroElTableAsyncTaskParams =
@@ -62,28 +75,16 @@ export interface UseVroElTableReturn<
 /**
  * 表格请求状态管理。
  *
- * 参数统一按「筛选表单 → 请求函数 → 列配置 → 选项」排列，`request` 始终紧跟筛选表单，
- * 因此 `Row` 在解析列配置之前就能从 `request` 的返回值推断出来，列配置里的 `row` 可以直接拿到具体类型。
+ * 参数按「筛选表单 → 请求函数 → 选项」排列：`request` 是 `Row` 的唯一推断来源，
+ * 且始终排在 `options` 之前，因此 `options.columns` 里的 `row` 能直接拿到具体类型。
  */
-// 重载 1：筛选表单 + 请求函数 + 列配置
-export function useVroElTable<
-  Row extends Record<string, any>,
-  R extends VroElSchemaFormSchema = VroElSchemaFormSchema,
->(
-  rowSchema: R,
-  request: VroElTableRequest<Row>,
-  rawColumns: VroElTableColumnGroupColumns<Row>,
-  options?: UseVroElTableOptions<Row>,
-): UseVroElTableReturn<Row, R>
-
-// 重载 2：请求函数 + 列配置
+// 重载 1：请求函数
 export function useVroElTable<Row extends Record<string, any>>(
   request: VroElTableRequest<Row>,
-  rawColumns: VroElTableColumnGroupColumns<Row>,
   options?: UseVroElTableOptions<Row>,
 ): UseVroElTableReturn<Row, never>
 
-// 重载 3：筛选表单 + 请求函数（不传列配置，列由插槽或 tableProps.columns 自行补充）
+// 重载 2：筛选表单 + 请求函数
 export function useVroElTable<
   Row extends Record<string, any>,
   R extends VroElSchemaFormSchema = VroElSchemaFormSchema,
@@ -92,36 +93,24 @@ export function useVroElTable<
   request: VroElTableRequest<Row>,
   options?: UseVroElTableOptions<Row>,
 ): UseVroElTableReturn<Row, R>
-
-// 重载 4：请求函数（不传筛选表单和列配置）
-export function useVroElTable<Row extends Record<string, any>>(
-  request: VroElTableRequest<Row>,
-  options?: UseVroElTableOptions<Row>,
-): UseVroElTableReturn<Row, never>
 
 // 实现签名
 export function useVroElTable(
   schemaOrRequest: any,
-  requestOrColumns?: any,
-  columnsOrOptions?: any,
+  requestOrOptions?: any,
   maybeOptions?: any,
 ): UseVroElTableReturn<any, any> {
-  // 第一个参数是筛选表单（既不是数组也不是函数），否则就是请求函数
-  const hasSchema = !Array.isArray(schemaOrRequest) && typeof schemaOrRequest !== 'function'
+  // 第一个参数是函数则为请求函数，否则是筛选表单
+  const hasSchema = typeof schemaOrRequest !== 'function'
 
   const rawSchema = hasSchema ? schemaOrRequest : undefined
-  const request = (hasSchema ? requestOrColumns : schemaOrRequest) as VroElTableRequest<any>
-
-  // 列配置可省略：传数组就是列配置，否则当作 options
-  const columnsOrOptionsArg = hasSchema ? columnsOrOptions : requestOrColumns
-  const rawColumns = Array.isArray(columnsOrOptionsArg) ? columnsOrOptionsArg : []
-  const options = ((Array.isArray(columnsOrOptionsArg) ? maybeOptions : columnsOrOptionsArg) ??
-    {}) as UseVroElTableOptions<any>
+  const request = (hasSchema ? requestOrOptions : schemaOrRequest) as VroElTableRequest<any>
+  const options = ((hasSchema ? maybeOptions : requestOrOptions) ?? {}) as UseVroElTableOptions<any>
 
   const schema = rawSchema ? reactive<UseVroElTableSchema<any>>(rawSchema) : undefined
-  const columns = reactive(rawColumns)
 
-  const { query: rawQuery, ...asyncTaskOptions } = options
+  const { columns: rawColumns, query: rawQuery, ...asyncTaskOptions } = options
+  const columns = reactive<any[]>(rawColumns ?? [])
   const query = rawQuery ?? ref<Record<string, any>>()
 
   const pagination = reactive<UseVroElTablePagination>({
@@ -147,7 +136,8 @@ export function useVroElTable(
       pagination.currentPage = currentPage
       pagination.pageSize = pageSize
 
-      const [list, total] = await request([currentPage, pageSize], query.value)
+      // request 允许返回元组或数组两种写法，这里统一按元组处理
+      const [list, total] = (await request([currentPage, pageSize], query.value)) as [any[], number]
 
       pagination.total = total
 

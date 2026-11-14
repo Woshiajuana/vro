@@ -91,40 +91,36 @@
       const res = await fetchList({ currentPage, pageSize, ...query })
       return [res.list, res.total]
     },
-    [
-      { is: ElTableColumn, label: '姓名', prop: 'name' },
-      {
-        is: ElTableColumn,
-        label: '金额',
-        prop: 'amount',
-        renderContent: ({ row }) => `${row.amount} 元`,
-      },
-    ],
+    {
+      columns: [
+        { is: ElTableColumn, label: '姓名', prop: 'name' },
+        {
+          is: ElTableColumn,
+          label: '金额',
+          prop: 'amount',
+          renderContent: ({ row }) => `${row.amount} 元`,
+        },
+      ],
+    },
   )
 </script>
 ```
 
 > `schema` 只在传入了筛选表单时存在，未传时为 `undefined`，此时表格不渲染筛选区；需要单独操作筛选字段时再从返回值里取 `schema`。
 
-> **参数顺序固定为「筛选表单 → 请求函数 → 列配置 → 选项」。**
+> **参数顺序固定为「筛选表单 → 请求函数 → 选项」，列配置放在 `options.columns`。**
 >
-> `Row` 只能从 `request` 的返回值推断，TypeScript 按参数顺序解析上下文敏感参数（`request` 的参数、列配置里的回调通常都不带类型标注）。`request` 排在列配置之前，才能先解析出 `Row`，列配置里的 `row` 才会拿到具体类型。目前支持三种入参形式：
+> `request` 是 `Row` 的唯一推断来源，且排在 `options` 之前，所以 `options.columns` 里的 `row` 能直接拿到具体类型。只有两种入参形式：
 >
 > ```ts
-> // ① 筛选表单 + 请求函数 + 列配置
-> useVroElTable(schema, request, columns, options?)
->
-> // ② 请求函数 + 列配置
-> useVroElTable(request, columns, options?)
->
-> // ③ 筛选表单 + 请求函数（列配置省略，由插槽或 tableProps.columns 自行补充）
-> useVroElTable(schema, request, options?)
->
-> // ④ 请求函数（筛选表单和列配置都省略）
+> // ① 请求函数
 > useVroElTable(request, options?)
+>
+> // ② 筛选表单 + 请求函数
+> useVroElTable(rowSchema, request, options?)
 > ```
 >
-> 不再支持 `useVroElTable(schema, columns, request)` 这类旧顺序；若确实需要固定行类型，仍可显式指定泛型 `useVroElTable<User>(...)`。
+> `options` 支持 `columns`、`query`、`initialValue`、`immediate`、`activated`、`throwError`、`onError`；若确实需要固定行类型，仍可显式指定泛型 `useVroElTable<User>(...)`。
 
 ## API
 

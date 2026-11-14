@@ -21,8 +21,19 @@ export type VroElTableRequestParams = [currentPage: number, pageSize: number]
  */
 export type VroElTableRequestQuery = Record<string, any>
 
+/**
+ * 请求函数的返回值：`[列表, 总数]`。
+ *
+ * 额外接受普通数组写法（`Array<T[] | number>`）：调用方写成 `async () => [[], 1]`
+ * 时数组字面量不一定被推断成元组，只按元组校验会误报。
+ */
+export type VroElTableRequestResult<T> = [T[], number] | Array<T[] | number>
+
 export interface VroElTableRequest<T = any> {
-  (state: VroElTableRequestParams, query: VroElTableRequestQuery): Promise<[T[], number]>
+  (
+    state: VroElTableRequestParams,
+    query: VroElTableRequestQuery,
+  ): Promise<VroElTableRequestResult<T>>
 }
 
 export interface VroElTableEmits {
