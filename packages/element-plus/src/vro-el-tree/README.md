@@ -4,6 +4,8 @@
 
 基于 `ElTree` 的受控勾选封装。组件会把全选节点和半选节点一起同步到 `v-model`，适合权限树这类需要保存父子勾选链路的场景。
 
+> 下表中未列出的 ElTree 属性（如 `show-checkbox`、`default-expand-all`、`props`、`filter-node-method` 等）会通过 `$attrs` 原样透传给内部的 `ElTree`，组件不再单独声明这些属性。
+
 ## 代码演示
 
 ### 基础用法
