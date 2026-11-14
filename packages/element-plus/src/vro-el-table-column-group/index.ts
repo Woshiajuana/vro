@@ -2,6 +2,7 @@ import { withInstall } from '@vrojs/base'
 
 import Component from './vro-el-table-column-group.vue'
 
+export * from './defineVroElTableColumns'
 export * from './types'
 export * from './useVroElTableColumnGroup'
 export * from './vroElTableColumnGroupColumnManager'

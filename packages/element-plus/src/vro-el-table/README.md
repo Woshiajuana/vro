@@ -63,21 +63,31 @@
 
 ### useVroElTable
 
-`useVroElTable` 会返回可直接绑定到组件的 `tableProps`，并维护筛选、分页、数据和 loading 状态。`tableProps` 里已经包含 `schema`、`columns`、`data`、`loading` 和 `pagination`，直接 `v-bind` 即可，不需要再手动拼 `filterProps`。
+`useVroElTable` 只负责筛选、分页、请求和 loading 状态，返回的 `tableProps` 包含 `schema`、`data`、`loading` 和 `pagination`，直接 `v-bind` 即可。列配置不在 hook 里，用 `defineVroElTableColumns<User>()` 单独定义后传给表格组件。
 
 ```html
 <template>
-  <vro-el-table v-bind="tableProps" @request="trigger" />
+  <vro-el-table v-bind="tableProps" :columns="columns" @request="trigger" />
 </template>
 
 <script setup lang="ts">
   import { ElTableColumn } from 'element-plus'
-  import { useVroElTable } from '@vrojs/element-plus'
+  import { defineVroElTableColumns, useVroElTable } from '@vrojs/element-plus'
 
   interface User {
     name: string
     amount: number
   }
+
+  const columns = defineVroElTableColumns<User>([
+    { is: ElTableColumn, label: '姓名', prop: 'name' },
+    {
+      is: ElTableColumn,
+      label: '金额',
+      prop: 'amount',
+      renderContent: ({ row }) => `${row.amount} 元`,
+    },
+  ])
 
   const { tableProps, trigger } = useVroElTable(
     {
@@ -91,26 +101,15 @@
       const res = await fetchList({ currentPage, pageSize, ...query })
       return [res.list, res.total]
     },
-    {
-      columns: [
-        { is: ElTableColumn, label: '姓名', prop: 'name' },
-        {
-          is: ElTableColumn,
-          label: '金额',
-          prop: 'amount',
-          renderContent: ({ row }) => `${row.amount} 元`,
-        },
-      ],
-    },
   )
 </script>
 ```
 
 > `schema` 只在传入了筛选表单时存在，未传时为 `undefined`，此时表格不渲染筛选区；需要单独操作筛选字段时再从返回值里取 `schema`。
 
-> **参数顺序固定为「筛选表单 → 请求函数 → 选项」，列配置放在 `options.columns`。**
+> **列配置用 `defineVroElTableColumns<Row>()` 定义。**
 >
-> `request` 是 `Row` 的唯一推断来源，且排在 `options` 之前，所以 `options.columns` 里的 `row` 能直接拿到具体类型。只有两种入参形式：
+> 显式传入行类型后，列配置里的 `row`、`formatter` 等回调都能拿到具体类型，不再依赖 hook 的推断。`useVroElTable` 只有两种入参形式：
 >
 > ```ts
 > // ① 请求函数
@@ -120,7 +119,7 @@
 > useVroElTable(rowSchema, request, options?)
 > ```
 >
-> `options` 支持 `columns`、`query`、`initialValue`、`immediate`、`activated`、`throwError`、`onError`；若确实需要固定行类型，仍可显式指定泛型 `useVroElTable<User>(...)`。
+> `options` 支持 `query`、`initialValue`、`immediate`、`activated`、`throwError`、`onError`；只有 `request` 是 `Row` 的推断来源，需要固定行类型时也可以写 `useVroElTable<User>(...)`。
 
 ## API
 

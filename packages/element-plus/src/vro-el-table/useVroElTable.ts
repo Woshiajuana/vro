@@ -4,16 +4,10 @@ import { useAsyncTask, type UseAsyncTaskOptions } from '@vrojs/use'
 import { computed, type ComputedRef, reactive, type Ref, ref } from 'vue'
 
 import type { VroElSchemaFormSchema, VroElSchemaFormSchemaFieldBase } from '../vro-el-schema-form'
-import type { VroElTableColumnGroupColumns } from '../vro-el-table-column-group'
 import type { VroElTableRequest } from './types'
 
 export interface UseVroElTableOptions<Row extends Record<string, any> = any>
   extends Pick<UseAsyncTaskOptions<any>, 'activated' | 'immediate' | 'throwError' | 'onError'> {
-  /**
-   * 表格列配置。
-   */
-  columns?: VroElTableColumnGroupColumns<Row>
-
   query?: Ref<Record<string, any>>
   initialValue?: Row[]
 
@@ -46,7 +40,6 @@ export interface UseVroElTableTableProps<
 > {
   schema: UseVroElTableSchema<R> | undefined
   loading: boolean
-  columns: VroElTableColumnGroupColumns<Row>
   data: Row[]
   pagination: UseVroElTablePagination
 }
@@ -65,7 +58,6 @@ export interface UseVroElTableReturn<
   tableProps: ComputedRef<UseVroElTableTableProps<Row, R>>
   query: Ref<Record<string, any> | undefined>
   schema: UseVroElTableSchemaResult<R>
-  columns: VroElTableColumnGroupColumns<Row>
   trigger: (params?: UseVroElTableAsyncTaskParams) => Promise<Row[]>
   data: Ref<Row[]>
   loading: Ref<boolean>
@@ -75,8 +67,8 @@ export interface UseVroElTableReturn<
 /**
  * 表格请求状态管理。
  *
- * 参数按「筛选表单 → 请求函数 → 选项」排列：`request` 是 `Row` 的唯一推断来源，
- * 且始终排在 `options` 之前，因此 `options.columns` 里的 `row` 能直接拿到具体类型。
+ * 只负责筛选、分页、请求和 loading 状态，不接管列配置；
+ * 列配置请用 `defineVroElTableColumns<Row>()` 单独定义后传给表格组件。
  */
 // 重载 1：请求函数
 export function useVroElTable<Row extends Record<string, any>>(
@@ -109,8 +101,7 @@ export function useVroElTable(
 
   const schema = rawSchema ? reactive<UseVroElTableSchema<any>>(rawSchema) : undefined
 
-  const { columns: rawColumns, query: rawQuery, ...asyncTaskOptions } = options
-  const columns = reactive<any[]>(rawColumns ?? [])
+  const { query: rawQuery, ...asyncTaskOptions } = options
   const query = rawQuery ?? ref<Record<string, any>>()
 
   const pagination = reactive<UseVroElTablePagination>({
@@ -154,7 +145,6 @@ export function useVroElTable(
   const tableProps = computed<UseVroElTableTableProps<any, any>>(() => ({
     schema,
     loading: loading.value,
-    columns,
     data: data.value,
     pagination,
   }))
@@ -163,7 +153,6 @@ export function useVroElTable(
     tableProps,
     query,
     schema,
-    columns,
     trigger,
     data,
     loading,

@@ -1,6 +1,11 @@
 <template>
   <demo-block title="基础用法">
-    <vro-el-table v-bind="tableProps" @request="trigger" @selection-change="handleSelectionChange">
+    <vro-el-table
+      v-bind="tableProps"
+      :columns="columns"
+      @request="trigger"
+      @selection-change="handleSelectionChange"
+    >
       <template #title>
         <h2 class="demo-table-title">用户列表</h2>
       </template>
@@ -23,6 +28,7 @@
   import { ElButton, ElTag } from 'element-plus'
   import { h, markRaw, ref } from 'vue'
 
+  import { defineVroElTableColumns } from '../../vro-el-table-column-group'
   import { useVroElTable } from '../useVroElTable'
 
   interface User {
@@ -58,6 +64,84 @@
     disabled: '停用',
   }
 
+  const columns = defineVroElTableColumns<User>([
+    { type: 'selection', width: 48 },
+    { type: 'index', label: '序号', width: 72 },
+    { label: '姓名', prop: 'name', minWidth: 120 },
+    { label: '状态', prop: 'status', width: 100, map: statusMap },
+    {
+      label: '状态标签',
+      prop: 'status',
+      width: 120,
+      renderContent: ({ row }) =>
+        h(
+          ElTag,
+          { type: row.status === 'enabled' ? 'success' : 'info' },
+          () => statusMap[row.status],
+        ),
+    },
+    {
+      label: '金额',
+      prop: 'amount',
+      unit: ' 元',
+      align: 'right',
+      width: 140,
+      formatter: (row) => row.amount.toLocaleString(),
+    },
+    {
+      label: '评分',
+      prop: 'score',
+      width: 100,
+      suffixIcon: { name: markRaw(Star), color: '#e6a23c' },
+    },
+    {
+      label: '备注',
+      prop: 'remark',
+      placeholder: '暂无备注',
+      lineClamp: 1,
+      hidden: () => !showRemark.value,
+      minWidth: 180,
+    },
+    {
+      is: 'VroElTableActionsColumn',
+      width: 180,
+      actions: (row) => {
+        return [
+          {
+            label: '编辑',
+            buttonProps: {
+              icon: markRaw(Edit),
+              disabled: row.status === 'disabled',
+            },
+            onAction: async () => {
+              await sleep(400)
+              console.log('edit => ', row)
+            },
+          },
+          {
+            label: row.status === 'enabled' ? '停用' : '启用',
+            buttonProps: { type: row.status === 'enabled' ? 'warning' : 'success' },
+            onAction: () => {
+              console.log('toggle => ', row)
+            },
+          },
+        ]
+      },
+      moreActions: [
+        {
+          label: '删除',
+          buttonProps: {
+            type: 'danger',
+            icon: markRaw(Delete),
+          },
+          onAction: (row) => {
+            console.log('delete => ', row)
+          },
+        },
+      ],
+    },
+  ])
+
   const { tableProps, trigger, schema } = useVroElTable(
     {
       keyword: {
@@ -85,85 +169,6 @@
     async ([currentPage, pageSize], query) => {
       await sleep(400)
       return [source, source.length]
-    },
-    {
-      columns: [
-        { type: 'selection', width: 48 },
-        { type: 'index', label: '序号', width: 72 },
-        { label: '姓名', prop: 'name', minWidth: 120 },
-        { label: '状态', prop: 'status', width: 100, map: statusMap },
-        {
-          label: '状态标签',
-          prop: 'status',
-          width: 120,
-          renderContent: ({ row }) =>
-            h(
-              ElTag,
-              { type: row.status === 'enabled' ? 'success' : 'info' },
-              () => statusMap[row.status],
-            ),
-        },
-        {
-          label: '金额',
-          prop: 'amount',
-          unit: ' 元',
-          align: 'right',
-          width: 140,
-          formatter: (row) => row.amount.toLocaleString(),
-        },
-        {
-          label: '评分',
-          prop: 'score',
-          width: 100,
-          suffixIcon: { name: markRaw(Star), color: '#e6a23c' },
-        },
-        {
-          label: '备注',
-          prop: 'remark',
-          placeholder: '暂无备注',
-          lineClamp: 1,
-          hidden: () => !showRemark.value,
-          minWidth: 180,
-        },
-        {
-          is: 'VroElTableActionsColumn',
-          width: 180,
-          actions: (row) => {
-            return [
-              {
-                label: '编辑',
-                buttonProps: {
-                  icon: markRaw(Edit),
-                  disabled: row.status === 'disabled',
-                },
-                onAction: async () => {
-                  await sleep(400)
-                  console.log('edit => ', row)
-                },
-              },
-              {
-                label: row.status === 'enabled' ? '停用' : '启用',
-                buttonProps: { type: row.status === 'enabled' ? 'warning' : 'success' },
-                onAction: () => {
-                  console.log('toggle => ', row)
-                },
-              },
-            ]
-          },
-          moreActions: [
-            {
-              label: '删除',
-              buttonProps: {
-                type: 'danger',
-                icon: markRaw(Delete),
-              },
-              onAction: (row) => {
-                console.log('delete => ', row)
-              },
-            },
-          ],
-        },
-      ],
     },
   )
 
