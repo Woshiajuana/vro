@@ -53,6 +53,26 @@ const actions = (row) => [
 ]
 ```
 
+### 工厂函数复用操作
+
+数组中每项可以是返回单个操作项的工厂函数，入参为 `(row, index)`，可省略。适合复用操作定义、延迟创建，也可按行数据决定单个操作的内容。
+
+```ts
+const createEditAction = (): VroElTableActionsColumnAction<Row> => ({
+  label: '编辑',
+  onAction: (row) => handleEdit(row),
+})
+
+const actions: VroElTableActionsColumnActions<Row> = [
+  createEditAction,
+  (row, index) => ({
+    label: row.status === 'enabled' ? '停用' : '启用',
+    buttonProps: { type: row.status === 'enabled' ? 'warning' : 'success' },
+    onAction: () => handleToggle(row, index),
+  }),
+]
+```
+
 ### 禁用与隐藏
 
 ```ts

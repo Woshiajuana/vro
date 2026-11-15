@@ -1,3 +1,4 @@
+import type { Maybe } from '@vrojs/base'
 import type { ButtonProps } from 'element-plus'
 import type { ExtractPropTypes, PropType } from 'vue'
 
@@ -36,9 +37,16 @@ export interface VroElTableActionsColumnAction<T = any> {
   buttonProps?: VroElTableActionsColumnButtonProps
 }
 
+/**
+ * 操作项配置，支持三种写法：
+ * - 直接传操作项数组；
+ * - 数组中每项是返回单个操作项的工厂函数，入参为 (row, index)，可省略，适合复用操作定义、延迟创建；
+ * - 传函数，按行返回操作项数组，适合按行数据决定展示哪些操作。
+ */
 export type VroElTableActionsColumnActions<T = any> =
-  | VroElTableActionsColumnAction<T>[]
-  | ((row: T, index: number) => VroElTableActionsColumnAction<T>[])
+  | Maybe<VroElTableActionsColumnAction<T>>[]
+  | ((row: T, index: number) => Maybe<VroElTableActionsColumnAction<T>>)[]
+  | ((row: T, index: number) => Maybe<VroElTableActionsColumnAction<T>>[])
 
 export const vroElTableActionsColumnProps = {
   ...elTableColumnProps,

@@ -36,6 +36,14 @@
     </el-table>
   </demo-block>
 
+  <demo-block title="工厂函数复用操作">
+    <el-table :data="tableData" border>
+      <el-table-column label="姓名" prop="name" />
+      <el-table-column label="状态" prop="status" />
+      <vro-el-table-actions-column :actions="factoryActions" width="160" />
+    </el-table>
+  </demo-block>
+
   <demo-block title="自定义内容">
     <el-table :data="tableData" border>
       <el-table-column label="姓名" prop="name" />
@@ -54,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-  import type { VroElTableActionsColumnAction } from '..'
+  import type { VroElTableActionsColumnAction, VroElTableActionsColumnActions } from '..'
 
   interface Row {
     name: string
@@ -116,6 +124,24 @@
       buttonProps: { type: 'warning' },
       hidden: (row) => row.status === '停用',
     },
+  ]
+
+  const createEditAction = (): VroElTableActionsColumnAction<Row> => ({
+    label: '编辑',
+    onAction: (row) => {
+      console.log('edit => ', row)
+    },
+  })
+
+  const factoryActions: VroElTableActionsColumnActions<Row> = [
+    createEditAction,
+    (row) => ({
+      label: row.status === '启用' ? '停用' : '启用',
+      buttonProps: { type: row.status === '启用' ? 'warning' : 'success' },
+      onAction: () => {
+        console.log('toggle => ', row)
+      },
+    }),
   ]
 
   const dynamicActions = (row: Row): VroElTableActionsColumnAction<Row>[] => {

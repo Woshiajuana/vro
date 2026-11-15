@@ -84,9 +84,15 @@
   const getVisibleActions = (actions: VroElTableActionsColumnActions, row: any, index: number) => {
     const actionList = typeof actions === 'function' ? actions(row, index) : actions
 
-    return actionList.filter((action) => {
-      return !(isFunction(action.hidden) ? action.hidden(row, index) : action.hidden)
-    })
+    // 数组元素可能是工厂函数，先统一展开成操作项
+    return actionList
+      .map((action) => (typeof action === 'function' ? action(row, index) : action))
+      .filter((action) => {
+        if (!action) {
+          return false
+        }
+        return !(isFunction(action!.hidden) ? action.hidden(row, index) : action.hidden)
+      }) as VroElTableActionsColumnAction[]
   }
 
   const getActionKey = (action: VroElTableActionsColumnAction, index: number) => {
@@ -118,16 +124,19 @@
   ) => {
     const result = action.onAction?.(row, rowIndex)
 
-    if (!action.buttonProps?.icon || !isPromiseLike(result)) {
-      return
+    const showLoading = action.buttonProps?.icon && isPromiseLike(result)
+    if (showLoading) {
+      setActionLoading(action, rowIndex, actionIndex, true)
     }
 
-    setActionLoading(action, rowIndex, actionIndex, true)
-
     try {
-      await result
+      if (isPromiseLike(result)) {
+        await result
+      }
     } finally {
-      setActionLoading(action, rowIndex, actionIndex, false)
+      if (showLoading) {
+        setActionLoading(action, rowIndex, actionIndex, false)
+      }
     }
   }
 </script>
