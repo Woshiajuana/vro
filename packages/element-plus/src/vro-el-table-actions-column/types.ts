@@ -44,9 +44,17 @@ export interface VroElTableActionsColumnAction<T = any> {
  * - 传函数，按行返回操作项数组，适合按行数据决定展示哪些操作。
  */
 export type VroElTableActionsColumnActions<T = any> =
-  | Maybe<VroElTableActionsColumnAction<T>>[]
-  | ((row: T, index: number) => Maybe<VroElTableActionsColumnAction<T>>)[]
-  | ((row: T, index: number) => Maybe<VroElTableActionsColumnAction<T>>[])
+  | Maybe<
+      | VroElTableActionsColumnAction<T>
+      | ((row: T, index: number) => Maybe<VroElTableActionsColumnAction<T>>)
+    >[]
+  | ((
+      row: T,
+      index: number,
+    ) => Maybe<
+      | VroElTableActionsColumnAction<T>
+      | ((row: T, index: number) => Maybe<VroElTableActionsColumnAction<T>>)
+    >[])
 
 export const vroElTableActionsColumnProps = {
   ...elTableColumnProps,
