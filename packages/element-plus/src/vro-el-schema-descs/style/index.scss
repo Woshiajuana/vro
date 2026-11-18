@@ -1,0 +1,17 @@
+:root,
+:host {
+  --vro-el-schema-descs-label-color: var(--el-text-color-regular);
+  --vro-el-schema-descs-content-color: var(--el-text-color-primary);
+}
+
+.vro-el-schema-descs {
+  .el-descriptions__label {
+    color: var(--vro-el-schema-descs-label-color);
+  }
+
+  .el-descriptions__content {
+    color: var(--vro-el-schema-descs-content-color);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+}
