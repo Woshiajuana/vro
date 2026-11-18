@@ -28,7 +28,17 @@
 
   defineOptions({ name: 'VroElSchemaDescs' })
 
-  const props = defineProps(vroElSchemaDescsProps)
+  const props = defineProps({
+    ...vroElSchemaDescsProps,
+
+    /**
+     * 仅用于承接 VroElSchemaForm 的 v-model 绑定，避免透传到根节点。
+     */
+    modelValue: {
+      type: null,
+      default: undefined,
+    },
+  })
   defineSlots<VroElSchemaDescsSlots>()
 
   // 渲染 render 返回的 vnode

@@ -2,6 +2,7 @@ import { withInstall } from '@vrojs/base'
 
 import Component from './vro-el-schema-descs.vue'
 
+export * from './function-call'
 export * from './types'
 
 export const VroElSchemaDescs = withInstall<typeof Component>(Component)

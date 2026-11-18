@@ -56,9 +56,14 @@
       @click="openFunction"
     />
   </demo-block>
+
+  <demo-block title="函数式调用（自定义文案）">
+    <van-button type="primary" block @click="openCustomText">选择到期时间</van-button>
+  </demo-block>
 </template>
 
 <script setup lang="ts">
+  import { showToast } from 'vant'
   import { ref, useTemplateRef } from 'vue'
 
   import {
@@ -160,6 +165,20 @@
     })
       .then((result) => {
         functionDate.value = result.value
+      })
+      .catch(() => {})
+  }
+
+  const openCustomText = () => {
+    showVroVanDatetimePicker({
+      title: '选择到期时间',
+      format: 'yyyy-MM-dd',
+      min: new Date(),
+      confirmButtonText: '确定',
+      cancelButtonText: '再想想',
+    })
+      .then((result) => {
+        showToast(`到期时间：${result.value}`)
       })
       .catch(() => {})
   }

@@ -37,6 +37,9 @@ export default {
         endPlaceholder: 'End date',
       },
     },
+    schemaDescs: {
+      closeText: 'Close',
+    },
     schemaFilter: {
       searchText: 'Search',
       resetText: 'Reset',

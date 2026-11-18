@@ -37,6 +37,9 @@ export default {
         endPlaceholder: '请选择',
       },
     },
+    schemaDescs: {
+      closeText: '关闭',
+    },
     schemaFilter: {
       searchText: '搜索',
       resetText: '重置',

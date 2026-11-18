@@ -40,13 +40,17 @@
       :item-props="{ align: 'center' }"
     />
   </demo-block>
+
+  <demo-block title="命令式弹窗">
+    <el-button type="primary" @click="showDescsDialog">查看用户详情</el-button>
+  </demo-block>
 </template>
 
 <script setup lang="ts">
   import { ElTag } from 'element-plus'
   import { h } from 'vue'
 
-  import type { VroElSchemaDescsSchema } from '..'
+  import { type VroElSchemaDescsSchema } from '..'
 
   interface Detail {
     name: string
@@ -130,13 +134,13 @@
       label: '状态',
       prop: 'status',
       map: statusMap,
-      render: (value, data) => h(ElTag, { type: statusMap[data.status].type }, value),
+      render: (value, data) => h(ElTag, { type: statusMap[data.status].type }, () => value),
     },
     {
       label: '积分',
       prop: 'score',
       unit: '分',
-      render: (value) => h(ElTag, { type: 'warning' }, value),
+      render: (value) => h(ElTag, { type: 'warning' }, () => value),
     },
   ]
 
@@ -157,4 +161,14 @@
     { label: `${data.name} 的公司`, prop: 'company.name' },
     { label: '公司地址', prop: 'company.address' },
   ]
+
+  const openDescsDialog = createVroElSchemaDescsDialog<Detail>(baseSchema, {
+    dialogProps: { title: '用户详情' },
+    descProps: { column: 2 },
+  })
+
+  const showDescsDialog = () => {
+    // 关闭弹窗时会 reject，这里忽略
+    openDescsDialog(data).catch(() => {})
+  }
 </script>

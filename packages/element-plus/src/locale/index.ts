@@ -1,4 +1,5 @@
 export { default as en } from './lang/en'
 export { default as zhCN } from './lang/zh-cn'
+export { default as zhTW } from './lang/zh-tw'
 export * from './types'
 export * from './useLocale'
