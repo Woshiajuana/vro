@@ -1,4 +1,3 @@
-import type { DescriptionProps } from 'element-plus'
 import { markRaw } from 'vue'
 
 import type { TranslatePair } from '../locale'
@@ -7,19 +6,15 @@ import {
   showVroElSchemaFormDialog,
   type VroElSchemaFormDialogProps,
 } from '../vro-el-schema-form-dialog'
-import type { VroElSchemaDescsSchema } from './types'
+import type { VroElSchemaDescsProps, VroElSchemaDescsSchema } from './types'
 import VroElSchemaDescs from './vro-el-schema-descs.vue'
 
-export interface VroElSchemaDescsDialogOptions {
+export interface VroElSchemaDescsDialogOptions
+  extends Partial<Omit<VroElSchemaDescsProps, 'schema' | 'data'>> {
   /**
    * 透传给 VroElSchemaFormDialog 的属性，不包含 schema。
    */
   dialogProps?: Partial<Omit<VroElSchemaFormDialogProps, 'schema'>>
-
-  /**
-   * 透传给 VroElSchemaDescs 的属性。
-   */
-  descProps?: Partial<DescriptionProps>
 }
 
 export type VroElSchemaDescsDialog<T = any> = (
@@ -42,8 +37,11 @@ export function createVroElSchemaDescsDialog<T = any>(
 ): VroElSchemaDescsDialog<T> {
   return (data, opts = {}) => {
     // dialogProps、descProps 均为浅合并，嵌套属性需要整体传入
-    const dialogProps = { ...options.dialogProps, ...opts.dialogProps }
-    const descProps = { ...options.descProps, ...opts.descProps }
+    const { dialogProps, descProps, itemProps, ...rest } = Object.assign({}, options, opts, {
+      dialogProps: { ...options.dialogProps, ...opts.dialogProps },
+      descProps: { ...options.descProps, ...opts.descProps },
+      itemProps: { ...options.itemProps, ...opts.itemProps },
+    })
 
     return showVroElSchemaFormDialog({
       // 详情场景默认只读，需要确认按钮时通过 dialogProps 打开
@@ -55,9 +53,11 @@ export function createVroElSchemaDescsDialog<T = any>(
         details: {
           is: VroElSchemaDescsRaw,
           props: {
+            ...rest,
             data,
             schema,
             descProps,
+            itemProps,
           },
         },
       },

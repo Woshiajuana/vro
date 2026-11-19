@@ -16,7 +16,6 @@ declare module 'vue' {
     ElSpace: typeof import('element-plus/es')['ElSpace']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
-    ElTag: typeof import('element-plus/es')['ElTag']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     VanButton: typeof import('vant/es')['Button']
@@ -77,8 +76,5 @@ declare module 'vue' {
     VroVanView: typeof import('@vrojs/vant')['VroVanView']
     VroVanWithConfig: typeof import('@vrojs/vant')['VroVanWithConfig']
     VroVnr: typeof import('@vrojs/base')['VroVnr']
-  }
-  export interface GlobalDirectives {
-    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }
