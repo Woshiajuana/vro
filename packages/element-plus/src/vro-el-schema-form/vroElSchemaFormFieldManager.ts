@@ -38,7 +38,10 @@ vroElSchemaFormFieldManager
     type: 'date',
     clearable: true,
   })
-  .add('ElInputNumber', ElInputNumber)
+  .add('ElInputNumber', ElInputNumber, {
+    controlsPosition: 'right',
+    align: 'left',
+  })
   .add('ElTreeSelect', ElTreeSelect)
   .add('ElCascader', ElCascader, {
     clearable: true,

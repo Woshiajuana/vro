@@ -25,6 +25,9 @@ export default {
       addText: '新增',
     },
     schemaForm: {
+      ElInputNumber: {
+        placeholder: '請填寫',
+      },
       ElInput: {
         placeholder: '請填寫',
       },

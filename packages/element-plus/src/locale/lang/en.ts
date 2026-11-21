@@ -25,6 +25,9 @@ export default {
       addText: 'Add',
     },
     schemaForm: {
+      ElInputNumber: {
+        placeholder: 'Please enter',
+      },
       ElInput: {
         placeholder: 'Please enter',
       },
