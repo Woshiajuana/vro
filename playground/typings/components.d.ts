@@ -25,6 +25,7 @@ declare module 'vue' {
     VroCircleProgress: typeof import('@vrojs/base')['VroCircleProgress']
     VroElCheckboxGroup: typeof import('@vrojs/element-plus')['VroElCheckboxGroup']
     VroElConfigProvider: typeof import('@vrojs/element-plus')['VroElConfigProvider']
+    VroElDivider: typeof import('@vrojs/element-plus')['VroElDivider']
     VroElFileUpload: typeof import('@vrojs/element-plus')['VroElFileUpload']
     VroElIcon: typeof import('@vrojs/element-plus')['VroElIcon']
     VroElImage: typeof import('@vrojs/element-plus')['VroElImage']

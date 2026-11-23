@@ -1,0 +1,16 @@
+:root,
+:host {
+  --vro-el-divider-content-color: var(--el-text-color-regular);
+  --vro-el-divider-content-font-size: var(--el-font-size-base);
+  --vro-el-divider-margin: 16px 0;
+}
+
+.vro-el-divider {
+  &.el-divider--horizontal {
+    margin: var(--vro-el-divider-margin);
+  }
+  .el-divider__text {
+    color: var(--vro-el-divider-content-color);
+    font-size: var(--vro-el-divider-content-font-size);
+  }
+}

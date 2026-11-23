@@ -1,6 +1,6 @@
 {
   "name": "@vrojs/element-plus",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "vrojs ui",
   "type": "module",
   "main": "src/index.ts",

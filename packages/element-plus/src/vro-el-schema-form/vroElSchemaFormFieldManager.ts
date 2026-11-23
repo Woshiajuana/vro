@@ -12,6 +12,7 @@ import {
 } from 'element-plus'
 
 import { VroElCheckboxGroup } from '../vro-el-checkbox-group'
+import { VroElDivider } from '../vro-el-divider'
 import { VroElFileUpload } from '../vro-el-file-upload'
 import { VroElImageUpload } from '../vro-el-image-upload'
 import { VroElRadioGroup } from '../vro-el-radio-group'
@@ -60,3 +61,4 @@ vroElSchemaFormFieldManager
   .add('VroElFileUpload', VroElFileUpload)
   .add('VroElTags', VroElTags)
   .add('VroElTree', VroElTree)
+  .add('VroElDivider', VroElDivider)
