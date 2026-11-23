@@ -33,13 +33,20 @@ export interface UseAsyncTaskOptions<T extends AnyPromiseFn> {
    * 错误回调，返回 false 或者 undefined 的时候，阻断默认错误 error 逻辑
    */
   onError?: (err: unknown) => boolean | undefined | Promise<boolean | undefined>
+
+  /**
+   * loading 为 true 时是否忽略新的调用，默认 false。
+   * 适用于提交、保存等幂等场景；注意参数不同也会被忽略。
+   * 被忽略时不执行任务，data 保持上一次的值。
+   */
+  ignoreWhileLoading?: boolean
 }
 
-export interface UseAsyncTaskResult<T, D> {
+export interface UseAsyncTaskResult<T extends AnyPromiseFn, D> {
   data: Ref<D>
   error: Ref<unknown>
   loading: Ref<boolean>
-  trigger: T
+  trigger: (...args: Parameters<T>) => Promise<void>
 }
 
 /**
@@ -54,17 +61,32 @@ export function useAsyncTask<T extends AnyPromiseFn>(
   options?: UseAsyncTaskOptions<T>,
 ): UseAsyncTaskResult<T, Awaited<ReturnType<T>> | undefined>
 export function useAsyncTask<T extends AnyPromiseFn>(task: T, options?: UseAsyncTaskOptions<T>) {
-  const { initialValue, immediate, activated, throwError, onError, initialParams } = options ?? {}
+  const {
+    initialValue,
+    immediate,
+    activated,
+    throwError,
+    onError,
+    initialParams,
+    ignoreWhileLoading,
+  } = options ?? {}
 
   const data = ref(initialValue) as Ref<Awaited<ReturnType<T>>>
   const error = ref<unknown>()
   const loading = ref(false)
 
-  const trigger = async (...args: unknown[]) => {
+  const trigger = async (...args: Parameters<T>): Promise<void> => {
+    if (ignoreWhileLoading && loading.value) {
+      return
+    }
+
     try {
       error.value = undefined
       loading.value = true
       data.value = await task(...args)
+
+      // TODO: 兼容旧调用方 const res = trigger()，下个 major 版本删除
+      // 类型上已声明 Promise<void>，此处仅保证运行时返回值
       return data.value
     } catch (err) {
       if ((await onError?.(err)) ?? true) {
