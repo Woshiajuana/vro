@@ -1,9 +1,35 @@
 import type { VroSlot } from '@vrojs/base'
-import { dividerProps } from 'element-plus'
-import type { ExtractPropTypes } from 'vue'
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+
+/**
+ * 分割线线条样式。
+ */
+export type VroElDividerBorderStyle = CSSProperties['borderStyle']
 
 export const vroElDividerProps = {
-  ...dividerProps,
+  /**
+   * 分割线方向。
+   */
+  direction: {
+    type: String as PropType<'horizontal' | 'vertical'>,
+    default: 'horizontal',
+  },
+
+  /**
+   * 内容在分割线上的位置。
+   */
+  contentPosition: {
+    type: String as PropType<'left' | 'center' | 'right'>,
+    default: 'center',
+  },
+
+  /**
+   * 线条样式。
+   */
+  borderStyle: {
+    type: String as PropType<VroElDividerBorderStyle>,
+    default: 'solid',
+  },
 
   /**
    * 分割线内容，默认插槽优先级更高。

@@ -32,6 +32,13 @@
       <span class="demo-divider-content">默认插槽内容</span>
     </vro-el-divider>
   </demo-block>
+
+  <demo-block title="特殊背景">
+    <div class="demo-divider-background">
+      <vro-el-divider content="渐变背景下的分割线" />
+      <vro-el-divider content="左侧内容" content-position="left" />
+    </div>
+  </demo-block>
 </template>
 
 <script setup lang="ts"></script>
@@ -44,5 +51,10 @@
 
   .demo-divider-content {
     color: var(--el-color-primary);
+  }
+
+  .demo-divider-background {
+    padding: 0 16px;
+    background: linear-gradient(135deg, #ecf5ff, #d9ecff);
   }
 </style>

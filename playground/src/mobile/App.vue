@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-  import vroZhCn from '@vrojs/element-plus/dist/locale/lang/zh-cn'
+  import vroZhCn from '@vrojs/element-plus/src/locale/lang/zh-cn'
   import zhCn from 'element-plus/es/locale/lang/zh-cn'
   import { watch } from 'vue'
 

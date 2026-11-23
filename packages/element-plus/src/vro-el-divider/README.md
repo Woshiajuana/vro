@@ -2,7 +2,7 @@
 
 ### 介绍
 
-基于 Element Plus `ElDivider` 封装的分割线组件。支持通过 `content` 直接设置分割内容，也支持默认插槽自定义内容，同时保留 `ElDivider` 的全部属性。
+分割线组件。线条由弹性容器与前后伪元素绘制，内容只占自身空间、不再用背景色遮挡线条，因此可以安全用于渐变、图片、深色等任意背景。`direction`、`contentPosition`、`borderStyle` 与 `ElDivider` 保持一致的命名。
 
 ## 代码演示
 
@@ -14,7 +14,7 @@
 
 ### 内容
 
-通过 `content` 设置分割线文本，内容为空时不渲染文本容器，与无内容的分割线表现一致。
+通过 `content` 设置分割线文本。
 
 ```html
 <vro-el-divider content="分割线内容" />
@@ -22,7 +22,7 @@
 
 ### 内容位置
 
-`contentPosition` 控制内容在分割线上的位置。
+`contentPosition` 控制内容在分割线上的位置，左侧、右侧时另一侧线条自动占满剩余空间。
 
 ```html
 <vro-el-divider content="左侧内容" content-position="left" />
@@ -32,7 +32,7 @@
 
 ### 虚线
 
-`borderStyle` 透传给 `ElDivider`，支持 `solid`、`dashed`、`dotted` 等。
+`borderStyle` 控制线条样式，支持 `solid`、`dashed`、`dotted` 等。
 
 ```html
 <vro-el-divider content="虚线" border-style="dashed" />
@@ -67,11 +67,27 @@
 </vro-el-divider>
 ```
 
+### 特殊背景
+
+内容不依赖背景色遮挡线条，渐变、图片等背景上也能正常展示。
+
+```html
+<div class="demo-divider-background">
+  <vro-el-divider content="渐变背景下的分割线" />
+  <vro-el-divider content="左侧内容" content-position="left" />
+</div>
+```
+
+```css
+.demo-divider-background {
+  padding: 0 16px;
+  background: linear-gradient(135deg, #ecf5ff, #d9ecff);
+}
+```
+
 ## API
 
 ### 属性 Props
-
-支持 Element Plus `ElDivider` 的全部属性，并额外支持以下属性。
 
 <table>
   <tbody>
@@ -110,6 +126,34 @@
     <tr>
       <td>名称</td>
       <td>默认值</td>
+    </tr>
+    <tr>
+      <td>--vro-el-divider-gap</td>
+      <td>12px</td>
+    </tr>
+    <tr>
+      <td>--vro-el-divider-margin</td>
+      <td>24px 0</td>
+    </tr>
+    <tr>
+      <td>--vro-el-divider-vertical-margin</td>
+      <td>0 8px</td>
+    </tr>
+    <tr>
+      <td>--vro-el-divider-border-color</td>
+      <td>var(--el-border-color)</td>
+    </tr>
+    <tr>
+      <td>--vro-el-divider-border-width</td>
+      <td>1px</td>
+    </tr>
+    <tr>
+      <td>--vro-el-divider-border-style</td>
+      <td>solid</td>
+    </tr>
+    <tr>
+      <td>--vro-el-divider-text-offset</td>
+      <td>5%</td>
     </tr>
     <tr>
       <td>--vro-el-divider-content-color</td>

@@ -18,6 +18,7 @@ import {
 import { type ExtractPropTypes, type PropType, type Raw } from 'vue'
 
 import type { VroElCheckboxGroupProps } from '../vro-el-checkbox-group'
+import type { VroElDividerProps } from '../vro-el-divider'
 import type { VroElFileUploadProps } from '../vro-el-file-upload'
 import type { VroElImageUploadProps } from '../vro-el-image-upload'
 import type { VroElRadioGroupProps } from '../vro-el-radio-group'
@@ -42,6 +43,7 @@ export interface VroElSchemaFormFieldPropsMap {
   VroElFileUpload: Partial<VroElFileUploadProps>
   VroElTags: Partial<VroElTagsProps>
   VroElTree: Partial<VroElTreeProps>
+  VroElDivider: Partial<VroElDividerProps>
 }
 
 export type VroElSchemaFormFieldType = keyof VroElSchemaFormFieldPropsMap
