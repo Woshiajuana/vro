@@ -7,7 +7,7 @@ import type { VroElSchemaFormInstance } from '.'
 import type { VroElSchemaFormSchema, VroElSchemaFormSchemaFieldBase } from './types'
 
 export interface UseVroElSchemaFormOptions
-  extends Omit<UseAsyncTaskOptions, 'initialValue' | 'initialParams'> {
+  extends Omit<UseAsyncTaskOptions<any>, 'initialValue' | 'initialParams'> {
   source?: Record<string, any>
   instanceRef?: Ref<VroElSchemaFormInstance | undefined>
 }
