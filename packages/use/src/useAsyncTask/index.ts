@@ -3,7 +3,7 @@ import { onActivated, onBeforeMount, type Ref, ref } from 'vue'
 
 type AnyPromiseFn = (...args: any[]) => Promise<any>
 
-export interface UseAsyncTaskOptions<T extends AnyPromiseFn> {
+export interface UseAsyncTaskOptions<T extends AnyPromiseFn = any> {
   /**
    * 是否立即执行 onBeforeMount 执行，默认 false
    */
