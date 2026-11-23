@@ -6,7 +6,6 @@
   --vro-el-divider-border-color: var(--el-border-color);
   --vro-el-divider-border-width: 1px;
   --vro-el-divider-border-style: solid;
-  --vro-el-divider-text-offset: 5%;
   --vro-el-divider-content-color: var(--el-text-color-regular);
   --vro-el-divider-content-font-size: var(--el-font-size-base);
 }
@@ -30,12 +29,9 @@
     gap: 0;
   }
 
-  &.is-horizontal.is-left::before {
-    flex: 0 0 var(--vro-el-divider-text-offset);
-  }
-
+  &.is-horizontal.is-left::before,
   &.is-horizontal.is-right::after {
-    flex: 0 0 var(--vro-el-divider-text-offset);
+    display: none;
   }
 
   &.is-vertical {
