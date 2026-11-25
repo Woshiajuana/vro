@@ -153,7 +153,7 @@ importers:
     dependencies:
       '@vrojs/use':
         specifier: '>=0.0.3'
-        version: 0.0.4(@daysnap/utils@0.1.36)(vue-router@4.6.3(vue@3.5.22(typescript@5.9.3)))(vue@3.5.22(typescript@5.9.3))
+        version: 0.0.4(@daysnap/utils@0.1.37)(vue-router@4.6.3(vue@3.5.22(typescript@5.9.3)))(vue@3.5.22(typescript@5.9.3))
     devDependencies:
       '@ajuanjs/banana':
         specifier: ^0.0.3
@@ -247,11 +247,11 @@ importers:
         specifier: ^2.0.1
         version: 2.0.1
       markdown-it:
-        specifier: ^14.1.0
-        version: 14.1.0
+        specifier: ^14.3.3
+        version: 14.3.3
       markdown-it-anchor:
         specifier: ^9.2.0
-        version: 9.2.0(@types/markdown-it@14.1.2)(markdown-it@14.1.0)
+        version: 9.2.0(@types/markdown-it@14.1.2)(markdown-it@14.3.3)
       sass:
         specifier: ^1.93.3
         version: 1.93.3
@@ -299,9 +299,6 @@ packages:
   '@ctrl/tinycolor@4.2.0':
     resolution: {integrity: sha512-kzyuwOAQnXJNLS9PSyrk0CWk35nWJW/zl/6KvnTBMFK65gm7U1/Z5BqjxeapjZCIhQcM/DsrEmcbRwDyXyXK4A==}
     engines: {node: '>=14'}
-
-  '@daysnap/utils@0.1.36':
-    resolution: {integrity: sha512-l4pdRghu57w7MUYEe5iVCnWx8bzgHyzLWriZdujLih7PuSQvrGaVluJcKSfjphGDCN58gVPq3ND1ZdozRPie+g==}
 
   '@daysnap/utils@0.1.37':
     resolution: {integrity: sha512-VvXJycikjMUGo75yt3iys5WcwiMRxWZXpGhYDrICFcD6weO284UkQVD+5XsAMQgm0RlXaEMFUkOgX7JCOjSMmw==}
@@ -2175,8 +2172,8 @@ packages:
   linkify-it@4.0.1:
     resolution: {integrity: sha512-C7bfi1UZmoj8+PQx22XyeXCuBlokoyWQL5pWSP+EI6nzRylyThouddufc2c1NDIcP9k5agmN9fLpA7VNJfIiqw==}
 
-  linkify-it@5.0.0:
-    resolution: {integrity: sha512-5aHCbzQRADcdP+ATqnDuhhJ/MRIqDkZX5pyjFHRRysS8vZ5AbqGEoFIb6pYHPZ+L/OC2Lc+xT8uHVVR5CAK/wQ==}
+  linkify-it@5.0.2:
+    resolution: {integrity: sha512-ONTm2jCMAVZjgQa/Fy1kScXsuOoF5NPTsoFBdE1KVIZ2vAh/r9+Bqo+0jINCBYnavTPQZz38QzFTme79ENoN3Q==}
 
   load-tsconfig@0.2.5:
     resolution: {integrity: sha512-IXO6OCs9yg8tMKzfPZ1YmheJbZCiEsnBdcB03l0OcfK9prKnJb96siuHCr5Fl37/yo9DnKU+TLpxzTUspw9shg==}
@@ -2238,15 +2235,15 @@ packages:
     resolution: {integrity: sha512-FtwnEuuK+2yVU7goGn/MJ0WBZMM9ZPgU9spqlFs7/A/pDIUNSOQZhUgOqYCficIuR2QaFnrt8LHqBWsbTAoI5w==}
     hasBin: true
 
-  markdown-it@14.1.0:
-    resolution: {integrity: sha512-a54IwgWPaeBCAAsv13YgmALOF1elABB08FxO9i+r4VFk5Vl4pKokRPeX8u5TCgSsPi6ec1otfLjdOpVcgbpshg==}
+  markdown-it@14.3.3:
+    resolution: {integrity: sha512-L//tDAkjTjJCU6pBUSBTgs3Kg4InVaZuUZog/b6V12UKhcDQ7S78877ibbCanRExwPuYP1CZD7Gd2dxSy1GXRg==}
     hasBin: true
 
   mdurl@1.0.1:
     resolution: {integrity: sha512-/sKlQJCBYVY9Ers9hqzKou4H6V5UWc/M59TH2dvkt+84itfnq7uFOMLpOiOS4ujvHP4etln18fmIxA5R5fll0g==}
 
-  mdurl@2.0.0:
-    resolution: {integrity: sha512-Lf+9+2r+Tdp5wXDXC4PcIBjTDtq4UKjCPMQhKIuzpJNW0b96kVqSwW0bT7FhRSfmAiFYgP+SCRvdrDozfh0U5w==}
+  mdurl@2.1.0:
+    resolution: {integrity: sha512-1+HBaOx0zi/dQWht8rNv9MYf9qqpqL/kxI0hXImU6Y547zM6Sni8BQibt7ifgMcYtQg41ao3Ivd6cnSM86inpg==}
 
   memoize-one@6.0.0:
     resolution: {integrity: sha512-rkpe71W0N0c0Xz6QD0eJETuWAJGnJ9afsl1srmwPrI+yBCkge5EycXXbYRyvL29zZVUWQCY7InPRCv3GDXuZNw==}
@@ -3131,8 +3128,6 @@ snapshots:
 
   '@ctrl/tinycolor@4.2.0': {}
 
-  '@daysnap/utils@0.1.36': {}
-
   '@daysnap/utils@0.1.37': {}
 
   '@element-plus/icons-vue@2.3.2(vue@3.5.22(typescript@5.9.3))':
@@ -3889,9 +3884,9 @@ snapshots:
       path-browserify: 1.0.1
       vscode-uri: 3.1.0
 
-  '@vrojs/use@0.0.4(@daysnap/utils@0.1.36)(vue-router@4.6.3(vue@3.5.22(typescript@5.9.3)))(vue@3.5.22(typescript@5.9.3))':
+  '@vrojs/use@0.0.4(@daysnap/utils@0.1.37)(vue-router@4.6.3(vue@3.5.22(typescript@5.9.3)))(vue@3.5.22(typescript@5.9.3))':
     dependencies:
-      '@daysnap/utils': 0.1.36
+      '@daysnap/utils': 0.1.37
       vue: 3.5.22(typescript@5.9.3)
       vue-router: 4.6.3(vue@3.5.22(typescript@5.9.3))
 
@@ -4906,7 +4901,7 @@ snapshots:
     dependencies:
       uc.micro: 1.0.6
 
-  linkify-it@5.0.0:
+  linkify-it@5.0.2:
     dependencies:
       uc.micro: 2.1.0
 
@@ -4953,10 +4948,10 @@ snapshots:
 
   map-cache@0.2.2: {}
 
-  markdown-it-anchor@9.2.0(@types/markdown-it@14.1.2)(markdown-it@14.1.0):
+  markdown-it-anchor@9.2.0(@types/markdown-it@14.1.2)(markdown-it@14.3.3):
     dependencies:
       '@types/markdown-it': 14.1.2
-      markdown-it: 14.1.0
+      markdown-it: 14.3.3
 
   markdown-it@13.0.2:
     dependencies:
@@ -4966,18 +4961,18 @@ snapshots:
       mdurl: 1.0.1
       uc.micro: 1.0.6
 
-  markdown-it@14.1.0:
+  markdown-it@14.3.3:
     dependencies:
       argparse: 2.0.1
       entities: 4.5.0
-      linkify-it: 5.0.0
-      mdurl: 2.0.0
+      linkify-it: 5.0.2
+      mdurl: 2.1.0
       punycode.js: 2.3.1
       uc.micro: 2.1.0
 
   mdurl@1.0.1: {}
 
-  mdurl@2.0.0: {}
+  mdurl@2.1.0: {}
 
   memoize-one@6.0.0: {}
 
