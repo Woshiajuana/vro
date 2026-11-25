@@ -58,8 +58,9 @@ export interface UseVroElTableReturn<
   tableProps: ComputedRef<UseVroElTableTableProps<Row, R>>
   query: Ref<Record<string, any> | undefined>
   schema: UseVroElTableSchemaResult<R>
-  trigger: (params?: UseVroElTableAsyncTaskParams) => Promise<Row[]>
+  trigger: (params?: UseVroElTableAsyncTaskParams) => Promise<void>
   data: Ref<Row[]>
+  
   loading: Ref<boolean>
   pagination: UseVroElTablePagination
 }

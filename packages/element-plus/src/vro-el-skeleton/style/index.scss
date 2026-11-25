@@ -2,9 +2,9 @@
 :host {
   --vro-el-skeleton-min-height: 240px;
   --vro-el-skeleton-color: var(--el-text-color-secondary);
-  --vro-el-skeleton-description-margin-top: 16px;
+  --vro-el-skeleton-description-margin-top: 10px;
   --vro-el-skeleton-description-color: var(--el-text-color-secondary);
-  --vro-el-skeleton-description-font-size: var(--el-font-size-base);
+  --vro-el-skeleton-description-font-size: 12px;
   --vro-el-skeleton-description-line-height: 1.5;
 }
 
@@ -16,9 +16,27 @@
 .vro-el-skeleton-state {
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
   min-height: inherit;
+  font-size: 14px;
+  .el-button {
+    margin-top: 10px;
+  }
+  .el-empty {
+    --el-empty-description-margin-top: 8px;
+    --el-empty-bottom-margin-top: 8px;
+    --el-empty-image-width: 60px;
+  }
+
+  &.is-error {
+    gap: 8px;
+    p {
+      font-size: 13px;
+      color: var(--el-text-color-secondary);
+    }
+  }
 }
 
 .vro-el-skeleton-loading {

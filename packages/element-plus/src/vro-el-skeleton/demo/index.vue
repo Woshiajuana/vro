@@ -20,6 +20,14 @@
       </div>
     </vro-el-skeleton>
   </demo-block>
+  <demo-block title="加载样式">
+    <vro-el-skeleton
+      loading
+      :loading-props="{ type: 'spinner' }"
+      loading-description="正在加载图片资源"
+      :min-height="160"
+    />
+  </demo-block>
 
   <demo-block title="加载样式">
     <vro-el-skeleton

@@ -3,7 +3,7 @@
     <template v-if="loading">
       <slot name="loading">
         <div class="vro-el-skeleton-state vro-el-skeleton-loading">
-          <vro-loading type="circular" size="32" v-bind="loadingProps" />
+          <vro-loading type="circular" size="24" v-bind="loadingProps" />
           <p class="vro-el-skeleton-description">
             {{ loadingDescription ?? t('skeleton.loadingDescription') }}
           </p>
@@ -13,18 +13,14 @@
 
     <template v-else-if="error">
       <slot name="error" :error="error" :refresh="handleRefresh">
-        <div class="vro-el-skeleton-state">
-          <el-result
-            icon="error"
-            :title="errorTitle ?? t('skeleton.errorTitle')"
-            :sub-title="formatMessage(error)"
-          >
-            <template #extra>
-              <el-button type="primary" @click="handleRefresh">
-                {{ errorBtnText ?? t('skeleton.errorBtnText') }}
-              </el-button>
-            </template>
-          </el-result>
+        <div class="vro-el-skeleton-state is-error">
+          <strong>{{ errorTitle ?? t('skeleton.errorTitle') }}</strong>
+
+          <p>{{ formatMessage(error) }}</p>
+
+          <el-button plain @click="handleRefresh">
+            {{ errorBtnText ?? t('skeleton.errorBtnText') }}
+          </el-button>
         </div>
       </slot>
     </template>
@@ -33,7 +29,7 @@
       <slot name="empty" :refresh="handleRefresh">
         <div class="vro-el-skeleton-state">
           <el-empty :description="emptyDescription ?? t('skeleton.emptyDescription')">
-            <el-button v-if="showEmptyBtn" type="primary" @click="handleRefresh">
+            <el-button v-if="showEmptyBtn" plain @click="handleRefresh">
               {{ emptyBtnText ?? t('skeleton.emptyBtnText') }}
             </el-button>
           </el-empty>
@@ -48,7 +44,7 @@
 <script setup lang="ts">
   import { formatMessage } from '@daysnap/utils'
   import { VroLoading } from '@vrojs/base'
-  import { ElButton, ElEmpty, ElResult } from 'element-plus'
+  import { ElButton, ElEmpty } from 'element-plus'
   import { computed, type HTMLAttributes } from 'vue'
 
   import { useLocale } from '../locale'
