@@ -2,6 +2,7 @@ import { withInstall } from '@vrojs/base'
 
 import Component from './vro-el-schema-form.vue'
 
+export * from './defineVroElSchemaForm'
 export * from './defineVroElSchemaFormCreateField'
 export * from './defineVroElSchemaFormFieldTrigger'
 export * from './types'

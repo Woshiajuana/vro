@@ -18,7 +18,7 @@
 
           <p>{{ formatMessage(error) }}</p>
 
-          <el-button plain @click="handleRefresh">
+          <el-button size="default" plain @click="handleRefresh">
             {{ errorBtnText ?? t('skeleton.errorBtnText') }}
           </el-button>
         </div>
@@ -29,7 +29,7 @@
       <slot name="empty" :refresh="handleRefresh">
         <div class="vro-el-skeleton-state">
           <el-empty :description="emptyDescription ?? t('skeleton.emptyDescription')">
-            <el-button v-if="showEmptyBtn" plain @click="handleRefresh">
+            <el-button v-if="showEmptyBtn" size="default" plain @click="handleRefresh">
               {{ emptyBtnText ?? t('skeleton.emptyBtnText') }}
             </el-button>
           </el-empty>
